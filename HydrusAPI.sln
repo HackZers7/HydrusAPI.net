@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HydrusAPI.Web", "HydrusAPI.Web\HydrusAPI.Web.csproj", "{9D0AF926-3420-4D89-AA26-66B620E914DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.Shared", "..\DS.Shared\DS.Shared\DS.Shared.csproj", "{5AB199DB-39A9-4D8F-A7C4-1C9FD486C20D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4A6BFE23-C8CC-4424-96D9-65DFD8D430DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HydrusApi.ClientTest", "Test\HydrusApi.ClientTest\HydrusApi.ClientTest.csproj", "{CAAF1C94-CB0B-41C9-AE08-BFEDF36156C2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,16 @@ Global
 		{9D0AF926-3420-4D89-AA26-66B620E914DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D0AF926-3420-4D89-AA26-66B620E914DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D0AF926-3420-4D89-AA26-66B620E914DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AB199DB-39A9-4D8F-A7C4-1C9FD486C20D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AB199DB-39A9-4D8F-A7C4-1C9FD486C20D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AB199DB-39A9-4D8F-A7C4-1C9FD486C20D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AB199DB-39A9-4D8F-A7C4-1C9FD486C20D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAAF1C94-CB0B-41C9-AE08-BFEDF36156C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAAF1C94-CB0B-41C9-AE08-BFEDF36156C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAAF1C94-CB0B-41C9-AE08-BFEDF36156C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAAF1C94-CB0B-41C9-AE08-BFEDF36156C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CAAF1C94-CB0B-41C9-AE08-BFEDF36156C2} = {4A6BFE23-C8CC-4424-96D9-65DFD8D430DF}
 	EndGlobalSection
 EndGlobal
