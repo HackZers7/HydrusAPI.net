@@ -21,7 +21,12 @@ public class HydrusClient : IHydrusClient
 			new NetHttpClient(),
 			null
 		);
+
+		AccessClient = new AccessClient(_apiConnection);
 	}
+
+	/// <inheritdoc />
+	public IAccessClient AccessClient { get; }
 
 	/// <inheritdoc />
 	public Task<ApiVersion> GetApiVersion(CancellationToken cancel = default)

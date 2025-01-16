@@ -2,9 +2,9 @@
 
 namespace HydrusApi.ClientTest;
 
-class Program
+internal class Program
 {
-	static void Main(string[] args)
+	private static void Main(string[] args)
 	{
 		Run();
 		Console.ReadKey();
@@ -14,5 +14,6 @@ class Program
 	{
 		var client = new HydrusClient();
 		await client.GetApiVersion();
+		await client.AccessClient.GetAccessKey("test test", Permissions.CommitPending, Permissions.ManagePopups, Permissions.EditFileRelationships);
 	}
 }
