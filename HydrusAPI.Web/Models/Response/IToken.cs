@@ -1,7 +1,7 @@
 namespace HydrusAPI.Web;
 
 /// <summary>
-///     Токен для доступа к Hydrus.
+///     Токен доступа.
 /// </summary>
 public interface IToken
 {

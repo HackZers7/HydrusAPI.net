@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace HydrusAPI.Web;
 
+/// <summary>
+///     Токен сессии.
+/// </summary>
 public class HydrusSessionToken : IToken
 {
 	/// <summary>

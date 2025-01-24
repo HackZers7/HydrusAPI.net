@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace HydrusAPI.Web;
 
 /// <summary>
-///     Класс представляющий API ключ.
+///     Токен доступа.
 /// </summary>
 public class HydrusAccessToken : ApiVersion, IToken
 {

@@ -1,31 +1,42 @@
 // Source: https://github.com/octokit/octokit.net/blob/main/Octokit/Http/HttpClientAdapter.cs
 
-using DS.Shared;
 using System.Net.Http.Headers;
 using System.Text;
 
 namespace HydrusAPI.Web.Http;
 
+/// <summary>
+///     Клиент отправки http запросов.
+/// </summary>
 public class NetHttpClient : IHttpClient
 {
 	private readonly HttpClient _httpClient;
 
+	/// <summary>
+	///     Конструктор по умолчанию.
+	/// </summary>
 	public NetHttpClient()
 	{
 		_httpClient = new HttpClient();
 	}
 
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="httpClient">Http клиент.</param>
 	public NetHttpClient(HttpClient httpClient)
 	{
 		_httpClient = httpClient;
 	}
 
+	/// <inheritdoc />
 	public void Dispose()
 	{
 		Dispose(true);
 		GC.SuppressFinalize(this);
 	}
 
+	/// <inheritdoc />
 	public async Task<IResponse> Send(IRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
@@ -41,11 +52,16 @@ public class NetHttpClient : IHttpClient
 		}
 	}
 
+	/// <inheritdoc />
 	public void SetRequestTimeout(TimeSpan timeout)
 	{
 		_httpClient.Timeout = timeout;
 	}
 
+	/// <summary>
+	///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+	/// </summary>
+	/// <param name="disposing"></param>
 	protected virtual void Dispose(bool disposing)
 	{
 		if (disposing)
@@ -100,8 +116,8 @@ public class NetHttpClient : IHttpClient
 	{
 		ThrowHelper.ArgumentNotNull(responseMessage);
 
-		object responseBody = null;
-		string contentType = null;
+		object? responseBody = null;
+		string? contentType = null;
 
 		// We added support for downloading images,zip-files and application/octet-stream.
 		// Let's constrain this appropriately.
@@ -120,11 +136,11 @@ public class NetHttpClient : IHttpClient
 			if (contentType != null && (contentType.StartsWith("image/") || binaryContentTypes
 				    .Any(item => item.Equals(contentType, StringComparison.OrdinalIgnoreCase))))
 			{
-				responseBody = await content.ReadAsStreamAsync().ConfigureAwait(false);
+				responseBody = await content.ReadAsStreamAsync(cancel).ConfigureAwait(false);
 			}
 			else
 			{
-				responseBody = await content.ReadAsStringAsync().ConfigureAwait(false);
+				responseBody = await content.ReadAsStringAsync(cancel).ConfigureAwait(false);
 				content.Dispose();
 			}
 		}

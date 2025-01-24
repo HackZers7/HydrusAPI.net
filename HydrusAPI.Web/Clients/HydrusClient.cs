@@ -55,7 +55,7 @@ public class HydrusClient : IHydrusClient
 	{
 		return GetApiVersion(_apiConnection, cancel);
 	}
-	
+
 	/// <summary>
 	///     Запрашивает версию Hydrus.
 	/// </summary>

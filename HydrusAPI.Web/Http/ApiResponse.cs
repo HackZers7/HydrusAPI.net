@@ -1,5 +1,3 @@
-using DS.Shared;
-
 namespace HydrusAPI.Web.Http;
 
 /// <summary>
