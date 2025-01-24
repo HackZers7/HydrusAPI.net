@@ -23,7 +23,7 @@ public static class HydrusUrls
 	///     Возвращает <see cref="Uri" /> запроса получения API ключа.
 	/// </summary>
 	/// <param name="name">Название ключа.</param>
-	/// <param name="permitsEverything">selective, bool, whether to permit all tasks now and in future</param>
+	/// <param name="permitsEverything">Разрешить доступ ко всем областям (разрешениям).</param>
 	/// <param name="permissions">Массив с запрашиваемыми разрешениями.</param>
 	/// <returns><see cref="Uri" /> эндпоинта получения API ключа.</returns>
 	public static Uri RequestAccessToken(string name, bool permitsEverything, params Permissions[] permissions)
@@ -45,5 +45,14 @@ public static class HydrusUrls
 	public static Uri RequestSessionToken()
 	{
 		return "/session_key".FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса на проверку токена.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта проверки токена.</returns>
+	public static Uri VerifyToken()
+	{
+		return "/verify_access_key".FormatUri();
 	}
 }

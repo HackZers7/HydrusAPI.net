@@ -32,7 +32,7 @@ public class HydrusTokenAuthenticator : IAuthenticator
 	{
 		ThrowHelper.ArgumentNotNull(request, nameof(request));
 
-		if (request.Headers.ContainsKey(OAuthClient.HydrusAccessHeader))
+		if (request.Headers.ContainsKey(OAuthClient.HydrusAccessHeader) || request.Headers.ContainsKey(OAuthClient.HydrusSessionHeader))
 		{
 			return;
 		}

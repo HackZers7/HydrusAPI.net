@@ -183,6 +183,7 @@ public class ApiConnection : IApiConnection
 		throw response.StatusCode switch
 		{
 			HttpStatusCode.Unauthorized => new ApiUnauthorizedException(response),
+			(HttpStatusCode)419 => new TokenExpiredException(response),
 			_ => new ApiException(response)
 		};
 	}

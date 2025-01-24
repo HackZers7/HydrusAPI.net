@@ -55,9 +55,21 @@ public class OAuthClient : ApiClient, IOAuthClient
 	}
 
 	/// <inheritdoc />
-	public Task<HydrusSessionToken> RequestSessionToken(string accessToken, CancellationToken cancel)
+	public Task<HydrusSessionToken> RequestSessionToken(string accessToken, CancellationToken cancel = default)
 	{
 		return RequestSessionToken(ApiConnection, accessToken, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<VerifyToken> VerifyAccessToken(string accessToken, CancellationToken cancel = default)
+	{
+		return VerifyAccessToken(ApiConnection, accessToken, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<VerifyToken> VerifySessionToken(string sessionToken, CancellationToken cancel = default)
+	{
+		return VerifySessionToken(ApiConnection, sessionToken, cancel);
 	}
 
 	/// <summary>
@@ -65,8 +77,8 @@ public class OAuthClient : ApiClient, IOAuthClient
 	/// </summary>
 	/// <param name="apiConnection">Подключение к клиенту Hydrus.</param>
 	/// <param name="name">Название ключа.</param>
-	/// <param name="permitsEverything">selective, bool, whether to permit all tasks now and in future</param>
-	/// <param name="permissions">Разрешения которые необходимы.</param>
+	/// <param name="permitsEverything">Разрешить доступ ко всем областям (разрешениям).</param>
+	/// <param name="permissions">Области видимости (разрешения).</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="HydrusAccessToken" /> с полученным ключом доступа.</returns>
 	public static Task<HydrusAccessToken> RequestAccessToken(
@@ -103,6 +115,44 @@ public class OAuthClient : ApiClient, IOAuthClient
 
 		// TODO: Добавить получение доступных областей видимости
 		return apiConnection.Get<HydrusSessionToken>(HydrusUrls.RequestSessionToken(), null, null, headers, cancel);
+	}
+
+	/// <summary>
+	///     Производит проверку токена доступа.
+	/// </summary>
+	/// <param name="apiConnection">Подключение к клиенту Hydrus.</param>
+	/// <param name="accessToken">Токен доступа.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="VerifyToken" /> с информацией о ключе.</returns>
+	public static Task<VerifyToken> VerifyAccessToken(IApiConnection apiConnection, string accessToken, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(apiConnection);
+		ThrowHelper.ArgumentNotNull(accessToken);
+
+		var headers = new Dictionary<string, string>
+		{
+			{ HydrusAccessHeader, accessToken }
+		};
+		return apiConnection.Get<VerifyToken>(HydrusUrls.VerifyToken(), null, null, headers, cancel);
+	}
+
+	/// <summary>
+	///     Производит проверку токена сессии.
+	/// </summary>
+	/// <param name="apiConnection">Подключение к клиенту Hydrus.</param>
+	/// <param name="sessionToken">Токен сессии</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="VerifyToken" /> с информацией о ключе.</returns>
+	public static Task<VerifyToken> VerifySessionToken(IApiConnection apiConnection, string sessionToken, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(apiConnection);
+		ThrowHelper.ArgumentNotNull(sessionToken);
+
+		var headers = new Dictionary<string, string>
+		{
+			{ HydrusSessionHeader, sessionToken }
+		};
+		return apiConnection.Get<VerifyToken>(HydrusUrls.VerifyToken(), null, null, headers, cancel);
 	}
 
 	private static IApiConnection BuildApi(HydrusClientConfig config)

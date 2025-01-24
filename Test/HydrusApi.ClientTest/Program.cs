@@ -22,6 +22,10 @@ internal class Program
 		
 			var client = new HydrusClient(config);
 			await client.GetApiVersion();
+			var sessionToken = (config.Authenticator as HydrusTokenAuthenticator)!.SessionToken!;
+			
+			await client.OAuthClient.VerifyAccessToken(accessToken.Token);
+			await client.OAuthClient.VerifySessionToken(sessionToken.Token);
 		}
 		catch (Exception e)
 		{

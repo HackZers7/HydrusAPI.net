@@ -1,7 +1,7 @@
 namespace HydrusAPI.Web;
 
 /// <summary>
-///     Класс представляющий версию API Hydrus.
+///     Версия API Hydrus.
 /// </summary>
 public class ApiVersion
 {
