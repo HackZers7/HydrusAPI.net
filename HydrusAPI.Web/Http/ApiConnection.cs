@@ -46,6 +46,11 @@ public class ApiConnection : IApiConnection
 		throw new NotImplementedException();
 	}
 
+	public Task<T> Get<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default)
+	{
+		throw new NotImplementedException();
+	}
+
 	public Task<T> Post<T>(Uri uri, CancellationToken cancel = default)
 	{
 		throw new NotImplementedException();
@@ -57,6 +62,11 @@ public class ApiConnection : IApiConnection
 	}
 
 	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, CancellationToken cancel = default)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default)
 	{
 		throw new NotImplementedException();
 	}
@@ -76,6 +86,11 @@ public class ApiConnection : IApiConnection
 		throw new NotImplementedException();
 	}
 
+	public Task<T> Put<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default)
+	{
+		throw new NotImplementedException();
+	}
+
 	public Task<T> Delete<T>(Uri uri, CancellationToken cancel = default)
 	{
 		throw new NotImplementedException();
@@ -87,6 +102,11 @@ public class ApiConnection : IApiConnection
 	}
 
 	public Task<T> Delete<T>(Uri uri, IDictionary<string, string>? parameters, object? body, CancellationToken cancel = default)
+	{
+		throw new NotImplementedException();
+	}
+
+	public Task<T> Delete<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default)
 	{
 		throw new NotImplementedException();
 	}
