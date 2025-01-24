@@ -6,9 +6,9 @@ namespace HydrusAPI.Web;
 public interface IHydrusClient
 {
 	/// <summary>
-	///     Клиент для получения ключа доступа.
+	///     Клиент получения токенов аутентификации.
 	/// </summary>
-	IAccessClient AccessClient { get; }
+	IOAuthClient OAuthClient { get; }
 
 	/// <summary>
 	///     Запрашивает версию Hydrus.

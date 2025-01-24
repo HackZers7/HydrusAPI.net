@@ -13,10 +13,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Authenticators\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\..\DS.Shared\DS.Shared\DS.Shared.csproj" />
     </ItemGroup>
 

@@ -49,7 +49,7 @@ public interface IApiConnection
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Полученные данные.</returns>
 	/// <exception cref="ApiException">Выбрасывается, когда происходит ошибка в API.</exception>
-	Task<T> Get<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default);
+	Task<T> Get<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Создает новые данные в API по-указанному URI.
@@ -95,7 +95,7 @@ public interface IApiConnection
 	/// <typeparam name="T">Тип данных.</typeparam>
 	/// <returns>Созданные данные.</returns>
 	/// <exception cref="ApiException">Выбрасывается, когда происходит ошибка в API.</exception>
-	Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default);
+	Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Создает или обновляет данные в API по-указанному URI.
@@ -137,7 +137,7 @@ public interface IApiConnection
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Созданные данные.</returns>
 	/// <exception cref="ApiException">Выбрасывается, когда происходит ошибка в API.</exception>
-	Task<T> Put<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default);
+	Task<T> Put<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Удаляет данные из API по-указанному URI.
@@ -179,5 +179,5 @@ public interface IApiConnection
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns></returns>
 	/// <exception cref="ApiException">Выбрасывается, когда происходит ошибка в API.</exception>
-	Task<T> Delete<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default);
+	Task<T> Delete<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default);
 }

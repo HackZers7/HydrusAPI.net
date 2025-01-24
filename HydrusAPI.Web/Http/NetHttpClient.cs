@@ -34,7 +34,7 @@ public class NetHttpClient : IHttpClient
 		using (var requestMessage = BuildRequestMessage(request))
 		{
 			var responseMessage = await _httpClient
-				.SendAsync(requestMessage, HttpCompletionOption.ResponseContentRead, cancel)
+				.SendAsync(requestMessage, HttpCompletionOption.ResponseContentRead, cancellationTokenForRequest)
 				.ConfigureAwait(false);
 
 			return await BuildResponse(responseMessage, cancel).ConfigureAwait(false);

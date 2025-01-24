@@ -12,8 +12,21 @@ internal class Program
 
 	private static async Task Run()
 	{
-		var client = new HydrusClient();
-		await client.GetApiVersion();
-		await client.AccessClient.GetAccessKey("test test", Permissions.CommitPending, Permissions.ManagePopups, Permissions.EditFileRelationships);
+		try
+		{
+			var config = HydrusClientConfig.CreateDefault(HydrusUrls.DefaultLocalhost);
+		
+			var auth = new OAuthClient(config);
+			var accessToken = await auth.RequestAccessToken("test", false, Permissions.CommitPending, Permissions.ManagePopups);
+			config.WithToken(accessToken.Token);
+		
+			var client = new HydrusClient(config);
+			await client.GetApiVersion();
+		}
+		catch (Exception e)
+		{
+			Console.WriteLine(e);
+			throw;
+		}
 	}
 }

@@ -1,4 +1,3 @@
-using DS.Shared;
 using System.Net;
 
 namespace HydrusAPI.Web.Http;
@@ -46,9 +45,11 @@ public class ApiConnection : IApiConnection
 		throw new NotImplementedException();
 	}
 
-	public Task<T> Get<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default)
+	public Task<T> Get<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default)
 	{
-		throw new NotImplementedException();
+		ThrowHelper.ArgumentNotNull(uri);
+
+		return SendData<T>(uri, HttpMethod.Get, headers, parameters, body, cancel);
 	}
 
 	public Task<T> Post<T>(Uri uri, CancellationToken cancel = default)
@@ -66,7 +67,7 @@ public class ApiConnection : IApiConnection
 		throw new NotImplementedException();
 	}
 
-	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default)
+	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default)
 	{
 		throw new NotImplementedException();
 	}
@@ -86,7 +87,7 @@ public class ApiConnection : IApiConnection
 		throw new NotImplementedException();
 	}
 
-	public Task<T> Put<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default)
+	public Task<T> Put<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default)
 	{
 		throw new NotImplementedException();
 	}
@@ -106,7 +107,7 @@ public class ApiConnection : IApiConnection
 		throw new NotImplementedException();
 	}
 
-	public Task<T> Delete<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string> headers, CancellationToken cancel = default)
+	public Task<T> Delete<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default)
 	{
 		throw new NotImplementedException();
 	}
