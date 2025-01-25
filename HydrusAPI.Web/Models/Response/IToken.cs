@@ -6,22 +6,22 @@ namespace HydrusAPI.Web;
 public interface IToken
 {
 	/// <summary>
-	///     Возвращает ключ.
+	///     Токен.
 	/// </summary>
 	public string Token { get; }
 
 	/// <summary>
-	///     Возвращает все доступные области видимости для ключа.
+	///     Все доступные области видимости для токена.
 	/// </summary>
 	public Permissions[] Scopes { get; }
 
 	/// <summary>
-	///     Возвращает время (UTC), когда токен был создан.
+	///    Время (UTC), когда токен был создан.
 	/// </summary>
 	public DateTime CreatedAt { get; }
 
 	/// <summary>
-	///     Возвращает значение, указывающее, истек ли токен или нет.
+	///     Указывает, истек ли токен или нет.
 	/// </summary>
 	public bool IsExpired { get; }
 }

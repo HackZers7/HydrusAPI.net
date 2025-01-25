@@ -9,7 +9,7 @@ namespace HydrusAPI.Web;
 public class HydrusAccessToken : ApiVersion, IToken
 {
 	/// <summary>
-	///     Возвращает ключ доступа.
+	///     Токен доступа.
 	/// </summary>
 	[JsonProperty("access_key")]
 	[JsonPropertyName("access_key")]
@@ -22,8 +22,8 @@ public class HydrusAccessToken : ApiVersion, IToken
 	public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
 	/// <summary>
-	///     Возвращает значение, указывающее, истек ли токен или нет.
-	///     <remarks>Ключ доступа Hydrus не может истечь, если только его не удалят.</remarks>
+	///     Указывает, истек ли токен или нет.
+	///     <remarks>Токен доступа Hydrus не может истечь, если только его не удалят.</remarks>
 	/// </summary>
 	public bool IsExpired => true;
 }

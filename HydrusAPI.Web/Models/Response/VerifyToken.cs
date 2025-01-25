@@ -14,19 +14,19 @@ public class VerifyToken : ApiVersion
 	public string Name { get; set; } = default!;
 
 	/// <summary>
-	///     Возвращает метку, что токену доступны все области видимости.
+	///     Метка, что ключу доступны все области видимости.
 	/// </summary>
 	public string PermitsEverything { get; set; } = default!;
 
 	/// <summary>
-	///     Возвращает области видимости токена.
+	///     Области видимости токена.
 	/// </summary>
 	[JsonProperty("basic_permissions")]
 	[JsonPropertyName("basic_permissions")]
 	public Permissions[] Scopes { get; set; } = default!;
 
 	/// <summary>
-	///     Возвращает человеческое описание информации про токен.
+	///     Человеческое описание информации про токен.
 	/// </summary>
 	public string HumanDescription { get; set; } = default!;
 }

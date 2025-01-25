@@ -22,17 +22,17 @@ public class ApiError : ApiVersion
 	}
 
 	/// <summary>
-	///     Возвращает текстовая описание ошибки.
+	///     Текстовая описание ошибки.
 	/// </summary>
 	public string Error { get; set; } = default!;
 
 	/// <summary>
-	///     Возвращает тип ошибки.
+	///     Тип ошибки.
 	/// </summary>
 	public string ExceptionType { get; set; } = default!;
 
 	/// <summary>
-	///     Возвращает статус.
+	///     Статус.
 	/// </summary>
 	public int StatusCode { get; set; }
 }

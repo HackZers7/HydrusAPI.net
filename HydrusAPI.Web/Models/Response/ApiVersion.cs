@@ -6,12 +6,12 @@ namespace HydrusAPI.Web;
 public class ApiVersion
 {
 	/// <summary>
-	///     Возвращает версию Hydrus API.
+	///     Версия Hydrus API.
 	/// </summary>
 	public int Version { get; set; }
 
 	/// <summary>
-	///     Возвращает версию Hydrus.
+	///     Версия Hydrus.
 	/// </summary>
 	public int HydrusVersion { get; set; }
 }
