@@ -45,10 +45,14 @@ public class HydrusClient : IHydrusClient
 		_apiConnection = config.BuildApiConnection();
 
 		OAuthClient = new OAuthClient(_apiConnection);
+		ServicesClient = new ServicesClient(_apiConnection);
 	}
 
 	/// <inheritdoc />
 	public IOAuthClient OAuthClient { get; }
+
+	/// <inheritdoc />
+	public IServicesClient ServicesClient { get; }
 
 	/// <inheritdoc />
 	public Task<ApiVersion> GetApiVersion(CancellationToken cancel = default)

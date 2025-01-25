@@ -34,7 +34,7 @@ public static class HydrusUrls
 		// ReSharper disable once UseStringInterpolation
 		var encodedPermissions = string.Format("[{0}]", string.Join(',', permissions.Select(p => ((int)p).ToString())))
 			.UriEncode();
-		return "/request_new_permissions?name={0}&permit_everything={1}&basic_permissions={2}"
+		return "/request_new_permissions?name={0}&permits_everything={1}&basic_permissions={2}"
 			.FormatUri(encodedName, permitsEverything.ToString().ToLower(), encodedPermissions);
 	}
 
@@ -54,5 +54,33 @@ public static class HydrusUrls
 	public static Uri VerifyToken()
 	{
 		return "/verify_access_key".FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса на получение сервиса по имени.
+	/// </summary>
+	/// <param name="name">Название сервиса.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения сервиса.</returns>
+	public static Uri GetServiceByName(string name)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(name);
+
+		var encodedName = name.UriEncode();
+		return "/get_service?service_name={0}"
+			.FormatUri(encodedName);
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса на получение сервиса по ключу.
+	/// </summary>
+	/// <param name="key">Ключ сервиса.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения сервиса.</returns>
+	public static Uri GetServiceByKey(string key)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(key);
+
+		var encodedKey = key.UriEncode();
+		return "/get_service?service_key={0}"
+			.FormatUri(encodedKey);
 	}
 }

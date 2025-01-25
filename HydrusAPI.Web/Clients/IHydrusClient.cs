@@ -11,6 +11,11 @@ public interface IHydrusClient
 	IOAuthClient OAuthClient { get; }
 
 	/// <summary>
+	///     Клиент для работы с сервисами.
+	/// </summary>
+	IServicesClient ServicesClient { get; }
+
+	/// <summary>
 	///     Запрашивает версию Hydrus.
 	/// </summary>
 	/// <param name="cancel">Токен отмены запроса.</param>
