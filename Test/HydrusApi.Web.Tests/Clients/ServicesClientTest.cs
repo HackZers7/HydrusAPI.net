@@ -38,4 +38,13 @@ public class ServicesClientTest
 		Assert.That(services.Service.Name, Is.Not.Empty);
 		Assert.That(services.Service.ServiceKey, Is.EqualTo(key));
 	}
+	
+	[Test]
+	public async Task GetServices()
+	{
+		var services = await _client.ServicesClient.GetServices();
+
+		Assert.That(services, Is.Not.Null);
+		Assert.That(services.Services, Has.Count.GreaterThan(0));
+	}
 }

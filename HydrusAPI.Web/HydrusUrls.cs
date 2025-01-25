@@ -83,4 +83,14 @@ public static class HydrusUrls
 		return "/get_service?service_key={0}"
 			.FormatUri(encodedKey);
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса на получение всех доступных сервисов.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта получения сервисов.</returns>
+	public static Uri GetServices()
+	{
+		return "/get_services"
+			.FormatUri();
+	}
 }

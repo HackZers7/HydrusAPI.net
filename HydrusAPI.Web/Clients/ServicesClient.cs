@@ -27,4 +27,10 @@ public class ServicesClient : ApiClient, IServicesClient
 
 		return ApiConnection.Get<ServiceResponse>(HydrusUrls.GetServiceByKey(key), cancel);
 	}
+
+	/// <inheritdoc />
+	public Task<ServicesResponse> GetServices(CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<ServicesResponse>(HydrusUrls.GetServices(), cancel);
+	}
 }
