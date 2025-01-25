@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DS.Shared", "..\DS.Shared\D
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4A6BFE23-C8CC-4424-96D9-65DFD8D430DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HydrusApi.ClientTest", "Test\HydrusApi.ClientTest\HydrusApi.ClientTest.csproj", "{CAAF1C94-CB0B-41C9-AE08-BFEDF36156C2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HydrusApi.Web.Tests", "Test\HydrusApi.Web.Tests\HydrusApi.Web.Tests.csproj", "{CAAF1C94-CB0B-41C9-AE08-BFEDF36156C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
