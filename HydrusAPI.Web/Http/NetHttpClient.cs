@@ -91,11 +91,11 @@ public class NetHttpClient : IHttpClient
 					requestMessage.Content = body;
 					break;
 				case string body:
-					requestMessage.Content = new StringContent(body, Encoding.UTF8, request.ContentType);
+					requestMessage.Content = new StringContent(body, Encoding.UTF8, "application/json");
 					break;
 				case Stream body:
 					requestMessage.Content = new StreamContent(body);
-					requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(request.ContentType);
+					// requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(request.ContentType);
 					break;
 			}
 		}

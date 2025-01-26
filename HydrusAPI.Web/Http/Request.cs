@@ -69,7 +69,4 @@ public class Request : IRequest
 
 	/// <inheritdoc />
 	public TimeSpan Timeout { get; set; }
-
-	/// <inheritdoc />
-	public string? ContentType { get; set; }
 }

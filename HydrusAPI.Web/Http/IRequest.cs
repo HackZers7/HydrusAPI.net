@@ -39,9 +39,4 @@ public interface IRequest
 	///     Возвращает таймаут.
 	/// </summary>
 	TimeSpan Timeout { get; }
-
-	/// <summary>
-	///     Возвращает тип контента.
-	/// </summary>
-	string? ContentType { get; }
 }
