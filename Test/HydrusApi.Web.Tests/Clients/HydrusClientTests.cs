@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 namespace HydrusApi.Web.Tests.Clients;
 
+[TestFixture]
 public class HydrusClientTests
 {
 	private readonly IHydrusClient _client;

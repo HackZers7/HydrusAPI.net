@@ -5,7 +5,9 @@ namespace HydrusApi.Web.Tests;
 
 public static class IoC
 {
-	private static readonly string Token;
+	public static readonly string Token;
+	public static readonly string FilePath;
+
 	private static readonly object Lock = new();
 	private static HydrusClient? _client;
 
@@ -18,6 +20,7 @@ public static class IoC
 				.Build();
 
 			Token = configuration["Token"]!;
+			FilePath = configuration["FilePath"]!;
 		}
 	}
 

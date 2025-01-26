@@ -16,6 +16,11 @@ public interface IHydrusClient
 	IServicesClient ServicesClient { get; }
 
 	/// <summary>
+	///     Клиент для работы с файлами.
+	/// </summary>
+	IFilesClient FilesClient { get; }
+
+	/// <summary>
 	///     Запрашивает версию Hydrus.
 	/// </summary>
 	/// <param name="cancel">Токен отмены запроса.</param>

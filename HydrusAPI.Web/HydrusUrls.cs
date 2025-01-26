@@ -93,4 +93,14 @@ public static class HydrusUrls
 		return "/get_services"
 			.FormatUri();
 	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса на отправку файла.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта отправки файла.</returns>
+	public static Uri AddFile()
+	{
+		return "/add_files/add_file"
+			.FormatUri();
+	}
 }

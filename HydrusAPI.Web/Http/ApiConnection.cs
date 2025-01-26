@@ -49,7 +49,7 @@ public class ApiConnection : IApiConnection
 	{
 		ThrowHelper.ArgumentNotNull(uri);
 
-		return SendData<T>(uri, HttpMethod.Get, headers, parameters, body, cancel);
+		return SendData<T>(uri, HttpMethod.Get, headers: headers, parameters: parameters, body: body, cancel: cancel);
 	}
 
 	public Task<T> Post<T>(Uri uri, CancellationToken cancel = default)
@@ -62,9 +62,10 @@ public class ApiConnection : IApiConnection
 		throw new NotImplementedException();
 	}
 
+	/// <inheritdoc />
 	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, CancellationToken cancel = default)
 	{
-		throw new NotImplementedException();
+		return SendData<T>(uri, HttpMethod.Post, parameters: parameters, body: body, cancel: cancel);
 	}
 
 	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default)

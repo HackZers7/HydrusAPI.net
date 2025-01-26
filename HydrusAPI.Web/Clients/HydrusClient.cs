@@ -46,6 +46,7 @@ public class HydrusClient : IHydrusClient
 
 		OAuthClient = new OAuthClient(_apiConnection);
 		ServicesClient = new ServicesClient(_apiConnection);
+		FilesClient = new FilesClient(_apiConnection);
 	}
 
 	/// <inheritdoc />
@@ -53,6 +54,9 @@ public class HydrusClient : IHydrusClient
 
 	/// <inheritdoc />
 	public IServicesClient ServicesClient { get; }
+	
+	/// <inheritdoc />
+	public IFilesClient FilesClient { get; }
 
 	/// <inheritdoc />
 	public Task<ApiVersion> GetApiVersion(CancellationToken cancel = default)
