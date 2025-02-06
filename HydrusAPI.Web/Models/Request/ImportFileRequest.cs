@@ -29,7 +29,7 @@ public class ImportFileRequest
 	public bool DeleteAfterSuccessfulImport { get; set; }
 
 	/// <summary>
-	///     Домен файла. По умолчанию - "quiet".
+	///     Домен файла. По умолчанию - "my files".
 	/// </summary>
 	public string? FileDomain { get; set; }
 }
