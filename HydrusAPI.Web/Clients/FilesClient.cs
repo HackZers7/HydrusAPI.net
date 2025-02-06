@@ -27,4 +27,10 @@ public class FilesClient : ApiClient, IFilesClient
 
 		return ApiConnection.Post<ImportResult>(HydrusUrls.AddFile(), null, request, cancel);
 	}
+
+	/// <inheritdoc />
+	public Task<ImportResult> SendFile(Stream file, CancellationToken cancel = default)
+	{
+		return ApiConnection.Post<ImportResult>(HydrusUrls.AddFile(), null, file, cancel);
+	}
 }

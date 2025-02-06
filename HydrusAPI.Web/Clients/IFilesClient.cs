@@ -30,4 +30,16 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="ServiceResponse" /> с информацией о сервисе.</returns>
 	Task<ImportResult> SendLocalFile(ImportFileRequest request, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Отправляет файл.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="file">Поток с файлом.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="ServiceResponse" /> с информацией о сервисе.</returns>
+	Task<ImportResult> SendFile(Stream file, CancellationToken cancel = default);
 }

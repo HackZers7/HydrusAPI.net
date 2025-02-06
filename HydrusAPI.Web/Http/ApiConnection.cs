@@ -68,9 +68,10 @@ public class ApiConnection : IApiConnection
 		return SendData<T>(uri, HttpMethod.Post, parameters: parameters, body: body, cancel: cancel);
 	}
 
+	/// <inheritdoc />
 	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default)
 	{
-		throw new NotImplementedException();
+		return SendData<T>(uri, HttpMethod.Post, headers: headers, parameters: parameters, body: body, cancel: cancel);
 	}
 
 	public Task<T> Put<T>(Uri uri, CancellationToken cancel = default)
