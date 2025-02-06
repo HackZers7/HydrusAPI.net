@@ -28,6 +28,8 @@ public class ImportFileRequest
 	/// </summary>
 	public bool DeleteAfterSuccessfulImport { get; set; }
 
+	// TODO: Реализовать правильный FileDomain
+	
 	/// <summary>
 	///     Домен файла. По умолчанию - "my files".
 	/// </summary>

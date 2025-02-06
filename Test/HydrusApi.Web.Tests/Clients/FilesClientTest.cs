@@ -25,7 +25,7 @@ public class FilesClientTest
 		Assert.That(result.Status, Is.EqualTo(ImportStatus.Success).Or.EqualTo(ImportStatus.AlreadyExists));
 		Assert.That(result.Hash, Is.Not.Empty);
 	}
-	
+
 	[Test]
 	public async Task SendFile()
 	{
@@ -36,6 +36,41 @@ public class FilesClientTest
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result.Status, Is.EqualTo(ImportStatus.Success).Or.EqualTo(ImportStatus.AlreadyExists));
 			Assert.That(result.Hash, Is.Not.Empty);
+		}
+	}
+
+	[Test]
+	public async Task DeleteFileByHash()
+	{
+		using (var stream = File.OpenRead(IoC.FilePath))
+		{
+			var hash = Utils.GetSha256(stream);
+			var result = await _client.FilesClient.DeleteFile(hash);
+
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result, Is.True);
+		}
+	}
+
+	[Test]
+	public async Task DeleteFileById()
+	{
+		var result = await _client.FilesClient.DeleteFile(1);
+
+		Assert.That(result, Is.Not.Null);
+		Assert.That(result, Is.True);
+	}
+
+	[Test]
+	public async Task DeleteFileWithReasons()
+	{
+		using (var stream = File.OpenRead(IoC.FilePath))
+		{
+			var hash = Utils.GetSha256(stream);
+			var result = await _client.FilesClient.DeleteFile(hash, reason: "testReason");
+
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result, Is.True);
 		}
 	}
 }

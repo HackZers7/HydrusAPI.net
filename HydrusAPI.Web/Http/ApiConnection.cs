@@ -69,6 +69,13 @@ public class ApiConnection : IApiConnection
 	}
 
 	/// <inheritdoc />
+	public async Task<HttpStatusCode> Post(Uri uri, IDictionary<string, string>? parameters, object? body, CancellationToken cancel = default)
+	{
+		var response = await SendDataDetailed(uri, HttpMethod.Post, parameters: parameters, body: body, cancel: cancel);
+		return response.StatusCode;
+	}
+
+	/// <inheritdoc />
 	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default)
 	{
 		return SendData<T>(uri, HttpMethod.Post, headers: headers, parameters: parameters, body: body, cancel: cancel);
@@ -126,6 +133,20 @@ public class ApiConnection : IApiConnection
 		var request = CreateRequest(uri, method, headers, parameters, body);
 		var apiResponse = await Run<T>(request, cancel).ConfigureAwait(false);
 		return apiResponse.Body!;
+	}
+	
+	private async Task<IResponse> SendDataDetailed(
+		Uri uri,
+		HttpMethod method,
+		IDictionary<string, string>? parameters = null,
+		object? body = null,
+		IDictionary<string, string>? headers = null,
+		CancellationToken cancel = default
+	)
+	{
+		var request = CreateRequest(uri, method, headers, parameters, body);
+		var response = await Run<object>(request, cancel).ConfigureAwait(false);
+		return response.Response;
 	}
 
 	private Request CreateRequest(
