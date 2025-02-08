@@ -153,7 +153,7 @@ public static class HydrusUrls
 		return "/add_files/archive_files"
 			.FormatUri();
 	}
-	
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса разархивации отправленных файлов.
 	/// </summary>
@@ -163,7 +163,7 @@ public static class HydrusUrls
 		return "/add_files/unarchive_files"
 			.FormatUri();
 	}
-	
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса генерации хэшей.
 	/// </summary>
@@ -171,6 +171,59 @@ public static class HydrusUrls
 	public static Uri GenerateHashes()
 	{
 		return "/add_files/generate_hashes"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса поиска файла по url.
+	/// </summary>
+	/// <param name="url">URl файла.</param>
+	/// <param name="doublecheckFileSystem">
+	///     Если true – то любой результат, который <see cref="FileStatus.AlreadyExists" /> (2), будет дважды сверен с фактической файловой системой.
+	///     Эта проверка выполняется в любом обычном процессе импорта файлов, для проверки и исправления отсутствующих файлов (если файл отсутствует, статус становится <see cref="FileStatus.FileNotExists" /> (0)).
+	/// </param>
+	/// <returns><see cref="Uri" /> эндпоинта поиска файла по url.</returns>
+	public static Uri GetUrlFiles(string url, bool doublecheckFileSystem = false)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
+
+		var encodedUrl = url.UriEncode();
+
+		return "/add_urls/get_url_files?url={0}&doublecheck_file_system={1}"
+			.FormatUri(encodedUrl, doublecheckFileSystem.ToString().ToLower());
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса генерации хэшей.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта генерации хэшей.</returns>
+	public static Uri GetUrlInfo(string url)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
+
+		var encodedUrl = url.UriEncode();
+
+		return "/add_urls/get_url_info?url={0}"
+			.FormatUri(encodedUrl);
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса для импорта файла по URL.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта импорта файла по URL.</returns>
+	public static Uri AddUrl()
+	{
+		return "/add_urls/add_url"
+			.FormatUri();
+	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса ассоциации (добавления) и диссоциации (удаления) URL.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта ассоциации (добавления) и диссоциации (удаления) URL.</returns>
+	public static Uri AssociateUrl()
+	{
+		return "/add_urls/associate_url"
 			.FormatUri();
 	}
 }

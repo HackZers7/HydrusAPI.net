@@ -1,12 +1,12 @@
 namespace HydrusAPI.Web;
 
 /// <summary>
-///     Результат импорта.
+///     Информация о файле.
 /// </summary>
-public class ImportResult : HashResponse
+public class FileInfo
 {
 	/// <summary>
-	///     Статус импорта.
+	///     Статус файла.
 	/// </summary>
 	public FileStatus Status { get; set; } = default!;
 
@@ -14,4 +14,9 @@ public class ImportResult : HashResponse
 	///     Заметка.
 	/// </summary>
 	public string Note { get; set; } = default!;
+
+	/// <summary>
+	///     Хэш (SHA256).
+	/// </summary>
+	public string Hash { get; set; } = default!;
 }

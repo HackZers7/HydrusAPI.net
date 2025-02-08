@@ -3,8 +3,13 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Статусы импорта.
 /// </summary>
-public enum ImportStatus
+public enum FileStatus
 {
+	/// <summary>
+	///     Файл находится не в базе данных, но готово к импорту. Очень редкий статус.
+	/// </summary>
+	FileNotExists = 0,
+
 	/// <summary>
 	///     Успешно импортирован.
 	/// </summary>
