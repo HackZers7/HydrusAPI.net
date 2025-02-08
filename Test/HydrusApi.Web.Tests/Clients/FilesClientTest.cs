@@ -8,106 +8,196 @@ namespace HydrusApi.Web.Tests.Clients;
 [TestFixture]
 public class FilesClientTest
 {
-	private readonly IHydrusClient _client;
-
-	// ReSharper disable once ConvertConstructorToMemberInitializers
-	public FilesClientTest()
+	[TestFixture]
+	public class SendTest
 	{
-		_client = IoC.GetHydrusClient();
-	}
+		private readonly IHydrusClient _client;
 
-	[Test]
-	public async Task SendLocalFile()
-	{
-		var result = await _client.FilesClient.SendLocalFile(IoC.FilePath);
-
-		Assert.That(result, Is.Not.Null);
-		Assert.That(result.Status, Is.EqualTo(ImportStatus.Success).Or.EqualTo(ImportStatus.AlreadyExists));
-		Assert.That(result.Hash, Is.Not.Empty);
-	}
-
-	[Test]
-	public async Task SendFile()
-	{
-		using (var stream = File.OpenRead(IoC.FilePath))
+		// ReSharper disable once ConvertConstructorToMemberInitializers
+		public SendTest()
 		{
-			var result = await _client.FilesClient.SendFile(stream);
+			_client = IoC.GetHydrusClient();
+		}
+
+		[Test]
+		public async Task LocalFile()
+		{
+			var result = await _client.FilesClient.SendLocalFile(IoC.FilePath);
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result.Status, Is.EqualTo(ImportStatus.Success).Or.EqualTo(ImportStatus.AlreadyExists));
 			Assert.That(result.Hash, Is.Not.Empty);
 		}
+
+		[Test]
+		public async Task File()
+		{
+			using (var stream = System.IO.File.OpenRead(IoC.FilePath))
+			{
+				var result = await _client.FilesClient.SendFile(stream);
+
+				Assert.That(result, Is.Not.Null);
+				Assert.That(result.Status, Is.EqualTo(ImportStatus.Success).Or.EqualTo(ImportStatus.AlreadyExists));
+				Assert.That(result.Hash, Is.Not.Empty);
+			}
+		}
 	}
 
-	[Test]
-	public async Task DeleteFileByHash()
+	[TestFixture]
+	public class DeleteTest
 	{
-		using (var stream = File.OpenRead(IoC.FilePath))
+		private readonly IHydrusClient _client;
+
+		// ReSharper disable once ConvertConstructorToMemberInitializers
+		public DeleteTest()
 		{
-			var hash = Utils.GetSha256(stream);
-			var result = await _client.FilesClient.DeleteFiles(hash);
+			_client = IoC.GetHydrusClient();
+		}
+
+		[Test]
+		public async Task ByHash()
+		{
+			using (var stream = File.OpenRead(IoC.FilePath))
+			{
+				var hash = Utils.GetSha256(stream);
+				var result = await _client.FilesClient.DeleteFiles(hash);
+
+				Assert.That(result, Is.Not.Null);
+				Assert.That(result, Is.True);
+			}
+		}
+
+		[Test]
+		public async Task ById()
+		{
+			var result = await _client.FilesClient.DeleteFiles(1);
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result, Is.True);
 		}
-	}
 
-	[Test]
-	public async Task DeleteFileById()
-	{
-		var result = await _client.FilesClient.DeleteFiles(1);
+		[Test]
+		public async Task MultiplyFiles()
+		{
+			var deleteFiles = new DeleteFilesRequest();
+			using (var stream = File.OpenRead(IoC.FilePath))
+			{
+				var hash = Utils.GetSha256(stream);
+				deleteFiles.AddHash(hash);
+			}
 
-		Assert.That(result, Is.Not.Null);
-		Assert.That(result, Is.True);
+			using (var stream = File.OpenRead(IoC.FilePath2))
+			{
+				var hash = Utils.GetSha256(stream);
+				deleteFiles.AddHash(hash);
+			}
+
+			var result = await _client.FilesClient.DeleteFiles(deleteFiles);
+
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result, Is.True);
+		}
+
+		[Test]
+		public async Task MultiplyFilesWithHashAndId()
+		{
+			var deleteFiles = new DeleteFilesRequest();
+			deleteFiles.AddId(1);
+
+			using (var stream = File.OpenRead(IoC.FilePath2))
+			{
+				var hash = Utils.GetSha256(stream);
+				deleteFiles.AddHash(hash);
+			}
+
+			var result = await _client.FilesClient.DeleteFiles(deleteFiles);
+
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result, Is.True);
+		}
+
+		[Test]
+		public async Task WithReasons()
+		{
+			using (var stream = File.OpenRead(IoC.FilePath))
+			{
+				var hash = Utils.GetSha256(stream);
+				var result = await _client.FilesClient.DeleteFiles(hash, "testReason");
+
+				Assert.That(result, Is.Not.Null);
+				Assert.That(result, Is.True);
+			}
+		}
 	}
 	
-	[Test]
-	public async Task DeleteMultiplyFiles()
+	[TestFixture]
+	public class UndeleteTest
 	{
-		var deleteFiles = new DeleteFilesRequest();
-		using (var stream = File.OpenRead(IoC.FilePath))
-		{
-			var hash = Utils.GetSha256(stream);
-			deleteFiles.AddHash(hash);
-		}
-		
-		using (var stream = File.OpenRead(IoC.FilePath2))
-		{
-			var hash = Utils.GetSha256(stream);
-			deleteFiles.AddHash(hash);
-		}
-		
-		var result = await _client.FilesClient.DeleteFiles(deleteFiles);
+		private readonly IHydrusClient _client;
 
-		Assert.That(result, Is.Not.Null);
-		Assert.That(result, Is.True);
-	}
-	
-	[Test]
-	public async Task DeleteMultiplyFilesWithHashAndId()
-	{
-		var deleteFiles = new DeleteFilesRequest();
-		deleteFiles.AddId(1);
-		
-		using (var stream = File.OpenRead(IoC.FilePath2))
+		// ReSharper disable once ConvertConstructorToMemberInitializers
+		public UndeleteTest()
 		{
-			var hash = Utils.GetSha256(stream);
-			deleteFiles.AddHash(hash);
+			_client = IoC.GetHydrusClient();
 		}
-		
-		var result = await _client.FilesClient.DeleteFiles(deleteFiles);
 
-		Assert.That(result, Is.Not.Null);
-		Assert.That(result, Is.True);
-	}
-
-	[Test]
-	public async Task DeleteFileWithReasons()
-	{
-		using (var stream = File.OpenRead(IoC.FilePath))
+		[Test]
+		public async Task ByHash()
 		{
-			var hash = Utils.GetSha256(stream);
-			var result = await _client.FilesClient.DeleteFiles(hash, "testReason");
+			using (var stream = File.OpenRead(IoC.FilePath))
+			{
+				var hash = Utils.GetSha256(stream);
+				var result = await _client.FilesClient.UndeleteFiles(hash);
+
+				Assert.That(result, Is.Not.Null);
+				Assert.That(result, Is.True);
+			}
+		}
+
+		[Test]
+		public async Task ById()
+		{
+			var result = await _client.FilesClient.UndeleteFiles(1);
+
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result, Is.True);
+		}
+
+		[Test]
+		public async Task MultiplyFiles()
+		{
+			var undeleteFiles = new UndeleteFilesRequest();
+			using (var stream = File.OpenRead(IoC.FilePath))
+			{
+				var hash = Utils.GetSha256(stream);
+				undeleteFiles.AddHash(hash);
+			}
+
+			using (var stream = File.OpenRead(IoC.FilePath2))
+			{
+				var hash = Utils.GetSha256(stream);
+				undeleteFiles.AddHash(hash);
+			}
+
+			var result = await _client.FilesClient.UndeleteFiles(undeleteFiles);
+
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result, Is.True);
+		}
+
+		[Test]
+		public async Task MultiplyFilesWithHashAndId()
+		{
+			var undeleteFiles = new UndeleteFilesRequest();
+			undeleteFiles.AddId(1);
+
+			using (var stream = File.OpenRead(IoC.FilePath2))
+			{
+				var hash = Utils.GetSha256(stream);
+				undeleteFiles.AddHash(hash);
+			}
+
+			var result = await _client.FilesClient.UndeleteFiles(undeleteFiles);
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result, Is.True);

@@ -105,12 +105,22 @@ public static class HydrusUrls
 	}
 
 	/// <summary>
-	///     Возвращает <see cref="Uri" /> запроса на удаление файла.
+	///     Возвращает <see cref="Uri" /> запроса на удаление файлов.
 	/// </summary>
 	/// <returns><see cref="Uri" /> эндпоинта удаления файла.</returns>
-	public static Uri DeleteFile()
+	public static Uri DeleteFiles()
 	{
 		return "/add_files/delete_files"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса на отмену удаление файлов.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта отмены удаления файла.</returns>
+	public static Uri UndeleteFiles()
+	{
+		return "/add_files/undelete_files"
 			.FormatUri();
 	}
 }

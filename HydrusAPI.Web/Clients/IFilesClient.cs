@@ -49,7 +49,7 @@ public interface IFilesClient
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
 	///     <see cref="Permissions.ImportDeleteFiles" />,
 	/// </remarks>
-	/// <param name="hashes">Хэши в формате SHA256.</param>
+	/// <param name="hashes">Хэши (SHA256) файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> DeleteFiles(params string[] hashes);
 
@@ -60,7 +60,7 @@ public interface IFilesClient
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
 	///     <see cref="Permissions.ImportDeleteFiles" />,
 	/// </remarks>
-	/// <param name="hashes">Хэши в формате SHA256.</param>
+	/// <param name="hashes">Хэши (SHA256) файлов.</param>
 	/// <param name="reason">Не обязателен, причина удаления файла.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -101,4 +101,38 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> DeleteFiles(DeleteFilesRequest request, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Отправляет запрос для отмены удаления файлов по их хэшу (SHA256). Используется файловый домен по умолчанию "all my files".
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> UndeleteFiles(params string[] hashes);
+	
+	/// <summary>
+	///     Отправляет запрос для отмены удаления файлов по их идентификатору. Используется файловый домен по умолчанию "all my files".
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="ids">Идентификаторы файлов.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> UndeleteFiles(params ulong[] ids);
+	
+	/// <summary>
+	///     Отправляет запрос для отмены удаления файлов.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="request">Запрос на отмену удаления файлов.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> UndeleteFiles(UndeleteFilesRequest request, CancellationToken cancel = default);
 }
