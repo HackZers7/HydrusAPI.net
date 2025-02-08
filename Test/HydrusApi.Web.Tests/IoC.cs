@@ -7,6 +7,7 @@ public static class IoC
 {
 	public static readonly string Token;
 	public static readonly string FilePath;
+	public static readonly string FilePath2;
 
 	private static readonly object Lock = new();
 	private static HydrusClient? _client;
@@ -21,6 +22,7 @@ public static class IoC
 
 			Token = configuration["Token"]!;
 			FilePath = configuration["FilePath"]!;
+			FilePath2 = configuration["FilePath2"]!;
 		}
 	}
 

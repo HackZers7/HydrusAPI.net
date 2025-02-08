@@ -45,7 +45,7 @@ public class FilesClientTest
 		using (var stream = File.OpenRead(IoC.FilePath))
 		{
 			var hash = Utils.GetSha256(stream);
-			var result = await _client.FilesClient.DeleteFile(hash);
+			var result = await _client.FilesClient.DeleteFiles(hash);
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result, Is.True);
@@ -55,7 +55,47 @@ public class FilesClientTest
 	[Test]
 	public async Task DeleteFileById()
 	{
-		var result = await _client.FilesClient.DeleteFile(1);
+		var result = await _client.FilesClient.DeleteFiles(1);
+
+		Assert.That(result, Is.Not.Null);
+		Assert.That(result, Is.True);
+	}
+	
+	[Test]
+	public async Task DeleteMultiplyFiles()
+	{
+		var deleteFiles = new DeleteFilesRequest();
+		using (var stream = File.OpenRead(IoC.FilePath))
+		{
+			var hash = Utils.GetSha256(stream);
+			deleteFiles.AddHash(hash);
+		}
+		
+		using (var stream = File.OpenRead(IoC.FilePath2))
+		{
+			var hash = Utils.GetSha256(stream);
+			deleteFiles.AddHash(hash);
+		}
+		
+		var result = await _client.FilesClient.DeleteFiles(deleteFiles);
+
+		Assert.That(result, Is.Not.Null);
+		Assert.That(result, Is.True);
+	}
+	
+	[Test]
+	public async Task DeleteMultiplyFilesWithHashAndId()
+	{
+		var deleteFiles = new DeleteFilesRequest();
+		deleteFiles.AddId(1);
+		
+		using (var stream = File.OpenRead(IoC.FilePath2))
+		{
+			var hash = Utils.GetSha256(stream);
+			deleteFiles.AddHash(hash);
+		}
+		
+		var result = await _client.FilesClient.DeleteFiles(deleteFiles);
 
 		Assert.That(result, Is.Not.Null);
 		Assert.That(result, Is.True);
@@ -67,7 +107,7 @@ public class FilesClientTest
 		using (var stream = File.OpenRead(IoC.FilePath))
 		{
 			var hash = Utils.GetSha256(stream);
-			var result = await _client.FilesClient.DeleteFile(hash, reason: "testReason");
+			var result = await _client.FilesClient.DeleteFiles(hash, "testReason");
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result, Is.True);
