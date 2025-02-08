@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Хэш.
 /// </summary>
-public abstract class HashRequest
+public abstract class HashRequest : FileDomain
 {
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
