@@ -11,7 +11,7 @@ public class FilesAndFilesDomainTest
 	[Test]
 	public void FilesSerializationTest()
 	{
-		var files = new TestFilesAndFilesDomain();
+		var files = new Files();
 		files.AddHash("test1");
 
 		var data = Utils.Serialize(files);
@@ -24,7 +24,7 @@ public class FilesAndFilesDomainTest
 	[Test]
 	public void FilesMultiplySerializationTest()
 	{
-		var files = new TestFilesAndFilesDomain();
+		var files = new Files();
 		files.AddHash("test1");
 		files.AddId(500);
 
@@ -33,9 +33,5 @@ public class FilesAndFilesDomainTest
 		TestContext.WriteLine(data);
 
 		Assert.That(data, Is.Not.Empty);
-	}
-
-	private class TestFilesAndFilesDomain : FilesAndFilesDomain
-	{
 	}
 }

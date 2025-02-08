@@ -1,12 +1,45 @@
+// ReSharper disable PossibleMultipleEnumeration
+
 namespace HydrusAPI.Web;
 
 /// <summary>
 ///     Представляет файлы Hydrus.
 /// </summary>
-public abstract class Files
+public class Files
 {
 	private List<ulong>? _fileIds;
 	private List<string>? _hashes;
+
+	/// <summary>
+	///     Конструктор по умолчанию.
+	/// </summary>
+	public Files()
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	public Files(IEnumerable<string>? hashes)
+	{
+		if (hashes?.Any() ?? false)
+		{
+			_hashes = hashes.ToList();
+		}
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="fileIds">Идентификаторы файлов.</param>
+	public Files(IEnumerable<ulong>? fileIds)
+	{
+		if (fileIds?.Any() ?? false)
+		{
+			_fileIds = fileIds.ToList();
+		}
+	}
 
 	/// <summary>
 	///     Коллекция хэшей (SHA256) файлов.
@@ -93,10 +126,41 @@ public abstract class Files
 /// <summary>
 ///     Представляет файлы Hydrus.
 /// </summary>
-public abstract class FilesAndFilesDomain : FileDomain
+public class FilesWithDomain : FileDomain
 {
 	private List<ulong>? _fileIds;
 	private List<string>? _hashes;
+	
+	/// <summary>
+	///     Конструктор по умолчанию.
+	/// </summary>
+	public FilesWithDomain()
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	public FilesWithDomain(IEnumerable<string>? hashes)
+	{
+		if (hashes?.Any() ?? false)
+		{
+			_hashes = hashes.ToList();
+		}
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="fileIds">Идентификаторы файлов.</param>
+	public FilesWithDomain(IEnumerable<ulong>? fileIds)
+	{
+		if (fileIds?.Any() ?? false)
+		{
+			_fileIds = fileIds.ToList();
+		}
+	}
 
 	/// <summary>
 	///     Коллекция хэшей (SHA256) файлов.

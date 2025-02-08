@@ -166,7 +166,7 @@ public class FilesClientTest
 		[Test]
 		public async Task MultiplyFiles()
 		{
-			var undeleteFiles = new UndeleteFilesRequest();
+			var undeleteFiles = new FilesWithDomain();
 			using (var stream = File.OpenRead(IoC.FilePath))
 			{
 				var hash = Utils.GetSha256(stream);
@@ -188,7 +188,7 @@ public class FilesClientTest
 		[Test]
 		public async Task MultiplyFilesWithHashAndId()
 		{
-			var undeleteFiles = new UndeleteFilesRequest();
+			var undeleteFiles = new FilesWithDomain();
 			undeleteFiles.AddId(1);
 
 			using (var stream = File.OpenRead(IoC.FilePath2))

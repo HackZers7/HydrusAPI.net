@@ -134,7 +134,7 @@ public interface IFilesClient
 	/// <param name="request">Запрос на отмену удаления файлов.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-	Task<bool> UndeleteFiles(UndeleteFilesRequest request, CancellationToken cancel = default);
+	Task<bool> UndeleteFiles(FilesWithDomain request, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Отправляет запрос для очистки информации об удалении файлов по их хэшу (SHA256). Поддерживается только файловый домен "all local files".
@@ -168,5 +168,5 @@ public interface IFilesClient
 	/// <param name="request">Запрос на отмену удаления файлов.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-	Task<bool> ClearFilesDeletion(ClearFilesDeletionRequest request, CancellationToken cancel = default);
+	Task<bool> ClearFilesDeletion(Files request, CancellationToken cancel = default);
 }

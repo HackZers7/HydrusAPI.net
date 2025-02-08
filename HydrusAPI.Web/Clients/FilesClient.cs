@@ -76,17 +76,17 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<bool> UndeleteFiles(params string[] hashes)
 	{
-		return UndeleteFiles(new UndeleteFilesRequest(hashes));
+		return UndeleteFiles(new FilesWithDomain(hashes));
 	}
 
 	/// <inheritdoc />
 	public Task<bool> UndeleteFiles(params ulong[] ids)
 	{
-		return UndeleteFiles(new UndeleteFilesRequest(ids));
+		return UndeleteFiles(new FilesWithDomain(ids));
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> UndeleteFiles(UndeleteFilesRequest request, CancellationToken cancel = default)
+	public async Task<bool> UndeleteFiles(FilesWithDomain request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
@@ -97,17 +97,17 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<bool> ClearFilesDeletion(params string[] hashes)
 	{
-		return ClearFilesDeletion(new ClearFilesDeletionRequest(hashes));
+		return ClearFilesDeletion(new Files(hashes));
 	}
 
 	/// <inheritdoc />
 	public Task<bool> ClearFilesDeletion(params ulong[] ids)
 	{
-		return ClearFilesDeletion(new ClearFilesDeletionRequest(ids));
+		return ClearFilesDeletion(new Files(ids));
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> ClearFilesDeletion(ClearFilesDeletionRequest request, CancellationToken cancel = default)
+	public async Task<bool> ClearFilesDeletion(Files request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
