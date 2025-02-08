@@ -251,4 +251,38 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> ArchiveFiles(Files request, CancellationToken cancel = default);
+	
+	/// <summary>
+	///     Отправляет запрос для разархивации отправленных файлов по их хэшу (SHA256). Поддерживается только файловый домен "my files" или "trash".
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> UnarchiveFiles(params string[] hashes);
+
+	/// <summary>
+	///     Отправляет запрос для разархивации отправленных файлов по их идентификатору. Поддерживается только файловый домен "my files" или "trash".
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="ids">Идентификаторы файлов.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> UnarchiveFiles(params ulong[] ids);
+
+	/// <summary>
+	///     Отправляет запрос для разархивации отправленных файлов. Поддерживается только файловый домен "my files" или "trash".
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="request">Запрос с файлами.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> UnarchiveFiles(Files request, CancellationToken cancel = default);
 }

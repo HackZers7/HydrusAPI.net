@@ -153,4 +153,14 @@ public static class HydrusUrls
 		return "/add_files/archive_files"
 			.FormatUri();
 	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса разархивации отправленных файлов.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта разархивации отправленных файлов.</returns>
+	public static Uri UnarchiveFiles()
+	{
+		return "/add_files/unarchive_files"
+			.FormatUri();
+	}
 }
