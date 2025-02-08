@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Запрос на отмену удаления файлов.
 /// </summary>
-public class UndeleteFilesRequest : Files
+public class UndeleteFilesRequest : FilesAndFilesDomain
 {
 	/// <summary>
 	///     Конструктор по умолчанию.

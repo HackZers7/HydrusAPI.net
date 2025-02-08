@@ -41,7 +41,7 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="ServiceResponse" /> с информацией о сервисе.</returns>
 	Task<ImportResult> SendFile(Stream file, CancellationToken cancel = default);
-	
+
 	/// <summary>
 	///     Отправляет запрос удаления файлов по их хэшу (SHA256). Используется файловый домен по умолчанию "all my files".
 	/// </summary>
@@ -65,7 +65,7 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> DeleteFiles(IEnumerable<string> hashes, string? reason = null, CancellationToken cancel = default);
-	
+
 	/// <summary>
 	///     Отправляет запрос удаления файла по их идентификатору. Используется файловый домен по умолчанию "all my files".
 	/// </summary>
@@ -89,7 +89,7 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> DeleteFiles(IEnumerable<ulong> ids, string? reason = null, CancellationToken cancel = default);
-	
+
 	/// <summary>
 	///     Отправляет запрос удаления файлов.
 	/// </summary>
@@ -112,7 +112,7 @@ public interface IFilesClient
 	/// <param name="hashes">Хэши (SHA256) файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> UndeleteFiles(params string[] hashes);
-	
+
 	/// <summary>
 	///     Отправляет запрос для отмены удаления файлов по их идентификатору. Используется файловый домен по умолчанию "all my files".
 	/// </summary>
@@ -123,7 +123,7 @@ public interface IFilesClient
 	/// <param name="ids">Идентификаторы файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> UndeleteFiles(params ulong[] ids);
-	
+
 	/// <summary>
 	///     Отправляет запрос для отмены удаления файлов.
 	/// </summary>
@@ -135,4 +135,38 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> UndeleteFiles(UndeleteFilesRequest request, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Отправляет запрос для очистки информации об удалении файлов по их хэшу (SHA256). Поддерживается только файловый домен "all local files".
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> ClearFilesDeletion(params string[] hashes);
+
+	/// <summary>
+	///     Отправляет запрос для очистки информации об удалении файлов по их идентификатору. Поддерживается только файловый домен "all local files".
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="ids">Идентификаторы файлов.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> ClearFilesDeletion(params ulong[] ids);
+
+	/// <summary>
+	///     Отправляет запрос для очистки информации об удалении файлов.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="request">Запрос на отмену удаления файлов.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> ClearFilesDeletion(ClearFilesDeletionRequest request, CancellationToken cancel = default);
 }

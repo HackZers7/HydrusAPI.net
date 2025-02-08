@@ -93,4 +93,25 @@ public class FilesClient : ApiClient, IFilesClient
 		var response = await ApiConnection.Post(HydrusUrls.UndeleteFiles(), null, request, cancel);
 		return response.IsSuccessStatusCode();
 	}
+
+	/// <inheritdoc />
+	public Task<bool> ClearFilesDeletion(params string[] hashes)
+	{
+		return ClearFilesDeletion(new ClearFilesDeletionRequest(hashes));
+	}
+
+	/// <inheritdoc />
+	public Task<bool> ClearFilesDeletion(params ulong[] ids)
+	{
+		return ClearFilesDeletion(new ClearFilesDeletionRequest(ids));
+	}
+
+	/// <inheritdoc />
+	public async Task<bool> ClearFilesDeletion(ClearFilesDeletionRequest request, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		var response = await ApiConnection.Post(HydrusUrls.ClearFilesDeletion(), null, request, cancel);
+		return response.IsSuccessStatusCode();
+	}
 }

@@ -4,14 +4,14 @@ using NUnit.Framework;
 namespace HydrusApi.Web.Tests.Models;
 
 [TestFixture]
-public class FilesTest
+public class FilesAndFilesDomainTest
 {
 	public TestContext TestContext { get; set; } = default!;
 
 	[Test]
 	public void FilesSerializationTest()
 	{
-		var files = new TestFiles();
+		var files = new TestFilesAndFilesDomain();
 		files.AddHash("test1");
 
 		var data = Utils.Serialize(files);
@@ -24,7 +24,7 @@ public class FilesTest
 	[Test]
 	public void FilesMultiplySerializationTest()
 	{
-		var files = new TestFiles();
+		var files = new TestFilesAndFilesDomain();
 		files.AddHash("test1");
 		files.AddId(500);
 
@@ -35,7 +35,7 @@ public class FilesTest
 		Assert.That(data, Is.Not.Empty);
 	}
 
-	private class TestFiles : Files
+	private class TestFilesAndFilesDomain : FilesAndFilesDomain
 	{
 	}
 }

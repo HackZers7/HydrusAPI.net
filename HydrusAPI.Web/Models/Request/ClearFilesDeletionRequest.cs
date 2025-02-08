@@ -1,14 +1,14 @@
 namespace HydrusAPI.Web;
 
 /// <summary>
-///     Запрос на удаление файлов.
+///     Запрос на очистку информации об удалении файлов.
 /// </summary>
-public class DeleteFilesRequest : FilesAndFilesDomain
+public class ClearFilesDeletionRequest : Files
 {
 	/// <summary>
 	///     Конструктор по умолчанию.
 	/// </summary>
-	public DeleteFilesRequest()
+	public ClearFilesDeletionRequest()
 	{
 	}
 
@@ -16,10 +16,8 @@ public class DeleteFilesRequest : FilesAndFilesDomain
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
 	/// <param name="hashes">Хэши (SHA256) файлов.</param>
-	/// <param name="reason">Причина удаления.</param>
-	public DeleteFilesRequest(IEnumerable<string> hashes, string? reason)
+	public ClearFilesDeletionRequest(IEnumerable<string> hashes)
 	{
-		Reason = reason;
 		foreach (var hash in hashes)
 		{
 			AddHash(hash);
@@ -30,18 +28,11 @@ public class DeleteFilesRequest : FilesAndFilesDomain
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
 	/// <param name="fileIds">Идентификаторы файлов.</param>
-	/// <param name="reason">Причина удаления.</param>
-	public DeleteFilesRequest(IEnumerable<ulong> fileIds, string? reason)
+	public ClearFilesDeletionRequest(IEnumerable<ulong> fileIds)
 	{
-		Reason = reason;
 		foreach (var id in fileIds)
 		{
 			AddId(id);
 		}
 	}
-
-	/// <summary>
-	///     Причина удаления
-	/// </summary>
-	public string? Reason { get; set; }
 }

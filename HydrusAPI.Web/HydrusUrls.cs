@@ -123,4 +123,14 @@ public static class HydrusUrls
 		return "/add_files/undelete_files"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса на очистку информации об удалении файлов.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта очистки информации об удалении файла.</returns>
+	public static Uri ClearFilesDeletion()
+	{
+		return "/add_files/clear_file_deletion_record"
+			.FormatUri();
+	}
 }
