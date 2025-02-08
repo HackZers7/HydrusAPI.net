@@ -131,7 +131,7 @@ public interface IFilesClient
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
 	///     <see cref="Permissions.ImportDeleteFiles" />,
 	/// </remarks>
-	/// <param name="request">Запрос на отмену удаления файлов.</param>
+	/// <param name="request">Запрос с файлами и доменом.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> UndeleteFiles(FilesWithDomain request, CancellationToken cancel = default);
@@ -165,7 +165,7 @@ public interface IFilesClient
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
 	///     <see cref="Permissions.ImportDeleteFiles" />,
 	/// </remarks>
-	/// <param name="request">Запрос на отмену удаления файлов.</param>
+	/// <param name="request">Запрос с файлами.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> ClearFilesDeletion(Files request, CancellationToken cancel = default);
@@ -213,8 +213,42 @@ public interface IFilesClient
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
 	///     <see cref="Permissions.ImportDeleteFiles" />,
 	/// </remarks>
-	/// <param name="request">Запрос на отмену удаления файлов.</param>
+	/// <param name="request">Запрос с файлами и доменом.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> MigrateFiles(FilesWithDomain request, CancellationToken cancel = default);
+	
+	/// <summary>
+	///     Отправляет запрос для архивации отправленных файлов по их хэшу (SHA256). Поддерживается только файловый домен "my files" или "trash".
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> ArchiveFiles(params string[] hashes);
+
+	/// <summary>
+	///     Отправляет запрос для архивации отправленных файлов по их идентификатору. Поддерживается только файловый домен "my files" или "trash".
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="ids">Идентификаторы файлов.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> ArchiveFiles(params ulong[] ids);
+
+	/// <summary>
+	///     Отправляет запрос для архивации отправленных файлов. Поддерживается только файловый домен "my files" или "trash".
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="request">Запрос с файлами.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> ArchiveFiles(Files request, CancellationToken cancel = default);
 }

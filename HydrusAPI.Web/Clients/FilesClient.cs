@@ -139,4 +139,25 @@ public class FilesClient : ApiClient, IFilesClient
 		var response = await ApiConnection.Post(HydrusUrls.MigrateFiles(), null, request, cancel);
 		return response.IsSuccessStatusCode();
 	}
+
+	/// <inheritdoc />
+	public Task<bool> ArchiveFiles(params string[] hashes)
+	{
+		return ArchiveFiles(new Files(hashes));
+	}
+
+	/// <inheritdoc />
+	public Task<bool> ArchiveFiles(params ulong[] ids)
+	{
+		return ArchiveFiles(new Files(ids));
+	}
+
+	/// <inheritdoc />
+	public async Task<bool> ArchiveFiles(Files request, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		var response = await ApiConnection.Post(HydrusUrls.ArchiveFiles(), null, request, cancel);
+		return response.IsSuccessStatusCode();
+	}
 }

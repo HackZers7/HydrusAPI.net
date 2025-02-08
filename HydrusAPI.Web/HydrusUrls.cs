@@ -143,4 +143,14 @@ public static class HydrusUrls
 		return "/add_files/migrate_files"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса архивации отправленных файлов.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта архивации отправленных файлов.</returns>
+	public static Uri ArchiveFiles()
+	{
+		return "/add_files/archive_files"
+			.FormatUri();
+	}
 }
