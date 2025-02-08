@@ -133,4 +133,14 @@ public static class HydrusUrls
 		return "/add_files/clear_file_deletion_record"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса копирование (миграции) файлов в другой файловый домен.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта копирования (миграция) файлов в другой файловый домен.</returns>
+	public static Uri MigrateFiles()
+	{
+		return "/add_files/migrate_files"
+			.FormatUri();
+	}
 }

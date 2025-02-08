@@ -114,4 +114,29 @@ public class FilesClient : ApiClient, IFilesClient
 		var response = await ApiConnection.Post(HydrusUrls.ClearFilesDeletion(), null, request, cancel);
 		return response.IsSuccessStatusCode();
 	}
+
+	/// <inheritdoc />
+	public Task<bool> MigrateFiles(string toFileDomain, params string[] hashes)
+	{
+		var files = new FilesWithDomain(hashes);
+		files.AddFileDomain(toFileDomain);
+		return MigrateFiles(files);
+	}
+
+	/// <inheritdoc />
+	public Task<bool> MigrateFiles(string toFileDomain, params ulong[] ids)
+	{
+		var files = new FilesWithDomain(ids);
+		files.AddFileDomain(toFileDomain);
+		return MigrateFiles(files);
+	}
+
+	/// <inheritdoc />
+	public async Task<bool> MigrateFiles(FilesWithDomain request, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		var response = await ApiConnection.Post(HydrusUrls.MigrateFiles(), null, request, cancel);
+		return response.IsSuccessStatusCode();
+	}
 }

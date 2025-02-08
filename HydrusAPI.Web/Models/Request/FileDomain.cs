@@ -14,7 +14,7 @@ public abstract class FileDomain
 	public IReadOnlyCollection<string>? FileServiceKeys => _fileServiceKeys;
 
 	/// <summary>
-	///     Коллекция шестнадцатеричных доменов, объединение "deleted from this file domain", по которому выполняется поиск/
+	///     Коллекция шестнадцатеричных доменов, объединение "deleted from this file domain", по которому выполняется поиск.
 	/// </summary>
 	public IReadOnlyCollection<string>? DeletedFileServiceKeys => _deletedFileServiceKeys;
 
