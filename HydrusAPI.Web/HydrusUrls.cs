@@ -163,4 +163,14 @@ public static class HydrusUrls
 		return "/add_files/unarchive_files"
 			.FormatUri();
 	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса генерации хэшей.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта генерации хэшей.</returns>
+	public static Uri GenerateHashes()
+	{
+		return "/add_files/generate_hashes"
+			.FormatUri();
+	}
 }

@@ -203,4 +203,53 @@ public class FilesClientTest
 			Assert.That(result, Is.True);
 		}
 	}
+	
+	[TestFixture]
+	public class GenerateHashesTest
+	{
+		private readonly IHydrusClient _client;
+
+		// ReSharper disable once ConvertConstructorToMemberInitializers
+		public GenerateHashesTest()
+		{
+			_client = IoC.GetHydrusClient();
+		}
+
+		[Test]
+		public async Task LocalFile()
+		{
+			var result = await _client.FilesClient.GenerateHashes(IoC.FilePath);
+
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result.PerceptualHashes, Is.Not.Null);
+			Assert.That(result.PixelHash, Is.Not.Null);
+			Assert.That(result.Hash, Is.Not.Empty);
+		}
+
+		[Test]
+		public async Task File()
+		{
+			using (var stream = System.IO.File.OpenRead(IoC.FilePath))
+			{
+				var result = await _client.FilesClient.GenerateHashes(stream);
+
+				Assert.That(result, Is.Not.Null);
+				Assert.That(result.PerceptualHashes, Is.Not.Null);
+				Assert.That(result.PixelHash, Is.Not.Null);
+				Assert.That(result.Hash, Is.Not.Empty);
+			}
+		}
+		
+		[Test]
+		public async Task NotExistFile()
+		{
+			using (var stream = System.IO.File.OpenRead(IoC.FilePath3))
+			{
+				var result = await _client.FilesClient.GenerateHashes(stream);
+
+				Assert.That(result, Is.Not.Null);
+				Assert.That(result.Hash, Is.Not.Empty);
+			}
+		}
+	}
 }

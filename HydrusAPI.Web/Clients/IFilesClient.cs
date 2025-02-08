@@ -15,7 +15,7 @@ public interface IFilesClient
 	/// <param name="filePath">Путь до файла на локальной машине.</param>
 	/// <param name="deleteAfterImport">Удалить файл после импорта.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="ServiceResponse" /> с информацией о сервисе.</returns>
+	/// <returns>Возвращает <see cref="ImportResult" /> с информацией об импортированном файле.</returns>
 	Task<ImportResult> SendLocalFile(string filePath, bool deleteAfterImport = false, CancellationToken cancel = default);
 
 	/// <summary>
@@ -27,7 +27,7 @@ public interface IFilesClient
 	/// </remarks>
 	/// <param name="request">Запрос на импорт файла по пути.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="ServiceResponse" /> с информацией о сервисе.</returns>
+	/// <returns>Возвращает <see cref="ImportResult" /> с информацией об импортированном файле.</returns>
 	Task<ImportResult> SendLocalFile(AddFileRequest request, CancellationToken cancel = default);
 
 	/// <summary>
@@ -39,7 +39,7 @@ public interface IFilesClient
 	/// </remarks>
 	/// <param name="file">Поток с файлом.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="ServiceResponse" /> с информацией о сервисе.</returns>
+	/// <returns>Возвращает <see cref="ImportResult" /> с информацией об импортированном файле.</returns>
 	Task<ImportResult> SendFile(Stream file, CancellationToken cancel = default);
 
 	/// <summary>
@@ -217,7 +217,7 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> MigrateFiles(FilesWithDomain request, CancellationToken cancel = default);
-	
+
 	/// <summary>
 	///     Отправляет запрос для архивации отправленных файлов по их хэшу (SHA256). Поддерживается только файловый домен "my files" или "trash".
 	/// </summary>
@@ -251,7 +251,7 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> ArchiveFiles(Files request, CancellationToken cancel = default);
-	
+
 	/// <summary>
 	///     Отправляет запрос для разархивации отправленных файлов по их хэшу (SHA256). Поддерживается только файловый домен "my files" или "trash".
 	/// </summary>
@@ -285,4 +285,28 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> UnarchiveFiles(Files request, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Генерирует хэши (SHA256), для файла, который находится на локальной машине с Hydrus.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="filePath">Путь до файла на локальной машине.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="GeneratedHashesResponse" /> с хэшами (SHA256) файла.</returns>
+	Task<GeneratedHashesResponse> GenerateHashes(string filePath, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Генерирует хэши (SHA256), для файла.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.ImportDeleteFiles" />,
+	/// </remarks>
+	/// <param name="file">Поток с файлом.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="GeneratedHashesResponse" /> с хэшами (SHA256) файла.</returns>
+	Task<GeneratedHashesResponse> GenerateHashes(Stream file, CancellationToken cancel = default);
 }

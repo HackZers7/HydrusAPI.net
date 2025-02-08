@@ -181,4 +181,18 @@ public class FilesClient : ApiClient, IFilesClient
 		var response = await ApiConnection.Post(HydrusUrls.UnarchiveFiles(), null, request, cancel);
 		return response.IsSuccessStatusCode();
 	}
+
+	/// <inheritdoc />
+	public Task<GeneratedHashesResponse> GenerateHashes(string filePath, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(filePath);
+
+		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, new LocalFile(filePath), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<GeneratedHashesResponse> GenerateHashes(Stream file, CancellationToken cancel = default)
+	{
+		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, file, cancel);
+	}
 }

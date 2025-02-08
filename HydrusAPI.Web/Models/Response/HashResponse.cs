@@ -6,7 +6,7 @@ namespace HydrusAPI.Web;
 public class HashResponse : ApiVersion
 {
 	/// <summary>
-	///     Хэш.
+	///     Хэш (SHA256).
 	/// </summary>
 	public string Hash { get; set; } = default!;
 }
