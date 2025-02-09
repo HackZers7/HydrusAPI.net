@@ -31,8 +31,8 @@ public static class HydrusUrls
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(name);
 
 		var encodedName = name.UriEncode();
-		// ReSharper disable once UseStringInterpolation
-		var encodedPermissions = string.Format("[{0}]", string.Join(',', permissions.Select(p => ((int)p).ToString())))
+		var encodedPermissions = permissions.Select(p => (int)p)
+			.ToStringArray()
 			.UriEncode();
 		return "/request_new_permissions?name={0}&permits_everything={1}&basic_permissions={2}"
 			.FormatUri(encodedName, permitsEverything.ToString().ToLower(), encodedPermissions);
@@ -196,6 +196,7 @@ public static class HydrusUrls
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса генерации хэшей.
 	/// </summary>
+	/// <param name="url">URL</param>
 	/// <returns><see cref="Uri" /> эндпоинта генерации хэшей.</returns>
 	public static Uri GetUrlInfo(string url)
 	{
@@ -216,7 +217,7 @@ public static class HydrusUrls
 		return "/add_urls/add_url"
 			.FormatUri();
 	}
-	
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса ассоциации (добавления) и диссоциации (удаления) URL.
 	/// </summary>
@@ -225,5 +226,75 @@ public static class HydrusUrls
 	{
 		return "/add_urls/associate_url"
 			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса для приведения тегов к правилам к Hydrus.
+	/// </summary>
+	/// <param name="tags">Перечисление тегов.</param>
+	/// <returns><see cref="Uri" /> эндпоинта приведения тегов к правилам к Hydrus.</returns>
+	public static Uri CleanTags(IEnumerable<string> tags)
+	{
+		var encodedTags = tags.ToStringArray()
+			.UriEncode();
+
+		return "/add_tags/clean_tags?tags={0}"
+			.FormatUri(encodedTags);
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения родителей и сестер.
+	/// </summary>
+	/// <param name="tags">Перечисление тегов.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения родителей и сестер.</returns>
+	public static Uri GetSiblingsAndParents(IEnumerable<string> tags)
+	{
+		var encodedTags = tags.ToStringArray()
+			.UriEncode();
+
+		return "/add_tags/get_siblings_and_parents?tags={0}"
+			.FormatUri(encodedTags);
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса поиска по тегам.
+	/// </summary>
+	/// <param name="search">Запрос для поиска, формат такой же как и для интерфейса Hydrus.</param>
+	/// <param name="fileDomain">Файловый домен.</param>
+	/// <param name="tagServiceKey">Ключ домена тегов в котором выполняется поиск. По умолчанию - "all known tags".</param>
+	/// <param name="tagDisplayType">Указывает на то, следует ли выполнять поиск по необработанным или обработанным тегам.</param>
+	/// <returns><see cref="Uri" /> эндпоинта поиска по тегам.</returns>
+	public static Uri SearchTags(string search, FileDomain? fileDomain, string? tagServiceKey, TagDisplay tagDisplayType = TagDisplay.Storage)
+	{
+		var param = string.Empty;
+
+		var encodedSearch = search.UriEncode();
+
+		if (fileDomain != null)
+		{
+			if (fileDomain.FileServiceKeys != null)
+			{
+				var encodedFileService = fileDomain.FileServiceKeys.ToStringArray()
+					.UriEncode();
+				param += $"&file_service_keys={encodedFileService}";
+			}
+
+			if (fileDomain.DeletedFileServiceKeys != null)
+			{
+				var encodedDeletedFileService = fileDomain.DeletedFileServiceKeys.ToStringArray()
+					.UriEncode();
+				param += $"&deleted_file_service_keys={encodedDeletedFileService}";
+			}
+		}
+
+		if (!string.IsNullOrWhiteSpace(tagServiceKey))
+		{
+			param += $"&tag_service_key={tagServiceKey}";
+		}
+
+		param += $"&tag_display_type={tagDisplayType.ToString().ToLower()}";
+
+		return "/add_tags/search_tags?search={0}{1}"
+			.FormatUri(encodedSearch, param);
 	}
 }

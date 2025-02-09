@@ -13,7 +13,7 @@ public interface IServicesClient
 	///     <see cref="Permissions.ImportDeleteFiles" />,
 	///     <see cref="Permissions.EditFileTags" />,
 	///     <see cref="Permissions.ManagePages" />,
-	///     <see cref="Permissions.SearchFetchFiles" />
+	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
 	/// <param name="name">Название сервиса.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -28,7 +28,7 @@ public interface IServicesClient
 	///     <see cref="Permissions.ImportDeleteFiles" />,
 	///     <see cref="Permissions.EditFileTags" />,
 	///     <see cref="Permissions.ManagePages" />,
-	///     <see cref="Permissions.SearchFetchFiles" />
+	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
 	/// <param name="key">Ключ сервиса.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -43,7 +43,7 @@ public interface IServicesClient
 	///     <see cref="Permissions.ImportDeleteFiles" />,
 	///     <see cref="Permissions.EditFileTags" />,
 	///     <see cref="Permissions.ManagePages" />,
-	///     <see cref="Permissions.SearchFetchFiles" />
+	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="ServicesResponse" /> с информацией о всех сервисах.</returns>

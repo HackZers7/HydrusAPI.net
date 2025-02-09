@@ -10,7 +10,7 @@ public interface IUrlsClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportEditUrls" />,
+	///     <see cref="Permissions.ImportEditUrls" />.
 	/// </remarks>
 	/// <param name="url">URL файла.</param>
 	/// <param name="doublecheckFileSystem">
@@ -26,7 +26,7 @@ public interface IUrlsClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportEditUrls" />,
+	///     <see cref="Permissions.ImportEditUrls" />.
 	/// </remarks>
 	/// <param name="url">URl файла.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -38,7 +38,7 @@ public interface IUrlsClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportEditUrls" />,
+	///     <see cref="Permissions.ImportEditUrls" />.
 	/// </remarks>
 	/// <param name="url">URL с файлом или файлами для импорта.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -50,7 +50,7 @@ public interface IUrlsClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportEditUrls" />,
+	///     <see cref="Permissions.ImportEditUrls" />.
 	/// </remarks>
 	/// <param name="request">Запрос для отправки.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -62,7 +62,7 @@ public interface IUrlsClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportEditUrls" />,
+	///     <see cref="Permissions.ImportEditUrls" />.
 	/// </remarks>
 	/// <param name="hash">Хэш (SHA256) файла к которому нужно добавить ссылки.</param>
 	/// <param name="urls">Ссылки для добавления.</param>
@@ -74,7 +74,7 @@ public interface IUrlsClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportEditUrls" />,
+	///     <see cref="Permissions.ImportEditUrls" />.
 	/// </remarks>
 	/// <param name="id">Идентификатор файла к которому нужно добавить ссылки.</param>
 	/// <param name="urls">Ссылки для добавления.</param>
@@ -86,7 +86,7 @@ public interface IUrlsClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportEditUrls" />,
+	///     <see cref="Permissions.ImportEditUrls" />.
 	/// </remarks>
 	/// <param name="hash">Хэш (SHA256) файла к которому нужно добавить ссылки.</param>
 	/// <param name="urls">Ссылки для добавления.</param>
@@ -98,7 +98,7 @@ public interface IUrlsClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportEditUrls" />,
+	///     <see cref="Permissions.ImportEditUrls" />.
 	/// </remarks>
 	/// <param name="id">Идентификатор файла к которому нужно добавить ссылки.</param>
 	/// <param name="urls">Ссылки для добавления.</param>
@@ -110,7 +110,7 @@ public interface IUrlsClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportEditUrls" />,
+	///     <see cref="Permissions.ImportEditUrls" />.
 	/// </remarks>
 	/// <param name="request">Запрос для отправки.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>

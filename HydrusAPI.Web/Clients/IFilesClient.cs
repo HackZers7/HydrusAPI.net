@@ -10,7 +10,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="filePath">Путь до файла на локальной машине.</param>
 	/// <param name="deleteAfterImport">Удалить файл после импорта.</param>
@@ -23,7 +23,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="request">Запрос на импорт файла по пути.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -35,7 +35,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="file">Поток с файлом.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -47,7 +47,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="hashes">Хэши (SHA256) файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -58,7 +58,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="hashes">Хэши (SHA256) файлов.</param>
 	/// <param name="reason">Не обязателен, причина удаления файла.</param>
@@ -71,7 +71,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="ids">Идентификаторы файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -82,7 +82,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="ids">Идентификаторы файлов.</param>
 	/// <param name="reason">Не обязателен, причина удаления файла.</param>
@@ -95,7 +95,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="request">Запрос на удаление файла.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -107,7 +107,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="hashes">Хэши (SHA256) файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -118,7 +118,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="ids">Идентификаторы файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -129,7 +129,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="request">Запрос с файлами и доменом.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -141,7 +141,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="hashes">Хэши (SHA256) файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -152,7 +152,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="ids">Идентификаторы файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -163,7 +163,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="request">Запрос с файлами.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -179,7 +179,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="toFileDomain">Шестнадцатеричный домен, в который необходимо скопировать файл.</param>
 	/// <param name="hashes">Хэши (SHA256) файлов.</param>
@@ -195,7 +195,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="toFileDomain">Шестнадцатеричный домен, в который необходимо скопировать файл.</param>
 	/// <param name="ids">Идентификаторы файлов.</param>
@@ -211,7 +211,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="request">Запрос с файлами и доменом.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -223,7 +223,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="hashes">Хэши (SHA256) файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -234,7 +234,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="ids">Идентификаторы файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -245,7 +245,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="request">Запрос с файлами.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -257,7 +257,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="hashes">Хэши (SHA256) файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -268,7 +268,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="ids">Идентификаторы файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
@@ -279,7 +279,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="request">Запрос с файлами.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -291,7 +291,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="filePath">Путь до файла на локальной машине.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
@@ -303,7 +303,7 @@ public interface IFilesClient
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
-	///     <see cref="Permissions.ImportDeleteFiles" />,
+	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="file">Поток с файлом.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>

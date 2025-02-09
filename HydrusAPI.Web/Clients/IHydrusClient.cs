@@ -26,6 +26,11 @@ public interface IHydrusClient
 	IUrlsClient UrlsClient { get; }
 
 	/// <summary>
+	///     Клиент для работы с тегами.
+	/// </summary>
+	ITagsClient TagsClient { get; }
+
+	/// <summary>
 	///     Запрашивает версию Hydrus.
 	/// </summary>
 	/// <param name="cancel">Токен отмены запроса.</param>
