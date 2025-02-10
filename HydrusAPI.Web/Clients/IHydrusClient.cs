@@ -31,6 +31,11 @@ public interface IHydrusClient
 	ITagsClient TagsClient { get; }
 
 	/// <summary>
+	///     Клиент для редактирования метаданных файла.
+	/// </summary>
+	IMetaClient MetaClient { get; }
+
+	/// <summary>
 	///     Запрашивает версию Hydrus.
 	/// </summary>
 	/// <param name="cancel">Токен отмены запроса.</param>

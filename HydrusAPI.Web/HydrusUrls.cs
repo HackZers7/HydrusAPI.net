@@ -307,4 +307,14 @@ public static class HydrusUrls
 		return "/add_tags/add_tags"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса установки рейтинга.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта установки рейтинга.</returns>
+	public static Uri SetRating()
+	{
+		return "/edit_ratings/set_rating"
+			.FormatUri();
+	}
 }
