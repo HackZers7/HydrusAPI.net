@@ -317,4 +317,34 @@ public static class HydrusUrls
 		return "/edit_ratings/set_rating"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса добавления время просмотра в статистику.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта добавления время просмотра в статистику.</returns>
+	public static Uri IncrementFileViewtime()
+	{
+		return "/edit_times/increment_file_viewtime"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса установки времени просмотра в статистике.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта установки времени просмотра в статистике.</returns>
+	public static Uri SetFileViewtime()
+	{
+		return "/edit_times/set_file_viewtime"
+			.FormatUri();
+	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса установки времени просмотр.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта установки времени просмотра.</returns>
+	public static Uri SetTime()
+	{
+		return "/edit_times/set_time"
+			.FormatUri();
+	}
 }
