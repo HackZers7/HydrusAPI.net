@@ -5,6 +5,8 @@ namespace HydrusAPI.Web;
 /// </summary>
 public abstract class FileDomain
 {
+	// TODO: Переписать на билдер
+	
 	private List<string>? _deletedFileServiceKeys;
 	private List<string>? _fileServiceKeys;
 

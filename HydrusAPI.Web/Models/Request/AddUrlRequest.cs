@@ -5,6 +5,8 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class AddUrlRequest : FileDomain
 {
+	// TODO: Переписать на билдер
+	
 	private Dictionary<string, List<string>>? _serviceKeysToAdditionalTags;
 
 	/// <summary>

@@ -5,6 +5,8 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class AssociateUrlRequest : Files
 {
+	// TODO: Переписать на билдер
+	
 	private List<string>? _urlsToAdd;
 	private List<string>? _urlsToDelete;
 

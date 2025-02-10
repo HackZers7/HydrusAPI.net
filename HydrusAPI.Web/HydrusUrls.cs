@@ -264,7 +264,7 @@ public static class HydrusUrls
 	/// <param name="tagServiceKey">Ключ домена тегов в котором выполняется поиск. По умолчанию - "all known tags".</param>
 	/// <param name="tagDisplayType">Указывает на то, следует ли выполнять поиск по необработанным или обработанным тегам.</param>
 	/// <returns><see cref="Uri" /> эндпоинта поиска по тегам.</returns>
-	public static Uri SearchTags(string search, FileDomain? fileDomain, string? tagServiceKey, TagDisplay tagDisplayType = TagDisplay.Storage)
+	public static Uri SearchTags(string search, FileDomain? fileDomain = null, string? tagServiceKey = null, TagDisplay tagDisplayType = TagDisplay.Storage)
 	{
 		var param = string.Empty;
 
@@ -296,5 +296,15 @@ public static class HydrusUrls
 
 		return "/add_tags/search_tags?search={0}{1}"
 			.FormatUri(encodedSearch, param);
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса добавления тегов.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта добавления тегов.</returns>
+	public static Uri AddTags()
+	{
+		return "/add_tags/add_tags"
+			.FormatUri();
 	}
 }

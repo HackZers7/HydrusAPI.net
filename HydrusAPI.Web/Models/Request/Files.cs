@@ -7,6 +7,8 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class Files
 {
+	// TODO: Переписать на билдер
+	
 	private List<ulong>? _fileIds;
 	private List<string>? _hashes;
 

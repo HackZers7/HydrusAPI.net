@@ -65,5 +65,17 @@ public interface ITagsClient
 	/// <param name="tagDisplayType">Указывает на то, следует ли выполнять поиск по необработанным или обработанным тегам.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="TagsSearchResponse" /> с найденными тегами.</returns>
-	Task<TagsSearchResponse> SearchTags(string search, FileDomain? fileDomain, string? tagServiceKey, TagDisplay tagDisplayType = TagDisplay.Storage, CancellationToken cancel = default);
+	Task<TagsSearchResponse> SearchTags(string search, FileDomain? fileDomain = null, string? tagServiceKey = null, TagDisplay tagDisplayType = TagDisplay.Storage, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Отправляет запрос на добавление тегов.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     <see cref="Permissions.EditFileTags" />.
+	/// </remarks>
+	/// <param name="request">Запрос для добавления тегов.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
+	Task<bool> AddTags(AddTagsRequest request, CancellationToken cancel = default);
 }
