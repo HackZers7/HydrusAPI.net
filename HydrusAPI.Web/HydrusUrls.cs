@@ -347,4 +347,24 @@ public static class HydrusUrls
 		return "/edit_times/set_time"
 			.FormatUri();
 	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса установки заметки.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта установки заметки.</returns>
+	public static Uri SetNotes()
+	{
+		return "/add_notes/set_notes"
+			.FormatUri();
+	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса удаление заметок.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта удаление заметок.</returns>
+	public static Uri DeleteNotes()
+	{
+		return "/add_notes/delete_notes"
+			.FormatUri();
+	}
 }

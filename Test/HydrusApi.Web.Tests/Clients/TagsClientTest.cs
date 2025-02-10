@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using File = System.IO.File;
 
 // ReSharper disable PossibleMultipleEnumeration
 

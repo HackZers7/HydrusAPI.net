@@ -2,6 +2,7 @@ using HydrusAPI.Web;
 using NUnit.Framework;
 using System.IO;
 using System.Threading.Tasks;
+using File = System.IO.File;
 
 namespace HydrusApi.Web.Tests.Clients;
 
