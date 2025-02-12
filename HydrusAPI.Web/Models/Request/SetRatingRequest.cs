@@ -3,25 +3,18 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Запрос установки рейтинга.
 /// </summary>
-public class SetRatingRequest : Files
+public class SetRatingRequest : FilesRequest
 {
 	/// <summary>
-	///     Идентификатор сервиса.
+	///     Шестнадцатеричный идентификатор сервиса.
 	/// </summary>
 	public string RatingServiceKey { get; set; } = default!;
 
 	/// <summary>
 	///     Рейтинг.
+	///     <remarks>
+	///         Может быть только <see cref="int" /> или <see cref="bool" /> в зависимости от типа рейтинговой системы.
+	///     </remarks>
 	/// </summary>
-	public object? Rating { get; private set; }
-
-	public void SetRating(bool rating)
-	{
-		Rating = rating;
-	}
-
-	public void SetRating(int rating)
-	{
-		Rating = rating;
-	}
+	public object? Rating { get; }
 }

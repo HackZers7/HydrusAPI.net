@@ -23,7 +23,7 @@ public class FilesClientTest
 		[Test]
 		public async Task LocalFile()
 		{
-			var result = await _client.FilesClient.SendLocalFile(IoC.FilePath);
+			var result = await _client.FilesClient.SendFile(IoC.FilePath);
 
 			Assert.That(result, Is.Not.Null);
 			Assert.That(result.Status, Is.EqualTo(FileStatus.Success).Or.EqualTo(FileStatus.AlreadyExists));
@@ -167,7 +167,7 @@ public class FilesClientTest
 		[Test]
 		public async Task MultiplyFiles()
 		{
-			var undeleteFiles = new FilesWithDomain();
+			var undeleteFiles = new FilesWithDomainRequest();
 			using (var stream = File.OpenRead(IoC.FilePath))
 			{
 				var hash = Utils.GetSha256(stream);
@@ -189,7 +189,7 @@ public class FilesClientTest
 		[Test]
 		public async Task MultiplyFilesWithHashAndId()
 		{
-			var undeleteFiles = new FilesWithDomain();
+			var undeleteFiles = new FilesWithDomainRequest();
 			undeleteFiles.AddId(1);
 
 			using (var stream = File.OpenRead(IoC.FilePath2))

@@ -63,7 +63,7 @@ public class UrlsClientTest
 		[Test]
 		public async Task Import()
 		{
-			var data = await _client.UrlsClient.ImportUrl(URL_2);
+			var data = await _client.UrlsClient.ImportFromUrl(URL_2);
 
 			Assert.That(data, Is.Not.Null);
 			Assert.That(data.NormalisedUrl, Is.Not.Null);
@@ -72,11 +72,11 @@ public class UrlsClientTest
 		[Test]
 		public async Task ImportWithShowDestinationPage()
 		{
-			var request = new AddUrlRequest(URL_2);
+			var request = new ImportFromUrlRequest(URL_2);
 
 			request.ShowDestinationPage = true;
 
-			var data = await _client.UrlsClient.ImportUrl(request);
+			var data = await _client.UrlsClient.ImportFromUrl(request);
 
 			Assert.That(data, Is.Not.Null);
 			Assert.That(data.NormalisedUrl, Is.Not.Null);
@@ -85,11 +85,11 @@ public class UrlsClientTest
 		[Test]
 		public async Task ImportWithDestinationPageName()
 		{
-			var request = new AddUrlRequest(URL_2);
+			var request = new ImportFromUrlRequest(URL_2);
 
 			request.DestinationPageName = "test";
 
-			var data = await _client.UrlsClient.ImportUrl(request);
+			var data = await _client.UrlsClient.ImportFromUrl(request);
 
 			Assert.That(data, Is.Not.Null);
 			Assert.That(data.NormalisedUrl, Is.Not.Null);
@@ -98,11 +98,11 @@ public class UrlsClientTest
 		[Test]
 		public async Task ImportWithAdditionalTags()
 		{
-			var request = new AddUrlRequest(URL_2);
+			var request = new ImportFromUrlRequest(URL_2);
 
 			request.AddAdditionalTag(MyTagsServiceKey, "test");
 
-			var data = await _client.UrlsClient.ImportUrl(request);
+			var data = await _client.UrlsClient.ImportFromUrl(request);
 
 			Assert.That(data, Is.Not.Null);
 			Assert.That(data.NormalisedUrl, Is.Not.Null);
@@ -111,11 +111,11 @@ public class UrlsClientTest
 		[Test]
 		public async Task ImportWithFilterableTags()
 		{
-			var request = new AddUrlRequest(URL_2);
+			var request = new ImportFromUrlRequest(URL_2);
 
 			request.FilterableTags.Add("test");
 
-			var data = await _client.UrlsClient.ImportUrl(request);
+			var data = await _client.UrlsClient.ImportFromUrl(request);
 
 			Assert.That(data, Is.Not.Null);
 			Assert.That(data.NormalisedUrl, Is.Not.Null);

@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Запрос установки времени.
 /// </summary>
-public class SetTimeRequest
+public class SetTimeRequest : FilesRequest
 {
 	// TODO: Переделать на билдер
 

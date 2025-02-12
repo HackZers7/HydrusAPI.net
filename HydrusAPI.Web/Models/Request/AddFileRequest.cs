@@ -3,26 +3,18 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Запрос на импорт локального файла.
 /// </summary>
-public class AddFileRequest : FileDomain
+public class AddFileRequest : FileDomainRequest
 {
-	/// <summary>
-	///     Инициализирует новый экземпляр класса.
-	/// </summary>
-	/// <param name="path">Путь до файла на локальной машине.</param>
-	/// <param name="deleteAfterSuccessfulImport">Удалить файл после импорта. По умолчанию - false.</param>
-	public AddFileRequest(string path, bool deleteAfterSuccessfulImport = false)
-	{
-		Path = path;
-		DeleteAfterSuccessfulImport = deleteAfterSuccessfulImport;
-	}
-
 	/// <summary>
 	///     Путь до файла на локальной машине.
 	/// </summary>
-	public string Path { get; set; }
+	public string? Path { get; set; }
 
 	/// <summary>
-	///     Удалить файл после импорта. По умолчанию - false.
+	///     Удалить файл после импорта.
 	/// </summary>
-	public bool DeleteAfterSuccessfulImport { get; set; }
+	/// <remarks>
+	///     По умолчанию - false.
+	/// </remarks>
+	public bool DeleteAfterSuccessfulImport { get; set; } = false;
 }

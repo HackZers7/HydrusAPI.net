@@ -3,12 +3,10 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Запрос на установку заметки.
 /// </summary>
-public class SetNotesRequest : Files
+public class SetNotesRequest : FileRequest
 {
-	// TODO: Переделать на билдер
-
 	/// <summary>
-	///     Заметки.
+	///     Словарь с заметками, где ключом является название заметки, а значение - заметка.
 	/// </summary>
 	public Dictionary<string, string> Notes { get; } = new();
 

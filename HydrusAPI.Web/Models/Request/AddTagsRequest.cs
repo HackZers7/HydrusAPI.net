@@ -3,67 +3,34 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Запрос добавления тегов к файлу.
 /// </summary>
-public class AddTagsRequest : Files
+public class AddTagsRequest : FilesRequest
 {
-	// TODO: Переписать на билдер
-	// TODO: Реализовать actions...
-
-	private Dictionary<string, List<string>>? _serviceKeysToTags;
+	/// <summary>
+	///     Словарь с тегами, где ключом является идентификатор сервиса, а значением коллекция тегов.
+	/// </summary>
+	public Dictionary<string, List<string>>? ServiceKeysToTags { get; set; }
 
 	/// <summary>
-	///     Словарь с тегами, где ключом является идентификатор сервиса, коллекцией теги.
+	///     Словарь с действиями, где первым ключом является идентификатор сервиса, а вторым тип действия (рекомендуется использовать <see cref="ActionTypes" />). Значение - коллекция тегов.
+	///     <remarks>
+	///         Значение определено как объект потому что может содержать как строковое значение, так и другую коллекцию с тегами.
+	///     </remarks>
 	/// </summary>
-	public IReadOnlyDictionary<string, List<string>>? ServiceKeysToTags => _serviceKeysToTags;
+	public Dictionary<string, Dictionary<int, List<object>>>? ServiceKeysToActionsToTags { get; set; }
 
-	public void AddTag(string serviceKey, string tag)
-	{
-		if (_serviceKeysToTags == null)
-		{
-			_serviceKeysToTags = new Dictionary<string, List<string>>();
-		}
+	/// <summary>
+	///     Перезаписать предыдущие удаленный мэппинг.
+	///     <remarks>
+	///         По умолчанию - true.
+	///     </remarks>
+	/// </summary>
+	public bool OverridePreviouslyDeletedMappings { get; set; } = true;
 
-		if (!_serviceKeysToTags.TryGetValue(serviceKey, out var list))
-		{
-			list = new List<string>();
-			_serviceKeysToTags.TryAdd(serviceKey, list);
-		}
-
-		list.Add(tag);
-	}
-
-	public void AddRangeTags(string serviceKey, IEnumerable<string> tags)
-	{
-		if (_serviceKeysToTags == null)
-		{
-			_serviceKeysToTags = new Dictionary<string, List<string>>();
-		}
-
-		if (!_serviceKeysToTags.TryGetValue(serviceKey, out var list))
-		{
-			list = new List<string>();
-			_serviceKeysToTags.TryAdd(serviceKey, list);
-		}
-
-		list.AddRange(tags);
-	}
-
-	public bool RemoveTag(string serviceKey, string tag)
-	{
-		if (_serviceKeysToTags == null)
-		{
-			return false;
-		}
-
-		if (!_serviceKeysToTags.TryGetValue(serviceKey, out var list))
-		{
-			return false;
-		}
-
-		return list.Remove(tag);
-	}
-
-	public void ClearTags()
-	{
-		_serviceKeysToTags = null;
-	}
+	/// <summary>
+	///     Создать новый удаленный мэппинг.
+	///     <remarks>
+	///         По умолчанию - true.
+	///     </remarks>
+	/// </summary>
+	public bool CreateNewDeletedMappings { get; set; } = true;
 }

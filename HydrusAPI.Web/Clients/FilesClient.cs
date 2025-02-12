@@ -15,15 +15,21 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public Task<ImportResult> SendLocalFile(string filePath, bool deleteAfterImport = false, CancellationToken cancel = default)
+	public Task<ImportResult> SendFile(string filePath, bool deleteAfterImport = false, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(filePath);
 
-		return SendLocalFile(new AddFileRequest(filePath, deleteAfterImport), cancel);
+		return SendFile(
+			new AddFileRequest
+			{
+				Path = filePath,
+				DeleteAfterSuccessfulImport = deleteAfterImport
+			}, cancel
+		);
 	}
 
 	/// <inheritdoc />
-	public Task<ImportResult> SendLocalFile(AddFileRequest request, CancellationToken cancel = default)
+	public Task<ImportResult> SendFile(AddFileRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
@@ -76,17 +82,17 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<bool> UndeleteFiles(params string[] hashes)
 	{
-		return UndeleteFiles(new FilesWithDomain(hashes));
+		return UndeleteFiles(new FilesWithDomainRequest(hashes));
 	}
 
 	/// <inheritdoc />
 	public Task<bool> UndeleteFiles(params ulong[] ids)
 	{
-		return UndeleteFiles(new FilesWithDomain(ids));
+		return UndeleteFiles(new FilesWithDomainRequest(ids));
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> UndeleteFiles(FilesWithDomain request, CancellationToken cancel = default)
+	public async Task<bool> UndeleteFiles(FilesWithDomainRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
@@ -97,17 +103,17 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<bool> ClearFilesDeletion(params string[] hashes)
 	{
-		return ClearFilesDeletion(new Files(hashes));
+		return ClearFilesDeletion(new FilesRequest(hashes));
 	}
 
 	/// <inheritdoc />
 	public Task<bool> ClearFilesDeletion(params ulong[] ids)
 	{
-		return ClearFilesDeletion(new Files(ids));
+		return ClearFilesDeletion(new FilesRequest(ids));
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> ClearFilesDeletion(Files request, CancellationToken cancel = default)
+	public async Task<bool> ClearFilesDeletion(FilesRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
@@ -118,21 +124,23 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<bool> MigrateFiles(string toFileDomain, params string[] hashes)
 	{
-		var files = new FilesWithDomain(hashes);
-		files.AddFileDomain(toFileDomain);
-		return MigrateFiles(files);
+		return MigrateFiles(new FilesWithDomainRequest(hashes)
+		{
+			FileServiceKey = toFileDomain
+		});
 	}
 
 	/// <inheritdoc />
 	public Task<bool> MigrateFiles(string toFileDomain, params ulong[] ids)
 	{
-		var files = new FilesWithDomain(ids);
-		files.AddFileDomain(toFileDomain);
-		return MigrateFiles(files);
+		return MigrateFiles(new FilesWithDomainRequest(ids)
+		{
+			FileServiceKey = toFileDomain
+		});
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> MigrateFiles(FilesWithDomain request, CancellationToken cancel = default)
+	public async Task<bool> MigrateFiles(FilesWithDomainRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
@@ -143,17 +151,17 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<bool> ArchiveFiles(params string[] hashes)
 	{
-		return ArchiveFiles(new Files(hashes));
+		return ArchiveFiles(new FilesRequest(hashes));
 	}
 
 	/// <inheritdoc />
 	public Task<bool> ArchiveFiles(params ulong[] ids)
 	{
-		return ArchiveFiles(new Files(ids));
+		return ArchiveFiles(new FilesRequest(ids));
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> ArchiveFiles(Files request, CancellationToken cancel = default)
+	public async Task<bool> ArchiveFiles(FilesRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
@@ -164,17 +172,17 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<bool> UnarchiveFiles(params string[] hashes)
 	{
-		return UnarchiveFiles(new Files(hashes));
+		return UnarchiveFiles(new FilesRequest(hashes));
 	}
 
 	/// <inheritdoc />
 	public Task<bool> UnarchiveFiles(params ulong[] ids)
 	{
-		return UnarchiveFiles(new Files(ids));
+		return UnarchiveFiles(new FilesRequest(ids));
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> UnarchiveFiles(Files request, CancellationToken cancel = default)
+	public async Task<bool> UnarchiveFiles(FilesRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 

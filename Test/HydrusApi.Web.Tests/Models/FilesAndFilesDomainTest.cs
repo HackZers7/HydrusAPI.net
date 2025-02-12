@@ -11,7 +11,7 @@ public class FilesAndFilesDomainTest
 	[Test]
 	public void FilesSerializationTest()
 	{
-		var files = new Files();
+		var files = new FilesRequest();
 		files.AddHash("test1");
 
 		var data = Utils.Serialize(files);
@@ -24,7 +24,7 @@ public class FilesAndFilesDomainTest
 	[Test]
 	public void FilesMultiplySerializationTest()
 	{
-		var files = new Files();
+		var files = new FilesRequest();
 		files.AddHash("test1");
 		files.AddId(500);
 

@@ -6,10 +6,10 @@ namespace HydrusAPI.Web;
 public interface IMetaClient
 {
 	/// <summary>
-	///     Отправляет запрос для установки рейтинга файлу.
+	///     Устанавливает рейтинг файлу.
 	/// </summary>
 	/// <remarks>
-	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.EditFileRatings" />.
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
@@ -18,10 +18,10 @@ public interface IMetaClient
 	Task<bool> SetRating(SetRatingRequest request, CancellationToken cancel = default);
 
 	/// <summary>
-	///     Отправляет запрос на добавление времени просмотра в статистику.
+	///     Добавляет время в статистику просмотра.
 	/// </summary>
 	/// <remarks>
-	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.EditFileTimes" />.
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
@@ -30,10 +30,10 @@ public interface IMetaClient
 	Task<bool> IncrementFileViewtime(ViewtimeRequest request, CancellationToken cancel = default);
 
 	/// <summary>
-	///     Отправляет запрос на установку времени просмотра в статистике.
+	///     Устанавливает статичное время просмотра в статистике.
 	/// </summary>
 	/// <remarks>
-	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.EditFileTimes" />.
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
@@ -42,10 +42,10 @@ public interface IMetaClient
 	Task<bool> SetFileViewtime(ViewtimeRequest request, CancellationToken cancel = default);
 
 	/// <summary>
-	///     Отправляет запрос на установку времени просмотра.
+	///     Устанавливает время для файла.
 	/// </summary>
 	/// <remarks>
-	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.EditFileTimes" />.
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
@@ -54,22 +54,22 @@ public interface IMetaClient
 	Task<bool> SetTime(SetTimeRequest request, CancellationToken cancel = default);
 
 	/// <summary>
-	///     Отправляет запрос на установку заметки.
+	///     Устанавливает заметки файлу.
 	/// </summary>
 	/// <remarks>
-	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.EditFileNotes" />.
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="NotesResponse" /> с текущими заметками.</returns>
 	Task<NotesResponse> SetNotes(SetNotesRequest request, CancellationToken cancel = default);
-	
+
 	/// <summary>
-	///     Отправляет запрос на удаление заметок.
+	///     Производит удаление заметок.
 	/// </summary>
 	/// <remarks>
-	///     Требуется аутентификация. Для отправки требуется одно из областей (разрешений):
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.EditFileNotes" />.
 	/// </remarks>
 	/// <param name="request">Запрос.</param>

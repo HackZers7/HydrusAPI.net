@@ -38,7 +38,7 @@ public class TagsClient : ApiClient, ITagsClient
 	}
 
 	/// <inheritdoc />
-	public Task<TagsSearchResponse> SearchTags(string search, FileDomain? fileDomain = null, string? tagServiceKey = null, TagDisplay tagDisplayType = TagDisplay.Storage, CancellationToken cancel = default)
+	public Task<TagsSearchResponse> SearchTags(string search, FileDomainRequest? fileDomain = null, string? tagServiceKey = null, TagDisplay tagDisplayType = TagDisplay.Storage, CancellationToken cancel = default)
 	{
 		return ApiConnection.Get<TagsSearchResponse>(HydrusUrls.SearchTags(search, fileDomain, tagServiceKey, tagDisplayType), cancel);
 	}

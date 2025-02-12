@@ -29,13 +29,16 @@ public class UrlsClient : ApiClient, IUrlsClient
 	}
 
 	/// <inheritdoc />
-	public Task<ImportUrlResult> ImportUrl(string url, CancellationToken cancel = default)
+	public Task<ImportUrlResult> ImportFromUrl(string url, CancellationToken cancel = default)
 	{
-		return ImportUrl(new AddUrlRequest(url), cancel);
+		return ImportFromUrl(new ImportFromUrlRequest
+		{
+			Url = new Uri(url)
+		}, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<ImportUrlResult> ImportUrl(AddUrlRequest request, CancellationToken cancel = default)
+	public Task<ImportUrlResult> ImportFromUrl(ImportFromUrlRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
@@ -47,19 +50,21 @@ public class UrlsClient : ApiClient, IUrlsClient
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
 
-		var request = new AssociateUrlRequest([hash]);
-		request.AddRangeAssociateUrl(urls);
-
-		return AssociateUrl(request);
+		return AssociateUrl(new AssociateUrlRequest([hash])
+		{
+			UrlsToAdd = new List<string>(urls)
+		});
 	}
 
 	/// <inheritdoc />
 	public Task<bool> AddUrlToFile(ulong id, params string[] urls)
 	{
-		var request = new AssociateUrlRequest([id]);
-		request.AddRangeAssociateUrl(urls);
+		ThrowHelper.ArgumentOutOfRange(id, (ulong)1, ulong.MaxValue);
 
-		return AssociateUrl(request);
+		return AssociateUrl(new AssociateUrlRequest([id])
+		{
+			UrlsToAdd = new List<string>(urls)
+		});
 	}
 
 	/// <inheritdoc />
@@ -67,19 +72,21 @@ public class UrlsClient : ApiClient, IUrlsClient
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
 
-		var request = new AssociateUrlRequest([hash]);
-		request.AddDisassociateUrl(urls);
-
-		return AssociateUrl(request);
+		return AssociateUrl(new AssociateUrlRequest([hash])
+		{
+			UrlsToDelete = new List<string>(urls)
+		});
 	}
 
 	/// <inheritdoc />
 	public Task<bool> RemoveUrlFromFile(ulong id, params string[] urls)
 	{
-		var request = new AssociateUrlRequest([id]);
-		request.AddDisassociateUrl(urls);
+		ThrowHelper.ArgumentOutOfRange(id, (ulong)1, ulong.MaxValue);
 
-		return AssociateUrl(request);
+		return AssociateUrl(new AssociateUrlRequest([id])
+		{
+			UrlsToDelete = new List<string>(urls)
+		});
 	}
 
 	/// <inheritdoc />

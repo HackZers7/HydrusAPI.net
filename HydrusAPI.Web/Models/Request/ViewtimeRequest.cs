@@ -3,10 +3,8 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Запрос на взаимодействие со временем.
 /// </summary>
-public class ViewtimeRequest
+public class ViewtimeRequest : FilesRequest
 {
-	// TODO: Переделать на билдер
-
 	/// <summary>
 	///     Тип, который редактируется.
 	///     <remarks>

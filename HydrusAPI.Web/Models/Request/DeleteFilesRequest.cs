@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Запрос на удаление файлов.
 /// </summary>
-public class DeleteFilesRequest : FilesWithDomain
+public class DeleteFilesRequest : FilesWithDomainRequest
 {
 	/// <summary>
 	///     Конструктор по умолчанию.
@@ -33,7 +33,7 @@ public class DeleteFilesRequest : FilesWithDomain
 	}
 
 	/// <summary>
-	///     Причина удаления
+	///     Причина удаления.
 	/// </summary>
 	public string? Reason { get; set; }
 }

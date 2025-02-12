@@ -3,12 +3,10 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Запрос на удаление заметки.
 /// </summary>
-public class DeleteNotesRequest : Files
+public class DeleteNotesRequest : FileRequest
 {
-	// TODO: Переделать на билдер
-
 	/// <summary>
-	///     Заметки.
+	///     Коллекция заметок.
 	/// </summary>
 	public List<string> NotesNames { get; } = new();
 }
