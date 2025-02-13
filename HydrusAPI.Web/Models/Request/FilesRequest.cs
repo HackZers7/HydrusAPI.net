@@ -51,7 +51,7 @@ public class FilesRequest
 	/// <summary>
 	///     Идентификатор файла.
 	/// </summary>
-	public string? FileId { get; set; }
+	public ulong? FileId { get; set; }
 
 	/// <summary>
 	///     Коллекция идентификаторов файлов.
@@ -108,7 +108,7 @@ public class FilesWithDomainRequest : FileDomainRequest
 	/// <summary>
 	///     Идентификатор файла.
 	/// </summary>
-	public string? FileId { get; set; }
+	public ulong? FileId { get; set; }
 
 	/// <summary>
 	///     Коллекция идентификаторов файлов.

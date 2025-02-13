@@ -1,5 +1,6 @@
 using HydrusAPI.Web;
 using NUnit.Framework;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using File = System.IO.File;
 
@@ -98,9 +99,13 @@ public class UrlsClientTest
 		[Test]
 		public async Task ImportWithAdditionalTags()
 		{
-			var request = new ImportFromUrlRequest(URL_2);
-
-			request.AddAdditionalTag(MyTagsServiceKey, "test");
+			var request = new ImportFromUrlRequest(URL_2)
+			{
+				ServiceKeysToAdditionalTags = new Dictionary<string, List<string>>
+				{
+					{ MyTagsServiceKey, ["test"] }
+				}
+			};
 
 			var data = await _client.UrlsClient.ImportFromUrl(request);
 
@@ -113,7 +118,7 @@ public class UrlsClientTest
 		{
 			var request = new ImportFromUrlRequest(URL_2);
 
-			request.FilterableTags.Add("test");
+			request.FilterableTags = new List<string> { "test" };
 
 			var data = await _client.UrlsClient.ImportFromUrl(request);
 

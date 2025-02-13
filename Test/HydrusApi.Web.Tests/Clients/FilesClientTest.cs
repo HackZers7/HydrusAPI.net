@@ -1,6 +1,6 @@
 using HydrusAPI.Web;
 using NUnit.Framework;
-using System.IO;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using File = System.IO.File;
 
@@ -81,16 +81,15 @@ public class FilesClientTest
 		public async Task MultiplyFiles()
 		{
 			var deleteFiles = new DeleteFilesRequest();
+			deleteFiles.Hashes = new List<string>();
 			using (var stream = File.OpenRead(IoC.FilePath))
 			{
-				var hash = Utils.GetSha256(stream);
-				deleteFiles.AddHash(hash);
+				deleteFiles.Hashes.Add(Utils.GetSha256(stream));
 			}
 
 			using (var stream = File.OpenRead(IoC.FilePath2))
 			{
-				var hash = Utils.GetSha256(stream);
-				deleteFiles.AddHash(hash);
+				deleteFiles.Hashes.Add(Utils.GetSha256(stream));
 			}
 
 			var result = await _client.FilesClient.DeleteFiles(deleteFiles);
@@ -103,12 +102,28 @@ public class FilesClientTest
 		public async Task MultiplyFilesWithHashAndId()
 		{
 			var deleteFiles = new DeleteFilesRequest();
-			deleteFiles.AddId(1);
+			deleteFiles.FileIds = new List<ulong> { 1 };
 
 			using (var stream = File.OpenRead(IoC.FilePath2))
 			{
-				var hash = Utils.GetSha256(stream);
-				deleteFiles.AddHash(hash);
+				deleteFiles.Hashes = new List<string> { Utils.GetSha256(stream) };
+			}
+
+			var result = await _client.FilesClient.DeleteFiles(deleteFiles);
+
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result, Is.True);
+		}
+
+		[Test]
+		public async Task MultiplyWithHashAndId()
+		{
+			var deleteFiles = new DeleteFilesRequest();
+			deleteFiles.FileId = 1;
+
+			using (var stream = File.OpenRead(IoC.FilePath2))
+			{
+				deleteFiles.Hash = Utils.GetSha256(stream);
 			}
 
 			var result = await _client.FilesClient.DeleteFiles(deleteFiles);
@@ -130,7 +145,7 @@ public class FilesClientTest
 			}
 		}
 	}
-	
+
 	[TestFixture]
 	public class UndeleteTest
 	{
@@ -168,16 +183,15 @@ public class FilesClientTest
 		public async Task MultiplyFiles()
 		{
 			var undeleteFiles = new FilesWithDomainRequest();
+			undeleteFiles.Hashes = new List<string>();
 			using (var stream = File.OpenRead(IoC.FilePath))
 			{
-				var hash = Utils.GetSha256(stream);
-				undeleteFiles.AddHash(hash);
+				undeleteFiles.Hashes.Add(Utils.GetSha256(stream));
 			}
 
 			using (var stream = File.OpenRead(IoC.FilePath2))
 			{
-				var hash = Utils.GetSha256(stream);
-				undeleteFiles.AddHash(hash);
+				undeleteFiles.Hashes.Add(Utils.GetSha256(stream));
 			}
 
 			var result = await _client.FilesClient.UndeleteFiles(undeleteFiles);
@@ -190,12 +204,11 @@ public class FilesClientTest
 		public async Task MultiplyFilesWithHashAndId()
 		{
 			var undeleteFiles = new FilesWithDomainRequest();
-			undeleteFiles.AddId(1);
+			undeleteFiles.FileIds = new List<ulong> { 1 };
 
 			using (var stream = File.OpenRead(IoC.FilePath2))
 			{
-				var hash = Utils.GetSha256(stream);
-				undeleteFiles.AddHash(hash);
+				undeleteFiles.Hashes = new List<string> { Utils.GetSha256(stream) };
 			}
 
 			var result = await _client.FilesClient.UndeleteFiles(undeleteFiles);
@@ -204,7 +217,7 @@ public class FilesClientTest
 			Assert.That(result, Is.True);
 		}
 	}
-	
+
 	[TestFixture]
 	public class GenerateHashesTest
 	{
@@ -240,7 +253,7 @@ public class FilesClientTest
 				Assert.That(result.Hash, Is.Not.Empty);
 			}
 		}
-		
+
 		[Test]
 		public async Task NotExistFile()
 		{

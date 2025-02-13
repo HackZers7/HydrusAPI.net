@@ -6,22 +6,22 @@ namespace HydrusAPI.Web;
 public enum СonflictResolutionType
 {
 	/// <summary>
-	///     Overwrite the existing conflicting note.
+	///     Перезаписывает конфликтную записку.
 	/// </summary>
 	Replace = 0,
 
 	/// <summary>
-	///     Make no changes.
+	///     Не производит изменения.
 	/// </summary>
 	Ignore = 1,
 
 	/// <summary>
-	///     Append the new text to the existing text.
+	///     Добавляет текст к существующему тексту.
 	/// </summary>
 	Append = 2,
 
 	/// <summary>
-	///     Add the new text under a 'name (x)'-style rename.
+	///     Добавляет заметку с новым названием в виде "name (n)".
 	/// </summary>
 	Rename = 3
 }

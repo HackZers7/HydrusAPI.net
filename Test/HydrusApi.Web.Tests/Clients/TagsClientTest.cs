@@ -1,6 +1,6 @@
 using HydrusAPI.Web;
 using NUnit.Framework;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using File = System.IO.File;
@@ -65,11 +65,15 @@ public class TagsClientTest
 	public async Task AddTags()
 	{
 		var request = new AddTagsRequest();
-		request.AddRangeTags(MyTagsServiceKey, Tags);
+		request.ServiceKeysToTags = new Dictionary<string, List<string>>
+		{
+			{ MyTagsServiceKey, new List<string>(Tags) }
+		};
+
 		using (var stream = File.OpenRead(IoC.FilePath))
 		{
 			var hash = Utils.GetSha256(stream);
-			request.AddHash(hash);
+			request.Hash = hash;
 		}
 
 		var tags = await _client.TagsClient.AddTags(request);

@@ -12,7 +12,7 @@ public class FileDomainRequestTest
 	public void FileDomainSerializationTest()
 	{
 		var fileDomain = new TestFileDomainRequest();
-		fileDomain.AddFileDomain("test1");
+		fileDomain.FileServiceKey = "test1";
 
 		var data = Utils.Serialize(fileDomain);
 
@@ -25,8 +25,8 @@ public class FileDomainRequestTest
 	public void FileDomainMultiplySerializationTest()
 	{
 		var fileDomain = new TestFileDomainRequest();
-		fileDomain.AddFileDomain("test1");
-		fileDomain.AddDeletedFileDomain("test1");
+		fileDomain.FileServiceKey = "test1";
+		fileDomain.DeletedFileServiceKey = "test1";
 
 		var data = Utils.Serialize(fileDomain);
 
