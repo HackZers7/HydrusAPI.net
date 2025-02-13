@@ -30,12 +30,13 @@ public static class HydrusUrls
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(name);
 
-		var encodedName = name.UriEncode();
-		var encodedPermissions = permissions.Select(p => (int)p)
-			.ToStringArray()
-			.UriEncode();
-		return "/request_new_permissions?name={0}&permits_everything={1}&basic_permissions={2}"
-			.FormatUri(encodedName, permitsEverything.ToString().ToLower(), encodedPermissions);
+		return "/request_new_permissions?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "name", name },
+				{ "permits_everything", permitsEverything },
+				{ "basic_permissions", permissions.Select(p => (int)p) }
+			});
 	}
 
 	/// <summary>
@@ -187,10 +188,12 @@ public static class HydrusUrls
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
 
-		var encodedUrl = url.UriEncode();
-
-		return "/add_urls/get_url_files?url={0}&doublecheck_file_system={1}"
-			.FormatUri(encodedUrl, doublecheckFileSystem.ToString().ToLower());
+		return "/add_urls/get_url_files?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "url", url },
+				{ "doublecheck_file_system", doublecheckFileSystem }
+			});
 	}
 
 	/// <summary>
@@ -266,36 +269,17 @@ public static class HydrusUrls
 	/// <returns><see cref="Uri" /> эндпоинта поиска по тегам.</returns>
 	public static Uri SearchTags(string search, FileDomainRequest? fileDomain = null, string? tagServiceKey = null, TagDisplay tagDisplayType = TagDisplay.Storage)
 	{
-		var param = string.Empty;
-
-		var encodedSearch = search.UriEncode();
-
-		if (fileDomain != null)
-		{
-			if (fileDomain.FileServiceKeys != null)
+		return "/add_tags/search_tags?"
+			.FormatUri(new Dictionary<string, object?>
 			{
-				var encodedFileService = fileDomain.FileServiceKeys.ToStringArray()
-					.UriEncode();
-				param += $"&file_service_keys={encodedFileService}";
-			}
-
-			if (fileDomain.DeletedFileServiceKeys != null)
-			{
-				var encodedDeletedFileService = fileDomain.DeletedFileServiceKeys.ToStringArray()
-					.UriEncode();
-				param += $"&deleted_file_service_keys={encodedDeletedFileService}";
-			}
-		}
-
-		if (!string.IsNullOrWhiteSpace(tagServiceKey))
-		{
-			param += $"&tag_service_key={tagServiceKey}";
-		}
-
-		param += $"&tag_display_type={tagDisplayType.ToString().ToLower()}";
-
-		return "/add_tags/search_tags?search={0}{1}"
-			.FormatUri(encodedSearch, param);
+				{ "search", search },
+				{ "file_service_key", fileDomain?.FileServiceKey },
+				{ "file_service_keys", fileDomain?.FileServiceKeys },
+				{ "deleted_file_service_key", fileDomain?.DeletedFileServiceKey },
+				{ "deleted_file_service_keys", fileDomain?.DeletedFileServiceKeys },
+				{ "tag_service_key", !string.IsNullOrWhiteSpace(tagServiceKey) ? tagServiceKey : null },
+				{ "tag_display_type", tagDisplayType.ToString().ToLower() }
+			});
 	}
 
 	/// <summary>
@@ -337,7 +321,7 @@ public static class HydrusUrls
 		return "/edit_times/set_file_viewtime"
 			.FormatUri();
 	}
-	
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса установки времени просмотр.
 	/// </summary>
@@ -347,7 +331,7 @@ public static class HydrusUrls
 		return "/edit_times/set_time"
 			.FormatUri();
 	}
-	
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса установки заметки.
 	/// </summary>
@@ -357,7 +341,7 @@ public static class HydrusUrls
 		return "/add_notes/set_notes"
 			.FormatUri();
 	}
-	
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса удаление заметок.
 	/// </summary>
