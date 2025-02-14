@@ -377,4 +377,22 @@ public static class HydrusUrls
 				{ "return_hashes", request.ReturnHashes }
 			});
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса преобразования хэшей.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта преобразования хэшей.</returns>
+	public static Uri FileHashes(FileHashesRequest request)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return "/get_files/file_hashes?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", request.Hash },
+				{ "hashes", request.Hashes },
+				{ "source_hash_type", request.SourceHashType },
+				{ "desired_hash_type", request.DesiredHashType }
+			});
+	}
 }

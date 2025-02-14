@@ -1,4 +1,5 @@
 using HydrusAPI.Web.Http;
+using System.Security.Authentication;
 
 // ReSharper disable PossibleMultipleEnumeration
 
@@ -234,5 +235,34 @@ public class FilesClient : ApiClient, IFilesClient
 	public Task<FilesSearchResponse> SearchFiles(SearchFilesRequest request, CancellationToken cancel = default)
 	{
 		return ApiConnection.Get<FilesSearchResponse>(HydrusUrls.SearchFiles(request), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<IDictionary<string, string>> FileHashes(string hash, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
+	{
+		return FileHashes(new FileHashesRequest
+		{
+			Hash = hash,
+			DesiredHashType = desiredHashType.ToString().ToLower(),
+			SourceHashType = sourceHashType.ToString().ToLower()
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<IDictionary<string, string>> FileHashes(IEnumerable<string> hashes, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
+	{
+		return FileHashes(new FileHashesRequest
+		{
+			Hashes = new List<string>(hashes),
+			DesiredHashType = desiredHashType.ToString().ToLower(),
+			SourceHashType = sourceHashType.ToString().ToLower()
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public async Task<IDictionary<string, string>> FileHashes(FileHashesRequest request, CancellationToken cancel = default)
+	{
+		var response = await ApiConnection.Get<FileHashesResponse>(HydrusUrls.FileHashes(request), cancel);
+		return response.Hashes;
 	}
 }

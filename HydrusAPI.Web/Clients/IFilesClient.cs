@@ -1,3 +1,5 @@
+using System.Security.Authentication;
+
 namespace HydrusAPI.Web;
 
 /// <summary>
@@ -315,7 +317,7 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="GeneratedHashesResponse" /> с хэшами (SHA256) файла.</returns>
 	Task<GeneratedHashesResponse> GenerateHashes(Stream file, CancellationToken cancel = default);
-	
+
 	/// <summary>
 	///     Производит поиск файлов по тегам.
 	/// </summary>
@@ -356,4 +358,54 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="FilesSearchResponse" /> с идентификаторами файла.</returns>
 	public Task<FilesSearchResponse> SearchFiles(SearchFilesRequest request, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Запрашивает хэш по другому хэшу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="hash">Хэш файла.</param>
+	/// <param name="desiredHashType">Тип хэша, который необходимо получить.</param>
+	/// <param name="sourceHashType">Тип отправленного хеша. По умолчанию - <see cref="HashAlgorithmType.Sha256" />.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
+	public Task<IDictionary<string, string>> FileHashes(
+		string hash,
+		HashAlgorithmType desiredHashType,
+		HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает хэш по другому хэшу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="hashes">Коллекция хэшей файлов.</param>
+	/// <param name="desiredHashType">Тип хэша, который необходимо получить.</param>
+	/// <param name="sourceHashType">Тип отправленного хеша. По умолчанию - <see cref="HashAlgorithmType.Sha256" />.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
+	public Task<IDictionary<string, string>> FileHashes(
+		IEnumerable<string> hashes,
+		HashAlgorithmType desiredHashType,
+		HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает хэш по другому хэшу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="request">Запрос.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
+	public Task<IDictionary<string, string>> FileHashes(FileHashesRequest request, CancellationToken cancel = default);
 }

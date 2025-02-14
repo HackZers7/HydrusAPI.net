@@ -1,6 +1,8 @@
 using HydrusAPI.Web;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Linq;
+using System.Security.Authentication;
 using System.Threading.Tasks;
 using File = System.IO.File;
 
@@ -291,6 +293,39 @@ public class FilesClientTest
 			Assert.That(response.Hashes!.Count, Is.GreaterThan(0));
 			Assert.That(response.FileIds, Is.Not.Null);
 			Assert.That(response.FileIds!.Count, Is.GreaterThan(0));
+		}
+
+		[Test]
+		public async Task OneFileHash()
+		{
+			using (var stream = File.OpenRead(IoC.FilePath))
+			{
+				var response = await _client.FilesClient.FileHashes(Utils.GetSha256(stream), HashAlgorithmType.Md5);
+
+				Assert.That(response, Is.Not.Null);
+				Assert.That(response.Count(), Is.GreaterThan(0));
+			}
+		}
+
+		[Test]
+		public async Task MultiplyFileHash()
+		{
+			var list = new List<string>();
+
+			using (var stream = File.OpenRead(IoC.FilePath))
+			{
+				list.Add(Utils.GetSha256(stream));
+			}
+
+			using (var stream = File.OpenRead(IoC.FilePath2))
+			{
+				list.Add(Utils.GetSha256(stream));
+			}
+
+			var response = await _client.FilesClient.FileHashes(list, HashAlgorithmType.Md5);
+
+			Assert.That(response, Is.Not.Null);
+			Assert.That(response.Count(), Is.GreaterThan(0));
 		}
 	}
 }
