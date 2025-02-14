@@ -351,4 +351,30 @@ public static class HydrusUrls
 		return "/add_notes/delete_notes"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса поиска файлов.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта поиска файлов.</returns>
+	public static Uri SearchFiles(SearchFilesRequest request)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return "/get_files/search_files?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "tags", request.Tags },
+				{ "file_service_key", request.FileServiceKey },
+				{ "file_service_keys", request.FileServiceKeys },
+				{ "deleted_file_service_key", request.DeletedFileServiceKey },
+				{ "deleted_file_service_keys", request.DeletedFileServiceKeys },
+				{ "tag_service_key", !string.IsNullOrWhiteSpace(request.TagServiceKey) ? request.TagServiceKey : null },
+				{ "include_current_tags", request.IncludeCurrentTags },
+				{ "include_pending_tags", request.IncludePendingTags },
+				{ "file_sort_type", request.FileSortType },
+				{ "file_sort_asc", request.FileSortAsc },
+				{ "return_file_ids", request.ReturnFileIds },
+				{ "return_hashes", request.ReturnHashes }
+			});
+	}
 }

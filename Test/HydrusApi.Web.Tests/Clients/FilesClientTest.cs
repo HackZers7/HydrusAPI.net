@@ -266,4 +266,31 @@ public class FilesClientTest
 			}
 		}
 	}
+
+	[TestFixture]
+	public class GetFilesTest
+	{
+		private readonly IHydrusClient _client;
+
+		// ReSharper disable once ConvertConstructorToMemberInitializers
+		public GetFilesTest()
+		{
+			_client = IoC.GetHydrusClient();
+		}
+
+		[Test]
+		public async Task SearchFiles()
+		{
+			var response = await _client.FilesClient.SearchFiles(new List<string>
+			{
+				"tag1"
+			});
+
+			Assert.That(response, Is.Not.Null);
+			Assert.That(response.Hashes, Is.Not.Null);
+			Assert.That(response.Hashes!.Count, Is.GreaterThan(0));
+			Assert.That(response.FileIds, Is.Not.Null);
+			Assert.That(response.FileIds!.Count, Is.GreaterThan(0));
+		}
+	}
 }

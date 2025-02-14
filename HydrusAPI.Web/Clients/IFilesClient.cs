@@ -315,4 +315,45 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="GeneratedHashesResponse" /> с хэшами (SHA256) файла.</returns>
 	Task<GeneratedHashesResponse> GenerateHashes(Stream file, CancellationToken cancel = default);
+	
+	/// <summary>
+	///     Производит поиск файлов по тегам.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="tags">Теги для поиска. Может содержать строковое значение или коллекцию с тегами.</param>
+	/// <param name="tagServiceKey">Необязательно, шестнадцатеричный ключ домена, в котором выполняется поиск. По умолчанию - "all my files".</param>
+	/// <param name="includeCurrentTags">Необязательно, выполнять поиск по "текущим" тегам. По умолчанию - true.</param>
+	/// <param name="includePendingTags">Необязательно, выполнять поиск по "ожидающим" тегам. По умолчанию - true.</param>
+	/// <param name="fileSortType">Необязательно, метод сортировки. По умолчанию - <see cref="SortingType.ImportTime" />.</param>
+	/// <param name="fileSortAsc">Необязательно, тип сортировки. По умолчанию - true.</param>
+	/// <param name="returnFileIds">Необязательно, получить идентификаторы файлов. По умолчанию - true.</param>
+	/// <param name="returnHashes">Необязательно, получить хэши файлов. По умолчанию - true.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="FilesSearchResponse" /> с идентификаторами файла.</returns>
+	public Task<FilesSearchResponse> SearchFiles(
+		IEnumerable<object> tags,
+		string? tagServiceKey = null,
+		bool includeCurrentTags = true,
+		bool includePendingTags = true,
+		SortingType fileSortType = SortingType.ImportTime,
+		bool fileSortAsc = true,
+		bool returnFileIds = true,
+		bool returnHashes = true,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Производит поиск файлов по тегам.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="request">Запрос.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="FilesSearchResponse" /> с идентификаторами файла.</returns>
+	public Task<FilesSearchResponse> SearchFiles(SearchFilesRequest request, CancellationToken cancel = default);
 }

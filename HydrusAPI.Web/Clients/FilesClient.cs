@@ -203,4 +203,36 @@ public class FilesClient : ApiClient, IFilesClient
 	{
 		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, file, cancel);
 	}
+
+	/// <inheritdoc />
+	public Task<FilesSearchResponse> SearchFiles(
+		IEnumerable<object> tags,
+		string? tagServiceKey = null,
+		bool includeCurrentTags = true,
+		bool includePendingTags = true,
+		SortingType fileSortType = SortingType.ImportTime,
+		bool fileSortAsc = true,
+		bool returnFileIds = true,
+		bool returnHashes = true,
+		CancellationToken cancel = default
+	)
+	{
+		return SearchFiles(new SearchFilesRequest
+		{
+			Tags = new List<object>(tags),
+			TagServiceKey = tagServiceKey,
+			IncludeCurrentTags = includeCurrentTags,
+			IncludePendingTags = includePendingTags,
+			FileSortType = (int)fileSortType,
+			FileSortAsc = fileSortAsc,
+			ReturnFileIds = returnFileIds,
+			ReturnHashes = returnHashes
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<FilesSearchResponse> SearchFiles(SearchFilesRequest request, CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<FilesSearchResponse>(HydrusUrls.SearchFiles(request), cancel);
+	}
 }
