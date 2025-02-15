@@ -267,18 +267,34 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public async Task<Stream?> GetFile(string hash, bool download = false, CancellationToken cancel = default)
+	public async Task<Stream> GetFile(string hash, bool download = false, CancellationToken cancel = default)
 	{
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetFile(hash, download), cancel);
 
-		return response.Body;
+		return response.Body!;
 	}
 
 	/// <inheritdoc />
-	public async Task<Stream?> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default)
+	public async Task<Stream> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default)
 	{
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetFile(fileId, download), cancel);
 
-		return response.Body;
+		return response.Body!;
+	}
+
+	/// <inheritdoc />
+	public async Task<Stream> GetThumbnail(string hash, CancellationToken cancel = default)
+	{
+		var response = await ApiConnection.GetRawStream(HydrusUrls.GetThumbnail(hash), cancel);
+
+		return response.Body!;
+	}
+
+	/// <inheritdoc />
+	public async Task<Stream> GetThumbnail(ulong fileId, CancellationToken cancel = default)
+	{
+		var response = await ApiConnection.GetRawStream(HydrusUrls.GetThumbnail(fileId), cancel);
+
+		return response.Body!;
 	}
 }

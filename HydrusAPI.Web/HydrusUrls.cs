@@ -458,4 +458,36 @@ public static class HydrusUrls
 				{ "download", download }
 			});
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения эскиза.
+	/// </summary>
+	/// <param name="hash">Хэш (SHA256) файл.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения эскиза.</returns>
+	public static Uri GetThumbnail(string hash)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
+		return "/get_files/thumbnail?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", hash }
+			});
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения эскиза.
+	/// </summary>
+	/// <param name="fileId">Идентификатор файл.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения эскиза.</returns>
+	public static Uri GetThumbnail(ulong fileId)
+	{
+		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+
+		return "/get_files/thumbnail?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "file_id", fileId }
+			});
+	}
 }
