@@ -54,6 +54,15 @@ public interface IApiConnection
 	Task<T> Get<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default);
 
 	/// <summary>
+	///     Запрашивает поток по API по-указанному URI.
+	/// </summary>
+	/// <param name="uri">URL по которому необходимо произвести запрос.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Поток с данными.</returns>
+	/// <exception cref="ApiException">Выбрасывается, когда происходит ошибка в API.</exception>
+	Task<IApiResponse<Stream>> GetRawStream(Uri uri, CancellationToken cancel = default);
+
+	/// <summary>
 	///     Создает новые данные в API по-указанному URI.
 	/// </summary>
 	/// <param name="uri">URL по которому необходимо произвести запрос.</param>

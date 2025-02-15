@@ -422,4 +422,40 @@ public static class HydrusUrls
 				{ "hide_service_keys_tags", request.HideServiceKeysTags }
 			});
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения файла.
+	/// </summary>
+	/// <param name="hash">Хэш (SHA256) файл.</param>
+	/// <param name="download">Ставит Content-Disposition=attachment. По умолчанию - false.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения файла.</returns>
+	public static Uri GetFile(string hash, bool download = false)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
+		return "/get_files/file?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", hash },
+				{ "download", download }
+			});
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения файла.
+	/// </summary>
+	/// <param name="fileId">Идентификатор файл.</param>
+	/// <param name="download">Ставит Content-Disposition=attachment. По умолчанию - false.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения файла.</returns>
+	public static Uri GetFile(ulong fileId, bool download = false)
+	{
+		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+
+		return "/get_files/file?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "file_id", fileId },
+				{ "download", download }
+			});
+	}
 }

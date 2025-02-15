@@ -265,4 +265,20 @@ public class FilesClient : ApiClient, IFilesClient
 		var response = await ApiConnection.Get<FileHashesResponse>(HydrusUrls.GetFileHashes(request), cancel);
 		return response.Hashes;
 	}
+
+	/// <inheritdoc />
+	public async Task<Stream?> GetFile(string hash, bool download = false, CancellationToken cancel = default)
+	{
+		var response = await ApiConnection.GetRawStream(HydrusUrls.GetFile(hash, download), cancel);
+
+		return response.Body;
+	}
+
+	/// <inheritdoc />
+	public async Task<Stream?> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default)
+	{
+		var response = await ApiConnection.GetRawStream(HydrusUrls.GetFile(fileId, download), cancel);
+
+		return response.Body;
+	}
 }

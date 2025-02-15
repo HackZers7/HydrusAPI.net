@@ -408,4 +408,30 @@ public interface IFilesClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
 	public Task<IDictionary<string, string>> GetFileHashes(FileHashesRequest request, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Запрашивает файл.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="hash">Хэш (SHA256) файл.</param>
+	/// <param name="download">Ставит Content-Disposition=attachment. По умолчанию - false.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает поток с файлом.</returns>
+	public Task<Stream?> GetFile(string hash, bool download = false, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Запрашивает файл.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="fileId">Идентификатор файл.</param>
+	/// <param name="download">Ставит Content-Disposition=attachment. По умолчанию - false.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает поток с файлом.</returns>
+	public Task<Stream?> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default);
 }

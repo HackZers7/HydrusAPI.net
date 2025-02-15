@@ -1,5 +1,6 @@
 using HydrusAPI.Web;
 using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace HydrusApi.Web.Tests;
 
@@ -7,6 +8,7 @@ public static class IoC
 {
 	public static readonly string Token;
 	public static readonly string FilePath;
+	public static readonly string FileHash;
 	public static readonly string FilePath2;
 	public static readonly string FilePath3;
 
@@ -25,6 +27,11 @@ public static class IoC
 			FilePath = configuration["FilePath"]!;
 			FilePath2 = configuration["FilePath2"]!;
 			FilePath3 = configuration["FilePath2"]!;
+			
+			using (var stream = File.OpenRead(IoC.FilePath))
+			{
+				FileHash = Utils.GetSha256(stream);
+			}
 		}
 	}
 

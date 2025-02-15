@@ -60,14 +60,10 @@ public class FilesClientTest
 		[Test]
 		public async Task ByHash()
 		{
-			using (var stream = File.OpenRead(IoC.FilePath))
-			{
-				var hash = Utils.GetSha256(stream);
-				var result = await _client.FilesClient.DeleteFiles(hash);
+			var result = await _client.FilesClient.DeleteFiles(IoC.FileHash);
 
-				Assert.That(result, Is.Not.Null);
-				Assert.That(result, Is.True);
-			}
+			Assert.That(result, Is.Not.Null);
+			Assert.That(result, Is.True);
 		}
 
 		[Test]
@@ -326,6 +322,27 @@ public class FilesClientTest
 
 			Assert.That(response, Is.Not.Null);
 			Assert.That(response.Count(), Is.GreaterThan(0));
+		}
+	}
+
+
+	[TestFixture]
+	public class GetTest
+	{
+		private readonly IHydrusClient _client;
+
+		// ReSharper disable once ConvertConstructorToMemberInitializers
+		public GetTest()
+		{
+			_client = IoC.GetHydrusClient();
+		}
+
+		[Test]
+		public async Task LocalFile()
+		{
+			var result = await _client.FilesClient.GetFile(IoC.FileHash);
+
+			Assert.That(result, Is.Not.Null);
 		}
 	}
 }

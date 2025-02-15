@@ -49,7 +49,15 @@ public class ApiConnection : IApiConnection
 	{
 		ThrowHelper.ArgumentNotNull(uri);
 
-		return SendData<T>(uri, HttpMethod.Get, headers: headers, parameters: parameters, body: body, cancel: cancel);
+		return SendData<T>(uri, HttpMethod.Get, headers, parameters, body, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<IApiResponse<Stream>> GetRawStream(Uri uri, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(uri);
+
+		return GetRawStream(uri, HttpMethod.Get, cancel: cancel);
 	}
 
 	public Task<T> Post<T>(Uri uri, CancellationToken cancel = default)
@@ -71,14 +79,14 @@ public class ApiConnection : IApiConnection
 	/// <inheritdoc />
 	public async Task<HttpStatusCode> Post(Uri uri, IDictionary<string, string>? parameters, object? body, CancellationToken cancel = default)
 	{
-		var response = await SendDataDetailed(uri, HttpMethod.Post, parameters: parameters, body: body, cancel: cancel);
+		var response = await SendDataDetailed(uri, HttpMethod.Post, parameters, body, cancel: cancel);
 		return response.StatusCode;
 	}
 
 	/// <inheritdoc />
 	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default)
 	{
-		return SendData<T>(uri, HttpMethod.Post, headers: headers, parameters: parameters, body: body, cancel: cancel);
+		return SendData<T>(uri, HttpMethod.Post, headers, parameters, body, cancel);
 	}
 
 	public Task<T> Put<T>(Uri uri, CancellationToken cancel = default)
@@ -121,6 +129,21 @@ public class ApiConnection : IApiConnection
 		throw new NotImplementedException();
 	}
 
+	private async Task<IApiResponse<Stream>> GetRawStream(
+		Uri uri,
+		HttpMethod method,
+		IDictionary<string, string>? parameters = null,
+		object? body = null,
+		IDictionary<string, string>? headers = null,
+		CancellationToken cancel = default
+	)
+	{
+		var request = CreateRequest(uri, method, headers, parameters, body);
+		// request.Headers.Add("Accept", AcceptHeaders.RawContentMediaType);
+		var apiResponse = await RunRequest(request, cancel).ConfigureAwait(false);
+		return new ApiResponse<Stream>(apiResponse, apiResponse.Body as Stream);
+	}
+
 	private async Task<T> SendData<T>(
 		Uri uri,
 		HttpMethod method,
@@ -134,7 +157,7 @@ public class ApiConnection : IApiConnection
 		var apiResponse = await Run<T>(request, cancel).ConfigureAwait(false);
 		return apiResponse.Body!;
 	}
-	
+
 	private async Task<IResponse> SendDataDetailed(
 		Uri uri,
 		HttpMethod method,
