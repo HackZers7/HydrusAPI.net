@@ -300,7 +300,7 @@ public class FilesClientTest
 		{
 			using (var stream = File.OpenRead(IoC.FilePath))
 			{
-				var response = await _client.FilesClient.FileHashes(Utils.GetSha256(stream), HashAlgorithmType.Md5);
+				var response = await _client.FilesClient.GetFileHashes(Utils.GetSha256(stream), HashAlgorithmType.Md5);
 
 				Assert.That(response, Is.Not.Null);
 				Assert.That(response.Count(), Is.GreaterThan(0));
@@ -322,7 +322,7 @@ public class FilesClientTest
 				list.Add(Utils.GetSha256(stream));
 			}
 
-			var response = await _client.FilesClient.FileHashes(list, HashAlgorithmType.Md5);
+			var response = await _client.FilesClient.GetFileHashes(list, HashAlgorithmType.Md5);
 
 			Assert.That(response, Is.Not.Null);
 			Assert.That(response.Count(), Is.GreaterThan(0));

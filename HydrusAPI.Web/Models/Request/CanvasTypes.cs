@@ -1,7 +1,7 @@
 namespace HydrusAPI.Web;
 
 /// <summary>
-///     Тип для редактирования.
+///     Тип вьювера.
 /// </summary>
 public enum CanvasTypes
 {

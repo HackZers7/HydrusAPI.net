@@ -371,7 +371,7 @@ public interface IFilesClient
 	/// <param name="sourceHashType">Тип отправленного хеша. По умолчанию - <see cref="HashAlgorithmType.Sha256" />.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
-	public Task<IDictionary<string, string>> FileHashes(
+	public Task<IDictionary<string, string>> GetFileHashes(
 		string hash,
 		HashAlgorithmType desiredHashType,
 		HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256,
@@ -390,7 +390,7 @@ public interface IFilesClient
 	/// <param name="sourceHashType">Тип отправленного хеша. По умолчанию - <see cref="HashAlgorithmType.Sha256" />.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
-	public Task<IDictionary<string, string>> FileHashes(
+	public Task<IDictionary<string, string>> GetFileHashes(
 		IEnumerable<string> hashes,
 		HashAlgorithmType desiredHashType,
 		HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256,
@@ -407,5 +407,5 @@ public interface IFilesClient
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
-	public Task<IDictionary<string, string>> FileHashes(FileHashesRequest request, CancellationToken cancel = default);
+	public Task<IDictionary<string, string>> GetFileHashes(FileHashesRequest request, CancellationToken cancel = default);
 }

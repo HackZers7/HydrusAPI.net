@@ -238,9 +238,9 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public Task<IDictionary<string, string>> FileHashes(string hash, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
+	public Task<IDictionary<string, string>> GetFileHashes(string hash, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
 	{
-		return FileHashes(new FileHashesRequest
+		return GetFileHashes(new FileHashesRequest
 		{
 			Hash = hash,
 			DesiredHashType = desiredHashType.ToString().ToLower(),
@@ -249,9 +249,9 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public Task<IDictionary<string, string>> FileHashes(IEnumerable<string> hashes, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
+	public Task<IDictionary<string, string>> GetFileHashes(IEnumerable<string> hashes, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
 	{
-		return FileHashes(new FileHashesRequest
+		return GetFileHashes(new FileHashesRequest
 		{
 			Hashes = new List<string>(hashes),
 			DesiredHashType = desiredHashType.ToString().ToLower(),
@@ -260,9 +260,9 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public async Task<IDictionary<string, string>> FileHashes(FileHashesRequest request, CancellationToken cancel = default)
+	public async Task<IDictionary<string, string>> GetFileHashes(FileHashesRequest request, CancellationToken cancel = default)
 	{
-		var response = await ApiConnection.Get<FileHashesResponse>(HydrusUrls.FileHashes(request), cancel);
+		var response = await ApiConnection.Get<FileHashesResponse>(HydrusUrls.GetFileHashes(request), cancel);
 		return response.Hashes;
 	}
 }

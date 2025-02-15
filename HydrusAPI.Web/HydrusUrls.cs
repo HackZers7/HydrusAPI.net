@@ -382,7 +382,7 @@ public static class HydrusUrls
 	///     Возвращает <see cref="Uri" /> запроса преобразования хэшей.
 	/// </summary>
 	/// <returns><see cref="Uri" /> эндпоинта преобразования хэшей.</returns>
-	public static Uri FileHashes(FileHashesRequest request)
+	public static Uri GetFileHashes(FileHashesRequest request)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
