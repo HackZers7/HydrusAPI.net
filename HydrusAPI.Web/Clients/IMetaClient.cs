@@ -76,4 +76,168 @@ public interface IMetaClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> DeleteNotes(DeleteNotesRequest request, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Запрашивает метаданные по настроенному запросу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="hash">Хэш (SHA256) файла.</param>
+	/// <param name="createNewFileIds">Создает физическую запись об хэше, который не был найден. По умолчанию - false.</param>
+	/// <param name="detailedUrlInformation">Необязательно, вернуть детальную информацию об URL. Может быть очень тяжелым процессом. По умолчанию - false.</param>
+	/// <param name="includeMilliseconds">Необязательно, включить в ответ миллисекунды. По умолчанию - false.</param>
+	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает коллекцию <see cref="MetaData" /> с мета данными.</returns>
+	Task<IEnumerable<MetaData>> GetMetaData(
+		string hash,
+		bool createNewFileIds = false,
+		bool detailedUrlInformation = false,
+		bool includeMilliseconds = false,
+		bool includeNotes = false,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает метаданные по настроенному запросу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <param name="createNewFileIds">Создает физическую запись об хэше, который не был найден. По умолчанию - false.</param>
+	/// <param name="detailedUrlInformation">Необязательно, вернуть детальную информацию об URL. Может быть очень тяжелым процессом. По умолчанию - false.</param>
+	/// <param name="includeMilliseconds">Необязательно, включить в ответ миллисекунды. По умолчанию - false.</param>
+	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает коллекцию <see cref="MetaData" /> с мета данными.</returns>
+	Task<IEnumerable<MetaData>> GetMetaData(
+		IEnumerable<string> hashes,
+		bool createNewFileIds = false,
+		bool detailedUrlInformation = false,
+		bool includeMilliseconds = false,
+		bool includeNotes = false,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает метаданные по настроенному запросу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="fileId">Идентификатор файла.</param>
+	/// <param name="createNewFileIds">Создает физическую запись об хэше, который не был найден. По умолчанию - false.</param>
+	/// <param name="detailedUrlInformation">Необязательно, вернуть детальную информацию об URL. Может быть очень тяжелым процессом. По умолчанию - false.</param>
+	/// <param name="includeMilliseconds">Необязательно, включить в ответ миллисекунды. По умолчанию - false.</param>
+	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает коллекцию <see cref="MetaData" /> с мета данными.</returns>
+	Task<IEnumerable<MetaData>> GetMetaData(
+		ulong fileId,
+		bool createNewFileIds = false,
+		bool detailedUrlInformation = false,
+		bool includeMilliseconds = false,
+		bool includeNotes = false,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает метаданные по настроенному запросу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="fileIds">Идентификаторы файлов.</param>
+	/// <param name="createNewFileIds">Создает физическую запись об хэше, который не был найден. По умолчанию - false.</param>
+	/// <param name="detailedUrlInformation">Необязательно, вернуть детальную информацию об URL. Может быть очень тяжелым процессом. По умолчанию - false.</param>
+	/// <param name="includeMilliseconds">Необязательно, включить в ответ миллисекунды. По умолчанию - false.</param>
+	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает коллекцию <see cref="MetaData" /> с мета данными.</returns>
+	Task<IEnumerable<MetaData>> GetMetaData(
+		IEnumerable<ulong> fileIds,
+		bool createNewFileIds = false,
+		bool detailedUrlInformation = false,
+		bool includeMilliseconds = false,
+		bool includeNotes = false,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает метаданные по настроенному запросу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="request">Запрос.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="MetaDataResponse" /> с мета данными.</returns>
+	Task<MetaDataResponse<MetaData>> GetMetaData(MetaDataRequest request, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Запрашивает идентификатор файла.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="hash">Хэш (SHA256) файла.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
+	Task<IEnumerable<MetaDataId>> GetId(
+		string hash,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает идентификаторы файлов.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
+	Task<IEnumerable<MetaDataId>> GetId(
+		IEnumerable<string> hashes,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает хэш (SHA256) файла.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="fileId">Идентификатор файла.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
+	Task<IEnumerable<MetaDataId>> GetHash(
+		ulong fileId,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает хэши (SHA256) файлов.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="fileIds">Идентификаторы файлов.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
+	Task<IEnumerable<MetaDataId>> GetHash(
+		IEnumerable<ulong> fileIds,
+		CancellationToken cancel = default
+	);
 }

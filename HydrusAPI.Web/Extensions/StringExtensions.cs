@@ -59,6 +59,16 @@ internal static class StringExtensions
 
 		return string.Format("[{0}]", string.Join(',', source.Select(p => p.ToString())));
 	}
+	
+	public static string ToStringArray(this IEnumerable<ulong>? source)
+	{
+		if (source == null)
+		{
+			return "[]";
+		}
+
+		return string.Format("[{0}]", string.Join(',', source.Select(p => p.ToString())));
+	}
 
 	public static string ToStringArray(this IEnumerable<string>? source)
 	{
@@ -92,8 +102,10 @@ internal static class StringExtensions
 			string value => value.UriEncode(),
 			bool value => value.ToString().ToLower(),
 			int value => value.ToString(),
+			ulong value => value.ToString(),
 			IEnumerable<string> value => value.ToStringArray().UriEncode(),
 			IEnumerable<int> value => value.ToStringArray().UriEncode(),
+			IEnumerable<ulong> value => value.ToStringArray().UriEncode(),
 			IEnumerable<object> value => value.Select(ToParameter).ToStringArray().UriEncode(),
 			_ => throw new NotSupportedException()
 		};

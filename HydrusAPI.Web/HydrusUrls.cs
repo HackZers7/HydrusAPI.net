@@ -395,4 +395,31 @@ public static class HydrusUrls
 				{ "desired_hash_type", request.DesiredHashType }
 			});
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса мата данных файла.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта мата данных файла.</returns>
+	public static Uri GetMetadata(MetaDataRequest request)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return "/get_files/file_metadata?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", request.Hash },
+				{ "hashes", request.Hashes },
+				{ "file_id", request.FileId },
+				{ "file_ids", request.FileIds },
+				{ "create_new_file_ids", request.CreateNewFileIds },
+				{ "only_return_identifiers", request.OnlyReturnIdentifiers },
+				{ "only_return_basic_information", request.OnlyReturnBasicInformation },
+				{ "detailed_url_information", request.DetailedUrlInformation },
+				{ "include_blurhash", request.IncludeBlurHash },
+				{ "include_milliseconds", request.IncludeMilliseconds },
+				{ "include_notes", request.IncludeNotes },
+				{ "include_services_object", request.IncludeServicesObject },
+				{ "hide_service_keys_tags", request.HideServiceKeysTags }
+			});
+	}
 }

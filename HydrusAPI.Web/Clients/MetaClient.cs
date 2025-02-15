@@ -52,4 +52,187 @@ public class MetaClient : ApiClient, IMetaClient
 		var response = await ApiConnection.Post(HydrusUrls.DeleteNotes(), null, request, cancel);
 		return response.IsSuccessStatusCode();
 	}
+
+	/// <inheritdoc />
+	public async Task<IEnumerable<MetaData>> GetMetaData(
+		string hash,
+		bool createNewFileIds = false,
+		bool detailedUrlInformation = false,
+		bool includeMilliseconds = false,
+		bool includeNotes = false,
+		CancellationToken cancel = default
+	)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
+		var response = await GetMetaData(new MetaDataRequest
+		{
+			Hash = hash,
+			CreateNewFileIds = createNewFileIds,
+			OnlyReturnIdentifiers = false,
+			OnlyReturnBasicInformation = false,
+			DetailedUrlInformation = detailedUrlInformation,
+			IncludeBlurHash = false,
+			IncludeMilliseconds = includeMilliseconds,
+			IncludeNotes = includeNotes,
+			IncludeServicesObject = false
+		}, cancel);
+
+		return response.Metadata;
+	}
+
+	/// <inheritdoc />
+	public async Task<IEnumerable<MetaData>> GetMetaData(
+		IEnumerable<string> hashes,
+		bool createNewFileIds = false,
+		bool detailedUrlInformation = false,
+		bool includeMilliseconds = false,
+		bool includeNotes = false,
+		CancellationToken cancel = default
+	)
+	{
+		ThrowHelper.ArgumentNotNull(hashes);
+
+		var response = await GetMetaData(new MetaDataRequest
+		{
+			Hashes = new List<string>(hashes),
+			CreateNewFileIds = createNewFileIds,
+			OnlyReturnIdentifiers = false,
+			OnlyReturnBasicInformation = false,
+			DetailedUrlInformation = detailedUrlInformation,
+			IncludeBlurHash = false,
+			IncludeMilliseconds = includeMilliseconds,
+			IncludeNotes = includeNotes,
+			IncludeServicesObject = false
+		}, cancel);
+
+		return response.Metadata;
+	}
+
+	/// <inheritdoc />
+	public async Task<IEnumerable<MetaData>> GetMetaData(
+		ulong fileId,
+		bool createNewFileIds = false,
+		bool detailedUrlInformation = false,
+		bool includeMilliseconds = false,
+		bool includeNotes = false,
+		CancellationToken cancel = default
+	)
+	{
+		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+
+		var response = await GetMetaData(new MetaDataRequest
+		{
+			FileId = fileId,
+			CreateNewFileIds = createNewFileIds,
+			OnlyReturnIdentifiers = false,
+			OnlyReturnBasicInformation = false,
+			DetailedUrlInformation = detailedUrlInformation,
+			IncludeBlurHash = false,
+			IncludeMilliseconds = includeMilliseconds,
+			IncludeNotes = includeNotes,
+			IncludeServicesObject = false
+		}, cancel);
+
+		return response.Metadata;
+	}
+
+	/// <inheritdoc />
+	public async Task<IEnumerable<MetaData>> GetMetaData(
+		IEnumerable<ulong> fileIds,
+		bool createNewFileIds = false,
+		bool detailedUrlInformation = false,
+		bool includeMilliseconds = false,
+		bool includeNotes = false,
+		CancellationToken cancel = default
+	)
+	{
+		ThrowHelper.ArgumentNotNull(fileIds);
+
+		var response = await GetMetaData(new MetaDataRequest
+		{
+			FileIds = new List<ulong>(fileIds),
+			CreateNewFileIds = createNewFileIds,
+			OnlyReturnIdentifiers = false,
+			OnlyReturnBasicInformation = false,
+			DetailedUrlInformation = detailedUrlInformation,
+			IncludeBlurHash = false,
+			IncludeMilliseconds = includeMilliseconds,
+			IncludeNotes = includeNotes,
+			IncludeServicesObject = false,
+		}, cancel);
+
+		return response.Metadata;
+	}
+
+
+	/// <inheritdoc />
+	public Task<MetaDataResponse<MetaData>> GetMetaData(MetaDataRequest request, CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<MetaDataResponse<MetaData>>(HydrusUrls.GetMetadata(request), cancel);
+	}
+
+	/// <inheritdoc />
+	public async Task<IEnumerable<MetaDataId>> GetId(string hash, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
+		var request = HydrusUrls.GetMetadata(new MetaDataRequest
+		{
+			Hash = hash,
+			OnlyReturnIdentifiers = true,
+			IncludeServicesObject = false
+		});
+		var response = await ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
+
+		return response.Metadata;
+	}
+
+	/// <inheritdoc />
+	public async Task<IEnumerable<MetaDataId>> GetId(IEnumerable<string> hashes, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(hashes);
+
+		var request = HydrusUrls.GetMetadata(new MetaDataRequest
+		{
+			Hashes = new List<string>(hashes),
+			OnlyReturnIdentifiers = true,
+			IncludeServicesObject = false
+		});
+		var response = await ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
+
+		return response.Metadata;
+	}
+
+	/// <inheritdoc />
+	public async Task<IEnumerable<MetaDataId>> GetHash(ulong fileId, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+
+		var request = HydrusUrls.GetMetadata(new MetaDataRequest
+		{
+			FileId = fileId,
+			OnlyReturnIdentifiers = true,
+			IncludeServicesObject = false
+		});
+		var response = await ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
+
+		return response.Metadata;
+	}
+
+	/// <inheritdoc />
+	public async Task<IEnumerable<MetaDataId>> GetHash(IEnumerable<ulong> fileIds, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(fileIds);
+
+		var request = HydrusUrls.GetMetadata(new MetaDataRequest
+		{
+			FileIds = new List<ulong>(fileIds),
+			OnlyReturnIdentifiers = true,
+			IncludeServicesObject = false
+		});
+		var response = await ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
+
+		return response.Metadata;
+	}
 }
