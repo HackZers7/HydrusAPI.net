@@ -340,7 +340,7 @@ public class FilesClientTest
 		[Test]
 		public async Task File()
 		{
-			var result = await _client.FilesClient.GetFile("f33b6b8cd55160059f4642787da5ae9838f977eddd885b28f05eae6111fa7b62");
+			var result = await _client.FilesClient.GetFile(IoC.FileHash);
 
 			Assert.That(result, Is.Not.Null);
 		}
