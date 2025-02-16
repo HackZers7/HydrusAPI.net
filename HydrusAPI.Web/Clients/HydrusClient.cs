@@ -51,6 +51,7 @@ public class HydrusClient : IHydrusClient
 		TagsClient = new TagsClient(_apiConnection);
 		MetaClient = new MetaClient(_apiConnection);
 		RelationshipsClient = new RelationshipsClient(_apiConnection);
+		PagesClient = new PagesClient(_apiConnection);
 	}
 
 	/// <inheritdoc />
@@ -73,6 +74,9 @@ public class HydrusClient : IHydrusClient
 
 	/// <inheritdoc />
 	public IRelationshipsClient RelationshipsClient { get; }
+
+	/// <inheritdoc />
+	public IPagesClient PagesClient { get; }
 
 	/// <inheritdoc />
 	public Task<ApiVersion> GetApiVersion(CancellationToken cancel = default)

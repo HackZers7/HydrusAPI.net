@@ -41,6 +41,11 @@ public interface IHydrusClient
 	IRelationshipsClient RelationshipsClient { get; }
 
 	/// <summary>
+	///     Клиент для работы со страницами Hydrus.
+	/// </summary>
+	IPagesClient PagesClient { get; }
+
+	/// <summary>
 	///     Запрашивает версию Hydrus.
 	/// </summary>
 	/// <param name="cancel">Токен отмены запроса.</param>

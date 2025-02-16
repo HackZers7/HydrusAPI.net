@@ -752,4 +752,44 @@ public static class HydrusUrls
 		return "/manage_services/forget_pending"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения всех открыты страниц.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта получения всех открыты страниц.</returns>
+	public static Uri GetPages()
+	{
+		return "/manage_pages/get_pages"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса добавления файлов на страницу.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта добавления файлов на страницу.</returns>
+	public static Uri AddFilesOnPage()
+	{
+		return "/manage_pages/add_files"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса фокуса страницы.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта фокуса страницы.</returns>
+	public static Uri FocusPage()
+	{
+		return "/manage_pages/focus_page"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса обновления страницы.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта обновления страницы.</returns>
+	public static Uri RefreshPage()
+	{
+		return "/manage_pages/refresh_page"
+			.FormatUri();
+	}
 }
