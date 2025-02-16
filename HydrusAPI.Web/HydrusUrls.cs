@@ -490,4 +490,72 @@ public static class HydrusUrls
 				{ "file_id", fileId }
 			});
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения локального пути к файлу.
+	/// </summary>
+	/// <param name="hash">Хэш (SHA256) файл.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения локального пути к файлу.</returns>
+	public static Uri GetFilePath(string hash)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
+		return "/get_files/file_path?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", hash }
+			});
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения локального пути к файлу.
+	/// </summary>
+	/// <param name="fileId">Идентификатор файл.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения локального пути к файлу.</returns>
+	public static Uri GetFilePath(ulong fileId)
+	{
+		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+
+		return "/get_files/file_path?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "file_id", fileId }
+			});
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения локального пути к эскизу.
+	/// </summary>
+	/// <param name="hash">Хэш (SHA256) файл.</param>
+	/// <param name="includeThumbnailFiletype">Добавить в ответ тип файла. По умолчанию - false.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения локального пути к файлу.</returns>
+	public static Uri GetThumbnailFilePath(string hash, bool includeThumbnailFiletype = false)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
+		return "/get_files/thumbnail_path?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", hash },
+				{ "include_thumbnail_filetype", includeThumbnailFiletype }
+			});
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения локального пути к эскизу.
+	/// </summary>
+	/// <param name="fileId">Идентификатор файл.</param>
+	/// <param name="includeThumbnailFiletype">Добавить в ответ тип файла. По умолчанию - false.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения локального пути к файлу.</returns>
+	public static Uri GetThumbnailFilePath(ulong fileId, bool includeThumbnailFiletype = false)
+	{
+		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+
+		return "/get_files/thumbnail_path?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "file_id", fileId },
+				{ "include_thumbnail_filetype", includeThumbnailFiletype }
+			});
+	}
 }

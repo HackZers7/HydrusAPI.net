@@ -240,4 +240,72 @@ public interface IMetaClient
 		IEnumerable<ulong> fileIds,
 		CancellationToken cancel = default
 	);
+	
+	/// <summary>
+	///     Запрашивает локальный путь к файлу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется области видимости (разрешения):
+	///     <see cref="Permissions.SearchFetchFiles" />,
+	///     <see cref="Permissions.SeeLocalPaths" />.
+	/// </remarks>
+	/// <param name="hash">Хэш (SHA256) файла.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="FilePathResponse" />.</returns>
+	Task<FilePathResponse> GetFilePath(
+		string hash,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает локальный путь к эскизу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется области видимости (разрешения):
+	///     <see cref="Permissions.SearchFetchFiles" />,
+	///     <see cref="Permissions.SeeLocalPaths" />.
+	/// </remarks>
+	/// <param name="fileId">Идентификатор файла.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="FilePathResponse" />.</returns>
+	Task<FilePathResponse> GetFilePath(
+		ulong fileId,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает локальный путь к эскизу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется области видимости (разрешения):
+	///     <see cref="Permissions.SearchFetchFiles" />,
+	///     <see cref="Permissions.SeeLocalPaths" />.
+	/// </remarks>
+	/// <param name="hash">Хэш (SHA256) файла.</param>
+	/// <param name="includeThumbnailFiletype">Добавить в ответ тип файла. По умолчанию - false.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="ThumbnailFilePathResponse" />.</returns>
+	Task<ThumbnailFilePathResponse> GetThumbnailFilePath(
+		string hash,
+		bool includeThumbnailFiletype = false,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает локальный путь к файлу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется области видимости (разрешения):
+	///     <see cref="Permissions.SearchFetchFiles" />,
+	///     <see cref="Permissions.SeeLocalPaths" />.
+	/// </remarks>
+	/// <param name="fileId">Идентификатор файла.</param>
+	/// <param name="includeThumbnailFiletype">Добавить в ответ тип файла. По умолчанию - false.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="ThumbnailFilePathResponse" />.</returns>
+	Task<ThumbnailFilePathResponse> GetThumbnailFilePath(
+		ulong fileId,
+		bool includeThumbnailFiletype = false,
+		CancellationToken cancel = default
+	);
 }

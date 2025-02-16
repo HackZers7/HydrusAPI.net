@@ -159,13 +159,12 @@ public class MetaClient : ApiClient, IMetaClient
 			IncludeBlurHash = false,
 			IncludeMilliseconds = includeMilliseconds,
 			IncludeNotes = includeNotes,
-			IncludeServicesObject = false,
+			IncludeServicesObject = false
 		}, cancel);
 
 		return response.Metadata;
 	}
-
-
+	
 	/// <inheritdoc />
 	public Task<MetaDataResponse<MetaData>> GetMetaData(MetaDataRequest request, CancellationToken cancel = default)
 	{
@@ -234,5 +233,29 @@ public class MetaClient : ApiClient, IMetaClient
 		var response = await ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
 
 		return response.Metadata;
+	}
+
+	/// <inheritdoc />
+	public Task<FilePathResponse> GetFilePath(string hash, CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<FilePathResponse>(HydrusUrls.GetFilePath(hash), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<FilePathResponse> GetFilePath(ulong fileId, CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<FilePathResponse>(HydrusUrls.GetFilePath(fileId), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<ThumbnailFilePathResponse> GetThumbnailFilePath(string hash, bool includeThumbnailFiletype = false, CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<ThumbnailFilePathResponse>(HydrusUrls.GetThumbnailFilePath(hash, includeThumbnailFiletype), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<ThumbnailFilePathResponse> GetThumbnailFilePath(ulong fileId, bool includeThumbnailFiletype = false, CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<ThumbnailFilePathResponse>(HydrusUrls.GetThumbnailFilePath(fileId, includeThumbnailFiletype), cancel);
 	}
 }
