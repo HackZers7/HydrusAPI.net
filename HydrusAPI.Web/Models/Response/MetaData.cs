@@ -34,7 +34,7 @@ public class MetaData : MetaDataId
 	/// <summary>
 	///     Тип файла перечислением.
 	/// </summary>
-	public int? FiletypeEnum { get; set; }
+	public HydrusFileTypes? FiletypeEnum { get; set; }
 
 	/// <summary>
 	///     Расширение файла.
