@@ -1,4 +1,6 @@
-// Source: https://github.com/octokit/octokit.net/blob/main/Octokit/Http/HttpClientAdapter.cs
+//  This file contains parts of code from octokit.net.
+//  Original source: https://github.com/octokit/octokit.net/blob/main/Octokit/Http/HttpClientAdapter.cs
+//  Licensed under the MIT License.
 
 using System.Net.Http.Headers;
 using System.Text;

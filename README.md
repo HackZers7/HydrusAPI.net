@@ -1,5 +1,9 @@
 # HydrusAPI.net
 
+⚠️ **Warning: This is an Early Development Version!** ⚠️
+
+Some features may not be fully implemented yet.
+
 The latest supported version of Hydrus API: 78 (607)
 
 ## Supports:
@@ -154,3 +158,11 @@ The latest supported version of Hydrus API: 78 (607)
 - Other API request
 - Requests builder
 - Structured types for response
+
+## Credits
+
+Thanks to [Hydrus Developer](https://github.com/hydrusnetwork/hydrus) for the great app!
+
+It is partially based on concepts and ideas from [SpotifyAPI-NET](https://github.com/JohnnyCrazy/SpotifyAPI-NET), which is licensed under the MIT License.
+
+This project includes code from [octokit.net](https://github.com/octokit/octokit.net), which is licensed under the MIT License.
