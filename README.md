@@ -132,20 +132,20 @@ The latest supported version of Hydrus API: 78 (607)
 |-----------------------------------------|:------:|:---------------:|:---------------:|
 | /manage_popups/get_popups               |   ❌    |        ❌        |        ❌        |
 | /manage_popups/add_popup                |   ❌    |        ❌        |        ❌        |
-| /manage_popups/call_user_callable       |   ❌    |        ❌        |        ❌        |
-| /manage_popups/cancel_popup             |   ❌    |        ❌        |        ❌        |
-| /manage_popups/dismiss_popup            |   ❌    |        ❌        |        ❌        |
-| /manage_popups/finish_popup             |   ❌    |        ❌        |        ❌        |
-| /manage_popups/finish_and_dismiss_popup |   ❌    |        ❌        |        ❌        |
+| /manage_popups/call_user_callable       |   ❌    |        ❌        |   Not needed    |
+| /manage_popups/cancel_popup             |   ❌    |        ❌        |   Not needed    |
+| /manage_popups/dismiss_popup            |   ❌    |        ❌        |   Not needed    |
+| /manage_popups/finish_popup             |   ❌    |        ❌        |   Not needed    |
+| /manage_popups/finish_and_dismiss_popup |   ❌    |        ❌        |   Not needed    |
 | /manage_popups/update_popup             |   ❌    |        ❌        |        ❌        |
 
 ### Managing the Database
 
 | URL                                 | Status | Request builder | Structured type |
 |-------------------------------------|:------:|:---------------:|:---------------:|
-| /manage_database/force_commit       |   ❌    |        ❌        |        ❌        |
-| /manage_database/lock_on            |   ❌    |        ❌        |        ❌        |
-| /manage_database/lock_off           |   ❌    |        ❌        |        ❌        |
+| /manage_database/force_commit       |   ❌    |        ❌        |   Not needed    |
+| /manage_database/lock_on            |   ❌    |        ❌        |   Not needed    |
+| /manage_database/lock_off           |   ❌    |        ❌        |   Not needed    |
 | /manage_database/mr_bones           |   ❌    |        ❌        |        ❌        |
 | /manage_database/get_client_options |   ❌    |        ❌        |        ❌        |
 
