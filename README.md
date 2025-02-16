@@ -85,21 +85,21 @@ The latest supported version of Hydrus API: 78 (607)
 
 | URL                                               | Status | Request builder | Structured type |
 |---------------------------------------------------|:------:|:---------------:|:---------------:|
-| /manage_file_relationships/get_file_relationships |   ❌    |        ❌        |        ❌        |
-| /manage_file_relationships/get_potentials_count   |   ❌    |        ❌        |        ❌        |
-| /manage_file_relationships/get_potential_pairs    |   ❌    |        ❌        |        ❌        |
-| /manage_file_relationships/get_random_potentials  |   ❌    |        ❌        |        ❌        |
-| /manage_file_relationships/remove_potentials      |   ❌    |        ❌        |        ❌        |
-| /manage_file_relationships/set_file_relationships |   ❌    |        ❌        |        ❌        |
-| /manage_file_relationships/set_kings              |   ❌    |        ❌        |        ❌        |
+| /manage_file_relationships/get_file_relationships |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/get_potentials_count   |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/get_potential_pairs    |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/get_random_potentials  |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/remove_potentials      |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/set_file_relationships |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/set_kings              |   ✅    |        ❌        |        ❌        |
 
 ### Managing Services
 
 | URL                                 | Status | Request builder | Structured type |
 |-------------------------------------|:------:|:---------------:|:---------------:|
-| /manage_services/get_pending_counts |   ❌    |        ❌        |        ❌        |
-| /manage_services/commit_pending     |   ❌    |        ❌        |        ❌        |
-| /manage_services/forget_pending     |   ❌    |        ❌        |        ❌        |
+| /manage_services/get_pending_counts |   ✅    |        ❌        |        ❌        |
+| /manage_services/commit_pending     |   ✅    |        ❌        |        ❌        |
+| /manage_services/forget_pending     |   ✅    |        ❌        |        ❌        |
 
 ### Managing Cookies
 
