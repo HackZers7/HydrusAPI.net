@@ -568,4 +568,24 @@ public static class HydrusUrls
 		return "/get_files/local_file_storage_locations"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса рендера файла.
+	/// </summary>
+	/// <param name="request">Запрос.</param>
+	/// <returns><see cref="Uri" /> эндпоинта рендера файла.</returns>
+	public static Uri Render(RenderRequest request)
+	{
+		return "/get_files/render?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", request.Hash },
+				{ "file_id", request.FileId },
+				{ "download", request.Download },
+				{ "render_format", request.RenderFormat },
+				{ "render_quality", request.RenderQuality },
+				{ "width", request.Width },
+				{ "height", request.Height }
+			});
+	}
 }

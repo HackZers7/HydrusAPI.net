@@ -202,6 +202,8 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<GeneratedHashesResponse> GenerateHashes(Stream file, CancellationToken cancel = default)
 	{
+		ThrowHelper.ArgumentNotNull(file);
+
 		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, file, cancel);
 	}
 
@@ -234,12 +236,16 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<FilesSearchResponse> SearchFiles(SearchFilesRequest request, CancellationToken cancel = default)
 	{
+		ThrowHelper.ArgumentNotNull(request);
+
 		return ApiConnection.Get<FilesSearchResponse>(HydrusUrls.SearchFiles(request), cancel);
 	}
 
 	/// <inheritdoc />
 	public Task<IDictionary<string, string>> GetFileHashes(string hash, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
 		return GetFileHashes(new FileHashesRequest
 		{
 			Hash = hash,
@@ -251,6 +257,8 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<IDictionary<string, string>> GetFileHashes(IEnumerable<string> hashes, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
 	{
+		ThrowHelper.ArgumentNotNull(hashes);
+
 		return GetFileHashes(new FileHashesRequest
 		{
 			Hashes = new List<string>(hashes),
@@ -269,6 +277,8 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public async Task<Stream> GetFile(string hash, bool download = false, CancellationToken cancel = default)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetFile(hash, download), cancel);
 
 		return response.Body!;
@@ -277,6 +287,8 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public async Task<Stream> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default)
 	{
+		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetFile(fileId, download), cancel);
 
 		return response.Body!;
@@ -285,6 +297,8 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public async Task<Stream> GetThumbnail(string hash, CancellationToken cancel = default)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetThumbnail(hash), cancel);
 
 		return response.Body!;
@@ -293,7 +307,66 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public async Task<Stream> GetThumbnail(ulong fileId, CancellationToken cancel = default)
 	{
+		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetThumbnail(fileId), cancel);
+
+		return response.Body!;
+	}
+
+	/// <inheritdoc />
+	public Task<Stream> Render(
+		string hash,
+		bool download = false,
+		RenderOutputFormat renderFormat = RenderOutputFormat.Png,
+		ushort? renderQuality = null,
+		ulong? width = null,
+		ulong? height = null,
+		CancellationToken cancel = default
+	)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
+		return Render(new RenderRequest
+		{
+			Hash = hash,
+			Download = download,
+			RenderFormat = (int)renderFormat,
+			RenderQuality = renderQuality,
+			Width = width,
+			Height = height
+		}, cancel);
+	}
+
+	public Task<Stream> Render(
+		ulong fileId,
+		bool download = false,
+		RenderOutputFormat renderFormat = RenderOutputFormat.Png,
+		ushort? renderQuality = null,
+		ulong? width = null,
+		ulong? height = null,
+		CancellationToken cancel = default
+	)
+	{
+		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+
+		return Render(new RenderRequest
+		{
+			FileId = fileId,
+			Download = download,
+			RenderFormat = (int)renderFormat,
+			RenderQuality = renderQuality,
+			Width = width,
+			Height = height
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public async Task<Stream> Render(RenderRequest request, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		var response = await ApiConnection.GetRawStream(HydrusUrls.Render(request), cancel);
 
 		return response.Body!;
 	}
