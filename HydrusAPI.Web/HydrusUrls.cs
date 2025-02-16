@@ -576,6 +576,8 @@ public static class HydrusUrls
 	/// <returns><see cref="Uri" /> эндпоинта рендера файла.</returns>
 	public static Uri Render(RenderRequest request)
 	{
+		ThrowHelper.ArgumentNotNull(request);
+
 		return "/get_files/render?"
 			.FormatUri(new Dictionary<string, object?>
 			{
@@ -587,5 +589,137 @@ public static class HydrusUrls
 				{ "width", request.Width },
 				{ "height", request.Height }
 			});
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения связей файла.
+	/// </summary>
+	/// <param name="request">Запрос.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения связей файла.</returns>
+	public static Uri GetFileRelationships(FilesWithDomainRequest request)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return "/manage_file_relationships/get_file_relationships?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", request.Hash },
+				{ "file_id", request.FileId },
+				{ "hashes", request.Hashes },
+				{ "file_ids", request.FileIds },
+				{ "file_service_key", request.FileServiceKey },
+				{ "file_service_keys", request.FileServiceKeys },
+				{ "deleted_file_service_key", request.DeletedFileServiceKey },
+				{ "deleted_file_service_keys", request.DeletedFileServiceKeys }
+			});
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения количества оставшихся потенциальных пар дубликатов.
+	/// </summary>
+	/// <param name="request">Запрос.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения количества оставшихся потенциальных пар дубликатов.</returns>
+	public static Uri GetPotentialsCount(GetPotentialsRequest request)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return "/manage_file_relationships/get_potentials_count?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", request.Hash },
+				{ "file_id", request.FileId },
+				{ "hashes", request.Hashes },
+				{ "file_ids", request.FileIds },
+				{ "tag_service_key_1", request.TagServiceKey1 },
+				{ "tags_1", request.Tags1 },
+				{ "tag_service_key_2", request.TagServiceKey2 },
+				{ "tags_2", request.Tags2 },
+				{ "potentials_search_type", request.PotentialsSearchType },
+				{ "pixel_duplicates", request.PixelDuplicates },
+				{ "max_hamming_distance", request.MaxHammingDistance }
+			});
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения оставшихся потенциальных пар дубликатов.
+	/// </summary>
+	/// <param name="request">Запрос.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения оставшихся потенциальных пар дубликатов.</returns>
+	public static Uri GetPotentialsPairs(GetPotentialsPairsRequest request)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return "/manage_file_relationships/get_potential_pairs?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", request.Hash },
+				{ "file_id", request.FileId },
+				{ "hashes", request.Hashes },
+				{ "file_ids", request.FileIds },
+				{ "tag_service_key_1", request.TagServiceKey1 },
+				{ "tags_1", request.Tags1 },
+				{ "tag_service_key_2", request.TagServiceKey2 },
+				{ "tags_2", request.Tags2 },
+				{ "potentials_search_type", request.PotentialsSearchType },
+				{ "pixel_duplicates", request.PixelDuplicates },
+				{ "max_hamming_distance", request.MaxHammingDistance },
+				{ "max_num_pairs", request.MaxNumPairs }
+			});
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения случайных потенциальных пар дубликатов.
+	/// </summary>
+	/// <param name="request">Запрос.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения случайных потенциальных пар дубликатов.</returns>
+	public static Uri GetRandomPotentials(GetPotentialsRequest request)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return "/manage_file_relationships/get_random_potentials?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", request.Hash },
+				{ "file_id", request.FileId },
+				{ "hashes", request.Hashes },
+				{ "file_ids", request.FileIds },
+				{ "tag_service_key_1", request.TagServiceKey1 },
+				{ "tags_1", request.Tags1 },
+				{ "tag_service_key_2", request.TagServiceKey2 },
+				{ "tags_2", request.Tags2 },
+				{ "potentials_search_type", request.PotentialsSearchType },
+				{ "pixel_duplicates", request.PixelDuplicates },
+				{ "max_hamming_distance", request.MaxHammingDistance }
+			});
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса удаления потенциальных дубликатов.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта удаления потенциальных дубликатов.</returns>
+	public static Uri RemovePotentials()
+	{
+		return "/manage_file_relationships/remove_potentials"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса добавления связи между файлами.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта добавления связи между файлами.</returns>
+	public static Uri SetFileRelationships()
+	{
+		return "/manage_file_relationships/set_file_relationships"
+			.FormatUri();
+	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса установки лучшего родителя.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта установки лучшего родителя.</returns>
+	public static Uri SetKings()
+	{
+		return "/manage_file_relationships/set_kings"
+			.FormatUri();
 	}
 }

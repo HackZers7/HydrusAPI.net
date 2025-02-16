@@ -335,7 +335,7 @@ public interface IFilesClient
 	/// <param name="returnHashes">Необязательно, получить хэши файлов. По умолчанию - true.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="FilesSearchResponse" /> с идентификаторами файла.</returns>
-	public Task<FilesSearchResponse> SearchFiles(
+	Task<FilesSearchResponse> SearchFiles(
 		IEnumerable<object> tags,
 		string? tagServiceKey = null,
 		bool includeCurrentTags = true,
@@ -357,7 +357,7 @@ public interface IFilesClient
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="FilesSearchResponse" /> с идентификаторами файла.</returns>
-	public Task<FilesSearchResponse> SearchFiles(SearchFilesRequest request, CancellationToken cancel = default);
+	Task<FilesSearchResponse> SearchFiles(SearchFilesRequest request, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает хэш по другому хэшу.
@@ -371,7 +371,7 @@ public interface IFilesClient
 	/// <param name="sourceHashType">Тип отправленного хеша. По умолчанию - <see cref="HashAlgorithmType.Sha256" />.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
-	public Task<IDictionary<string, string>> GetFileHashes(
+	Task<IDictionary<string, string>> GetFileHashes(
 		string hash,
 		HashAlgorithmType desiredHashType,
 		HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256,
@@ -390,7 +390,7 @@ public interface IFilesClient
 	/// <param name="sourceHashType">Тип отправленного хеша. По умолчанию - <see cref="HashAlgorithmType.Sha256" />.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
-	public Task<IDictionary<string, string>> GetFileHashes(
+	Task<IDictionary<string, string>> GetFileHashes(
 		IEnumerable<string> hashes,
 		HashAlgorithmType desiredHashType,
 		HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256,
@@ -407,7 +407,7 @@ public interface IFilesClient
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
-	public Task<IDictionary<string, string>> GetFileHashes(FileHashesRequest request, CancellationToken cancel = default);
+	Task<IDictionary<string, string>> GetFileHashes(FileHashesRequest request, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает файл.
@@ -420,7 +420,7 @@ public interface IFilesClient
 	/// <param name="download">Ставит Content-Disposition=attachment. По умолчанию - false.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	public Task<Stream> GetFile(string hash, bool download = false, CancellationToken cancel = default);
+	Task<Stream> GetFile(string hash, bool download = false, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает файл.
@@ -433,7 +433,7 @@ public interface IFilesClient
 	/// <param name="download">Ставит Content-Disposition=attachment. По умолчанию - false.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	public Task<Stream> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default);
+	Task<Stream> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает эскиз.
@@ -445,7 +445,7 @@ public interface IFilesClient
 	/// <param name="hash">Хэш (SHA256) файл.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	public Task<Stream> GetThumbnail(string hash, CancellationToken cancel = default);
+	Task<Stream> GetThumbnail(string hash, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает эскиз.
@@ -457,7 +457,7 @@ public interface IFilesClient
 	/// <param name="fileId">Идентификатор файл.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	public Task<Stream> GetThumbnail(ulong fileId, CancellationToken cancel = default);
+	Task<Stream> GetThumbnail(ulong fileId, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Рендерит файл.
@@ -474,7 +474,7 @@ public interface IFilesClient
 	/// <param name="height">Высота выходного изображения.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	public Task<Stream> Render(
+	Task<Stream> Render(
 		string hash,
 		bool download = false,
 		RenderOutputFormat renderFormat = RenderOutputFormat.Png,
@@ -499,7 +499,7 @@ public interface IFilesClient
 	/// <param name="height">Высота выходного изображения.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	public Task<Stream> Render(
+	Task<Stream> Render(
 		ulong fileId,
 		bool download = false,
 		RenderOutputFormat renderFormat = RenderOutputFormat.Png,
@@ -519,5 +519,5 @@ public interface IFilesClient
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	public Task<Stream> Render(RenderRequest request, CancellationToken cancel = default);
+	Task<Stream> Render(RenderRequest request, CancellationToken cancel = default);
 }

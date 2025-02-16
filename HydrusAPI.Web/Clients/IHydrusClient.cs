@@ -36,6 +36,11 @@ public interface IHydrusClient
 	IMetaClient MetaClient { get; }
 
 	/// <summary>
+	///     Клиент для работы со связями файлов.
+	/// </summary>
+	IRelationshipsClient RelationshipsClient { get; }
+
+	/// <summary>
 	///     Запрашивает версию Hydrus.
 	/// </summary>
 	/// <param name="cancel">Токен отмены запроса.</param>

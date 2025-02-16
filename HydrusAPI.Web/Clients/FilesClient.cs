@@ -338,6 +338,7 @@ public class FilesClient : ApiClient, IFilesClient
 		}, cancel);
 	}
 
+	/// <inheritdoc />
 	public Task<Stream> Render(
 		ulong fileId,
 		bool download = false,
