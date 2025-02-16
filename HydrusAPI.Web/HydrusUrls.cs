@@ -712,7 +712,7 @@ public static class HydrusUrls
 		return "/manage_file_relationships/set_file_relationships"
 			.FormatUri();
 	}
-	
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса установки лучшего родителя.
 	/// </summary>
@@ -720,6 +720,36 @@ public static class HydrusUrls
 	public static Uri SetKings()
 	{
 		return "/manage_file_relationships/set_kings"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса ожидающих загрузки материалов для каждого сервиса.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта ожидающих загрузки материалов для каждого сервиса.</returns>
+	public static Uri GetPendingCounts()
+	{
+		return "/manage_services/get_pending_counts"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса запуска загрузки ожидающего сервиса.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта запуска загрузки ожидающего сервиса.</returns>
+	public static Uri CommitPending()
+	{
+		return "/manage_services/commit_pending"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса отмены загрузки ожидающего сервиса.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта отмены загрузки ожидающего сервиса.</returns>
+	public static Uri ForgetPending()
+	{
+		return "/manage_services/forget_pending"
 			.FormatUri();
 	}
 }
