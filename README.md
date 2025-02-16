@@ -20,12 +20,12 @@ The latest supported version of Hydrus API: 78 (607)
 | URL                                   | Status | Request builder | Structured type |
 |---------------------------------------|:------:|:---------------:|:---------------:|
 | /add_files/add_file                   |   ✅    |        ❌        |        ❌        |
-| /add_files/delete_files               |   ✅    |        ❌        |        ❌        |
-| /add_files/undelete_files             |   ✅    |        ❌        |        ❌        |
-| /add_files/clear_file_deletion_record |   ✅    |        ❌        |        ❌        |
-| /add_files/migrate_files              |   ✅    |        ❌        |        ❌        |
-| /add_files/archive_files              |   ✅    |        ❌        |        ❌        |
-| /add_files/unarchive_files            |   ✅    |        ❌        |        ❌        |
+| /add_files/delete_files               |   ✅    |        ❌        |   Not needed    |
+| /add_files/undelete_files             |   ✅    |        ❌        |   Not needed    |
+| /add_files/clear_file_deletion_record |   ✅    |        ❌        |   Not needed    |
+| /add_files/migrate_files              |   ✅    |        ❌        |   Not needed    |
+| /add_files/archive_files              |   ✅    |        ❌        |   Not needed    |
+| /add_files/unarchive_files            |   ✅    |        ❌        |   Not needed    |
 | /add_files/generate_hashes            |   ✅    |        ❌        |        ❌        |
 
 ### Importing and Editing URLs
@@ -35,7 +35,7 @@ The latest supported version of Hydrus API: 78 (607)
 | /add_urls/get_url_files |   ✅    |        ❌        |        ❌        |
 | /add_urls/get_url_info  |   ✅    |        ❌        |        ❌        |
 | /add_urls/add_url       |   ✅    |        ❌        |        ❌        |
-| /add_urls/associate_url |   ✅    |        ❌        |        ❌        |
+| /add_urls/associate_url |   ✅    |        ❌        |   Not needed    |
 
 ### Editing File Tags
 
@@ -44,28 +44,28 @@ The latest supported version of Hydrus API: 78 (607)
 | /add_tags/clean_tags               |   ✅    |        ❌        |        ❌        |
 | /add_tags/get_siblings_and_parents |   ✅    |        ❌        |        ❌        |
 | /add_tags/search_tags              |   ✅    |        ❌        |        ❌        |
-| /add_tags/add_tags                 |   ✅    |        ❌        |        ❌        |
+| /add_tags/add_tags                 |   ✅    |        ❌        |   Not needed    |
 
 ### Editing File Ratings
 
 | URL                      | Status | Request builder | Structured type |
 |--------------------------|:------:|:---------------:|:---------------:|
-| /edit_ratings/set_rating |   ✅    |        ❌        |        ❌        |
+| /edit_ratings/set_rating |   ✅    |        ❌        |   Not needed    |
 
 ### Editing File Times
 
 | URL                                 | Status | Request builder | Structured type |
 |-------------------------------------|:------:|:---------------:|:---------------:|
-| /edit_times/increment_file_viewtime |   ✅    |        ❌        |        ❌        |
-| /edit_times/set_file_viewtime       |   ✅    |        ❌        |        ❌        |
-| /edit_times/set_time                |   ✅    |        ❌        |        ❌        |
+| /edit_times/increment_file_viewtime |   ✅    |        ❌        |   Not needed    |
+| /edit_times/set_file_viewtime       |   ✅    |        ❌        |   Not needed    |
+| /edit_times/set_time                |   ✅    |        ❌        |   Not needed    |
 
 ### Editing File Notes
 
 | URL                     | Status | Request builder | Structured type |
 |-------------------------|:------:|:---------------:|:---------------:|
 | /add_notes/set_notes    |   ✅    |        ❌        |        ❌        |
-| /add_notes/delete_notes |   ✅    |        ❌        |        ❌        |
+| /add_notes/delete_notes |   ✅    |        ❌        |   Not needed    |
 
 ### Searching and Fetching Files
 
@@ -74,12 +74,12 @@ The latest supported version of Hydrus API: 78 (607)
 | /get_files/search_files                 |   ✅    |        ❌        |        ❌        |
 | /get_files/file_hashes                  |   ✅    |        ❌        |        ❌        |
 | /get_files/file_metadata                |   ✅    |        ❌        |        ❌        |
-| /get_files/file                         |   ✅    |        ❌        |        ❌        |
-| /get_files/thumbnail                    |   ✅    |        ❌        |        ❌        |
+| /get_files/file                         |   ✅    |        ❌        |   Not needed    |
+| /get_files/thumbnail                    |   ✅    |        ❌        |   Not needed    |
 | /get_files/file_path                    |   ✅    |        ❌        |        ❌        |
 | /get_files/thumbnail_path               |   ✅    |        ❌        |        ❌        |
 | /get_files/local_file_storage_locations |   ✅    |        ❌        |        ❌        |
-| /get_files/render                       |   ✅    |        ❌        |        ❌        |
+| /get_files/render                       |   ✅    |        ❌        |   Not needed    |
 
 ### Managing File Relationships
 
@@ -89,17 +89,17 @@ The latest supported version of Hydrus API: 78 (607)
 | /manage_file_relationships/get_potentials_count   |   ✅    |        ❌        |        ❌        |
 | /manage_file_relationships/get_potential_pairs    |   ✅    |        ❌        |        ❌        |
 | /manage_file_relationships/get_random_potentials  |   ✅    |        ❌        |        ❌        |
-| /manage_file_relationships/remove_potentials      |   ✅    |        ❌        |        ❌        |
-| /manage_file_relationships/set_file_relationships |   ✅    |        ❌        |        ❌        |
-| /manage_file_relationships/set_kings              |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/remove_potentials      |   ✅    |        ❌        |   Not needed    |
+| /manage_file_relationships/set_file_relationships |   ✅    |        ❌        |   Not needed    |
+| /manage_file_relationships/set_kings              |   ✅    |        ❌        |   Not needed    |
 
 ### Managing Services
 
 | URL                                 | Status | Request builder | Structured type |
 |-------------------------------------|:------:|:---------------:|:---------------:|
 | /manage_services/get_pending_counts |   ✅    |        ❌        |        ❌        |
-| /manage_services/commit_pending     |   ✅    |        ❌        |        ❌        |
-| /manage_services/forget_pending     |   ✅    |        ❌        |        ❌        |
+| /manage_services/commit_pending     |   ✅    |        ❌        |   Not needed    |
+| /manage_services/forget_pending     |   ✅    |        ❌        |   Not needed    |
 
 ### Managing Cookies
 
