@@ -164,7 +164,7 @@ public class MetaClient : ApiClient, IMetaClient
 
 		return response.Metadata;
 	}
-	
+
 	/// <inheritdoc />
 	public Task<MetaDataResponse<MetaData>> GetMetaData(MetaDataRequest request, CancellationToken cancel = default)
 	{
@@ -257,5 +257,12 @@ public class MetaClient : ApiClient, IMetaClient
 	public Task<ThumbnailFilePathResponse> GetThumbnailFilePath(ulong fileId, bool includeThumbnailFiletype = false, CancellationToken cancel = default)
 	{
 		return ApiConnection.Get<ThumbnailFilePathResponse>(HydrusUrls.GetThumbnailFilePath(fileId, includeThumbnailFiletype), cancel);
+	}
+
+	/// <inheritdoc />
+	public async Task<IEnumerable<StorageLocation>> GetLocalFileStorageLocations(CancellationToken cancel = default)
+	{
+		var response = await ApiConnection.Get<LocalFileStorageLocationsResponse>(HydrusUrls.GetLocalFileStorageLocations(), cancel);
+		return response.Locations;
 	}
 }

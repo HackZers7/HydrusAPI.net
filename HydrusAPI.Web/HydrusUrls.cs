@@ -558,4 +558,14 @@ public static class HydrusUrls
 				{ "include_thumbnail_filetype", includeThumbnailFiletype }
 			});
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения локальных хранилищ Hydrus.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта получения локальных хранилищ Hydrus.</returns>
+	public static Uri GetLocalFileStorageLocations()
+	{
+		return "/get_files/local_file_storage_locations"
+			.FormatUri();
+	}
 }

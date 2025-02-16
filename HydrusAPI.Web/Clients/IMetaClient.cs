@@ -240,7 +240,7 @@ public interface IMetaClient
 		IEnumerable<ulong> fileIds,
 		CancellationToken cancel = default
 	);
-	
+
 	/// <summary>
 	///     Запрашивает локальный путь к файлу.
 	/// </summary>
@@ -306,6 +306,20 @@ public interface IMetaClient
 	Task<ThumbnailFilePathResponse> GetThumbnailFilePath(
 		ulong fileId,
 		bool includeThumbnailFiletype = false,
+		CancellationToken cancel = default
+	);
+
+	/// <summary>
+	///     Запрашивает локальные хранилища.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется области видимости (разрешения):
+	///     <see cref="Permissions.SearchFetchFiles" />,
+	///     <see cref="Permissions.SeeLocalPaths" />.
+	/// </remarks>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает коллекция с хранилищами.</returns>
+	Task<IEnumerable<StorageLocation>> GetLocalFileStorageLocations(
 		CancellationToken cancel = default
 	);
 }
