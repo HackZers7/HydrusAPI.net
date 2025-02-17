@@ -792,4 +792,90 @@ public static class HydrusUrls
 		return "/manage_pages/refresh_page"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения всплывающих окон.
+	/// </summary>
+	/// <param name="onlyInView">Только те окна, которые сейчас отображаются в клиенте. По умолчанию - false.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения всплывающих окон.</returns>
+	public static Uri GetPopups(bool onlyInView = false)
+	{
+		return "/manage_popups/get_popups"
+			.FormatUri(
+				new Dictionary<string, object?>
+				{
+					{ "only_in_view", onlyInView }
+				}
+			);
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса добавления нового всплывающего окна.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта добавления нового всплывающего окна.</returns>
+	public static Uri AddPopup()
+	{
+		return "/manage_popups/add_popup"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса вызова пользовательской функции.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта вызова пользовательской функции.</returns>
+	public static Uri CallUserCallable()
+	{
+		return "/manage_popups/call_user_callable"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса пытается отменить отображение всплывающего окна.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта пытается отменить отображение всплывающего окна.</returns>
+	public static Uri CancelPopup()
+	{
+		return "/manage_popups/cancel_popup"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса пытается закрыть всплывающее окно.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта пытается закрыть всплывающее окно.</returns>
+	public static Uri DismissPopup()
+	{
+		return "/manage_popups/dismiss_popup"
+			.FormatUri();
+	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса пытается завершить всплывающее окно.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта пытается завершить всплывающее окно.</returns>
+	public static Uri FinishPopup()
+	{
+		return "/manage_popups/finish_popup"
+			.FormatUri();
+	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса пытается завершить и закрыть всплывающее окно.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта пытается завершить и закрыть всплывающее окно.</returns>
+	public static Uri FinishAndDismissPopup()
+	{
+		return "/manage_popups/finish_and_dismiss_popup"
+			.FormatUri();
+	}
+	
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса обновления всплывающего окна.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта обновления всплывающего окна.</returns>
+	public static Uri UpdatePopup()
+	{
+		return "/manage_popups/update_popup"
+			.FormatUri();
+	}
 }
