@@ -3,7 +3,7 @@ using System.Security.Authentication;
 namespace HydrusAPI.Web;
 
 /// <summary>
-///     Запрос преобразования хэша файла.
+///     Запрос преобразования хеша файла.
 /// </summary>
 public class FileHashesRequest
 {
@@ -13,7 +13,7 @@ public class FileHashesRequest
 	public string? Hash { get; set; }
 
 	/// <summary>
-	///     Коллекция хэшей файлов.
+	///     Коллекция хешей файлов.
 	/// </summary>
 	public List<string>? Hashes { get; set; }
 
@@ -29,7 +29,7 @@ public class FileHashesRequest
 	public string SourceHashType { get; set; } = HashAlgorithmType.Sha256.ToString().ToLower();
 
 	/// <summary>
-	///     Тип хэша, который необходимо получить. Для определения тип рекомендуется использовать <see cref="HashAlgorithmType" />, см. пример.
+	///     Тип хеша, который необходимо получить. Для определения тип рекомендуется использовать <see cref="HashAlgorithmType" />, см. пример.
 	/// </summary>
 	/// <code>
 	/// 	HashAlgorithmType.Sha256.ToString().ToLower();

@@ -15,7 +15,7 @@ public class AssociateUrlRequest : FilesRequest
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
 	public AssociateUrlRequest(IEnumerable<string>? hashes) : base(hashes)
 	{
 	}

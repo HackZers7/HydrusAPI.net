@@ -58,7 +58,7 @@ public interface IUrlsClient
 	Task<ImportUrlResult> ImportFromUrl(ImportFromUrlRequest request, CancellationToken cancel = default);
 
 	/// <summary>
-	///     Добавляет новые URL для файла по его хэшу (SHA256).
+	///     Добавляет новые URL для файла по его хешу (SHA256).
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
@@ -82,7 +82,7 @@ public interface IUrlsClient
 	Task<bool> AddUrlToFile(ulong id, params string[] urls);
 
 	/// <summary>
-	///     Удаляет URL из файла по его хэшу (SHA256).
+	///     Удаляет URL из файла по его хешу (SHA256).
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):

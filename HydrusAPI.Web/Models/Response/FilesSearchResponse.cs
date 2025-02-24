@@ -6,7 +6,7 @@ namespace HydrusAPI.Web;
 public class FilesSearchResponse : ApiVersion
 {
 	/// <summary>
-	///     Коллекция хэшей (SHA256) файлов.
+	///     Коллекция хешей (SHA256) файлов.
 	/// </summary>
 	public List<string>? Hashes { get; set; }
 

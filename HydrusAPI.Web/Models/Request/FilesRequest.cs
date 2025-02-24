@@ -17,7 +17,7 @@ public class FilesRequest
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
 	public FilesRequest(IEnumerable<string>? hashes)
 	{
 		if (hashes?.Any() ?? false)
@@ -44,7 +44,7 @@ public class FilesRequest
 	public string? Hash { get; set; }
 
 	/// <summary>
-	///     Коллекция хэшей (SHA256) файлов.
+	///     Коллекция хешей (SHA256) файлов.
 	/// </summary>
 	public List<string>? Hashes { get; set; }
 
@@ -74,7 +74,7 @@ public class FilesWithDomainRequest : FileDomainRequest
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
 	public FilesWithDomainRequest(IEnumerable<string>? hashes)
 	{
 		if (hashes?.Any() ?? false)
@@ -101,7 +101,7 @@ public class FilesWithDomainRequest : FileDomainRequest
 	public string? Hash { get; set; }
 
 	/// <summary>
-	///     Коллекция хэшей (SHA256) файлов.
+	///     Коллекция хешей (SHA256) файлов.
 	/// </summary>
 	public List<string>? Hashes { get; set; }
 

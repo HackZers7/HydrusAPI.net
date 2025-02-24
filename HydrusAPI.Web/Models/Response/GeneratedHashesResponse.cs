@@ -6,7 +6,7 @@ namespace HydrusAPI.Web;
 public class GeneratedHashesResponse : HashResponse
 {
 	/// <summary>
-	///     Список перцептивных хэшей для файла.
+	///     Список перцептивных хешей для файла.
 	/// </summary>
 	public List<string>? PerceptualHashes { get; set; }
 

@@ -44,7 +44,7 @@ public interface IHydrusClient
 	///     Клиент для работы со страницами Hydrus.
 	/// </summary>
 	IPagesClient PagesClient { get; }
-	
+
 	/// <summary>
 	///     Клиент для работы со всплывающими окнами Hydrus.
 	/// </summary>

@@ -15,7 +15,7 @@ public class DeleteFilesRequest : FilesWithDomainRequest
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
 	/// <param name="reason">Причина удаления.</param>
 	public DeleteFilesRequest(IEnumerable<string> hashes, string? reason) : base(hashes)
 	{

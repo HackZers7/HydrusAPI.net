@@ -50,7 +50,7 @@ public interface IRelationshipsClient
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает коллекцию хэшей (SHA256).</returns>
+	/// <returns>Возвращает коллекцию хешей (SHA256).</returns>
 	Task<List<string>> GetRandomPotentials(GetPotentialsRequest request, CancellationToken cancel = default);
 
 	/// <summary>
@@ -72,7 +72,7 @@ public interface IRelationshipsClient
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.EditFileRelationships" />.
 	/// </remarks>
-	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> RemovePotentials(params string[] hashes);
 
@@ -142,7 +142,7 @@ public interface IRelationshipsClient
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.EditFileRelationships" />.
 	/// </remarks>
-	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> SetKings(params string[] hashes);
 

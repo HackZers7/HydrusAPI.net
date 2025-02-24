@@ -151,9 +151,9 @@ The latest supported version of Hydrus API: 78 (607)
 
 | URL                                 | Status | Request builder | Structured type |
 |-------------------------------------|:------:|:---------------:|:---------------:|
-| /manage_database/force_commit       |   ❌    |        ❌        |   Not needed    |
-| /manage_database/lock_on            |   ❌    |        ❌        |   Not needed    |
-| /manage_database/lock_off           |   ❌    |        ❌        |   Not needed    |
+| /manage_database/force_commit       |   ⚠️    |        ❌        |   Not needed    |
+| /manage_database/lock_on            |   ⚠️    |        ❌        |   Not needed    |
+| /manage_database/lock_off           |   ⚠️    |        ❌        |   Not needed    |
 | /manage_database/mr_bones           |   ❌    |        ❌        |        ❌        |
 | /manage_database/get_client_options |   ❌    |        ❌        |        ❌        |
 

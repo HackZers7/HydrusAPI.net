@@ -37,7 +37,7 @@ public interface IPagesClient
 	///     <see cref="Permissions.ManagePages" />.
 	/// </remarks>
 	/// <param name="pageKey">Уникальный ключ страницы.</param>
-	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> AddFilesOnPage(string pageKey, params string[] hashes);
 

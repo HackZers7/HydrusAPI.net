@@ -26,17 +26,22 @@ public static class HydrusUrls
 	/// <param name="permitsEverything">Разрешить доступ ко всем областям (разрешениям).</param>
 	/// <param name="permissions">Массив с запрашиваемыми разрешениями.</param>
 	/// <returns><see cref="Uri" /> эндпоинта получения API ключа.</returns>
-	public static Uri RequestAccessToken(string name, bool permitsEverything, params Permissions[] permissions)
+	public static Uri RequestAccessToken(
+		string name,
+		bool permitsEverything,
+		params Permissions[] permissions
+	)
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(name);
 
-		return "/request_new_permissions?"
-			.FormatUri(new Dictionary<string, object?>
+		return "/request_new_permissions?".FormatUri(
+			new Dictionary<string, object?>
 			{
 				{ "name", name },
 				{ "permits_everything", permitsEverything },
-				{ "basic_permissions", permissions.Select(p => (int)p) }
-			});
+				{ "basic_permissions", permissions.Select(p => (int)p) },
+			}
+		);
 	}
 
 	/// <summary>
@@ -166,9 +171,9 @@ public static class HydrusUrls
 	}
 
 	/// <summary>
-	///     Возвращает <see cref="Uri" /> запроса генерации хэшей.
+	///     Возвращает <see cref="Uri" /> запроса генерации хешей.
 	/// </summary>
-	/// <returns><see cref="Uri" /> эндпоинта генерации хэшей.</returns>
+	/// <returns><see cref="Uri" /> эндпоинта генерации хешей.</returns>
 	public static Uri GenerateHashes()
 	{
 		return "/add_files/generate_hashes"
@@ -193,14 +198,15 @@ public static class HydrusUrls
 			{
 				{ "url", url },
 				{ "doublecheck_file_system", doublecheckFileSystem }
-			});
+			}
+		);
 	}
 
 	/// <summary>
-	///     Возвращает <see cref="Uri" /> запроса генерации хэшей.
+	///     Возвращает <see cref="Uri" /> запроса генерации хешей.
 	/// </summary>
 	/// <param name="url">URL</param>
-	/// <returns><see cref="Uri" /> эндпоинта генерации хэшей.</returns>
+	/// <returns><see cref="Uri" /> эндпоинта генерации хешей.</returns>
 	public static Uri GetUrlInfo(string url)
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
@@ -267,7 +273,12 @@ public static class HydrusUrls
 	/// <param name="tagServiceKey">Ключ домена тегов в котором выполняется поиск. По умолчанию - "all known tags".</param>
 	/// <param name="tagDisplayType">Указывает на то, следует ли выполнять поиск по необработанным или обработанным тегам.</param>
 	/// <returns><see cref="Uri" /> эндпоинта поиска по тегам.</returns>
-	public static Uri SearchTags(string search, FileDomainRequest? fileDomain = null, string? tagServiceKey = null, TagDisplay tagDisplayType = TagDisplay.Storage)
+	public static Uri SearchTags(
+		string search,
+		FileDomainRequest? fileDomain = null,
+		string? tagServiceKey = null,
+		TagDisplay tagDisplayType = TagDisplay.Storage
+	)
 	{
 		return "/add_tags/search_tags?"
 			.FormatUri(new Dictionary<string, object?>
@@ -279,7 +290,8 @@ public static class HydrusUrls
 				{ "deleted_file_service_keys", fileDomain?.DeletedFileServiceKeys },
 				{ "tag_service_key", !string.IsNullOrWhiteSpace(tagServiceKey) ? tagServiceKey : null },
 				{ "tag_display_type", tagDisplayType.ToString().ToLower() }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -289,7 +301,7 @@ public static class HydrusUrls
 	public static Uri AddTags()
 	{
 		return "/add_tags/add_tags"
-			.FormatUri();
+		.FormatUri();
 	}
 
 	/// <summary>
@@ -299,7 +311,7 @@ public static class HydrusUrls
 	public static Uri SetRating()
 	{
 		return "/edit_ratings/set_rating"
-			.FormatUri();
+		.FormatUri();
 	}
 
 	/// <summary>
@@ -309,7 +321,7 @@ public static class HydrusUrls
 	public static Uri IncrementFileViewtime()
 	{
 		return "/edit_times/increment_file_viewtime"
-			.FormatUri();
+		.FormatUri();
 	}
 
 	/// <summary>
@@ -319,7 +331,7 @@ public static class HydrusUrls
 	public static Uri SetFileViewtime()
 	{
 		return "/edit_times/set_file_viewtime"
-			.FormatUri();
+		.FormatUri();
 	}
 
 	/// <summary>
@@ -329,7 +341,7 @@ public static class HydrusUrls
 	public static Uri SetTime()
 	{
 		return "/edit_times/set_time"
-			.FormatUri();
+		.FormatUri();
 	}
 
 	/// <summary>
@@ -339,7 +351,7 @@ public static class HydrusUrls
 	public static Uri SetNotes()
 	{
 		return "/add_notes/set_notes"
-			.FormatUri();
+		.FormatUri();
 	}
 
 	/// <summary>
@@ -349,7 +361,7 @@ public static class HydrusUrls
 	public static Uri DeleteNotes()
 	{
 		return "/add_notes/delete_notes"
-			.FormatUri();
+		.FormatUri();
 	}
 
 	/// <summary>
@@ -375,13 +387,14 @@ public static class HydrusUrls
 				{ "file_sort_asc", request.FileSortAsc },
 				{ "return_file_ids", request.ReturnFileIds },
 				{ "return_hashes", request.ReturnHashes }
-			});
+			}
+		);
 	}
 
 	/// <summary>
-	///     Возвращает <see cref="Uri" /> запроса преобразования хэшей.
+	///     Возвращает <see cref="Uri" /> запроса преобразования хешей.
 	/// </summary>
-	/// <returns><see cref="Uri" /> эндпоинта преобразования хэшей.</returns>
+	/// <returns><see cref="Uri" /> эндпоинта преобразования хешей.</returns>
 	public static Uri GetFileHashes(FileHashesRequest request)
 	{
 		ThrowHelper.ArgumentNotNull(request);
@@ -393,7 +406,8 @@ public static class HydrusUrls
 				{ "hashes", request.Hashes },
 				{ "source_hash_type", request.SourceHashType },
 				{ "desired_hash_type", request.DesiredHashType }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -420,7 +434,8 @@ public static class HydrusUrls
 				{ "include_notes", request.IncludeNotes },
 				{ "include_services_object", request.IncludeServicesObject },
 				{ "hide_service_keys_tags", request.HideServiceKeysTags }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -438,7 +453,8 @@ public static class HydrusUrls
 			{
 				{ "hash", hash },
 				{ "download", download }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -456,7 +472,8 @@ public static class HydrusUrls
 			{
 				{ "file_id", fileId },
 				{ "download", download }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -472,7 +489,8 @@ public static class HydrusUrls
 			.FormatUri(new Dictionary<string, object?>
 			{
 				{ "hash", hash }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -488,7 +506,8 @@ public static class HydrusUrls
 			.FormatUri(new Dictionary<string, object?>
 			{
 				{ "file_id", fileId }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -504,7 +523,8 @@ public static class HydrusUrls
 			.FormatUri(new Dictionary<string, object?>
 			{
 				{ "hash", hash }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -520,7 +540,8 @@ public static class HydrusUrls
 			.FormatUri(new Dictionary<string, object?>
 			{
 				{ "file_id", fileId }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -538,7 +559,8 @@ public static class HydrusUrls
 			{
 				{ "hash", hash },
 				{ "include_thumbnail_filetype", includeThumbnailFiletype }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -556,7 +578,8 @@ public static class HydrusUrls
 			{
 				{ "file_id", fileId },
 				{ "include_thumbnail_filetype", includeThumbnailFiletype }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -588,7 +611,8 @@ public static class HydrusUrls
 				{ "render_quality", request.RenderQuality },
 				{ "width", request.Width },
 				{ "height", request.Height }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -611,7 +635,8 @@ public static class HydrusUrls
 				{ "file_service_keys", request.FileServiceKeys },
 				{ "deleted_file_service_key", request.DeletedFileServiceKey },
 				{ "deleted_file_service_keys", request.DeletedFileServiceKeys }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -637,7 +662,8 @@ public static class HydrusUrls
 				{ "potentials_search_type", request.PotentialsSearchType },
 				{ "pixel_duplicates", request.PixelDuplicates },
 				{ "max_hamming_distance", request.MaxHammingDistance }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -664,7 +690,8 @@ public static class HydrusUrls
 				{ "pixel_duplicates", request.PixelDuplicates },
 				{ "max_hamming_distance", request.MaxHammingDistance },
 				{ "max_num_pairs", request.MaxNumPairs }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -690,7 +717,8 @@ public static class HydrusUrls
 				{ "potentials_search_type", request.PotentialsSearchType },
 				{ "pixel_duplicates", request.PixelDuplicates },
 				{ "max_hamming_distance", request.MaxHammingDistance }
-			});
+			}
+		);
 	}
 
 	/// <summary>
@@ -801,12 +829,11 @@ public static class HydrusUrls
 	public static Uri GetPopups(bool onlyInView = false)
 	{
 		return "/manage_popups/get_popups"
-			.FormatUri(
-				new Dictionary<string, object?>
-				{
-					{ "only_in_view", onlyInView }
-				}
-			);
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "only_in_view", onlyInView }
+			}
+		);
 	}
 
 	/// <summary>
@@ -848,7 +875,7 @@ public static class HydrusUrls
 		return "/manage_popups/dismiss_popup"
 			.FormatUri();
 	}
-	
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса пытается завершить всплывающее окно.
 	/// </summary>
@@ -858,7 +885,7 @@ public static class HydrusUrls
 		return "/manage_popups/finish_popup"
 			.FormatUri();
 	}
-	
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса пытается завершить и закрыть всплывающее окно.
 	/// </summary>
@@ -868,7 +895,7 @@ public static class HydrusUrls
 		return "/manage_popups/finish_and_dismiss_popup"
 			.FormatUri();
 	}
-	
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса обновления всплывающего окна.
 	/// </summary>
@@ -876,6 +903,36 @@ public static class HydrusUrls
 	public static Uri UpdatePopup()
 	{
 		return "/manage_popups/update_popup"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса, который заставляет БД немедленно записать все ожидающие изменения.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта запроса, который заставляет БД немедленно записать все ожидающие изменения.</returns>
+	public static Uri ForceCommit()
+	{
+		return "/manage_database/force_commit"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса приостановки работы БД клиента и отключения текущего соединения.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта запроса, приостановки работы БД клиента и отключения текущего соединения.</returns>
+	public static Uri LockOn()
+	{
+		return "/manage_database/lock_on"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса восстановления соединения с БД клиент.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта запроса, восстановления соединения с БД клиент.</returns>
+	public static Uri LockOff()
+	{
+		return "/manage_database/lock_off"
 			.FormatUri();
 	}
 }

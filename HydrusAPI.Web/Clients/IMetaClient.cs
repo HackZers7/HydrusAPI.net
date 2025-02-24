@@ -85,7 +85,7 @@ public interface IMetaClient
 	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
 	/// <param name="hash">Хэш (SHA256) файла.</param>
-	/// <param name="createNewFileIds">Создает физическую запись об хэше, который не был найден. По умолчанию - false.</param>
+	/// <param name="createNewFileIds">Создает физическую запись об хеше, который не был найден. По умолчанию - false.</param>
 	/// <param name="detailedUrlInformation">Необязательно, вернуть детальную информацию об URL. Может быть очень тяжелым процессом. По умолчанию - false.</param>
 	/// <param name="includeMilliseconds">Необязательно, включить в ответ миллисекунды. По умолчанию - false.</param>
 	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
@@ -107,8 +107,8 @@ public interface IMetaClient
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
-	/// <param name="hashes">Хэши (SHA256) файлов.</param>
-	/// <param name="createNewFileIds">Создает физическую запись об хэше, который не был найден. По умолчанию - false.</param>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
+	/// <param name="createNewFileIds">Создает физическую запись об хеше, который не был найден. По умолчанию - false.</param>
 	/// <param name="detailedUrlInformation">Необязательно, вернуть детальную информацию об URL. Может быть очень тяжелым процессом. По умолчанию - false.</param>
 	/// <param name="includeMilliseconds">Необязательно, включить в ответ миллисекунды. По умолчанию - false.</param>
 	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
@@ -131,7 +131,7 @@ public interface IMetaClient
 	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
 	/// <param name="fileId">Идентификатор файла.</param>
-	/// <param name="createNewFileIds">Создает физическую запись об хэше, который не был найден. По умолчанию - false.</param>
+	/// <param name="createNewFileIds">Создает физическую запись об хеше, который не был найден. По умолчанию - false.</param>
 	/// <param name="detailedUrlInformation">Необязательно, вернуть детальную информацию об URL. Может быть очень тяжелым процессом. По умолчанию - false.</param>
 	/// <param name="includeMilliseconds">Необязательно, включить в ответ миллисекунды. По умолчанию - false.</param>
 	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
@@ -154,7 +154,7 @@ public interface IMetaClient
 	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
 	/// <param name="fileIds">Идентификаторы файлов.</param>
-	/// <param name="createNewFileIds">Создает физическую запись об хэше, который не был найден. По умолчанию - false.</param>
+	/// <param name="createNewFileIds">Создает физическую запись об хеше, который не был найден. По умолчанию - false.</param>
 	/// <param name="detailedUrlInformation">Необязательно, вернуть детальную информацию об URL. Может быть очень тяжелым процессом. По умолчанию - false.</param>
 	/// <param name="includeMilliseconds">Необязательно, включить в ответ миллисекунды. По умолчанию - false.</param>
 	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
@@ -203,7 +203,7 @@ public interface IMetaClient
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
-	/// <param name="hashes">Хэши (SHA256) файлов.</param>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
 	Task<IEnumerable<MetaDataId>> GetId(
@@ -227,7 +227,7 @@ public interface IMetaClient
 	);
 
 	/// <summary>
-	///     Запрашивает хэши (SHA256) файлов.
+	///     Запрашивает хеши (SHA256) файлов.
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):

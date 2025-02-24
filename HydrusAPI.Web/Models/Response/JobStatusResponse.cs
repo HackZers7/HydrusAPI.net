@@ -130,7 +130,7 @@ public class JobStatus
 public class Files
 {
 	/// <summary>
-	///     Коллекция хэшей (SHA256).
+	///     Коллекция хешей (SHA256).
 	/// </summary>
 	public List<string>? Hashes { get; set; }
 
