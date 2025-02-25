@@ -32,4 +32,12 @@ public class ManageDataBaseClient : ApiClient, IManageDataBaseClient
 		var response = await ApiConnection.Post(HydrusUrls.LockOff(), null, null, cancel);
 		return response.IsSuccessStatusCode();
 	}
+
+	/// <inheritdoc/>
+	public async Task<Bones> UpdatePopup(BonesRequest request, CancellationToken cancel = default)
+	{
+		var response = await ApiConnection.Get<BonesResponse>(HydrusUrls.GetBones(request), cancel);
+
+		return response.BonedStats;
+	}
 }

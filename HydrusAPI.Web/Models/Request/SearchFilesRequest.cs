@@ -5,7 +5,7 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class SearchFilesRequest : FileDomainRequest
 {
-	// TODO: Добавить поддержку предиктов(predicates)
+	// TODO: Добавить поддержку предикатов (predicates)
 
 	/// <summary>
 	///     Теги для поиска.

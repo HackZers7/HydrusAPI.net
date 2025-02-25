@@ -935,4 +935,29 @@ public static class HydrusUrls
 		return "/manage_database/lock_off"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения статистики.
+	/// </summary>
+	/// <param name="request">Запрос.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения статистики.</returns>
+	public static Uri GetBones(BonesRequest request)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return "/manage_database/mr_bones?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "hash", request.Hash },
+				{ "file_id", request.FileId },
+				{ "hashes", request.Hashes },
+				{ "file_ids", request.FileIds },
+				{ "file_service_key", request.FileServiceKey },
+				{ "file_service_keys", request.FileServiceKeys },
+				{ "deleted_file_service_key", request.DeletedFileServiceKey },
+				{ "deleted_file_service_keys", request.DeletedFileServiceKeys },
+				{ "tag_service_key", request.TagServiceKey }
+			}
+		);
+	}
 }

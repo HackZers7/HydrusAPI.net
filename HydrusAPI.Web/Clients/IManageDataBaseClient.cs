@@ -37,4 +37,16 @@ public interface IManageDataBaseClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
 	Task<bool> LockOff(CancellationToken cancel = default);
+
+	/// <summary>
+	///     Запрашивает статистку БД.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.ManageDatabase" />.
+	/// </remarks>
+	/// <param name="request">Запрос.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает статистику.</returns>
+	Task<Bones> UpdatePopup(BonesRequest request, CancellationToken cancel = default);
 }

@@ -6,7 +6,7 @@ namespace HydrusAPI.Web;
 public class MetaDataRequest : FilesRequest
 {
 	/// <summary>
-	///     Создает физическую запись об хэше, который не был найден.
+	///     Создает физическую запись об хеше, который не был найден.
 	/// </summary>
 	/// <remarks>
 	///     По умолчанию - false.
