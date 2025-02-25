@@ -12,6 +12,19 @@ public class PagesResponse
 }
 
 /// <summary>
+///     Ответ с информацией об странице.
+/// </summary>
+public class PageInfoResponse
+{
+	/// <summary>
+	/// Информация об странице.
+	/// </summary>
+	public Page PageInfo { get; set; } = default!;
+
+	public Media? Media { get; set; }
+}
+
+/// <summary>
 ///     Страница.
 /// </summary>
 public class Page
@@ -50,6 +63,8 @@ public class Page
 	///     Дочерние страницы.
 	/// </summary>
 	public List<Page>? Pages { get; set; }
+
+	public Management? Management { get; set; }
 }
 
 /// <summary>
@@ -128,4 +143,53 @@ public enum PageTypes
 	///     Page of pages
 	/// </summary>
 	PageOfPages = 10
+}
+
+// TODO: Проверить Management на содержание других наблюдателей
+
+public class Media
+{
+	public int NumFiles { get; set; }
+}
+
+public class Management
+{
+	public MultipleWatcherImport MultipleWatcherImport { get; set; }
+	public string Highlight { get; set; }
+}
+
+public class MultipleWatcherImport
+{
+	public List<WatcherImport> WatcherImports { get; set; }
+}
+
+public class WatcherImport
+{
+	public string Url { get; set; }
+	public string WatcherKey { get; set; }
+	public int Created { get; set; }
+	public int LastCheckTime { get; set; }
+	public int NextCheckTime { get; set; }
+	public bool FilesPaused { get; set; }
+	public bool CheckingPaused { get; set; }
+	public int CheckingStatus { get; set; }
+	public string Subject { get; set; }
+	public Imports Imports { get; set; }
+	public GalleryLog GalleryLog { get; set; }
+}
+
+public class GalleryLog
+{
+	public string Status { get; set; }
+	public string SimpleStatus { get; set; }
+	public int TotalProcessed { get; set; }
+	public int TotalToProcess { get; set; }
+}
+
+public class Imports
+{
+	public string Status { get; set; }
+	public string SimpleStatus { get; set; }
+	public int TotalProcessed { get; set; }
+	public int TotalToProcess { get; set; }
 }

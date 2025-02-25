@@ -20,6 +20,12 @@ public class PagesClient : ApiClient, IPagesClient
 		return response.Pages;
 	}
 
+	/// <inheritdoc/>
+	public Task<PageInfoResponse> GetPage(string pageKey, bool simple = true, CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<PageInfoResponse>(HydrusUrls.GetPage(pageKey, simple), cancel);
+	}
+
 	/// <inheritdoc />
 	public Task<bool> AddFilesOnPage(string pageKey, string hash, CancellationToken cancel = default)
 	{

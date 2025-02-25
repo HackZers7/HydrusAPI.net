@@ -792,6 +792,23 @@ public static class HydrusUrls
 	}
 
 	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения информации об странице.
+	/// </summary>
+	/// <param name="pageKey">Уникальный ключ страницы.</param>
+	/// <param name="simple">Вернуть простую структуру. По умолчанию - true.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения информации об странице.</returns>
+	public static Uri GetPage(string pageKey, bool simple = true)
+	{
+		return "/manage_pages/get_page_info?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "page_key", pageKey },
+				{ "simple", simple }
+			}
+		);
+	}
+
+	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса добавления файлов на страницу.
 	/// </summary>
 	/// <returns><see cref="Uri" /> эндпоинта добавления файлов на страницу.</returns>

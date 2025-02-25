@@ -129,7 +129,7 @@ The latest supported version of Hydrus API: 78 (607)
 | URL                         | Status | Request builder | Structured type |
 |-----------------------------|:------:|:---------------:|:---------------:|
 | /manage_pages/get_pages     |   ⚠️   |        ❌        |        ❌        |
-| /manage_pages/get_page_info |   ❌    |        ❌        |        ❌        |
+| /manage_pages/get_page_info |   ⚠️    |        ❌        |        ❌        |
 | /manage_pages/add_files     |   ⚠️   |        ❌        |   Not needed    |
 | /manage_pages/focus_page    |   ⚠️   |        ❌        |   Not needed    |
 | /manage_pages/refresh_page  |   ⚠️   |        ❌        |   Not needed    |

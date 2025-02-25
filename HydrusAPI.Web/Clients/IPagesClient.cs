@@ -17,6 +17,19 @@ public interface IPagesClient
 	Task<Page> GetPages(CancellationToken cancel = default);
 
 	/// <summary>
+	///     Запрашивает страницу открытую в клиенте Hydrus.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.ManagePages" />.
+	/// </remarks>
+	/// <param name="pageKey">Уникальный ключ страницы.</param>
+	/// <param name="simple">Вернуть простую структуру. По умолчанию - true.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="PageInfoResponse"/>.</returns>
+	Task<PageInfoResponse> GetPage(string pageKey, bool simple = true, CancellationToken cancel = default);
+
+	/// <summary>
 	///     Добавляет файлы на страницу.
 	/// </summary>
 	/// <remarks>
