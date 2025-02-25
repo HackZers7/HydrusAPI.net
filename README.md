@@ -121,7 +121,7 @@ The latest supported version of Hydrus API: 78 (607)
 | URL                            | Status | Request builder | Structured type |
 |--------------------------------|:------:|:---------------:|:---------------:|
 | /manage_headers/get_headers    |   ⚠️    |        ❌        |        ❌        |
-| /manage_headers/set_headers    |   ❌    |        ❌        |        ❌        |
+| /manage_headers/set_headers    |   ⚠️    |        ❌        |        ❌        |
 
 ### Managing Pages
 
