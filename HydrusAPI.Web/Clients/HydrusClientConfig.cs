@@ -19,7 +19,7 @@ public class HydrusClientConfig
 		Uri baseAddress,
 		IAuthenticator? authenticator,
 		IJsonSerializer serializer,
-		IHttpClient httpClient,
+		IHydrusHttpClient httpClient,
 		IApiConnection? apiConnection
 	)
 	{
@@ -48,7 +48,7 @@ public class HydrusClientConfig
 	/// <summary>
 	///     Возвращает http клиент.
 	/// </summary>
-	public IHttpClient HttpClient { get; private set; }
+	public IHydrusHttpClient HttpClient { get; private set; }
 
 	/// <summary>
 	///     Возвращает подключение.
@@ -88,7 +88,7 @@ public class HydrusClientConfig
 	/// </summary>
 	/// <param name="httpClient">Новый экземпляр http клиента.</param>
 	/// <returns>Экземпляр настроек.</returns>
-	public HydrusClientConfig WithHttpClient(IHttpClient httpClient)
+	public HydrusClientConfig WithHttpClient(IHydrusHttpClient httpClient)
 	{
 		ThrowHelper.ArgumentNotNull(httpClient);
 

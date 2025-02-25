@@ -987,4 +987,29 @@ public static class HydrusUrls
 		return "/manage_database/get_client_options"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения куки.
+	/// </summary>
+	/// <param name="domain">Домен сайта.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения куки.</returns>
+	public static Uri GetCookies(string domain)
+	{
+		return "/manage_cookies/get_cookies?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "domain", domain },
+			}
+		);
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса присвоения куки.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта присвоения куки.</returns>
+	public static Uri SetCookies()
+	{
+		return "/manage_cookies/set_cookies"
+			.FormatUri();
+	}
 }

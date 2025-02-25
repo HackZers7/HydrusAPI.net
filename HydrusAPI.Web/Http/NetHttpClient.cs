@@ -12,7 +12,7 @@ namespace HydrusAPI.Web.Http;
 /// </summary>
 public class NetHttpClient : IHttpClient
 {
-	private readonly HttpClient _httpClient;
+	private readonly HydrusHttpClient _httpClient;
 
 	/// <summary>
 	///     Конструктор по умолчанию.
@@ -26,7 +26,7 @@ public class NetHttpClient : IHttpClient
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
 	/// <param name="httpClient">Http клиент.</param>
-	public NetHttpClient(HttpClient httpClient)
+	public NetHttpClient(HydrusHttpClient httpClient)
 	{
 		_httpClient = httpClient;
 	}
@@ -136,7 +136,7 @@ public class NetHttpClient : IHttpClient
 			contentType = GetContentMediaType(content);
 
 			if (contentType != null && (contentType.StartsWith("image/") || binaryContentTypes
-				    .Any(item => item.Equals(contentType, StringComparison.OrdinalIgnoreCase))))
+					.Any(item => item.Equals(contentType, StringComparison.OrdinalIgnoreCase))))
 			{
 				responseBody = await content.ReadAsStreamAsync(cancel).ConfigureAwait(false);
 			}
@@ -165,7 +165,7 @@ public class NetHttpClient : IHttpClient
 
 		// Issue #2898 - Bad "zip" Content-Type coming from Blob Storage for artifacts
 		if (httpContent.Headers?.TryGetValues("Content-Type", out var contentTypeValues) == true
-		    && contentTypeValues.FirstOrDefault() == "zip")
+			&& contentTypeValues.FirstOrDefault() == "zip")
 		{
 			return "application/zip";
 		}

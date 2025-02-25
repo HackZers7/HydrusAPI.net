@@ -53,6 +53,8 @@ public class HydrusClient : IHydrusClient
 		RelationshipsClient = new RelationshipsClient(_apiConnection);
 		PagesClient = new PagesClient(_apiConnection);
 		PopupsClient = new PopupsClient(_apiConnection);
+		ManageDataBaseClient = new ManageDataBaseClient(_apiConnection);
+		HydrusHttpClient = new HydrusHttpClient(_apiConnection);
 	}
 
 	/// <inheritdoc />
@@ -81,6 +83,12 @@ public class HydrusClient : IHydrusClient
 
 	/// <inheritdoc />
 	public IPopupsClient PopupsClient { get; }
+
+	/// <inheritdoc/>
+	public IManageDataBaseClient ManageDataBaseClient { get; }
+
+	/// <inheritdoc/>
+	public IHydrusHttpClient HydrusHttpClient { get; }
 
 	/// <inheritdoc />
 	public Task<ApiVersion> GetApiVersion(CancellationToken cancel = default)

@@ -113,8 +113,8 @@ The latest supported version of Hydrus API: 78 (607)
 
 | URL                         | Status | Request builder | Structured type |
 |-----------------------------|:------:|:---------------:|:---------------:|
-| /manage_cookies/get_cookies |   ❌    |        ❌        |        ❌        |
-| /manage_cookies/set_cookies |   ❌    |        ❌        |        ❌        |
+| /manage_cookies/get_cookies |   ⚠️    |        ❌        |        ❌        |
+| /manage_cookies/set_cookies |   ⚠️    |        ❌        |   Not needed    |
 
 ### Managing HTTP Headers
 

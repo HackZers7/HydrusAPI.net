@@ -51,6 +51,16 @@ public interface IHydrusClient
 	IPopupsClient PopupsClient { get; }
 
 	/// <summary>
+	///      Клиент для работы базой данных Hydrus.
+	/// </summary>
+	IManageDataBaseClient ManageDataBaseClient { get; }
+
+	/// <summary>
+	///     Клиент для работы с http запросами Hydrus.
+	/// </summary>
+	IHydrusHttpClient HydrusHttpClient { get; }
+
+	/// <summary>
 	///     Запрашивает версию Hydrus.
 	/// </summary>
 	/// <param name="cancel">Токен отмены запроса.</param>
