@@ -960,4 +960,14 @@ public static class HydrusUrls
 			}
 		);
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения настроек клиента.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта получения настроек клиента.</returns>
+	public static Uri GetClientOptions()
+	{
+		return "/manage_database/get_client_options"
+			.FormatUri();
+	}
 }

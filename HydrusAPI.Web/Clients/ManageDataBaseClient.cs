@@ -40,4 +40,10 @@ public class ManageDataBaseClient : ApiClient, IManageDataBaseClient
 
 		return response.BonedStats;
 	}
+
+	/// <inheritdoc/>
+	public Task<object?> GetClientOptions(CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<object?>(HydrusUrls.GetClientOptions(), cancel);
+	}
 }
