@@ -154,8 +154,8 @@ The latest supported version of Hydrus API: 78 (607)
 | /manage_database/force_commit       |   ⚠️    |        ❌        |   Not needed    |
 | /manage_database/lock_on            |   ⚠️    |        ❌        |   Not needed    |
 | /manage_database/lock_off           |   ⚠️    |        ❌        |   Not needed    |
-| /manage_database/mr_bones           |   ❌    |        ❌        |        ❌        |
-| /manage_database/get_client_options |   ❌    |        ❌        |        ❌        |
+| /manage_database/mr_bones           |   ⚠️    |        ❌        |        ❌        |
+| /manage_database/get_client_options |   ⚠️    |        ❌        |        ❌        |
 
 ## Future plans:
 
