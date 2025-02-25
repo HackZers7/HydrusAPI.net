@@ -1,6 +1,4 @@
 using HydrusAPI.Web.Http;
-using HydrusAPI.Web.Models.Request;
-using HydrusAPI.Web.Models.Response;
 
 namespace HydrusAPI.Web;
 
@@ -26,6 +24,25 @@ public class HydrusHttpClient : ApiClient, IHydrusHttpClient
 	public async Task<bool> SetCookies(SetCookiesRequest request, CancellationToken cancel = default)
 	{
 		var response = await ApiConnection.Post(HydrusUrls.SetCookies(), null, request, cancel);
+		return response.IsSuccessStatusCode();
+	}
+
+	/// <inheritdoc/>
+	public Task<HeadersResponse> GetHeaders(CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<HeadersResponse>(HydrusUrls.GetHeaders(), cancel);
+	}
+
+	/// <inheritdoc/>
+	public Task<HeadersResponse> GetHeaders(string domain, CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<HeadersResponse>(HydrusUrls.GetHeaders(domain), cancel);
+	}
+
+	/// <inheritdoc/>
+	public async Task<bool> SetHeaders(SetHeadersRequest request, CancellationToken cancel = default)
+	{
+		var response = await ApiConnection.Post(HydrusUrls.SetHeaders(), null, request, cancel);
 		return response.IsSuccessStatusCode();
 	}
 }

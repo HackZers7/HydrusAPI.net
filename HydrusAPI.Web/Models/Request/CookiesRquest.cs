@@ -1,4 +1,4 @@
-namespace HydrusAPI.Web.Models.Request;
+namespace HydrusAPI.Web;
 
 /// <summary>
 /// Запрос присвоения куки.

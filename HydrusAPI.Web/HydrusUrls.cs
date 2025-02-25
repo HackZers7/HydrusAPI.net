@@ -1012,4 +1012,39 @@ public static class HydrusUrls
 		return "/manage_cookies/set_cookies"
 			.FormatUri();
 	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения заголовков.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта получения заголовков.</returns>
+	public static Uri GetHeaders()
+	{
+		return "/manage_headers/get_headers"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения заголовков.
+	/// </summary>
+	/// <param name="domain">Домен сайта.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения заголовков.</returns>
+	public static Uri GetHeaders(string domain)
+	{
+		return "/manage_headers/get_headers?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "domain", domain },
+			}
+		);
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса присвоения заголовков.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта присвоения заголовков.</returns>
+	public static Uri SetHeaders()
+	{
+		return "/manage_headers/set_headers"
+			.FormatUri();
+	}
 }

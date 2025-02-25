@@ -1,4 +1,4 @@
-namespace HydrusAPI.Web.Models.Response;
+namespace HydrusAPI.Web;
 
 /// <summary>
 /// Ответ с куки Hydrus.
