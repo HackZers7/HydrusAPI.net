@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Ответ с потенциальными парами дубликатов.
 /// </summary>
-public class PotentialDuplicatePairsResponse : ApiVersion
+public class PotentialDuplicatePairsResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Потенциальные пары дубликатов.

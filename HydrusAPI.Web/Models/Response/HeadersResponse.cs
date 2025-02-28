@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Ответ с заголовками.
 /// </summary>
-public class HeadersResponse : ApiVersion
+public class HeadersResponse : ApiVersionResponse
 {
 	public NetworkContext NetworkContext { get; set; }
 

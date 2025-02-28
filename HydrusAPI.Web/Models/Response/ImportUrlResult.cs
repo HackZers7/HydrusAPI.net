@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Результат импорта URL.
 /// </summary>
-public class ImportUrlResult : ApiVersion
+public class ImportUrlResult : ApiVersionResponse
 {
 	/// <summary>
 	///     Текстовый результат импорта.

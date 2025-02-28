@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Стандартная ошибка Hydrus.
 /// </summary>
-public class ApiError : ApiVersion
+public class ApiError : ApiVersionResponse
 {
 	/// <summary>
 	///     Конструктор по умолчанию.

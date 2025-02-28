@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Связи файлов.
 /// </summary>
-public class FileRelationshipsResponse : ApiVersion
+public class FileRelationshipsResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Словарь со связями файла, где первый ключ - хэш (SHA256) файл, а второй свойство.

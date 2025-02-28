@@ -6,7 +6,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Проверка, что токен валиден.
 /// </summary>
-public class VerifyToken : ApiVersion
+public class VerifyTokenResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Название токена.
@@ -14,19 +14,19 @@ public class VerifyToken : ApiVersion
 	public string Name { get; set; } = default!;
 
 	/// <summary>
-	///     Метка, что ключу доступны все области видимости.
+	///     Разрешен доступ ко всем областям (разрешениям), в том числе и тем что появятся в будущем.
 	/// </summary>
-	public string PermitsEverything { get; set; } = default!;
+	public bool PermitsEverything { get; set; } = default!;
 
 	/// <summary>
-	///     Области видимости токена.
+	///     Области видимости (разрешения) токена.
 	/// </summary>
 	[JsonProperty("basic_permissions")]
 	[JsonPropertyName("basic_permissions")]
-	public Permissions[] Scopes { get; set; } = default!;
+	public List<Permissions> Permissions { get; set; } = default!;
 
 	/// <summary>
-	///     Человеческое описание информации про токен.
+	///     Описание токена.
 	/// </summary>
 	public string HumanDescription { get; set; } = default!;
 }

@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Файлы привязанные к указанной URL.
 /// </summary>
-public class UrlFilesResponse : ApiVersion
+public class UrlFilesResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Норма-лизированная URL.

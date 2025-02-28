@@ -5,7 +5,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 /// Ответ со статистикой БД.
 /// </summary>
-public class BonesResponse : ApiVersion
+public class BonesResponse : ApiVersionResponse
 {
 	/// <summary>
 	/// Статистика.

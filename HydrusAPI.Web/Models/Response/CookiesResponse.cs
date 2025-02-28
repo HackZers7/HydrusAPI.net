@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 /// Ответ с куки Hydrus.
 /// </summary>
-public class CookiesResponse : ApiVersion
+public class CookiesResponse : ApiVersionResponse
 {
 	/// <summary>
 	/// Коллекция куки в формате [название, значение, домен, путь, истекает].

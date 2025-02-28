@@ -20,26 +20,20 @@ public static class HydrusUrls
 	}
 
 	/// <summary>
-	///     Возвращает <see cref="Uri" /> запроса получения API ключа.
+	///     Возвращает <see cref="Uri" /> запроса получения API токена.
 	/// </summary>
-	/// <param name="name">Название ключа.</param>
-	/// <param name="permitsEverything">Разрешить доступ ко всем областям (разрешениям).</param>
-	/// <param name="permissions">Массив с запрашиваемыми разрешениями.</param>
-	/// <returns><see cref="Uri" /> эндпоинта получения API ключа.</returns>
-	public static Uri RequestAccessToken(
-		string name,
-		bool permitsEverything,
-		params Permissions[] permissions
-	)
+	/// <param name="request">Запрос получения токена доступа.</param>
+	/// <returns><see cref="Uri" /> эндпоинта получения API токена.</returns>
+	public static Uri RequestAccessToken(AccessTokenRequest request)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(name);
+		ThrowHelper.ArgumentNotNull(request);
 
 		return "/request_new_permissions?".FormatUri(
 			new Dictionary<string, object?>
 			{
-				{ "name", name },
-				{ "permits_everything", permitsEverything },
-				{ "basic_permissions", permissions.Select(p => (int)p) },
+				{ "name", request.Name },
+				{ "permits_everything", request.PermitsEverything },
+				{ "basic_permissions", request.Permissions.Select(x => (int)x) },
 			}
 		);
 	}

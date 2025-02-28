@@ -330,7 +330,7 @@ public abstract class AbstractService
 /// <summary>
 ///     Информация об URL.
 /// </summary>
-public class UrlDetailedDefinition : ApiVersion
+public class UrlDetailedDefinition : ApiVersionResponse
 {
 	/// <summary>
 	///     Норма-лизированная URL.

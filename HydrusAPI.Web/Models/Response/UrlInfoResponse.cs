@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Информация об URL.
 /// </summary>
-public class UrlInfoResponse : ApiVersion
+public class UrlInfoResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     URL для запроса.

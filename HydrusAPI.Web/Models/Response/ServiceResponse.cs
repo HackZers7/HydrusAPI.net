@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Ответ на запрос получения сервиса.
 /// </summary>
-public class ServiceResponse : ApiVersion
+public class ServiceResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Сервис.

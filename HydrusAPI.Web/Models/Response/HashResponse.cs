@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Ответ в виде хеша.
 /// </summary>
-public class HashResponse : ApiVersion
+public class HashResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Хэш (SHA256).
@@ -14,7 +14,7 @@ public class HashResponse : ApiVersion
 /// <summary>
 ///     Ответ в виде коллекции хешей.
 /// </summary>
-public class HashesResponse : ApiVersion
+public class HashesResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Хэш.

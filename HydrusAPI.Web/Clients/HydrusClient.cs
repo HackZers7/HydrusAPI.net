@@ -42,7 +42,7 @@ public class HydrusClient : IHydrusClient
 			throw new ArgumentNullException(nameof(config.Authenticator));
 		}
 
-		_apiConnection = config.BuildApiConnection();
+		_apiConnection = config.Build();
 
 		OAuthClient = new OAuthClient(_apiConnection);
 		ServicesClient = new ServicesClient(_apiConnection);
@@ -91,7 +91,7 @@ public class HydrusClient : IHydrusClient
 	public IHydrusHttpClient HydrusHttpClient { get; }
 
 	/// <inheritdoc />
-	public Task<ApiVersion> GetApiVersion(CancellationToken cancel = default)
+	public Task<ApiVersionResponse> GetApiVersion(CancellationToken cancel = default)
 	{
 		return GetApiVersion(_apiConnection, cancel);
 	}
@@ -101,9 +101,9 @@ public class HydrusClient : IHydrusClient
 	/// </summary>
 	/// <param name="apiConnection">Подключение к клиенту Hydrus.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="ApiVersion" /> с информацией о версии Hydrus.</returns>
-	public static Task<ApiVersion> GetApiVersion(IApiConnection apiConnection, CancellationToken cancel = default)
+	/// <returns>Возвращает <see cref="ApiVersionResponse" /> с информацией о версии Hydrus.</returns>
+	public static Task<ApiVersionResponse> GetApiVersion(IApiConnection apiConnection, CancellationToken cancel = default)
 	{
-		return apiConnection.Get<ApiVersion>(HydrusUrls.ApiVersion(), cancel);
+		return apiConnection.Get<ApiVersionResponse>(HydrusUrls.ApiVersion(), cancel);
 	}
 }

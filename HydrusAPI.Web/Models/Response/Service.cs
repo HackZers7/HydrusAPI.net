@@ -1,8 +1,11 @@
+using System.Diagnostics;
+
 namespace HydrusAPI.Web;
 
 /// <summary>
 ///     Сервис Hydrus.
 /// </summary>
+[DebuggerDisplay("{ToString()}")]
 public class Service
 {
 	/// <summary>
@@ -11,9 +14,9 @@ public class Service
 	public string Name { get; set; } = default!;
 
 	/// <summary>
-	///     Ключ сервиса.
+	///     Идентификатор сервиса.
 	/// </summary>
-	public string ServiceKey { get; set; } = default!;
+	public string? ServiceKey { get; set; }
 
 	/// <summary>
 	///     Тип сервиса.
@@ -21,22 +24,39 @@ public class Service
 	public ServicesTypes Type { get; set; } = default!;
 
 	/// <summary>
-	///     Человеческое описание типа.
+	///     Описание типа.
 	/// </summary>
 	public string TypePretty { get; set; } = default!;
 
+	// TODO: переделать на перечисление.
 	/// <summary>
-	///     Форма звезды оценочного сервиса.
+	///     Форма звезды оценочного сервиса (только для рейтинговых сервисов).
 	/// </summary>
-	public string StarShape { get; set; } = default!;
+	/// <remarks>
+	/// 	Возможные значения - circle | square | fat star | pentagram star.
+	/// </remarks>
+	public string? StarShape { get; set; }
 
 	/// <summary>
 	///     Минимально возможная оценка.
 	/// </summary>
-	public int MinStars { get; set; }
+	/// <remarks>
+	/// 	Возможные значения: 0 - 1.
+	/// </remarks>
+	public ushort MinStars { get; set; }
 
 	/// <summary>
 	///     Максимально возможная оценка.
 	/// </summary>
-	public int MaxStars { get; set; }
+	/// <remarks>
+	/// 	Возможные значения: 1 - 20.
+	/// </remarks>
+	public ushort MaxStars { get; set; }
+
+	/// <inheritdoc/>
+	public override string ToString()
+	{
+		var key = !string.IsNullOrWhiteSpace(ServiceKey) ? $"::{ServiceKey}" : string.Empty;
+		return $"{Name}{key} ({Type})";
+	}
 }

@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Версия API Hydrus.
 /// </summary>
-public class ApiVersion
+public class ApiVersionResponse
 {
 	/// <summary>
 	///     Версия Hydrus API.

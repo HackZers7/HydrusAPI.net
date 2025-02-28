@@ -20,8 +20,11 @@ public class HydrusClientTests
 	{
 		var apiVersion = await _client.GetApiVersion();
 
+		TestContext.WriteLine($"{nameof(ApiVersionResponse.HydrusVersion)}: {apiVersion.HydrusVersion}");
+		TestContext.WriteLine($"{nameof(ApiVersionResponse.Version)}: {apiVersion.Version}");
+
 		Assert.That(apiVersion, Is.Not.Null);
-		Assert.That(apiVersion, Has.Property(nameof(ApiVersion.Version)).GreaterThan(0));
-		Assert.That(apiVersion, Has.Property(nameof(ApiVersion.HydrusVersion)).GreaterThan(0));
+		Assert.That(apiVersion, Has.Property(nameof(ApiVersionResponse.Version)).GreaterThan(0));
+		Assert.That(apiVersion, Has.Property(nameof(ApiVersionResponse.HydrusVersion)).GreaterThan(0));
 	}
 }

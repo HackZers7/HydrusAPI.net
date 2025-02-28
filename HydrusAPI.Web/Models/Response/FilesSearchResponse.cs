@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Возвращает найденные файлы.
 /// </summary>
-public class FilesSearchResponse : ApiVersion
+public class FilesSearchResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Коллекция хешей (SHA256) файлов.

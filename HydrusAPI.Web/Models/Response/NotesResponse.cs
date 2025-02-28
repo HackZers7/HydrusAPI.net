@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Ответ с заметками.
 /// </summary>
-public class NotesResponse : ApiVersion
+public class NotesResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Словарь с заметками, где ключ название заметки.

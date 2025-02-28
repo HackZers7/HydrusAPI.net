@@ -64,6 +64,6 @@ public interface IHydrusClient
 	///     Запрашивает версию Hydrus.
 	/// </summary>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="ApiVersion" /> с информацией о версии Hydrus.</returns>
-	Task<ApiVersion> GetApiVersion(CancellationToken cancel = default);
+	/// <returns>Возвращает <see cref="ApiVersionResponse" /> с информацией о версии Hydrus.</returns>
+	Task<ApiVersionResponse> GetApiVersion(CancellationToken cancel = default);
 }

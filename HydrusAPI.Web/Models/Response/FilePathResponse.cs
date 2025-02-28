@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Содержит данные бо локальном пути к файлу.
 /// </summary>
-public class FilePathResponse : ApiVersion
+public class FilePathResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Путь к файлу.
@@ -24,7 +24,7 @@ public class FilePathResponse : ApiVersion
 /// <summary>
 ///     Содержит данные бо локальном пути к эскизу.
 /// </summary>
-public class ThumbnailFilePathResponse : ApiVersion
+public class ThumbnailFilePathResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Путь к файлу.

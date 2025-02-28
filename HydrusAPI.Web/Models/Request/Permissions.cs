@@ -1,7 +1,7 @@
 namespace HydrusAPI.Web;
 
 /// <summary>
-///     Ключи, указывающие какие разрешения доступны.
+///     Области видимости (разрешения) Hydrus.
 /// </summary>
 public enum Permissions
 {

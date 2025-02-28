@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 namespace HydrusApi.Web.Tests.Clients;
 
 [TestFixture]
-public class MataClientTest
+public class MetaClientTest
 {
 	private readonly IHydrusClient _client;
 
 	// ReSharper disable once ConvertConstructorToMemberInitializers
-	public MataClientTest()
+	public MetaClientTest()
 	{
 		_client = IoC.GetHydrusClient();
 	}

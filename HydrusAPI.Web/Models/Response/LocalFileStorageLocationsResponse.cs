@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Ответ со всеми локальными хранилищами Hydrus.
 /// </summary>
-public class LocalFileStorageLocationsResponse : ApiVersion
+public class LocalFileStorageLocationsResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Коллекция хранилищ.

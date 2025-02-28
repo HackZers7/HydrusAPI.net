@@ -12,7 +12,7 @@ public class HydrusClientConfig
 	/// </summary>
 	/// <param name="baseAddress">Базовый адрес подключения.</param>
 	/// <param name="authenticator">Аутентификатор.</param>
-	/// <param name="serializer">Серелизатор.</param>
+	/// <param name="serializer">Сериализатор.</param>
 	/// <param name="httpClient">Http клиент.</param>
 	/// <param name="apiConnection">Подключение.</param>
 	public HydrusClientConfig(
@@ -41,7 +41,7 @@ public class HydrusClientConfig
 	public IAuthenticator? Authenticator { get; private set; }
 
 	/// <summary>
-	///     Возвращает серелизатор.
+	///     Возвращает сериализатор.
 	/// </summary>
 	public IJsonSerializer Serializer { get; private set; }
 
@@ -72,7 +72,7 @@ public class HydrusClientConfig
 	/// <summary>
 	///     Устанавливает новый аутентификатор.
 	/// </summary>
-	/// <param name="authenticator">Новый экземпляр аутентификатора.</param>
+	/// <param name="authenticator">Новый экземпляр аутентификатор.</param>
 	/// <returns>Экземпляр настроек.</returns>
 	public HydrusClientConfig WithAuthenticator(IAuthenticator authenticator)
 	{
@@ -98,9 +98,9 @@ public class HydrusClientConfig
 	}
 
 	/// <summary>
-	///     Устанавливает новый серелизатор.
+	///     Устанавливает новый сериализатор.
 	/// </summary>
-	/// <param name="jsonSerializer">Новый экземпляр серилизатора.</param>
+	/// <param name="jsonSerializer">Новый экземпляр сериализатора.</param>
 	/// <returns>Экземпляр настроек.</returns>
 	public HydrusClientConfig WithJsonSerializer(IJsonSerializer jsonSerializer)
 	{
@@ -159,7 +159,7 @@ public class HydrusClientConfig
 	///     Собирает подключение по текущим настройкам.
 	/// </summary>
 	/// <returns>Новый экземпляр подключения.</returns>
-	public IApiConnection BuildApiConnection()
+	public IApiConnection Build()
 	{
 		return ApiConnection ?? new ApiConnection(
 			BaseAddress,

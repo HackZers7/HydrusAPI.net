@@ -46,7 +46,7 @@ public interface IServicesClient
 	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="ServicesResponse" /> с информацией о всех сервисах.</returns>
+	/// <returns>Возвращает <see cref="ServicesResponse" /> содержащий все сервисы.</returns>
 	Task<ServicesResponse> GetServices(CancellationToken cancel = default);
 
 	/// <summary>

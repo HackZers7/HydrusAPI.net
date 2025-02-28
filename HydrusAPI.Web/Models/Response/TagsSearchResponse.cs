@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Поиск тегов.
 /// </summary>
-public class TagsSearchResponse : ApiVersion
+public class TagsSearchResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Теги.

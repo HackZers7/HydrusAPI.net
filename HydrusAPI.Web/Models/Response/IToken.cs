@@ -11,11 +11,6 @@ public interface IToken
 	public string Token { get; }
 
 	/// <summary>
-	///     Все доступные области видимости для токена.
-	/// </summary>
-	public Permissions[] Scopes { get; }
-
-	/// <summary>
 	///    Время (UTC), когда токен был создан.
 	/// </summary>
 	public DateTime CreatedAt { get; }

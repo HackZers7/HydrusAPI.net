@@ -5,15 +5,18 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Предоставляет авторизацию с использованием токенов сессии. Для работы требуется токен доступа.
 /// </summary>
-// ReSharper disable once InconsistentNaming
 public class HydrusTokenAuthenticator : IAuthenticator
 {
 	/// <summary>
 	///     Инициализирует новый экземпляр идентификатора.
 	/// </summary>
 	/// <param name="accessToken">Ключ доступа.</param>
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 	public HydrusTokenAuthenticator(string accessToken)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(accessToken);
+
 		AccessToken = accessToken;
 	}
 
@@ -25,7 +28,10 @@ public class HydrusTokenAuthenticator : IAuthenticator
 	/// <summary>
 	///     Возвращает текущий токен сессии.
 	/// </summary>
-	public HydrusSessionToken? SessionToken { get; private set; }
+	/// <remarks>
+	/// 	Обновляется, если просрочен.
+	/// </remarks>
+	public HydrusSessionTokenResponse? SessionToken { get; private set; }
 
 	/// <inheritdoc />
 	public async Task Apply(IRequest request, IApiConnection apiConnection)
@@ -42,7 +48,6 @@ public class HydrusTokenAuthenticator : IAuthenticator
 			var refreshedToken = await OAuthClient.RequestSessionToken(apiConnection, AccessToken).ConfigureAwait(false);
 			SessionToken ??= refreshedToken;
 			SessionToken.Token = refreshedToken.Token;
-			SessionToken.Scopes = refreshedToken.Scopes;
 			SessionToken.CreatedAt = refreshedToken.CreatedAt;
 
 			TokenRefreshed?.Invoke(this, SessionToken);

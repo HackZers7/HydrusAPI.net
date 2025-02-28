@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Ответ с текущими статусами задач.
 /// </summary>
-public class JobStatusResponse : ApiVersion
+public class JobStatusResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Текущие статусы задач.
