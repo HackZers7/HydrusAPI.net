@@ -12,7 +12,7 @@ namespace HydrusAPI.Web.Http;
 /// </summary>
 public class NetHttpClient : IHttpClient
 {
-	private readonly HydrusHttpClient _httpClient;
+	private readonly HttpClient _httpClient;
 
 	/// <summary>
 	///     Конструктор по умолчанию.
@@ -26,7 +26,7 @@ public class NetHttpClient : IHttpClient
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
 	/// <param name="httpClient">Http клиент.</param>
-	public NetHttpClient(HydrusHttpClient httpClient)
+	public NetHttpClient(HttpClient httpClient)
 	{
 		_httpClient = httpClient;
 	}
