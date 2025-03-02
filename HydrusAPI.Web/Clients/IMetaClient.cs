@@ -115,7 +115,7 @@ public interface IMetaClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию <see cref="MetaData" /> с мета данными.</returns>
 	Task<IEnumerable<MetaData>> GetMetaData(
-		IEnumerable<string> hashes,
+		IList<string> hashes,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
 		bool includeMilliseconds = false,
@@ -161,7 +161,7 @@ public interface IMetaClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию <see cref="MetaData" /> с мета данными.</returns>
 	Task<IEnumerable<MetaData>> GetMetaData(
-		IEnumerable<ulong> fileIds,
+		IList<ulong> fileIds,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
 		bool includeMilliseconds = false,
@@ -207,7 +207,7 @@ public interface IMetaClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
 	Task<IEnumerable<MetaDataId>> GetId(
-		IEnumerable<string> hashes,
+		IList<string> hashes,
 		CancellationToken cancel = default
 	);
 
@@ -237,7 +237,7 @@ public interface IMetaClient
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
 	Task<IEnumerable<MetaDataId>> GetHash(
-		IEnumerable<ulong> fileIds,
+		IList<ulong> fileIds,
 		CancellationToken cancel = default
 	);
 

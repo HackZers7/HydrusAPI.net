@@ -1,9 +1,9 @@
 namespace HydrusAPI.Web;
 
 /// <summary>
-///     Сгенерированные хэши (SHA256) произвольного файла.
+///     Сгенерированные хеши (SHA256) произвольного файла.
 /// </summary>
-public class GeneratedHashesResponse : HashResponse
+public class GeneratedHashesResponse : ApiVersionResponse
 {
 	/// <summary>
 	///     Список перцептивных хешей для файла.
@@ -14,4 +14,9 @@ public class GeneratedHashesResponse : HashResponse
 	///     Хеш (SHA256) отрендеренного изображения.
 	/// </summary>
 	public string? PixelHash { get; set; }
+
+	/// <summary>
+	///     Хэш (SHA256). Всегда возвращается для файлов, в остальных случаях только если могут быть сгенерированы.
+	/// </summary>
+	public string? Hash { get; set; }
 }

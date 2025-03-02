@@ -18,11 +18,7 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public Task<ImportResultResponse> SendFile(string filePath, bool deleteAfterImport = false, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(filePath);
-
-		return SendFile(
-			new AddFileRequest(filePath, deleteAfterImport), cancel
-		);
+		return SendFile(new AddFileRequest(filePath, deleteAfterImport), cancel);
 	}
 
 	/// <inheritdoc />
@@ -40,13 +36,19 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public Task<bool> DeleteFiles(params string[] hashes)
+	public Task DeleteFiles(string hash, string? reason = null, CancellationToken cancel = default)
 	{
-		return DeleteFiles(hashes, null);
+		return DeleteFiles(new DeleteFilesRequest(hash, reason), cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<bool> DeleteFiles(IEnumerable<string> hashes, string? reason = null, CancellationToken cancel = default)
+	public Task DeleteFiles(ulong id, string? reason = null, CancellationToken cancel = default)
+	{
+		return DeleteFiles(new DeleteFilesRequest(id, reason), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task DeleteFiles(IList<string> hashes, string? reason = null, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(hashes);
 
@@ -54,13 +56,7 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public Task<bool> DeleteFiles(params ulong[] ids)
-	{
-		return DeleteFiles(ids, null);
-	}
-
-	/// <inheritdoc />
-	public Task<bool> DeleteFiles(IEnumerable<ulong> ids, string? reason = null, CancellationToken cancel = default)
+	public Task DeleteFiles(IList<ulong> ids, string? reason = null, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(ids);
 
@@ -68,59 +64,102 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> DeleteFiles(DeleteFilesRequest request, CancellationToken cancel = default)
+	public Task DeleteFiles(DeleteFilesRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
-		var response = await ApiConnection.Post(HydrusUrls.DeleteFiles(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return ApiConnection.Post(HydrusUrls.DeleteFiles(), null, request, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<bool> UndeleteFiles(params string[] hashes)
+	public Task RestoreFiles(string hash)
 	{
-		return UndeleteFiles(new FilesWithDomainRequest(hashes));
+		return RestoreFiles(new FilesWithDomainRequest(hash));
 	}
 
 	/// <inheritdoc />
-	public Task<bool> UndeleteFiles(params ulong[] ids)
+	public Task RestoreFiles(IList<string> hashes)
 	{
-		return UndeleteFiles(new FilesWithDomainRequest(ids));
+		ThrowHelper.ArgumentNotNull(hashes);
+
+		return RestoreFiles(new FilesWithDomainRequest(hashes));
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> UndeleteFiles(FilesWithDomainRequest request, CancellationToken cancel = default)
+	public Task RestoreFiles(ulong id)
+	{
+		return RestoreFiles(new FilesWithDomainRequest(id));
+	}
+
+	/// <inheritdoc />
+	public Task RestoreFiles(IList<ulong> ids)
+	{
+		ThrowHelper.ArgumentNotNull(ids);
+
+		return RestoreFiles(new FilesWithDomainRequest(ids));
+	}
+
+	/// <inheritdoc />
+	public Task RestoreFiles(FilesWithDomainRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
-		var response = await ApiConnection.Post(HydrusUrls.UndeleteFiles(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return ApiConnection.Post(HydrusUrls.RestoreFiles(), null, request, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<bool> ClearFilesDeletion(params string[] hashes)
+	public Task ClearFilesDeletion(string hash)
 	{
+		return ClearFilesDeletion(new FilesRequest(hash));
+	}
+
+	/// <inheritdoc />
+	public Task ClearFilesDeletion(IList<string> hashes)
+	{
+		ThrowHelper.ArgumentNotNull(hashes);
+
 		return ClearFilesDeletion(new FilesRequest(hashes));
 	}
 
 	/// <inheritdoc />
-	public Task<bool> ClearFilesDeletion(params ulong[] ids)
+	public Task ClearFilesDeletion(ulong id)
 	{
+		return ClearFilesDeletion(new FilesRequest(id));
+	}
+
+	/// <inheritdoc />
+	public Task ClearFilesDeletion(IList<ulong> ids)
+	{
+		ThrowHelper.ArgumentNotNull(ids);
+
 		return ClearFilesDeletion(new FilesRequest(ids));
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> ClearFilesDeletion(FilesRequest request, CancellationToken cancel = default)
+	public Task ClearFilesDeletion(FilesRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
-		var response = await ApiConnection.Post(HydrusUrls.ClearFilesDeletion(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return ApiConnection.Post(HydrusUrls.ClearFilesDeletion(), null, request, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<bool> MigrateFiles(string toFileDomain, params string[] hashes)
+	public Task MigrateFiles(string toFileDomain, string hash)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(toFileDomain);
+
+		return MigrateFiles(new FilesWithDomainRequest(hash)
+		{
+			FileServiceKey = toFileDomain
+		});
+	}
+
+	/// <inheritdoc />
+	public Task MigrateFiles(string toFileDomain, IList<string> hashes)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(toFileDomain);
+		ThrowHelper.ArgumentNotNull(hashes);
+
 		return MigrateFiles(new FilesWithDomainRequest(hashes)
 		{
 			FileServiceKey = toFileDomain
@@ -128,8 +167,22 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public Task<bool> MigrateFiles(string toFileDomain, params ulong[] ids)
+	public Task MigrateFiles(string toFileDomain, ulong id)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(toFileDomain);
+
+		return MigrateFiles(new FilesWithDomainRequest(id)
+		{
+			FileServiceKey = toFileDomain
+		});
+	}
+
+	/// <inheritdoc />
+	public Task MigrateFiles(string toFileDomain, IList<ulong> ids)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(toFileDomain);
+		ThrowHelper.ArgumentNotNull(ids);
+
 		return MigrateFiles(new FilesWithDomainRequest(ids)
 		{
 			FileServiceKey = toFileDomain
@@ -137,70 +190,105 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> MigrateFiles(FilesWithDomainRequest request, CancellationToken cancel = default)
+	public Task MigrateFiles(FilesWithDomainRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
-		var response = await ApiConnection.Post(HydrusUrls.MigrateFiles(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return ApiConnection.Post(HydrusUrls.MigrateFiles(), null, request, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<bool> ArchiveFiles(params string[] hashes)
+	public Task ArchiveFiles(string hash)
 	{
+		return ArchiveFiles(new FilesRequest(hash));
+	}
+
+	/// <inheritdoc />
+	public Task ArchiveFiles(IList<string> hashes)
+	{
+		ThrowHelper.ArgumentNotNull(hashes);
+
 		return ArchiveFiles(new FilesRequest(hashes));
 	}
 
 	/// <inheritdoc />
-	public Task<bool> ArchiveFiles(params ulong[] ids)
+	public Task ArchiveFiles(ulong id)
 	{
+		return ArchiveFiles(new FilesRequest(id));
+	}
+
+	/// <inheritdoc />
+	public Task ArchiveFiles(IList<ulong> ids)
+	{
+		ThrowHelper.ArgumentNotNull(ids);
+
 		return ArchiveFiles(new FilesRequest(ids));
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> ArchiveFiles(FilesRequest request, CancellationToken cancel = default)
+	public Task ArchiveFiles(FilesRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
-		var response = await ApiConnection.Post(HydrusUrls.ArchiveFiles(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return ApiConnection.Post(HydrusUrls.ArchiveFiles(), null, request, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<bool> UnarchiveFiles(params string[] hashes)
+	public Task UnarchiveFiles(string hash)
 	{
+		return UnarchiveFiles(new FilesRequest(hash));
+	}
+
+	/// <inheritdoc />
+	public Task UnarchiveFiles(IList<string> hashes)
+	{
+		ThrowHelper.ArgumentNotNull(hashes);
+
 		return UnarchiveFiles(new FilesRequest(hashes));
 	}
 
 	/// <inheritdoc />
-	public Task<bool> UnarchiveFiles(params ulong[] ids)
+	public Task UnarchiveFiles(ulong id)
 	{
+		return UnarchiveFiles(new FilesRequest(id));
+	}
+
+	/// <inheritdoc />
+	public Task UnarchiveFiles(IList<ulong> ids)
+	{
+		ThrowHelper.ArgumentNotNull(ids);
+
 		return UnarchiveFiles(new FilesRequest(ids));
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> UnarchiveFiles(FilesRequest request, CancellationToken cancel = default)
+	public Task UnarchiveFiles(FilesRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
-		var response = await ApiConnection.Post(HydrusUrls.UnarchiveFiles(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return ApiConnection.Post(HydrusUrls.UnarchiveFiles(), null, request, cancel);
 	}
 
 	/// <inheritdoc />
 	public Task<GeneratedHashesResponse> GenerateHashes(string filePath, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(filePath);
-
-		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, new LocalFile(filePath), progressCallback: null, cancel);
+		return GenerateHashes(new LocalFileRequest(filePath), cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<GeneratedHashesResponse> GenerateHashes(Stream file, CancellationToken cancel = default)
+	public Task<GeneratedHashesResponse> GenerateHashes(LocalFileRequest request, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, request, progressCallback: null, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<GeneratedHashesResponse> GenerateHashes(Stream file, IProgress<int>? progressCallback = default, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(file);
 
-		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, file, progressCallback: null, cancel);
+		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, file, progressCallback: progressCallback, cancel);
 	}
 
 	/// <inheritdoc />

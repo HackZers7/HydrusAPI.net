@@ -3,14 +3,16 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Локальный файл.
 /// </summary>
-public class LocalFile
+public class LocalFileRequest
 {
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
 	/// <param name="path">Путь до файла на локальной машине.</param>
-	public LocalFile(string path)
+	public LocalFileRequest(string path)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(path);
+		
 		Path = path;
 	}
 

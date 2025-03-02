@@ -1,3 +1,4 @@
+
 namespace HydrusAPI.Web;
 
 /// <summary>
@@ -5,6 +6,38 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class MetaDataRequest : FilesRequest
 {
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	public MetaDataRequest(string hash) : base(hash)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="id">Идентификатор файла.</param>
+	public MetaDataRequest(ulong id) : base(id)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+	public MetaDataRequest(IList<string>? hashes) : base(hashes)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
+	public MetaDataRequest(IList<ulong>? fileIds) : base(fileIds)
+	{
+	}
+
 	/// <summary>
 	///     Создает физическую запись об хеше, который не был найден.
 	/// </summary>

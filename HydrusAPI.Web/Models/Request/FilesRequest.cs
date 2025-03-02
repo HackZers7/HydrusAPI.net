@@ -8,17 +8,32 @@ namespace HydrusAPI.Web;
 public class FilesRequest
 {
 	/// <summary>
-	///     Конструктор по умолчанию.
+	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	public FilesRequest()
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	public FilesRequest(string hash)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
+		Hash = hash;
 	}
 
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="hashes">Хеши (SHA256) файлов.</param>
-	public FilesRequest(IEnumerable<string>? hashes)
+	/// <param name="id">Идентификатор файла.</param>
+	public FilesRequest(ulong id)
+	{
+		ThrowHelper.ArgumentOutOfRange(id, (ulong)0, ulong.MaxValue);
+
+		FileId = id;
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+	public FilesRequest(IList<string>? hashes)
 	{
 		if (hashes?.Any() ?? false)
 		{
@@ -29,8 +44,8 @@ public class FilesRequest
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="fileIds">Идентификаторы файлов.</param>
-	public FilesRequest(IEnumerable<ulong>? fileIds)
+	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
+	public FilesRequest(IList<ulong>? fileIds)
 	{
 		if (fileIds?.Any() ?? false)
 		{
@@ -46,7 +61,7 @@ public class FilesRequest
 	/// <summary>
 	///     Коллекция хешей (SHA256) файлов.
 	/// </summary>
-	public List<string>? Hashes { get; set; }
+	public IList<string>? Hashes { get; set; }
 
 	/// <summary>
 	///     Идентификатор файла.
@@ -56,7 +71,7 @@ public class FilesRequest
 	/// <summary>
 	///     Коллекция идентификаторов файлов.
 	/// </summary>
-	public List<ulong>? FileIds { get; set; }
+	public IList<ulong>? FileIds { get; set; }
 }
 
 /// <summary>
@@ -65,17 +80,32 @@ public class FilesRequest
 public class FilesWithDomainRequest : FileDomainRequest
 {
 	/// <summary>
-	///     Конструктор по умолчанию.
+	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	public FilesWithDomainRequest()
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	public FilesWithDomainRequest(string hash)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+
+		Hash = hash;
 	}
 
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="hashes">Хеши (SHA256) файлов.</param>
-	public FilesWithDomainRequest(IEnumerable<string>? hashes)
+	/// <param name="id">Идентификатор файла.</param>
+	public FilesWithDomainRequest(ulong id)
+	{
+		ThrowHelper.ArgumentOutOfRange(id, (ulong)0, ulong.MaxValue);
+
+		FileId = id;
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+	public FilesWithDomainRequest(IList<string>? hashes)
 	{
 		if (hashes?.Any() ?? false)
 		{
@@ -86,8 +116,8 @@ public class FilesWithDomainRequest : FileDomainRequest
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="fileIds">Идентификаторы файлов.</param>
-	public FilesWithDomainRequest(IEnumerable<ulong>? fileIds)
+	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
+	public FilesWithDomainRequest(IList<ulong>? fileIds)
 	{
 		if (fileIds?.Any() ?? false)
 		{
@@ -103,7 +133,7 @@ public class FilesWithDomainRequest : FileDomainRequest
 	/// <summary>
 	///     Коллекция хешей (SHA256) файлов.
 	/// </summary>
-	public List<string>? Hashes { get; set; }
+	public IList<string>? Hashes { get; set; }
 
 	/// <summary>
 	///     Идентификатор файла.
@@ -113,5 +143,5 @@ public class FilesWithDomainRequest : FileDomainRequest
 	/// <summary>
 	///     Коллекция идентификаторов файлов.
 	/// </summary>
-	public List<ulong>? FileIds { get; set; }
+	public IList<ulong>? FileIds { get; set; }
 }

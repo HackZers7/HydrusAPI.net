@@ -3,8 +3,13 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Результат импорта.
 /// </summary>
-public class ImportResultResponse : HashResponse
+public class ImportResultResponse : ApiVersionResponse
 {
+	/// <summary>
+	///     Хэш (SHA256).
+	/// </summary>
+	public string Hash { get; set; } = default!;
+
 	/// <summary>
 	///     Статус импорта.
 	/// </summary>

@@ -1,3 +1,4 @@
+
 namespace HydrusAPI.Web;
 
 /// <summary>
@@ -5,6 +6,38 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class ViewtimeRequest : FilesRequest
 {
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	public ViewtimeRequest(string hash) : base(hash)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="id">Идентификатор файла.</param>
+	public ViewtimeRequest(ulong id) : base(id)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+	public ViewtimeRequest(IList<string>? hashes) : base(hashes)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
+	public ViewtimeRequest(IList<ulong>? fileIds) : base(fileIds)
+	{
+	}
+
 	/// <summary>
 	///     Тип, который редактируется.
 	///     <remarks>

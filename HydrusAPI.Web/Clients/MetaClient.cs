@@ -63,11 +63,8 @@ public class MetaClient : ApiClient, IMetaClient
 		CancellationToken cancel = default
 	)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
-
-		var response = await GetMetaData(new MetaDataRequest
+		var response = await GetMetaData(new MetaDataRequest(hash)
 		{
-			Hash = hash,
 			CreateNewFileIds = createNewFileIds,
 			OnlyReturnIdentifiers = false,
 			OnlyReturnBasicInformation = false,
@@ -83,7 +80,7 @@ public class MetaClient : ApiClient, IMetaClient
 
 	/// <inheritdoc />
 	public async Task<IEnumerable<MetaData>> GetMetaData(
-		IEnumerable<string> hashes,
+		IList<string> hashes,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
 		bool includeMilliseconds = false,
@@ -93,9 +90,8 @@ public class MetaClient : ApiClient, IMetaClient
 	{
 		ThrowHelper.ArgumentNotNull(hashes);
 
-		var response = await GetMetaData(new MetaDataRequest
+		var response = await GetMetaData(new MetaDataRequest(hashes)
 		{
-			Hashes = new List<string>(hashes),
 			CreateNewFileIds = createNewFileIds,
 			OnlyReturnIdentifiers = false,
 			OnlyReturnBasicInformation = false,
@@ -119,11 +115,8 @@ public class MetaClient : ApiClient, IMetaClient
 		CancellationToken cancel = default
 	)
 	{
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
-
-		var response = await GetMetaData(new MetaDataRequest
+		var response = await GetMetaData(new MetaDataRequest(fileId)
 		{
-			FileId = fileId,
 			CreateNewFileIds = createNewFileIds,
 			OnlyReturnIdentifiers = false,
 			OnlyReturnBasicInformation = false,
@@ -139,7 +132,7 @@ public class MetaClient : ApiClient, IMetaClient
 
 	/// <inheritdoc />
 	public async Task<IEnumerable<MetaData>> GetMetaData(
-		IEnumerable<ulong> fileIds,
+		IList<ulong> fileIds,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
 		bool includeMilliseconds = false,
@@ -149,9 +142,8 @@ public class MetaClient : ApiClient, IMetaClient
 	{
 		ThrowHelper.ArgumentNotNull(fileIds);
 
-		var response = await GetMetaData(new MetaDataRequest
+		var response = await GetMetaData(new MetaDataRequest(fileIds)
 		{
-			FileIds = new List<ulong>(fileIds),
 			CreateNewFileIds = createNewFileIds,
 			OnlyReturnIdentifiers = false,
 			OnlyReturnBasicInformation = false,
@@ -174,11 +166,8 @@ public class MetaClient : ApiClient, IMetaClient
 	/// <inheritdoc />
 	public async Task<IEnumerable<MetaDataId>> GetId(string hash, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
-
-		var request = HydrusUrls.GetMetadata(new MetaDataRequest
+		var request = HydrusUrls.GetMetadata(new MetaDataRequest(hash)
 		{
-			Hash = hash,
 			OnlyReturnIdentifiers = true,
 			IncludeServicesObject = false
 		});
@@ -188,13 +177,12 @@ public class MetaClient : ApiClient, IMetaClient
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<MetaDataId>> GetId(IEnumerable<string> hashes, CancellationToken cancel = default)
+	public async Task<IEnumerable<MetaDataId>> GetId(IList<string> hashes, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(hashes);
 
-		var request = HydrusUrls.GetMetadata(new MetaDataRequest
+		var request = HydrusUrls.GetMetadata(new MetaDataRequest(hashes)
 		{
-			Hashes = new List<string>(hashes),
 			OnlyReturnIdentifiers = true,
 			IncludeServicesObject = false
 		});
@@ -206,11 +194,8 @@ public class MetaClient : ApiClient, IMetaClient
 	/// <inheritdoc />
 	public async Task<IEnumerable<MetaDataId>> GetHash(ulong fileId, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
-
-		var request = HydrusUrls.GetMetadata(new MetaDataRequest
+		var request = HydrusUrls.GetMetadata(new MetaDataRequest(fileId)
 		{
-			FileId = fileId,
 			OnlyReturnIdentifiers = true,
 			IncludeServicesObject = false
 		});
@@ -220,13 +205,12 @@ public class MetaClient : ApiClient, IMetaClient
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<MetaDataId>> GetHash(IEnumerable<ulong> fileIds, CancellationToken cancel = default)
+	public async Task<IEnumerable<MetaDataId>> GetHash(IList<ulong> fileIds, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(fileIds);
 
-		var request = HydrusUrls.GetMetadata(new MetaDataRequest
+		var request = HydrusUrls.GetMetadata(new MetaDataRequest(fileIds)
 		{
-			FileIds = new List<ulong>(fileIds),
 			OnlyReturnIdentifiers = true,
 			IncludeServicesObject = false
 		});

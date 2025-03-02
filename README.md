@@ -27,14 +27,14 @@ The latest supported version of Hydrus API: 78 (607)
 
 | URL                                   | Status | Request builder | Structured type |
 | ------------------------------------- | :----: | :-------------: | :-------------: |
-| /add_files/add_file                   |   ⚠️    |        ❌        |        ❌        |
-| /add_files/delete_files               |   ⚠️    |        ❌        |   Not needed    |
-| /add_files/undelete_files             |   ⚠️    |        ❌        |   Not needed    |
-| /add_files/clear_file_deletion_record |   ⚠️    |        ❌        |   Not needed    |
-| /add_files/migrate_files              |   ⚠️    |        ❌        |   Not needed    |
-| /add_files/archive_files              |   ⚠️    |        ❌        |   Not needed    |
-| /add_files/unarchive_files            |   ⚠️    |        ❌        |   Not needed    |
-| /add_files/generate_hashes            |   ⚠️    |        ❌        |        ❌        |
+| /add_files/add_file                   |   ✅    |        ❌        |        ❌        |
+| /add_files/delete_files               |   ✅    |        ❌        |   Not needed    |
+| /add_files/undelete_files             |   ✅    |        ❌        |   Not needed    |
+| /add_files/clear_file_deletion_record |   ✅    |        ❌        |   Not needed    |
+| /add_files/migrate_files              |   ✅    |        ❌        |   Not needed    |
+| /add_files/archive_files              |   ✅    |        ❌        |   Not needed    |
+| /add_files/unarchive_files            |   ✅    |        ❌        |   Not needed    |
+| /add_files/generate_hashes            |   ✅    |        ❌        |        ❌        |
 
 ### Importing and Editing URLs
 

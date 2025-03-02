@@ -64,17 +64,11 @@ public class TagsClientTest
 	[Test]
 	public async Task AddTags()
 	{
-		var request = new AddTagsRequest();
+		var request = new AddTagsRequest(IoC.FileHash);
 		request.ServiceKeysToTags = new Dictionary<string, List<string>>
 		{
 			{ MyTagsServiceKey, new List<string>(Tags) }
 		};
-
-		using (var stream = File.OpenRead(IoC.FilePath))
-		{
-			var hash = Utils.GetSha256(stream);
-			request.Hash = hash;
-		}
 
 		var tags = await _client.TagsClient.AddTags(request);
 

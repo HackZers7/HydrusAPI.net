@@ -1,3 +1,4 @@
+
 namespace HydrusAPI.Web;
 
 /// <summary>
@@ -5,6 +6,38 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class AddTagsRequest : FilesRequest
 {
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	public AddTagsRequest(string hash) : base(hash)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="id">Идентификатор файла.</param>
+	public AddTagsRequest(ulong id) : base(id)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+	public AddTagsRequest(IList<string>? hashes) : base(hashes)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
+	public AddTagsRequest(IList<ulong>? fileIds) : base(fileIds)
+	{
+	}
+
 	/// <summary>
 	///     Словарь с тегами, где ключом является идентификатор сервиса, а значением коллекция тегов.
 	/// </summary>
@@ -19,7 +52,7 @@ public class AddTagsRequest : FilesRequest
 	public Dictionary<string, Dictionary<int, List<object>>>? ServiceKeysToActionsToTags { get; set; }
 
 	/// <summary>
-	///     Перезаписать предыдущие удаленный мэппинг.
+	///     Перезаписать предыдущие удаленный маппинг.
 	///     <remarks>
 	///         По умолчанию - true.
 	///     </remarks>
@@ -27,7 +60,7 @@ public class AddTagsRequest : FilesRequest
 	public bool OverridePreviouslyDeletedMappings { get; set; } = true;
 
 	/// <summary>
-	///     Создать новый удаленный мэппинг.
+	///     Создать новый удаленный маппинг.
 	///     <remarks>
 	///         По умолчанию - true.
 	///     </remarks>

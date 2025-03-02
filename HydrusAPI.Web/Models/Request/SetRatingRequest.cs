@@ -1,3 +1,4 @@
+
 namespace HydrusAPI.Web;
 
 /// <summary>
@@ -5,6 +6,38 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class SetRatingRequest : FilesRequest
 {
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	public SetRatingRequest(string hash) : base(hash)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="id">Идентификатор файла.</param>
+	public SetRatingRequest(ulong id) : base(id)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+	public SetRatingRequest(IList<string>? hashes) : base(hashes)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
+	public SetRatingRequest(IList<ulong>? fileIds) : base(fileIds)
+	{
+	}
+
 	/// <summary>
 	///     Шестнадцатеричный идентификатор сервиса.
 	/// </summary>

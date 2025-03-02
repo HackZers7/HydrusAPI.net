@@ -1,3 +1,4 @@
+
 namespace HydrusAPI.Web;
 
 /// <summary>
@@ -5,6 +6,38 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class GetPotentialsRequest : FilesRequest
 {
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	public GetPotentialsRequest(string hash) : base(hash)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="id">Идентификатор файла.</param>
+	public GetPotentialsRequest(ulong id) : base(id)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+	public GetPotentialsRequest(IList<string>? hashes) : base(hashes)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
+	public GetPotentialsRequest(IList<ulong>? fileIds) : base(fileIds)
+	{
+	}
+
 	/// <summary>
 	///     Необязательно, ключ сервисов тегов.
 	/// </summary>
@@ -46,7 +79,7 @@ public class GetPotentialsRequest : FilesRequest
 	public int PotentialsSearchType { get; set; } = (int)PotentialsSearchTypes.OneFileMatchesSearch;
 
 	/// <summary>
-	///     Необязательно, должны ли пары быть пиксельными дубликатами.
+	///     Необязательно, должны ли быть у пар пиксельные дубликаты.
 	/// </summary>
 	/// <remarks>
 	///     По умолчанию - <see cref="PixelDuplicateTypes.CanBePixelDuplicates" />.

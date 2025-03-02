@@ -29,61 +29,25 @@ public class PagesClient : ApiClient, IPagesClient
 	/// <inheritdoc />
 	public Task<bool> AddFilesOnPage(string pageKey, string hash, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(pageKey);
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
-
-		return AddFilesOnPage(
-			new AddFilesOnPageRequest
-			{
-				PageKey = pageKey,
-				Hash = hash
-			}, cancel
-		);
+		return AddFilesOnPage(new AddFilesOnPageRequest(pageKey, hash), cancel);
 	}
 
 	/// <inheritdoc />
 	public Task<bool> AddFilesOnPage(string pageKey, params string[] hashes)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(pageKey);
-		ThrowHelper.ArgumentNotNull(hashes);
-
-		return AddFilesOnPage(
-			new AddFilesOnPageRequest
-			{
-				PageKey = pageKey,
-				Hashes = new List<string>(hashes)
-			}
-		);
+		return AddFilesOnPage(new AddFilesOnPageRequest(pageKey, hashes));
 	}
 
 	/// <inheritdoc />
 	public Task<bool> AddFilesOnPage(string pageKey, ulong fileId, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(pageKey);
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
-
-		return AddFilesOnPage(
-			new AddFilesOnPageRequest
-			{
-				PageKey = pageKey,
-				FileId = fileId
-			}, cancel
-		);
+		return AddFilesOnPage(new AddFilesOnPageRequest(pageKey, fileId), cancel);
 	}
 
 	/// <inheritdoc />
 	public Task<bool> AddFilesOnPage(string pageKey, params ulong[] ids)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(pageKey);
-		ThrowHelper.ArgumentNotNull(ids);
-
-		return AddFilesOnPage(
-			new AddFilesOnPageRequest
-			{
-				PageKey = pageKey,
-				FileIds = new List<ulong>(ids)
-			}
-		);
+		return AddFilesOnPage(new AddFilesOnPageRequest(pageKey, ids));
 	}
 
 	/// <inheritdoc />

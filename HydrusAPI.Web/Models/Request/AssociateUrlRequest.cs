@@ -1,3 +1,4 @@
+
 namespace HydrusAPI.Web;
 
 /// <summary>
@@ -6,25 +7,34 @@ namespace HydrusAPI.Web;
 public class AssociateUrlRequest : FilesRequest
 {
 	/// <summary>
-	///     Конструктор по умолчанию.
+	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	public AssociateUrlRequest()
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	public AssociateUrlRequest(string hash) : base(hash)
 	{
 	}
 
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="hashes">Хеши (SHA256) файлов.</param>
-	public AssociateUrlRequest(IEnumerable<string>? hashes) : base(hashes)
+	/// <param name="id">Идентификатор файла.</param>
+	public AssociateUrlRequest(ulong id) : base(id)
 	{
 	}
 
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="fileIds">Идентификаторы файлов.</param>
-	public AssociateUrlRequest(IEnumerable<ulong>? fileIds) : base(fileIds)
+	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+	public AssociateUrlRequest(IList<string>? hashes) : base(hashes)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
+	public AssociateUrlRequest(IList<ulong>? fileIds) : base(fileIds)
 	{
 	}
 

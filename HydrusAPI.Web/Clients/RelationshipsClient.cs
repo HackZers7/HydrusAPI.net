@@ -49,12 +49,7 @@ public class RelationshipsClient : ApiClient, IRelationshipsClient
 	/// <inheritdoc />
 	public Task<bool> RemovePotentials(string hash, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
-
-		return RemovePotentials(new FilesRequest
-		{
-			Hash = hash
-		}, cancel);
+		return RemovePotentials(new FilesRequest(hash), cancel);
 	}
 
 	/// <inheritdoc />
@@ -62,21 +57,13 @@ public class RelationshipsClient : ApiClient, IRelationshipsClient
 	{
 		ThrowHelper.ArgumentNotNull(hashes);
 
-		return RemovePotentials(new FilesRequest
-		{
-			Hashes = new List<string>(hashes)
-		});
+		return RemovePotentials(new FilesRequest(hashes));
 	}
 
 	/// <inheritdoc />
 	public Task<bool> RemovePotentials(ulong fileId, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
-
-		return RemovePotentials(new FilesRequest
-		{
-			FileId = fileId
-		}, cancel);
+		return RemovePotentials(new FilesRequest(fileId), cancel);
 	}
 
 	/// <inheritdoc />
@@ -84,10 +71,7 @@ public class RelationshipsClient : ApiClient, IRelationshipsClient
 	{
 		ThrowHelper.ArgumentNotNull(ids);
 
-		return RemovePotentials(new FilesRequest
-		{
-			FileIds = new List<ulong>(ids)
-		});
+		return RemovePotentials(new FilesRequest(ids));
 	}
 
 	/// <inheritdoc />
@@ -121,37 +105,25 @@ public class RelationshipsClient : ApiClient, IRelationshipsClient
 	/// <inheritdoc />
 	public Task<bool> SetKings(string hash, CancellationToken cancel = default)
 	{
-		return SetKings(new FilesRequest
-		{
-			Hash = hash
-		}, cancel);
+		return SetKings(new FilesRequest(hash), cancel);
 	}
 
 	/// <inheritdoc />
 	public Task<bool> SetKings(params string[] hashes)
 	{
-		return SetKings(new FilesRequest
-		{
-			Hashes = new List<string>(hashes)
-		});
+		return SetKings(new FilesRequest(hashes));
 	}
 
 	/// <inheritdoc />
 	public Task<bool> SetKings(ulong fileId, CancellationToken cancel = default)
 	{
-		return SetKings(new FilesRequest
-		{
-			FileId = fileId
-		}, cancel);
+		return SetKings(new FilesRequest(fileId), cancel);
 	}
 
 	/// <inheritdoc />
 	public Task<bool> SetKings(params ulong[] ids)
 	{
-		return SetKings(new FilesRequest
-		{
-			FileIds = new List<ulong>(ids)
-		});
+		return SetKings(new FilesRequest(ids));
 	}
 
 	/// <inheritdoc />

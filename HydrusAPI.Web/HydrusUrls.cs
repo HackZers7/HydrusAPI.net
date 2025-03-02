@@ -118,7 +118,7 @@ public static class HydrusUrls
 	///     Возвращает <see cref="Uri" /> запроса на отмену удаление файлов.
 	/// </summary>
 	/// <returns><see cref="Uri" /> эндпоинта отмены удаления файла.</returns>
-	public static Uri UndeleteFiles()
+	public static Uri RestoreFiles()
 	{
 		return "/add_files/undelete_files"
 			.FormatUri();
