@@ -39,4 +39,9 @@ public interface IRequest
 	///     Возвращает таймаут.
 	/// </summary>
 	TimeSpan Timeout { get; }
+
+	/// <summary>
+	/// 	Функция обратного вызова для отображения процесса отправки.
+	/// </summary>
+	IProgress<int>? ProgressCallback { get; set; }
 }

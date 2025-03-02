@@ -95,7 +95,7 @@ public static class HydrusUrls
 	}
 
 	/// <summary>
-	///     Возвращает <see cref="Uri" /> запроса на отправку файла.
+	///     Возвращает <see cref="Uri" /> запроса отправки файла.
 	/// </summary>
 	/// <returns><see cref="Uri" /> эндпоинта отправки файла.</returns>
 	public static Uri AddFile()

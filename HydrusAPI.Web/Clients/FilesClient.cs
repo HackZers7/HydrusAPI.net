@@ -16,31 +16,27 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public Task<ImportResult> SendFile(string filePath, bool deleteAfterImport = false, CancellationToken cancel = default)
+	public Task<ImportResultResponse> SendFile(string filePath, bool deleteAfterImport = false, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(filePath);
 
 		return SendFile(
-			new AddFileRequest
-			{
-				Path = filePath,
-				DeleteAfterSuccessfulImport = deleteAfterImport
-			}, cancel
+			new AddFileRequest(filePath, deleteAfterImport), cancel
 		);
 	}
 
 	/// <inheritdoc />
-	public Task<ImportResult> SendFile(AddFileRequest request, CancellationToken cancel = default)
+	public Task<ImportResultResponse> SendFile(AddFileRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
-		return ApiConnection.Post<ImportResult>(HydrusUrls.AddFile(), null, request, cancel);
+		return ApiConnection.Post<ImportResultResponse>(HydrusUrls.AddFile(), null, request, progressCallback: null, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<ImportResult> SendFile(Stream file, CancellationToken cancel = default)
+	public Task<ImportResultResponse> SendFile(Stream file, IProgress<int>? progressCallback = default, CancellationToken cancel = default)
 	{
-		return ApiConnection.Post<ImportResult>(HydrusUrls.AddFile(), null, file, cancel);
+		return ApiConnection.Post<ImportResultResponse>(HydrusUrls.AddFile(), null, file, progressCallback, cancel);
 	}
 
 	/// <inheritdoc />
@@ -196,7 +192,7 @@ public class FilesClient : ApiClient, IFilesClient
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(filePath);
 
-		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, new LocalFile(filePath), cancel);
+		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, new LocalFile(filePath), progressCallback: null, cancel);
 	}
 
 	/// <inheritdoc />
@@ -204,7 +200,7 @@ public class FilesClient : ApiClient, IFilesClient
 	{
 		ThrowHelper.ArgumentNotNull(file);
 
-		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, file, cancel);
+		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, file, progressCallback: null, cancel);
 	}
 
 	/// <inheritdoc />

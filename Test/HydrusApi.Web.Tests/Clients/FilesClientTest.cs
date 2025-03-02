@@ -1,5 +1,6 @@
 using HydrusAPI.Web;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Authentication;
@@ -38,6 +39,21 @@ public class FilesClientTest
 			using (var stream = System.IO.File.OpenRead(IoC.FilePath))
 			{
 				var result = await _client.FilesClient.SendFile(stream);
+
+				Assert.That(result, Is.Not.Null);
+				Assert.That(result.Status, Is.EqualTo(FileStatus.Success).Or.EqualTo(FileStatus.AlreadyExists));
+				Assert.That(result.Hash, Is.Not.Empty);
+			}
+		}
+
+		[Test]
+		public async Task FileWithProgress()
+		{
+			var progress = new Progress<int>(TestContext.WriteLine);
+
+			using (var stream = System.IO.File.OpenRead(IoC.FilePath))
+			{
+				var result = await _client.FilesClient.SendFile(stream, progress);
 
 				Assert.That(result, Is.Not.Null);
 				Assert.That(result.Status, Is.EqualTo(FileStatus.Success).Or.EqualTo(FileStatus.AlreadyExists));

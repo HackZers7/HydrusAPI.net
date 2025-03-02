@@ -1,7 +1,7 @@
 namespace HydrusAPI.Web;
 
 /// <summary>
-///     Статусы импорта.
+///     Статус файла.
 /// </summary>
 public enum FileStatus
 {

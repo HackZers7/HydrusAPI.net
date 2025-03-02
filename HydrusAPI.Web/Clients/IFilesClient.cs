@@ -8,7 +8,7 @@ namespace HydrusAPI.Web;
 public interface IFilesClient
 {
 	/// <summary>
-	///     Импортирует файл, который находится на локальной машине с Hydrus. Используется файловый домен по умолчанию "all my files".
+	///     Импортирует файл, который находится на локальной машине с Hydrus. Используется файловый домен по умолчанию - "all my files".
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
@@ -17,11 +17,11 @@ public interface IFilesClient
 	/// <param name="filePath">Путь до файла на локальной машине.</param>
 	/// <param name="deleteAfterImport">Удалить файл после импорта.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="ImportResult" /> с информацией об импортированном файле.</returns>
-	Task<ImportResult> SendFile(string filePath, bool deleteAfterImport = false, CancellationToken cancel = default);
+	/// <returns>Возвращает <see cref="ImportResultResponse" /> с информацией об импортированном файле.</returns>
+	Task<ImportResultResponse> SendFile(string filePath, bool deleteAfterImport = false, CancellationToken cancel = default);
 
 	/// <summary>
-	///     Импортирует файл, который находится на локальной машине с Hydrus. Используется файловый домен по умолчанию "all my files".
+	///     Импортирует файл, который находится на локальной машине с Hydrus. Используется файловый домен по умолчанию - "all my files".
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
@@ -29,8 +29,8 @@ public interface IFilesClient
 	/// </remarks>
 	/// <param name="request">Запрос на импорт файла по пути.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="ImportResult" /> с информацией об импортированном файле.</returns>
-	Task<ImportResult> SendFile(AddFileRequest request, CancellationToken cancel = default);
+	/// <returns>Возвращает <see cref="ImportResultResponse" /> с информацией об импортированном файле.</returns>
+	Task<ImportResultResponse> SendFile(AddFileRequest request, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Импортирует файл из потока.
@@ -40,9 +40,10 @@ public interface IFilesClient
 	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="file">Поток с файлом.</param>
+	/// <param name="progressCallback">Функция обратного вызова для отображения процесса отправки.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="ImportResult" /> с информацией об импортированном файле.</returns>
-	Task<ImportResult> SendFile(Stream file, CancellationToken cancel = default);
+	/// <returns>Возвращает <see cref="ImportResultResponse" /> с информацией об импортированном файле.</returns>
+	Task<ImportResultResponse> SendFile(Stream file, IProgress<int>? progressCallback = default, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Удаляет файлы по их хешу (SHA256). Используется файловый домен по умолчанию "all my files".

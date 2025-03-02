@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Результат импорта.
 /// </summary>
-public class ImportResult : HashResponse
+public class ImportResultResponse : HashResponse
 {
 	/// <summary>
 	///     Статус импорта.

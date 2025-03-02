@@ -75,7 +75,7 @@ public class NetHttpClient : IHttpClient
 	protected virtual HttpRequestMessage BuildRequestMessage(IRequest request)
 	{
 		ThrowHelper.ArgumentNotNull(request);
-		HttpRequestMessage requestMessage = null;
+		HttpRequestMessage? requestMessage = null;
 
 		try
 		{
@@ -96,8 +96,15 @@ public class NetHttpClient : IHttpClient
 					requestMessage.Content = new StringContent(body, Encoding.UTF8, JSON_MEDIA_TYPE);
 					break;
 				case Stream body:
-					requestMessage.Content = new StreamContent(body);
+					HttpContent content = new StreamContent(body);
+
+					if (request.ProgressCallback != null)
+					{
+						content = new ProgressStreamContent(content, request.ProgressCallback);
+					}
+					requestMessage.Content = content;
 					requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(STREAM_MEDIA_TYPE);
+
 					break;
 			}
 		}
