@@ -31,7 +31,7 @@ public class UrlInfoResponse : ApiVersionResponse
 	public string? MatchName { get; set; }
 
 	/// <summary>
-	///     Можно спарсить.
+	///     Можно разобрать.
 	/// </summary>
 	public bool CanParse { get; set; }
 }

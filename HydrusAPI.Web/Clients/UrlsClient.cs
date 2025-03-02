@@ -13,11 +13,21 @@ public class UrlsClient : ApiClient, IUrlsClient
 	}
 
 	/// <inheritdoc />
-	public Task<UrlFilesResponse> GetUrlFiles(string url, bool doublecheckFileSystem = false, CancellationToken cancel = default)
+	public Task<UrlFilesResponse> GetUrlFiles(string url, bool doubleCheckFileSystem = false, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
+		return GetUrlFiles(new GetUrlFilesRequest(url, doubleCheckFileSystem), cancel);
+	}
 
-		return ApiConnection.Get<UrlFilesResponse>(HydrusUrls.GetUrlFiles(url, doublecheckFileSystem), cancel);
+	/// <inheritdoc />
+	public Task<UrlFilesResponse> GetUrlFiles(Uri url, bool doubleCheckFileSystem = false, CancellationToken cancel = default)
+	{
+		return GetUrlFiles(new GetUrlFilesRequest(url, doubleCheckFileSystem), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<UrlFilesResponse> GetUrlFiles(GetUrlFilesRequest request, CancellationToken cancel = default)
+	{
+		return ApiConnection.Get<UrlFilesResponse>(HydrusUrls.GetUrlFiles(request), cancel);
 	}
 
 	/// <inheritdoc />
@@ -25,16 +35,28 @@ public class UrlsClient : ApiClient, IUrlsClient
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
 
+		return GetUrlInfo(new Uri(url));
+	}
+
+	/// <inheritdoc />
+	public Task<UrlInfoResponse> GetUrlInfo(Uri url, CancellationToken cancel = default)
+	{
 		return ApiConnection.Get<UrlInfoResponse>(HydrusUrls.GetUrlInfo(url), cancel);
 	}
 
 	/// <inheritdoc />
 	public Task<ImportUrlResult> ImportFromUrl(string url, CancellationToken cancel = default)
 	{
-		return ImportFromUrl(new ImportFromUrlRequest
-		{
-			Url = new Uri(url)
-		}, cancel);
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
+
+		return ImportFromUrl(new ImportFromUrlRequest(url), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<ImportUrlResult> ImportFromUrl(Uri url, CancellationToken cancel = default)
+	{
+
+		return ImportFromUrl(new ImportFromUrlRequest(url), cancel);
 	}
 
 	/// <inheritdoc />
@@ -46,55 +68,186 @@ public class UrlsClient : ApiClient, IUrlsClient
 	}
 
 	/// <inheritdoc />
-	public Task<bool> AddUrlToFile(string hash, params string[] urls)
+	public Task AddUrlToFile(string hash, string url, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
 
-		return AssociateUrl(new AssociateUrlRequest([hash])
+		return AssociateUrl(new AssociateUrlRequest(hash)
 		{
-			UrlsToAdd = new List<string>(urls)
-		});
+			UrlToAdd = new Uri(url)
+		}, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<bool> AddUrlToFile(ulong id, params string[] urls)
+	public Task AddUrlToFile(string hash, Uri url, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentOutOfRange(id, (ulong)1, ulong.MaxValue);
+		ThrowHelper.ArgumentNotNull(url);
 
-		return AssociateUrl(new AssociateUrlRequest([id])
+		return AssociateUrl(new AssociateUrlRequest(hash)
 		{
-			UrlsToAdd = new List<string>(urls)
-		});
+			UrlToAdd = url
+		}, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<bool> RemoveUrlFromFile(string hash, params string[] urls)
+	public Task AddUrlToFile(string hash, IList<string> urls, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
+		ThrowHelper.ArgumentNotNull(urls);
 
-		return AssociateUrl(new AssociateUrlRequest([hash])
+		return AssociateUrl(new AssociateUrlRequest(hash)
 		{
-			UrlsToDelete = new List<string>(urls)
-		});
+			UrlsToAdd = urls.Select(x => new Uri(x)).ToList()
+		}, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<bool> RemoveUrlFromFile(ulong id, params string[] urls)
+	public Task AddUrlToFile(string hash, IList<Uri> urls, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentOutOfRange(id, (ulong)1, ulong.MaxValue);
+		ThrowHelper.ArgumentNotNull(urls);
 
-		return AssociateUrl(new AssociateUrlRequest([id])
+		return AssociateUrl(new AssociateUrlRequest(hash)
 		{
-			UrlsToDelete = new List<string>(urls)
-		});
+			UrlsToAdd = urls
+		}, cancel);
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> AssociateUrl(AssociateUrlRequest request, CancellationToken cancel = default)
+	public Task AddUrlToFile(ulong id, string url, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
+
+		return AssociateUrl(new AssociateUrlRequest(id)
+		{
+			UrlToAdd = new Uri(url)
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task AddUrlToFile(ulong id, Uri url, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(url);
+
+		return AssociateUrl(new AssociateUrlRequest(id)
+		{
+			UrlToAdd = url
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task AddUrlToFile(ulong id, IList<string> urls, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(urls);
+
+		return AssociateUrl(new AssociateUrlRequest(id)
+		{
+			UrlsToAdd = urls.Select(x => new Uri(x)).ToList()
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task AddUrlToFile(ulong id, IList<Uri> urls, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(urls);
+
+		return AssociateUrl(new AssociateUrlRequest(id)
+		{
+			UrlsToAdd = urls
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task RemoveUrlFromFile(string hash, string url, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
+
+		return AssociateUrl(new AssociateUrlRequest(hash)
+		{
+			UrlToDelete = new Uri(url)
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task RemoveUrlFromFile(string hash, Uri url, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(url);
+
+		return AssociateUrl(new AssociateUrlRequest(hash)
+		{
+			UrlToDelete = url
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task RemoveUrlFromFile(string hash, IList<string> urls, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(urls);
+
+		return AssociateUrl(new AssociateUrlRequest(hash)
+		{
+			UrlsToDelete = urls.Select(x => new Uri(x)).ToList()
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task RemoveUrlFromFile(string hash, IList<Uri> urls, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(urls);
+
+		return AssociateUrl(new AssociateUrlRequest(hash)
+		{
+			UrlsToDelete = urls
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task RemoveUrlFromFile(ulong id, string url, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
+
+		return AssociateUrl(new AssociateUrlRequest(id)
+		{
+			UrlToDelete = new Uri(url)
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task RemoveUrlFromFile(ulong id, Uri url, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(url);
+
+		return AssociateUrl(new AssociateUrlRequest(id)
+		{
+			UrlToDelete = url
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task RemoveUrlFromFile(ulong id, IList<string> urls, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(urls);
+
+		return AssociateUrl(new AssociateUrlRequest(id)
+		{
+			UrlsToDelete = urls.Select(x => new Uri(x)).ToList()
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task RemoveUrlFromFile(ulong id, IList<Uri> urls, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(urls);
+
+		return AssociateUrl(new AssociateUrlRequest(id)
+		{
+			UrlsToDelete = urls
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task AssociateUrl(AssociateUrlRequest request, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
-		var response = await ApiConnection.Post(HydrusUrls.AssociateUrl(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return ApiConnection.Post(HydrusUrls.AssociateUrl(), null, request, cancel);
 	}
 }

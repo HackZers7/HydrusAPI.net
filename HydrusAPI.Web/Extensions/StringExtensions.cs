@@ -107,6 +107,7 @@ internal static class StringExtensions
 			IEnumerable<int> value => value.ToStringArray().UriEncode(),
 			IEnumerable<ulong> value => value.ToStringArray().UriEncode(),
 			IEnumerable<object> value => value.Select(ToParameter).ToStringArray().UriEncode(),
+			Uri value => value.ToString().UriEncode(),
 			_ => throw new NotSupportedException()
 		};
 	}

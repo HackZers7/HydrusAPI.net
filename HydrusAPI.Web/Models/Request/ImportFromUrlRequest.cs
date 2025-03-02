@@ -6,33 +6,28 @@ namespace HydrusAPI.Web;
 public class ImportFromUrlRequest : FileDomainRequest
 {
 	/// <summary>
-	///     Конструктор по умолчанию.
+	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	public ImportFromUrlRequest()
+	/// <param name="url">URL</param>
+	public ImportFromUrlRequest(string url) : this(new Uri(url))
 	{
 	}
 
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
-	/// <param name="uri">URL</param>
-	public ImportFromUrlRequest(string uri) : this(new Uri(uri))
+	/// <param name="url">URL</param>
+	public ImportFromUrlRequest(Uri url)
 	{
-	}
+		ThrowHelper.ArgumentNotNull(url);
 
-	/// <summary>
-	///     Инициализирует новый экземпляр класса.
-	/// </summary>
-	/// <param name="uri">URL</param>
-	public ImportFromUrlRequest(Uri uri)
-	{
-		Url = uri;
+		Url = url;
 	}
 
 	/// <summary>
 	///     URL файла или файлов для импорта.
 	/// </summary>
-	public Uri? Url { get; set; }
+	public Uri Url { get; set; }
 
 	/// <summary>
 	///     Необязательно, идентификатор страницы, в которой будет произведен импорт.

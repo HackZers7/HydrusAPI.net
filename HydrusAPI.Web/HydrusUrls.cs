@@ -177,21 +177,17 @@ public static class HydrusUrls
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса поиска файла по url.
 	/// </summary>
-	/// <param name="url">URl файла.</param>
-	/// <param name="doublecheckFileSystem">
-	///     Если true – то любой результат, который <see cref="FileStatus.AlreadyExists" /> (2), будет дважды сверен с фактической файловой системой.
-	///     Эта проверка выполняется в любом обычном процессе импорта файлов, для проверки и исправления отсутствующих файлов (если файл отсутствует, статус становится <see cref="FileStatus.FileNotExists" /> (0)).
-	/// </param>
+	/// <param name="request">Запрос.</param>
 	/// <returns><see cref="Uri" /> эндпоинта поиска файла по url.</returns>
-	public static Uri GetUrlFiles(string url, bool doublecheckFileSystem = false)
+	public static Uri GetUrlFiles(GetUrlFilesRequest request)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
+		ThrowHelper.ArgumentNotNull(request);
 
 		return "/add_urls/get_url_files?"
 			.FormatUri(new Dictionary<string, object?>
 			{
-				{ "url", url },
-				{ "doublecheck_file_system", doublecheckFileSystem }
+				{ "url", request.Url },
+				{ "doublecheck_file_system", request.DoubleCheckFileSystem }
 			}
 		);
 	}
@@ -201,11 +197,11 @@ public static class HydrusUrls
 	/// </summary>
 	/// <param name="url">URL</param>
 	/// <returns><see cref="Uri" /> эндпоинта генерации хешей.</returns>
-	public static Uri GetUrlInfo(string url)
+	public static Uri GetUrlInfo(Uri url)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(url);
+		ThrowHelper.ArgumentNotNull(url);
 
-		var encodedUrl = url.UriEncode();
+		var encodedUrl = url.ToString().UriEncode();
 
 		return "/add_urls/get_url_info?url={0}"
 			.FormatUri(encodedUrl);

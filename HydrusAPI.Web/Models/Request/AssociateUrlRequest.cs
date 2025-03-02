@@ -41,22 +41,22 @@ public class AssociateUrlRequest : FilesRequest
 	/// <summary>
 	///     Ссылка для ассоциации (добавления).
 	/// </summary>
-	public string? UrlToAdd { get; set; }
+	public Uri? UrlToAdd { get; set; }
 
 	/// <summary>
 	///     Коллекция ссылок для ассоциации (добавления).
 	/// </summary>
-	public List<string>? UrlsToAdd { get; set; }
+	public IList<Uri>? UrlsToAdd { get; set; }
 
 	/// <summary>
 	///     Ссылка для диссоциации (удаления).
 	/// </summary>
-	public string? UrlToDelete { get; set; }
+	public Uri? UrlToDelete { get; set; }
 
 	/// <summary>
 	///     Коллекция ссылок для диссоциации (удаления).
 	/// </summary>
-	public List<string>? UrlsToDelete { get; set; }
+	public IList<Uri>? UrlsToDelete { get; set; }
 
 	/// <summary>
 	///     Нормализовать URL. Работает только для ассоциации.

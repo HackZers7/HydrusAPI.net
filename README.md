@@ -40,10 +40,10 @@ The latest supported version of Hydrus API: 78 (607)
 
 | URL                     | Status | Request builder | Structured type |
 | ----------------------- | :----: | :-------------: | :-------------: |
-| /add_urls/get_url_files |   ⚠️    |        ❌        |        ❌        |
-| /add_urls/get_url_info  |   ⚠️    |        ❌        |        ❌        |
-| /add_urls/add_url       |   ⚠️    |        ❌        |        ❌        |
-| /add_urls/associate_url |   ⚠️    |        ❌        |   Not needed    |
+| /add_urls/get_url_files |   ✅    |        ❌        |        ❌        |
+| /add_urls/get_url_info  |   ✅    |        ❌        |        ❌        |
+| /add_urls/add_url       |   ✅    |        ❌        |        ❌        |
+| /add_urls/associate_url |   ✅    |        ❌        |   Not needed    |
 
 ### Editing File Tags
 

@@ -2,7 +2,7 @@ using HydrusAPI.Web;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using File = System.IO.File;
+using System.IO;
 
 namespace HydrusApi.Web.Tests.Clients;
 
@@ -11,13 +11,13 @@ public class UrlsClientTest
 {
 	private readonly IHydrusClient _client;
 
-	public static string URL = "http://safebooru.org/index.php?page=post&s=view&id=2753608";
+	public static string URL = "https://safebooru.org/index.php?id=2753608&page=post&s=view";
 	public static string URL_2 = "https://safebooru.org/index.php?page=post&s=view&id=3272525";
+	public static string URL_3 = "https://safebooru.org/index.php?page=post&s=view&id=5592221";
 	private readonly string _badUrl = "https://ya.ru";
 
 	public static string MyTagsServiceKey = "6c6f63616c2074616773";
 
-	// ReSharper disable once ConvertConstructorToMemberInitializers
 	public UrlsClientTest()
 	{
 		_client = IoC.GetHydrusClient();
@@ -55,7 +55,6 @@ public class UrlsClientTest
 	{
 		private readonly IHydrusClient _client;
 
-		// ReSharper disable once ConvertConstructorToMemberInitializers
 		public ImportUrlTest()
 		{
 			_client = IoC.GetHydrusClient();
@@ -73,9 +72,10 @@ public class UrlsClientTest
 		[Test]
 		public async Task ImportWithShowDestinationPage()
 		{
-			var request = new ImportFromUrlRequest(URL_2);
-
-			request.ShowDestinationPage = true;
+			var request = new ImportFromUrlRequest(URL_2)
+			{
+				ShowDestinationPage = true
+			};
 
 			var data = await _client.UrlsClient.ImportFromUrl(request);
 
@@ -86,9 +86,10 @@ public class UrlsClientTest
 		[Test]
 		public async Task ImportWithDestinationPageName()
 		{
-			var request = new ImportFromUrlRequest(URL_2);
-
-			request.DestinationPageName = "test";
+			var request = new ImportFromUrlRequest(URL_2)
+			{
+				DestinationPageName = "test"
+			};
 
 			var data = await _client.UrlsClient.ImportFromUrl(request);
 
@@ -99,7 +100,7 @@ public class UrlsClientTest
 		[Test]
 		public async Task ImportWithAdditionalTags()
 		{
-			var request = new ImportFromUrlRequest(URL_2)
+			var request = new ImportFromUrlRequest(URL_3)
 			{
 				ServiceKeysToAdditionalTags = new Dictionary<string, List<string>>
 				{
@@ -141,27 +142,25 @@ public class UrlsClientTest
 		[Test]
 		public async Task AddByHash()
 		{
-			using (var stream = File.OpenRead(IoC.FilePath2))
-			{
-				var hash = Utils.GetSha256(stream);
-				var data = await _client.UrlsClient.AddUrlToFile(hash, URL);
+			await _client.UrlsClient.AddUrlToFile(IoC.FileHash2, URL);
+		}
 
-				Assert.That(data, Is.Not.Null);
-				Assert.That(data, Is.True);
-			}
+		[Test]
+		public async Task AddById()
+		{
+			await _client.UrlsClient.AddUrlToFile(IoC.FileId, URL);
 		}
 
 		[Test]
 		public async Task DeleteByHash()
 		{
-			using (var stream = File.OpenRead(IoC.FilePath2))
-			{
-				var hash = Utils.GetSha256(stream);
-				var data = await _client.UrlsClient.RemoveUrlFromFile(hash, URL);
+			await _client.UrlsClient.RemoveUrlFromFile(IoC.FileHash2, URL);
+		}
 
-				Assert.That(data, Is.Not.Null);
-				Assert.That(data, Is.True);
-			}
+		[Test]
+		public async Task DeleteById()
+		{
+			await _client.UrlsClient.RemoveUrlFromFile(IoC.FileId, URL);
 		}
 	}
 }
