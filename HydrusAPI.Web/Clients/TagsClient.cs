@@ -13,40 +13,32 @@ public class TagsClient : ApiClient, ITagsClient
 	}
 
 	/// <inheritdoc />
-	public Task<IEnumerable<string>> CleanTags(params string[] tags)
+	public Task<TagsResponse> CleanTags(IList<string> tags, CancellationToken cancel = default)
 	{
-		return CleanTags(tags, default);
+		return ApiConnection.Get<TagsResponse>(HydrusUrls.CleanTags(tags), cancel);
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<string>> CleanTags(IEnumerable<string> tags, CancellationToken cancel = default)
-	{
-		var response = await ApiConnection.Get<TagsResponse>(HydrusUrls.CleanTags(tags), cancel);
-		return response.Tags;
-	}
-
-	/// <inheritdoc />
-	public Task<SiblingsAndParentsResponse> GetSiblingsAndParents(params string[] tags)
-	{
-		return GetSiblingsAndParents(tags, default);
-	}
-
-	/// <inheritdoc />
-	public Task<SiblingsAndParentsResponse> GetSiblingsAndParents(IEnumerable<string> tags, CancellationToken cancel = default)
+	public Task<SiblingsAndParentsResponse> GetSiblingsAndParents(IList<string> tags, CancellationToken cancel = default)
 	{
 		return ApiConnection.Get<SiblingsAndParentsResponse>(HydrusUrls.GetSiblingsAndParents(tags), cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<TagsSearchResponse> SearchTags(string search, FileDomainRequest? fileDomain = null, string? tagServiceKey = null, TagDisplay tagDisplayType = TagDisplay.Storage, CancellationToken cancel = default)
+	public Task<TagsSearchResponse> SearchTags(string search, CancellationToken cancel = default)
 	{
-		return ApiConnection.Get<TagsSearchResponse>(HydrusUrls.SearchTags(search, fileDomain, tagServiceKey, tagDisplayType), cancel);
+		return SearchTags(new SearchTagsRequest(search), cancel);
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> AddTags(AddTagsRequest request, CancellationToken cancel = default)
+	public Task<TagsSearchResponse> SearchTags(SearchTagsRequest request, CancellationToken cancel = default)
 	{
-		var response = await ApiConnection.Post(HydrusUrls.AddTags(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return ApiConnection.Get<TagsSearchResponse>(HydrusUrls.SearchTags(request), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task AddTags(AddTagsRequest request, CancellationToken cancel = default)
+	{
+		return ApiConnection.Post(HydrusUrls.AddTags(), null, request, cancel);
 	}
 }

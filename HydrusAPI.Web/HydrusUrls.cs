@@ -230,56 +230,58 @@ public static class HydrusUrls
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса для приведения тегов к правилам к Hydrus.
 	/// </summary>
-	/// <param name="tags">Перечисление тегов.</param>
+	/// <param name="tags">Коллекция тегов.</param>
 	/// <returns><see cref="Uri" /> эндпоинта приведения тегов к правилам к Hydrus.</returns>
-	public static Uri CleanTags(IEnumerable<string> tags)
+	public static Uri CleanTags(IList<string> tags)
 	{
-		var encodedTags = tags.ToStringArray()
-			.UriEncode();
+		ThrowHelper.ArgumentNotNull(tags);
+		ThrowHelper.ArgumentNegativeOrZero(tags.Count);
 
-		return "/add_tags/clean_tags?tags={0}"
-			.FormatUri(encodedTags);
+		return "/add_tags/clean_tags?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "tags", tags }
+			}
+		);
 	}
 
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса получения родителей и сестер.
 	/// </summary>
-	/// <param name="tags">Перечисление тегов.</param>
+	/// <param name="tags">Коллекция тегов.</param>
 	/// <returns><see cref="Uri" /> эндпоинта получения родителей и сестер.</returns>
-	public static Uri GetSiblingsAndParents(IEnumerable<string> tags)
+	public static Uri GetSiblingsAndParents(IList<string> tags)
 	{
-		var encodedTags = tags.ToStringArray()
-			.UriEncode();
+		ThrowHelper.ArgumentNotNull(tags);
+		ThrowHelper.ArgumentNegativeOrZero(tags.Count);
 
-		return "/add_tags/get_siblings_and_parents?tags={0}"
-			.FormatUri(encodedTags);
+		return "/add_tags/get_siblings_and_parents?"
+			.FormatUri(new Dictionary<string, object?>
+			{
+				{ "tags", tags }
+			}
+		);
 	}
 
 	/// <summary>
-	///     Возвращает <see cref="Uri" /> запроса поиска по тегам.
+	///     Возвращает <see cref="Uri" /> запроса поиска тегов.
 	/// </summary>
-	/// <param name="search">Запрос для поиска, формат такой же как и для интерфейса Hydrus.</param>
-	/// <param name="fileDomain">Файловый домен.</param>
-	/// <param name="tagServiceKey">Ключ домена тегов в котором выполняется поиск. По умолчанию - "all known tags".</param>
-	/// <param name="tagDisplayType">Указывает на то, следует ли выполнять поиск по необработанным или обработанным тегам.</param>
+	/// <param name="request">Запрос.</param>
 	/// <returns><see cref="Uri" /> эндпоинта поиска по тегам.</returns>
-	public static Uri SearchTags(
-		string search,
-		FileDomainRequest? fileDomain = null,
-		string? tagServiceKey = null,
-		TagDisplay tagDisplayType = TagDisplay.Storage
-	)
+	public static Uri SearchTags(SearchTagsRequest request)
 	{
+		ThrowHelper.ArgumentNotNull(request);
+
 		return "/add_tags/search_tags?"
 			.FormatUri(new Dictionary<string, object?>
 			{
-				{ "search", search },
-				{ "file_service_key", fileDomain?.FileServiceKey },
-				{ "file_service_keys", fileDomain?.FileServiceKeys },
-				{ "deleted_file_service_key", fileDomain?.DeletedFileServiceKey },
-				{ "deleted_file_service_keys", fileDomain?.DeletedFileServiceKeys },
-				{ "tag_service_key", !string.IsNullOrWhiteSpace(tagServiceKey) ? tagServiceKey : null },
-				{ "tag_display_type", tagDisplayType.ToString().ToLower() }
+				{ "search", request.Search },
+				{ "file_service_key", request.FileServiceKey },
+				{ "file_service_keys", request.FileServiceKeys },
+				{ "deleted_file_service_key", request.DeletedFileServiceKey },
+				{ "deleted_file_service_keys", request.DeletedFileServiceKeys },
+				{ "tag_service_key", request.TagServiceKey },
+				{ "tag_display_type", request.TagDisplayType.ToString().ToLower() }
 			}
 		);
 	}
@@ -291,7 +293,7 @@ public static class HydrusUrls
 	public static Uri AddTags()
 	{
 		return "/add_tags/add_tags"
-		.FormatUri();
+			.FormatUri();
 	}
 
 	/// <summary>
@@ -301,7 +303,7 @@ public static class HydrusUrls
 	public static Uri SetRating()
 	{
 		return "/edit_ratings/set_rating"
-		.FormatUri();
+			.FormatUri();
 	}
 
 	/// <summary>
@@ -311,7 +313,7 @@ public static class HydrusUrls
 	public static Uri IncrementFileViewtime()
 	{
 		return "/edit_times/increment_file_viewtime"
-		.FormatUri();
+			.FormatUri();
 	}
 
 	/// <summary>
@@ -321,7 +323,7 @@ public static class HydrusUrls
 	public static Uri SetFileViewtime()
 	{
 		return "/edit_times/set_file_viewtime"
-		.FormatUri();
+			.FormatUri();
 	}
 
 	/// <summary>
@@ -331,7 +333,7 @@ public static class HydrusUrls
 	public static Uri SetTime()
 	{
 		return "/edit_times/set_time"
-		.FormatUri();
+			.FormatUri();
 	}
 
 	/// <summary>
@@ -341,7 +343,7 @@ public static class HydrusUrls
 	public static Uri SetNotes()
 	{
 		return "/add_notes/set_notes"
-		.FormatUri();
+			.FormatUri();
 	}
 
 	/// <summary>
@@ -351,7 +353,7 @@ public static class HydrusUrls
 	public static Uri DeleteNotes()
 	{
 		return "/add_notes/delete_notes"
-		.FormatUri();
+			.FormatUri();
 	}
 
 	/// <summary>

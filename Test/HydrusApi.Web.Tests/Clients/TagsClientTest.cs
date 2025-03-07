@@ -1,11 +1,7 @@
 using HydrusAPI.Web;
 using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using File = System.IO.File;
-
-// ReSharper disable PossibleMultipleEnumeration
 
 namespace HydrusApi.Web.Tests.Clients;
 
@@ -14,16 +10,15 @@ public class TagsClientTest
 {
 	private readonly IHydrusClient _client;
 
-	public static string MyTagsServiceKey = "6c6f63616c2074616773";
-
-	public TestContext TestContext { get; set; } = default!;
+	public readonly static string MyTagsServiceKey = "6c6f63616c2074616773";
 
 	public static readonly string[] Tags =
 	{
 		"test",
 		"tag1",
 		"tag2",
-		"tags_test"
+		"tags_test",
+		"tags2__"
 	};
 
 	// ReSharper disable once ConvertConstructorToMemberInitializers
@@ -40,7 +35,7 @@ public class TagsClientTest
 		TestContext.WriteLine(string.Join(", ", tags));
 
 		Assert.That(tags, Is.Not.Null);
-		Assert.That(tags.Count(), Is.GreaterThan(0));
+		Assert.That(tags.Tags.Count, Is.GreaterThan(0));
 	}
 
 	[Test]
@@ -70,9 +65,6 @@ public class TagsClientTest
 			{ MyTagsServiceKey, new List<string>(Tags) }
 		};
 
-		var tags = await _client.TagsClient.AddTags(request);
-
-		Assert.That(tags, Is.Not.Null);
-		Assert.That(tags, Is.True);
+		await _client.TagsClient.AddTags(request);
 	}
 }

@@ -49,10 +49,10 @@ The latest supported version of Hydrus API: 78 (607)
 
 | URL                                | Status | Request builder | Structured type |
 | ---------------------------------- | :----: | :-------------: | :-------------: |
-| /add_tags/clean_tags               |   ⚠️    |        ❌        |        ❌        |
-| /add_tags/get_siblings_and_parents |   ⚠️    |        ❌        |        ❌        |
-| /add_tags/search_tags              |   ⚠️    |        ❌        |        ❌        |
-| /add_tags/add_tags                 |   ⚠️    |        ❌        |   Not needed    |
+| /add_tags/clean_tags               |   ✅    |        ❌        |        ❌        |
+| /add_tags/get_siblings_and_parents |   ✅    |        ❌        |        ❌        |
+| /add_tags/search_tags              |   ✅    |        ❌        |        ❌        |
+| /add_tags/add_tags                 |   ✅    |        ❌        |   Not needed    |
 
 ### Editing File Ratings
 
