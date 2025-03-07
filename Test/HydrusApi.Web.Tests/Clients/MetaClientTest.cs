@@ -10,10 +10,24 @@ public class MetaClientTest
 {
 	private readonly IHydrusClient _client;
 
-	// ReSharper disable once ConvertConstructorToMemberInitializers
+	private readonly static string RatingServiceKey = "dd7876d8df3c75058427d7258ff0037f8396a93b6c28dcc537797431e669d8b5";
+
 	public MetaClientTest()
 	{
 		_client = IoC.GetHydrusClient();
+	}
+
+	[Test]
+	public async Task SetRating()
+	{
+		await _client.MetaClient.SetRating(IoC.FileHash, RatingServiceKey, 2);
+	}
+
+	[Test]
+	public async Task UnSetRating()
+	{
+		// TODO: Необходимо создать атрибут, который будет читаться при серилизации
+		await _client.MetaClient.SetRating(IoC.FileHash, RatingServiceKey);
 	}
 
 	[Test]
@@ -23,12 +37,12 @@ public class MetaClientTest
 		{
 			"system:everything"
 		});
-		
+
 		var data = await _client.MetaClient.GetMetaData(search.Hashes!);
 
 		Assert.That(data, Is.Not.Null);
 	}
-	
+
 	[Test]
 	public async Task GetMetadataOnlyId()
 	{
@@ -36,7 +50,7 @@ public class MetaClientTest
 		{
 			"system:everything"
 		});
-		
+
 		var data = await _client.MetaClient.GetId(search.Hashes!);
 
 		Assert.That(data, Is.Not.Null);

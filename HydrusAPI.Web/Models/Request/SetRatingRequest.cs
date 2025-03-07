@@ -1,4 +1,3 @@
-
 namespace HydrusAPI.Web;
 
 /// <summary>
@@ -10,44 +9,60 @@ public class SetRatingRequest : FilesRequest
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
 	/// <param name="hash">Хеш (SHA256) файла.</param>
-	public SetRatingRequest(string hash) : base(hash)
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	public SetRatingRequest(string hash, string ratingServiceKey) : base(hash)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(ratingServiceKey);
+
+		RatingServiceKey = ratingServiceKey;
 	}
 
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
 	/// <param name="id">Идентификатор файла.</param>
-	public SetRatingRequest(ulong id) : base(id)
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	public SetRatingRequest(ulong id, string ratingServiceKey) : base(id)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(ratingServiceKey);
+
+		RatingServiceKey = ratingServiceKey;
 	}
 
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
 	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
-	public SetRatingRequest(IList<string>? hashes) : base(hashes)
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	public SetRatingRequest(IList<string>? hashes, string ratingServiceKey) : base(hashes)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(ratingServiceKey);
+
+		RatingServiceKey = ratingServiceKey;
 	}
 
 	/// <summary>
 	///     Инициализирует новый экземпляр класса.
 	/// </summary>
 	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
-	public SetRatingRequest(IList<ulong>? fileIds) : base(fileIds)
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	public SetRatingRequest(IList<ulong>? fileIds, string ratingServiceKey) : base(fileIds)
 	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(ratingServiceKey);
+
+		RatingServiceKey = ratingServiceKey;
 	}
 
 	/// <summary>
 	///     Шестнадцатеричный идентификатор сервиса.
 	/// </summary>
-	public string RatingServiceKey { get; set; } = default!;
+	public string RatingServiceKey { get; set; }
 
 	/// <summary>
 	///     Рейтинг.
-	///     <remarks>
-	///         Может быть только <see cref="int" /> или <see cref="bool" /> в зависимости от типа рейтинговой системы.
-	///     </remarks>
 	/// </summary>
-	public object? Rating { get; }
+	/// <remarks>
+	///		Может быть только <see cref="int" /> или <see cref="bool" /> в зависимости от типа рейтинговой системы.
+	/// </remarks>
+	public object? Rating { get; set; }
 }

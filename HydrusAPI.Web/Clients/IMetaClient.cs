@@ -12,10 +12,122 @@ public interface IMetaClient
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.EditFileRatings" />.
 	/// </remarks>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	/// <param name="rating">Рейтинг.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetRating(string hash, string ratingServiceKey, int? rating = null, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает рейтинг файлу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileRatings" />.
+	/// </remarks>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	/// <param name="rating">Рейтинг.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetRating(string hash, string ratingServiceKey, bool rating, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает рейтинг файлу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileRatings" />.
+	/// </remarks>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	/// <param name="rating">Рейтинг.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetRating(IList<string> hashes, string ratingServiceKey, int? rating = null, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает рейтинг файлу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileRatings" />.
+	/// </remarks>
+	/// <param name="hashes">Хеши (SHA256) файлов.</param>
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	/// <param name="rating">Рейтинг.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetRating(IList<string> hashes, string ratingServiceKey, bool rating, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает рейтинг файлу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileRatings" />.
+	/// </remarks>
+	/// <param name="id">Идентификатор файла.</param>
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	/// <param name="rating">Рейтинг.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetRating(ulong id, string ratingServiceKey, int? rating = null, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает рейтинг файлу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileRatings" />.
+	/// </remarks>
+	/// <param name="id">Идентификатор файла.</param>
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	/// <param name="rating">Рейтинг.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetRating(ulong id, string ratingServiceKey, bool rating, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает рейтинг файлу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileRatings" />.
+	/// </remarks>
+	/// <param name="ids">Идентификаторы файлов.</param>
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	/// <param name="rating">Рейтинг.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetRating(IList<ulong> ids, string ratingServiceKey, int? rating = null, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает рейтинг файлу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileRatings" />.
+	/// </remarks>
+	/// <param name="ids">Идентификаторы файлов.</param>
+	/// <param name="ratingServiceKey">Шестнадцатеричный идентификатор сервиса.</param>
+	/// <param name="rating">Рейтинг.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetRating(IList<ulong> ids, string ratingServiceKey, bool rating, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает рейтинг файлу.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileRatings" />.
+	/// </remarks>
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-	Task<bool> SetRating(SetRatingRequest request, CancellationToken cancel = default);
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetRating(SetRatingRequest request, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Добавляет время в статистику просмотра.

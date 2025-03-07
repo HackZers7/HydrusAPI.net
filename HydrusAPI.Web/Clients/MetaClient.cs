@@ -13,10 +13,84 @@ public class MetaClient : ApiClient, IMetaClient
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> SetRating(SetRatingRequest request, CancellationToken cancel = default)
+	public Task SetRating(string hash, string ratingServiceKey, int? rating = null, CancellationToken cancel = default)
 	{
-		var response = await ApiConnection.Post(HydrusUrls.SetRating(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return SetRating(new SetRatingRequest(hash, ratingServiceKey)
+		{
+			Rating = rating
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetRating(string hash, string ratingServiceKey, bool rating, CancellationToken cancel = default)
+	{
+		return SetRating(new SetRatingRequest(hash, ratingServiceKey)
+		{
+			Rating = rating
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetRating(IList<string> hashes, string ratingServiceKey, int? rating = null, CancellationToken cancel = default)
+	{
+		return SetRating(new SetRatingRequest(hashes, ratingServiceKey)
+		{
+			Rating = rating
+		}, cancel);
+	}
+
+
+	/// <inheritdoc />
+	public Task SetRating(IList<string> hashes, string ratingServiceKey, bool rating, CancellationToken cancel = default)
+	{
+		return SetRating(new SetRatingRequest(hashes, ratingServiceKey)
+		{
+			Rating = rating
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetRating(ulong id, string ratingServiceKey, int? rating = null, CancellationToken cancel = default)
+	{
+		return SetRating(new SetRatingRequest(id, ratingServiceKey)
+		{
+			Rating = rating
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetRating(ulong id, string ratingServiceKey, bool rating, CancellationToken cancel = default)
+	{
+		return SetRating(new SetRatingRequest(id, ratingServiceKey)
+		{
+			Rating = rating
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetRating(IList<ulong> ids, string ratingServiceKey, int? rating = null, CancellationToken cancel = default)
+	{
+		return SetRating(new SetRatingRequest(ids, ratingServiceKey)
+		{
+			Rating = rating
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetRating(IList<ulong> ids, string ratingServiceKey, bool rating, CancellationToken cancel = default)
+	{
+		return SetRating(new SetRatingRequest(ids, ratingServiceKey)
+		{
+			Rating = rating
+		}, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetRating(SetRatingRequest request, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return ApiConnection.Post(HydrusUrls.SetRating(), null, request, cancel);
 	}
 
 	/// <inheritdoc />
