@@ -411,9 +411,8 @@ public class FilesClient : ApiClient, IFilesClient
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
 
-		return Render(new RenderRequest
+		return Render(new RenderRequest(hash)
 		{
-			Hash = hash,
 			Download = download,
 			RenderFormat = (int)renderFormat,
 			RenderQuality = renderQuality,
@@ -435,9 +434,8 @@ public class FilesClient : ApiClient, IFilesClient
 	{
 		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
 
-		return Render(new RenderRequest
+		return Render(new RenderRequest(fileId)
 		{
-			FileId = fileId,
 			Download = download,
 			RenderFormat = (int)renderFormat,
 			RenderQuality = renderQuality,

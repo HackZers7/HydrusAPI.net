@@ -136,10 +136,126 @@ public interface IMetaClient
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.EditFileTimes" />.
 	/// </remarks>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	/// <param name="type">Тип холста.</param>
+	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task IncrementFileViewTime(string hash, CanvasTypes type, double viewTime, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Добавляет время в статистику просмотра.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileTimes" />.
+	/// </remarks>
+	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+	/// <param name="type">Тип холста.</param>
+	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task IncrementFileViewTime(IList<string>? hashes, CanvasTypes type, double viewTime, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Добавляет время в статистику просмотра.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileTimes" />.
+	/// </remarks>
+	/// <param name="id">Идентификатор файла.</param>
+	/// <param name="type">Тип холста.</param>
+	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task IncrementFileViewTime(ulong id, CanvasTypes type, double viewTime, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Добавляет время в статистику просмотра.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileTimes" />.
+	/// </remarks>
+	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
+	/// <param name="type">Тип холста.</param>
+	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task IncrementFileViewTime(IList<ulong>? fileIds, CanvasTypes type, double viewTime, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Добавляет время в статистику просмотра.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileTimes" />.
+	/// </remarks>
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-	Task<bool> IncrementFileViewtime(ViewtimeRequest request, CancellationToken cancel = default);
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task IncrementFileViewTime(ViewTimeRequest request, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает статичное время просмотра в статистике.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileTimes" />.
+	/// </remarks>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	/// <param name="type">Тип холста.</param>
+	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
+	/// <param name="views">Необязательно, количество добавляемых просмотров. По умолчанию - 1.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetFileViewTime(string hash, CanvasTypes type, double viewTime, int views = 1, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает статичное время просмотра в статистике.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileTimes" />.
+	/// </remarks>
+	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+	/// <param name="type">Тип холста.</param>
+	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
+	/// <param name="views">Необязательно, количество добавляемых просмотров. По умолчанию - 1.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetFileViewTime(IList<string>? hashes, CanvasTypes type, double viewTime, int views = 1, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает статичное время просмотра в статистике.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileTimes" />.
+	/// </remarks>
+	/// <param name="id">Идентификатор файла.</param>
+	/// <param name="type">Тип холста.</param>
+	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
+	/// <param name="views">Необязательно, количество добавляемых просмотров. По умолчанию - 1.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetFileViewTime(ulong id, CanvasTypes type, double viewTime, int views = 1, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Устанавливает статичное время просмотра в статистике.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileTimes" />.
+	/// </remarks>
+	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
+	/// <param name="type">Тип холста.</param>
+	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
+	/// <param name="views">Необязательно, количество добавляемых просмотров. По умолчанию - 1.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetFileViewTime(IList<ulong>? fileIds, CanvasTypes type, double viewTime, int views = 1, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Устанавливает статичное время просмотра в статистике.
@@ -150,8 +266,8 @@ public interface IMetaClient
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-	Task<bool> SetFileViewtime(ViewtimeRequest request, CancellationToken cancel = default);
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetFileViewTime(ViewTimeRequest request, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Устанавливает время для файла.
@@ -162,8 +278,8 @@ public interface IMetaClient
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-	Task<bool> SetTime(SetTimeRequest request, CancellationToken cancel = default);
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task SetTime(SetTimeRequest request, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Устанавливает заметки файлу.
@@ -174,8 +290,34 @@ public interface IMetaClient
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="NotesResponse" /> с текущими заметками.</returns>
-	Task<NotesResponse> SetNotes(SetNotesRequest request, CancellationToken cancel = default);
+	/// <returns>Возвращает <see cref="SetNotesResponse" /> с текущими заметками.</returns>
+	Task<SetNotesResponse> SetNotes(SetNotesRequest request, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Производит удаление заметок.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileNotes" />.
+	/// </remarks>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	/// <param name="names">Коллекция наименований заметок.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task DeleteNotes(string hash, IList<string> names, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Производит удаление заметок.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.EditFileNotes" />.
+	/// </remarks>
+	/// <param name="id">Идентификатор файла.</param>
+	/// <param name="names">Коллекция наименований заметок.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task DeleteNotes(ulong id, IList<string> names, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Производит удаление заметок.
@@ -186,8 +328,8 @@ public interface IMetaClient
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-	Task<bool> DeleteNotes(DeleteNotesRequest request, CancellationToken cancel = default);
+	/// <returns>Возвращает <see cref="Task"/>.</returns>
+	Task DeleteNotes(DeleteNotesRequest request, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает метаданные по настроенному запросу.

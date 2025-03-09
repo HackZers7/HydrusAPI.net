@@ -94,37 +94,103 @@ public class MetaClient : ApiClient, IMetaClient
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> IncrementFileViewtime(ViewtimeRequest request, CancellationToken cancel = default)
+	public Task IncrementFileViewTime(string hash, CanvasTypes type, double viewTime, CancellationToken cancel = default)
 	{
-		var response = await ApiConnection.Post(HydrusUrls.IncrementFileViewtime(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return IncrementFileViewTime(new ViewTimeRequest(hash, type, viewTime), cancel);
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> SetFileViewtime(ViewtimeRequest request, CancellationToken cancel = default)
+	public Task IncrementFileViewTime(IList<string>? hashes, CanvasTypes type, double viewTime, CancellationToken cancel = default)
 	{
-		var response = await ApiConnection.Post(HydrusUrls.SetFileViewtime(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return IncrementFileViewTime(new ViewTimeRequest(hashes, type, viewTime), cancel);
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> SetTime(SetTimeRequest request, CancellationToken cancel = default)
+	public Task IncrementFileViewTime(ulong id, CanvasTypes type, double viewTime, CancellationToken cancel = default)
 	{
-		var response = await ApiConnection.Post(HydrusUrls.SetTime(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		return IncrementFileViewTime(new ViewTimeRequest(id, type, viewTime), cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<NotesResponse> SetNotes(SetNotesRequest request, CancellationToken cancel = default)
+	public Task IncrementFileViewTime(IList<ulong>? fileIds, CanvasTypes type, double viewTime, CancellationToken cancel = default)
 	{
-		return ApiConnection.Post<NotesResponse>(HydrusUrls.SetNotes(), null, request, cancel);
+		return IncrementFileViewTime(new ViewTimeRequest(fileIds, type, viewTime), cancel);
 	}
 
 	/// <inheritdoc />
-	public async Task<bool> DeleteNotes(DeleteNotesRequest request, CancellationToken cancel = default)
+	public Task IncrementFileViewTime(ViewTimeRequest request, CancellationToken cancel = default)
 	{
-		var response = await ApiConnection.Post(HydrusUrls.DeleteNotes(), null, request, cancel);
-		return response.IsSuccessStatusCode();
+		ThrowHelper.ArgumentNotNull(request);
+
+		return ApiConnection.Post(HydrusUrls.IncrementFileViewTime(), null, request, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetFileViewTime(string hash, CanvasTypes type, double viewTime, int views = 1, CancellationToken cancel = default)
+	{
+		return SetFileViewTime(new ViewTimeRequest(hash, type, viewTime) { Views = views }, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetFileViewTime(IList<string>? hashes, CanvasTypes type, double viewTime, int views = 1, CancellationToken cancel = default)
+	{
+		return SetFileViewTime(new ViewTimeRequest(hashes, type, viewTime) { Views = views }, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetFileViewTime(ulong id, CanvasTypes type, double viewTime, int views = 1, CancellationToken cancel = default)
+	{
+		return SetFileViewTime(new ViewTimeRequest(id, type, viewTime) { Views = views }, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetFileViewTime(IList<ulong>? fileIds, CanvasTypes type, double viewTime, int views = 1, CancellationToken cancel = default)
+	{
+		return SetFileViewTime(new ViewTimeRequest(fileIds, type, viewTime) { Views = views }, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetFileViewTime(ViewTimeRequest request, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return ApiConnection.Post(HydrusUrls.SetFileViewTime(), null, request, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task SetTime(SetTimeRequest request, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return ApiConnection.Post(HydrusUrls.SetTime(), null, request, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<SetNotesResponse> SetNotes(SetNotesRequest request, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return ApiConnection.Post<SetNotesResponse>(HydrusUrls.SetNotes(), null, request, cancel);
+	}
+
+	/// <inheritdoc />
+	public Task DeleteNotes(string hash, IList<string> names, CancellationToken cancel = default)
+	{
+		return DeleteNotes(new DeleteNotesRequest(hash, names), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task DeleteNotes(ulong id, IList<string> names, CancellationToken cancel = default)
+	{
+		return DeleteNotes(new DeleteNotesRequest(id, names), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task DeleteNotes(DeleteNotesRequest request, CancellationToken cancel = default)
+	{
+		ThrowHelper.ArgumentNotNull(request);
+
+		return ApiConnection.Post(HydrusUrls.DeleteNotes(), null, request, cancel);
 	}
 
 	/// <inheritdoc />

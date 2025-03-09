@@ -310,7 +310,7 @@ public static class HydrusUrls
 	///     Возвращает <see cref="Uri" /> запроса добавления время просмотра в статистику.
 	/// </summary>
 	/// <returns><see cref="Uri" /> эндпоинта добавления время просмотра в статистику.</returns>
-	public static Uri IncrementFileViewtime()
+	public static Uri IncrementFileViewTime()
 	{
 		return "/edit_times/increment_file_viewtime"
 			.FormatUri();
@@ -320,7 +320,7 @@ public static class HydrusUrls
 	///     Возвращает <see cref="Uri" /> запроса установки времени просмотра в статистике.
 	/// </summary>
 	/// <returns><see cref="Uri" /> эндпоинта установки времени просмотра в статистике.</returns>
-	public static Uri SetFileViewtime()
+	public static Uri SetFileViewTime()
 	{
 		return "/edit_times/set_file_viewtime"
 			.FormatUri();

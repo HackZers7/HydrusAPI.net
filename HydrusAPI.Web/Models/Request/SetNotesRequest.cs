@@ -6,32 +6,48 @@ namespace HydrusAPI.Web;
 public class SetNotesRequest : FileRequest
 {
 	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	public SetNotesRequest(string hash) : base(hash)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="id">Идентификатор файла.</param>
+	public SetNotesRequest(ulong id) : base(id)
+	{
+	}
+
+	/// <summary>
 	///     Словарь с заметками, где ключом является название заметки, а значение - заметка.
 	/// </summary>
-	public Dictionary<string, string> Notes { get; } = new();
+	public IDictionary<string, string> Notes { get; set; } = new Dictionary<string, string>();
 
 	/// <summary>
 	///     Умное слияние.
-	///     <remarks>
-	///         По умолчанию - false.
-	///     </remarks>
 	/// </summary>
+	/// <remarks>
+	/// 	По умолчанию - false.
+	/// </remarks>
 	public bool MergeCleverly { get; set; } = false;
 
 	/// <summary>
 	///     Расширить существующую заметку, если возможно.
-	///     <remarks>
-	///         По умолчанию - false.
-	///     </remarks>
 	/// </summary>
+	/// <remarks>
+	/// 	По умолчанию - false.
+	/// </remarks>
 	public bool ExtendExistingNoteIfPossible { get; set; } = true;
 
 	/// <summary>
 	///     Как разрешать конфликты с существующей заметкой.
-	///     <remarks>
-	///         По умолчанию - <see cref="HydrusAPI.Web.СonflictResolutionType.Rename" />
-	///         Для более удобной установки значения рекомендуется использовать <see cref="HydrusAPI.Web.СonflictResolutionType" />.
-	///     </remarks>
 	/// </summary>
-	public int ConflictResolution { get; set; } = (int)СonflictResolutionType.Rename;
+	/// <remarks>
+	/// 	По умолчанию - <see cref="HydrusAPI.Web.ConflictResolutionType.Rename" />
+	/// 	Для более удобной установки значения рекомендуется использовать <see cref="HydrusAPI.Web.ConflictResolutionType" />.
+	/// </remarks>
+	public int ConflictResolution { get; set; } = (int)ConflictResolutionType.Rename;
 }

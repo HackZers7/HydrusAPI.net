@@ -3,7 +3,7 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Типы разрешения конфликтов.
 /// </summary>
-public enum СonflictResolutionType
+public enum ConflictResolutionType
 {
 	/// <summary>
 	///     Перезаписывает конфликтную записку.

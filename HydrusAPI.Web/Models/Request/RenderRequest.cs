@@ -6,6 +6,22 @@ namespace HydrusAPI.Web;
 public class RenderRequest : FileRequest
 {
 	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="hash">Хеш (SHA256) файла.</param>
+	public RenderRequest(string hash) : base(hash)
+	{
+	}
+
+	/// <summary>
+	///     Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="id">Идентификатор файла.</param>
+	public RenderRequest(ulong id) : base(id)
+	{
+	}
+
+	/// <summary>
 	///     Ставит Content-Disposition=attachment.
 	/// </summary>
 	/// <remarks>

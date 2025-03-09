@@ -58,22 +58,22 @@ The latest supported version of Hydrus API: 78 (607)
 
 | URL                      | Status | Request builder | Structured type |
 | ------------------------ | :----: | :-------------: | :-------------: |
-| /edit_ratings/set_rating |   ⚠️    |        ❌        |   Not needed    |
+| /edit_ratings/set_rating |   ✅    |        ❌        |   Not needed    |
 
 ### Editing File Times
 
 | URL                                 | Status | Request builder | Structured type |
 | ----------------------------------- | :----: | :-------------: | :-------------: |
-| /edit_times/increment_file_viewtime |   ⚠️    |        ❌        |   Not needed    |
-| /edit_times/set_file_viewtime       |   ⚠️    |        ❌        |   Not needed    |
-| /edit_times/set_time                |   ⚠️    |        ❌        |   Not needed    |
+| /edit_times/increment_file_viewtime |   ✅    |        ❌        |   Not needed    |
+| /edit_times/set_file_viewtime       |   ✅    |        ❌        |   Not needed    |
+| /edit_times/set_time                |   ✅    |        ❌        |   Not needed    |
 
 ### Editing File Notes
 
 | URL                     | Status | Request builder | Structured type |
 | ----------------------- | :----: | :-------------: | :-------------: |
-| /add_notes/set_notes    |   ⚠️    |        ❌        |        ❌        |
-| /add_notes/delete_notes |   ⚠️    |        ❌        |   Not needed    |
+| /add_notes/set_notes    |   ✅    |        ❌        |        ❌        |
+| /add_notes/delete_notes |   ✅    |        ❌        |   Not needed    |
 
 ### Searching and Fetching Files
 

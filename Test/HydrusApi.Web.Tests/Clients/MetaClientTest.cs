@@ -30,6 +30,49 @@ public class MetaClientTest
 	}
 
 	[Test]
+	public async Task IncrementFileViewTime()
+	{
+		await _client.MetaClient.IncrementFileViewTime(IoC.FileHash, CanvasTypes.Media, 100000);
+	}
+
+	[Test]
+	public async Task SetFileViewTime()
+	{
+		await _client.MetaClient.SetFileViewTime(IoC.FileHash, CanvasTypes.Media, 100000);
+	}
+
+
+	[Test]
+	public async Task SetTime()
+	{
+		await _client.MetaClient.SetTime(new SetTimeRequest(IoC.FileHash, TimestampTypes.FileModifiedTimeDrive)
+		{
+			Timestamp = 0
+		});
+	}
+
+	[Test]
+	public async Task SetNotes()
+	{
+		var response = await _client.MetaClient.SetNotes(new SetNotesRequest(IoC.FileHash)
+		{
+			Notes = new Dictionary<string, string>()
+			{
+				{ "test", "test2" }
+			}
+		});
+
+		Assert.That(response, Is.Not.Null);
+		Assert.That(response.Notes.Count, Is.GreaterThan(0));
+	}
+
+	[Test]
+	public async Task DeleteNotes()
+	{
+		await _client.MetaClient.DeleteNotes(IoC.FileHash, new List<string> { "test" });
+	}
+
+	[Test]
 	public async Task GetMetadataDefault()
 	{
 		var search = await _client.FilesClient.SearchFiles(new List<object>()
