@@ -1,3 +1,5 @@
+using System.Text.Json;
+using HydrusAPI.Web.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -9,6 +11,8 @@ namespace HydrusAPI.Web.Http;
 public class NewtonsoftJsonSerializer : IJsonSerializer
 {
 	private readonly JsonSerializerSettings _serializerSettings;
+
+	private readonly JsonSerializerOptions _serializerOptions;
 
 	/// <summary>
 	///     Инициализирует новый экземпляр сериализатора.
@@ -25,6 +29,11 @@ public class NewtonsoftJsonSerializer : IJsonSerializer
 			NullValueHandling = NullValueHandling.Ignore,
 			ContractResolver = contractResolver
 		};
+
+		_serializerOptions = new JsonSerializerOptions()
+		{
+			PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
+		};
 	}
 
 	/// <inheritdoc />
@@ -34,6 +43,12 @@ public class NewtonsoftJsonSerializer : IJsonSerializer
 
 		if (request.Body is string || request.Body is Stream || request.Body is HttpContent || request.Body is null)
 		{
+			return;
+		}
+
+		if (request.Body is IConvert convert)
+		{
+			request.Body = convert.SerializeObject(_serializerOptions);
 			return;
 		}
 

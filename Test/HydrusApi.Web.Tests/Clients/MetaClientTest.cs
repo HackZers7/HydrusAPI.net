@@ -26,7 +26,6 @@ public class MetaClientTest
 	[Test]
 	public async Task UnSetRating()
 	{
-		// TODO: Необходимо создать атрибут, который будет читаться при серилизации
 		await _client.MetaClient.SetRating(IoC.FileHash, RatingServiceKey);
 	}
 
