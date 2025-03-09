@@ -8,66 +8,84 @@ public class SearchFilesRequest : FileDomainRequest
 	// TODO: Добавить поддержку предикатов (predicates)
 
 	/// <summary>
+	/// 	Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="tags">Теги для поиска.</param>
+	public SearchFilesRequest(IList<string> tags)
+	{
+		Tags = new List<object>(tags);
+	}
+
+	/// <summary>
+	/// 	Инициализирует новый экземпляр класса.
+	/// </summary>
+	/// <param name="tags">Теги для поиска.</param>
+	public SearchFilesRequest(IList<object> tags)
+	{
+		Tags = tags;
+	}
+
+	/// <summary>
 	///     Теги для поиска.
 	/// </summary>
 	/// <remarks>
 	///     Значение определено как объект потому что может содержать как строковое значение, так и другую коллекцию с тегами.
 	/// </remarks>
-	public List<object>? Tags { get; set; }
+	public IList<object> Tags { get; set; }
 
 	/// <summary>
 	///     Необязательно, шестнадцатеричный ключ домена, в котором выполняется поиск.
-	///     <remarks>
-	///         По умолчанию - "all my files".
-	///     </remarks>
 	/// </summary>
+	/// <remarks>
+	/// 	По умолчанию - "all my files".
+	/// </remarks>
 	public string? TagServiceKey { get; set; }
 
 	/// <summary>
 	///     Необязательно, выполнять поиск по "текущим" тегам.
-	///     <remarks>
-	///         По умолчанию - true.
-	///     </remarks>
 	/// </summary>
+	/// <remarks>
+	/// 	По умолчанию - true.
+	/// </remarks>
 	public bool IncludeCurrentTags { get; set; } = true;
 
 	/// <summary>
 	///     Необязательно, выполнять поиск по "ожидающим" тегам.
-	///     <remarks>
-	///         По умолчанию - true.
-	///     </remarks>
 	/// </summary>
+	/// <remarks>
+	/// 	По умолчанию - true.
+	/// </remarks>
 	public bool IncludePendingTags { get; set; } = true;
 
 	/// <summary>
 	///     Необязательно, метод сортировки.
-	///     <remarks>
-	///         По умолчанию - <see cref="SortingType.ImportTime" />.
-	///     </remarks>
 	/// </summary>
+	/// <remarks>
+	/// 	По умолчанию - <see cref="SortingType.ImportTime" />.
+	/// </remarks>
 	public int FileSortType { get; set; } = (int)SortingType.ImportTime;
 
 	/// <summary>
 	///     Необязательно, тип сортировки.
-	///     <remarks>
-	///         По умолчанию - true.
-	///     </remarks>
 	/// </summary>
+	/// <remarks>
+	/// 	По умолчанию - true.
+	/// </remarks>
 	public bool FileSortAsc { get; set; } = true;
 
 	/// <summary>
 	///     Необязательно, получить идентификаторы файлов.
-	///     <remarks>
-	///         По умолчанию - true.
-	///     </remarks>
 	/// </summary>
+	/// <remarks>
+	/// 	По умолчанию - true.
+	/// </remarks>
 	public bool ReturnFileIds { get; set; } = true;
 
 	/// <summary>
-	///     Необязательно, получить хэши файлов.
-	///     <remarks>
-	///         По умолчанию - true.
-	///     </remarks>
+	///     Необязательно, получить хеши файлов.
 	/// </summary>
+	/// <remarks>
+	/// 	По умолчанию - true.
+	/// </remarks>
 	public bool ReturnHashes { get; set; } = true;
 }

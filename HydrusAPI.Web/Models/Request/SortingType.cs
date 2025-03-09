@@ -113,5 +113,29 @@ public enum SortingType
 	/// <summary>
 	///     BlurHash (lexicographic/reverse lexicographic).
 	/// </summary>
-	BlurHash = 22
+	BlurHash = 22,
+
+	/// <summary>
+	/// 	Average color - lightness (darkest first/lightest first).
+	/// </summary>
+	AverageColorLightness = 23,
+
+	/// <summary>
+	/// 	Average color - chromatic magnitude (greys first/colours first).
+	/// </summary>
+	AverageColorChromaticMagnitude = 24,
+	/// <summary>
+	/// 	Average color - green/red axis (greens first/reds first).
+	/// </summary>
+	AverageColorGreenRedAxis = 25,
+
+	/// <summary>
+	/// 	Average color - blue/yellow axis (blues first/yellows first).
+	/// </summary>
+	AverageColorBlueYellowAxis = 26,
+
+	/// <summary>
+	/// 	Average color - hue (rainbow - red first/rainbow - purple first).
+	/// </summary>
+	AverageColorHue = 27
 }

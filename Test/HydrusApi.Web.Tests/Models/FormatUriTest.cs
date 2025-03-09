@@ -11,14 +11,10 @@ namespace HydrusApi.Web.Tests.Models;
 [TestFixture]
 public class FormatUriTest
 {
-	public TestContext TestContext { get; set; } = default!;
-
 	[Test]
 	public void FormatUri()
 	{
-		var data = HydrusUrls.SearchFiles(new SearchFilesRequest
-		{
-			Tags = new List<object>
+		var data = HydrusUrls.SearchFiles(new SearchFilesRequest(new List<object>
 			{
 				"test",
 				"test2",
@@ -27,8 +23,8 @@ public class FormatUriTest
 					"test4",
 					"test5"
 				}
-			}
-		});
+			})
+		);
 
 		TestContext.WriteLine(data);
 

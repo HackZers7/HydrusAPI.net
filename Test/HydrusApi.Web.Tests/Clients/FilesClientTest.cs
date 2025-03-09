@@ -413,34 +413,23 @@ public class FilesClientTest
 		[Test]
 		public async Task OneFileHash()
 		{
-			using (var stream = File.OpenRead(IoC.FilePath))
-			{
-				var response = await _client.FilesClient.GetFileHashes(Utils.GetSha256(stream), HashAlgorithmType.Md5);
+			var response = await _client.FilesClient.GetFileHashes(IoC.FileHash, HashAlgorithmType.Md5);
 
-				Assert.That(response, Is.Not.Null);
-				Assert.That(response.Count(), Is.GreaterThan(0));
-			}
+			Assert.That(response, Is.Not.Null);
+			Assert.That(response.Hashes.Count, Is.GreaterThan(0));
 		}
 
 		[Test]
 		public async Task MultiplyFileHash()
 		{
-			var list = new List<string>();
-
-			using (var stream = File.OpenRead(IoC.FilePath))
+			var response = await _client.FilesClient.GetFileHashes(new List<string>()
 			{
-				list.Add(Utils.GetSha256(stream));
-			}
-
-			using (var stream = File.OpenRead(IoC.FilePath2))
-			{
-				list.Add(Utils.GetSha256(stream));
-			}
-
-			var response = await _client.FilesClient.GetFileHashes(list, HashAlgorithmType.Md5);
+				IoC.FileHash,
+				IoC.FileHash2
+			}, HashAlgorithmType.Md5);
 
 			Assert.That(response, Is.Not.Null);
-			Assert.That(response.Count(), Is.GreaterThan(0));
+			Assert.That(response.Hashes.Count, Is.GreaterThan(0));
 		}
 	}
 

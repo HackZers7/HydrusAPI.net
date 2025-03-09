@@ -8,10 +8,10 @@ public class FilesSearchResponse : ApiVersionResponse
 	/// <summary>
 	///     Коллекция хешей (SHA256) файлов.
 	/// </summary>
-	public List<string>? Hashes { get; set; }
+	public List<string> Hashes { get; set; } = new List<string>();
 
 	/// <summary>
 	///     Коллекция идентификаторов файлов.
 	/// </summary>
-	public List<ulong>? FileIds { get; set; }
+	public List<ulong> FileIds { get; set; } = new List<ulong>();
 }

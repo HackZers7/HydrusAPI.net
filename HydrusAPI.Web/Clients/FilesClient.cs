@@ -292,29 +292,15 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public Task<FilesSearchResponse> SearchFiles(
-		IEnumerable<object> tags,
-		string? tagServiceKey = null,
-		bool includeCurrentTags = true,
-		bool includePendingTags = true,
-		SortingType fileSortType = SortingType.ImportTime,
-		bool fileSortAsc = true,
-		bool returnFileIds = true,
-		bool returnHashes = true,
-		CancellationToken cancel = default
-	)
+	public Task<FilesSearchResponse> SearchFiles(IList<object> tags, CancellationToken cancel = default)
 	{
-		return SearchFiles(new SearchFilesRequest
-		{
-			Tags = new List<object>(tags),
-			TagServiceKey = tagServiceKey,
-			IncludeCurrentTags = includeCurrentTags,
-			IncludePendingTags = includePendingTags,
-			FileSortType = (int)fileSortType,
-			FileSortAsc = fileSortAsc,
-			ReturnFileIds = returnFileIds,
-			ReturnHashes = returnHashes
-		}, cancel);
+		return SearchFiles(new SearchFilesRequest(tags), cancel);
+	}
+
+	/// <inheritdoc />
+	public Task<FilesSearchResponse> SearchFiles(IList<string> tags, CancellationToken cancel = default)
+	{
+		return SearchFiles(new SearchFilesRequest(tags), cancel);
 	}
 
 	/// <inheritdoc />
@@ -326,36 +312,23 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public Task<IDictionary<string, string>> GetFileHashes(string hash, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
+	public Task<FileHashesResponse> GetFileHashes(string hash, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
-
-		return GetFileHashes(new FileHashesRequest
-		{
-			Hash = hash,
-			DesiredHashType = desiredHashType.ToString().ToLower(),
-			SourceHashType = sourceHashType.ToString().ToLower()
-		}, cancel);
+		return GetFileHashes(new FileHashesRequest(hash, desiredHashType, sourceHashType), cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<IDictionary<string, string>> GetFileHashes(IEnumerable<string> hashes, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
+	public Task<FileHashesResponse> GetFileHashes(IList<string> hashes, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(hashes);
 
-		return GetFileHashes(new FileHashesRequest
-		{
-			Hashes = new List<string>(hashes),
-			DesiredHashType = desiredHashType.ToString().ToLower(),
-			SourceHashType = sourceHashType.ToString().ToLower()
-		}, cancel);
+		return GetFileHashes(new FileHashesRequest(hashes, desiredHashType, sourceHashType), cancel);
 	}
 
 	/// <inheritdoc />
-	public async Task<IDictionary<string, string>> GetFileHashes(FileHashesRequest request, CancellationToken cancel = default)
+	public Task<FileHashesResponse> GetFileHashes(FileHashesRequest request, CancellationToken cancel = default)
 	{
-		var response = await ApiConnection.Get<FileHashesResponse>(HydrusUrls.GetFileHashes(request), cancel);
-		return response.Hashes;
+		return ApiConnection.Get<FileHashesResponse>(HydrusUrls.GetFileHashes(request), cancel);
 	}
 
 	/// <inheritdoc />

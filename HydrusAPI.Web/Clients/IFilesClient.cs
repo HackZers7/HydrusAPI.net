@@ -520,26 +520,21 @@ public interface IFilesClient
 	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
 	/// <param name="tags">Теги для поиска. Может содержать строковое значение или коллекцию с тегами.</param>
-	/// <param name="tagServiceKey">Необязательно, шестнадцатеричный ключ домена, в котором выполняется поиск. По умолчанию - "all my files".</param>
-	/// <param name="includeCurrentTags">Необязательно, выполнять поиск по "текущим" тегам. По умолчанию - true.</param>
-	/// <param name="includePendingTags">Необязательно, выполнять поиск по "ожидающим" тегам. По умолчанию - true.</param>
-	/// <param name="fileSortType">Необязательно, метод сортировки. По умолчанию - <see cref="SortingType.ImportTime" />.</param>
-	/// <param name="fileSortAsc">Необязательно, тип сортировки. По умолчанию - true.</param>
-	/// <param name="returnFileIds">Необязательно, получить идентификаторы файлов. По умолчанию - true.</param>
-	/// <param name="returnHashes">Необязательно, получить хеши файлов. По умолчанию - true.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="FilesSearchResponse" /> с идентификаторами файла.</returns>
-	Task<FilesSearchResponse> SearchFiles(
-		IEnumerable<object> tags,
-		string? tagServiceKey = null,
-		bool includeCurrentTags = true,
-		bool includePendingTags = true,
-		SortingType fileSortType = SortingType.ImportTime,
-		bool fileSortAsc = true,
-		bool returnFileIds = true,
-		bool returnHashes = true,
-		CancellationToken cancel = default
-	);
+	Task<FilesSearchResponse> SearchFiles(IList<object> tags, CancellationToken cancel = default);
+
+	/// <summary>
+	///     Производит поиск файлов по тегам.
+	/// </summary>
+	/// <remarks>
+	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
+	///     <see cref="Permissions.SearchFetchFiles" />.
+	/// </remarks>
+	/// <param name="tags">Теги для поиска. Может содержать строковое значение или коллекцию с тегами.</param>
+	/// <param name="cancel">Токен отмены запроса.</param>
+	/// <returns>Возвращает <see cref="FilesSearchResponse" /> с идентификаторами файла.</returns>
+	Task<FilesSearchResponse> SearchFiles(IList<string> tags, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Производит поиск файлов по тегам.
@@ -565,12 +560,7 @@ public interface IFilesClient
 	/// <param name="sourceHashType">Тип отправленного хеша. По умолчанию - <see cref="HashAlgorithmType.Sha256" />.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
-	Task<IDictionary<string, string>> GetFileHashes(
-		string hash,
-		HashAlgorithmType desiredHashType,
-		HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256,
-		CancellationToken cancel = default
-	);
+	Task<FileHashesResponse> GetFileHashes(string hash, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает хэш по другому хешу.
@@ -584,12 +574,7 @@ public interface IFilesClient
 	/// <param name="sourceHashType">Тип отправленного хеша. По умолчанию - <see cref="HashAlgorithmType.Sha256" />.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
-	Task<IDictionary<string, string>> GetFileHashes(
-		IEnumerable<string> hashes,
-		HashAlgorithmType desiredHashType,
-		HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256,
-		CancellationToken cancel = default
-	);
+	Task<FileHashesResponse> GetFileHashes(IList<string> hashes, HashAlgorithmType desiredHashType, HashAlgorithmType sourceHashType = HashAlgorithmType.Sha256, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает хэш по другому хешу.
@@ -601,7 +586,7 @@ public interface IFilesClient
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает словарь с идентификаторами файла в нужном типе, где ключ - отправленный идентификатор.</returns>
-	Task<IDictionary<string, string>> GetFileHashes(FileHashesRequest request, CancellationToken cancel = default);
+	Task<FileHashesResponse> GetFileHashes(FileHashesRequest request, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает файл.

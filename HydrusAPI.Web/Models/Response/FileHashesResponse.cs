@@ -6,7 +6,7 @@ namespace HydrusAPI.Web;
 public class FileHashesResponse : ApiVersionResponse
 {
 	/// <summary>
-	///     Хеши.
+	///     Хеши, где ключ - идентификатор.
 	/// </summary>
 	public Dictionary<string, string> Hashes { get; set; } = default!;
 }
