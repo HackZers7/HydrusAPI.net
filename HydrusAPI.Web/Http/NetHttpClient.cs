@@ -97,11 +97,6 @@ public class NetHttpClient : IHttpClient
 					break;
 				case Stream body:
 					HttpContent content = new StreamContent(body);
-
-					if (request.ProgressCallback != null)
-					{
-						content = new ProgressStreamContent(content, request.ProgressCallback);
-					}
 					requestMessage.Content = content;
 					requestMessage.Content.Headers.ContentType = new MediaTypeHeaderValue(STREAM_MEDIA_TYPE);
 

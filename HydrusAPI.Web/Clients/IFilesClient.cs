@@ -40,10 +40,9 @@ public interface IFilesClient
 	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="file">Поток с файлом.</param>
-	/// <param name="progressCallback">Функция обратного вызова для отображения процесса отправки.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="ImportResultResponse" /> с информацией об импортированном файле.</returns>
-	Task<ImportResultResponse> SendFile(Stream file, IProgress<int>? progressCallback = default, CancellationToken cancel = default);
+	Task<ImportResultResponse> SendFile(Stream file, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Удаляет файл по хешу (SHA256). Используется файловый домен по умолчанию "all my files".
@@ -507,10 +506,9 @@ public interface IFilesClient
 	///     <see cref="Permissions.ImportDeleteFiles" />.
 	/// </remarks>
 	/// <param name="file">Поток с файлом.</param>
-	/// <param name="progressCallback">Функция обратного вызова для отображения процесса отправки.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="GeneratedHashesResponse" /> с хешами (SHA256) файла.</returns>
-	Task<GeneratedHashesResponse> GenerateHashes(Stream file, IProgress<int>? progressCallback = default, CancellationToken cancel = default);
+	Task<GeneratedHashesResponse> GenerateHashes(Stream file, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Производит поиск файлов по тегам.

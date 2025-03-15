@@ -49,7 +49,7 @@ public class ApiConnection : IApiConnection
 	{
 		ThrowHelper.ArgumentNotNull(uri);
 
-		return SendData<T>(uri, HttpMethod.Get, headers, parameters, body, null, cancel);
+		return SendData<T>(uri, HttpMethod.Get, headers, parameters, body, cancel);
 	}
 
 	/// <inheritdoc />
@@ -77,12 +77,6 @@ public class ApiConnection : IApiConnection
 	}
 
 	/// <inheritdoc />
-	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IProgress<int>? progressCallback = default, CancellationToken cancel = default)
-	{
-		return SendData<T>(uri, HttpMethod.Post, parameters: parameters, body: body, progressCallback: progressCallback, cancel: cancel);
-	}
-
-	/// <inheritdoc />
 	public async Task<HttpStatusCode> Post(Uri uri, IDictionary<string, string>? parameters, object? body, CancellationToken cancel = default)
 	{
 		var response = await SendDataDetailed(uri, HttpMethod.Post, parameters, body, cancel: cancel);
@@ -92,7 +86,7 @@ public class ApiConnection : IApiConnection
 	/// <inheritdoc />
 	public Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IDictionary<string, string>? headers, CancellationToken cancel = default)
 	{
-		return SendData<T>(uri, HttpMethod.Post, headers, parameters, body, null, cancel);
+		return SendData<T>(uri, HttpMethod.Post, headers, parameters, body, cancel);
 	}
 
 	public Task<T> Put<T>(Uri uri, CancellationToken cancel = default)
@@ -144,7 +138,7 @@ public class ApiConnection : IApiConnection
 		CancellationToken cancel = default
 	)
 	{
-		var request = CreateRequest(uri, method, headers, parameters, null, body);
+		var request = CreateRequest(uri, method, headers, parameters, body);
 		// request.Headers.Add("Accept", AcceptHeaders.RawContentMediaType);
 		var apiResponse = await RunRequest(request, cancel).ConfigureAwait(false);
 		return new ApiResponse<Stream>(apiResponse, apiResponse.Body as Stream);
@@ -156,11 +150,10 @@ public class ApiConnection : IApiConnection
 		IDictionary<string, string>? headers = null,
 		IDictionary<string, string>? parameters = null,
 		object? body = null,
-		IProgress<int>? progressCallback = default,
 		CancellationToken cancel = default
 	)
 	{
-		var request = CreateRequest(uri, method, headers, parameters, progressCallback, body);
+		var request = CreateRequest(uri, method, headers, parameters, body);
 		var apiResponse = await Run<T>(request, cancel).ConfigureAwait(false);
 		return apiResponse.Body!;
 	}
@@ -174,7 +167,7 @@ public class ApiConnection : IApiConnection
 		CancellationToken cancel = default
 	)
 	{
-		var request = CreateRequest(uri, method, headers, parameters, null, body);
+		var request = CreateRequest(uri, method, headers, parameters, body);
 		var response = await Run<object>(request, cancel).ConfigureAwait(false);
 		return response.Response;
 	}
@@ -184,7 +177,6 @@ public class ApiConnection : IApiConnection
 		HttpMethod method,
 		IDictionary<string, string>? headers,
 		IDictionary<string, string>? parameters,
-		IProgress<int>? progressCallback,
 		object? body
 	)
 	{
@@ -199,7 +191,6 @@ public class ApiConnection : IApiConnection
 			parameters ?? new Dictionary<string, string>())
 		{
 			Body = body,
-			ProgressCallback = progressCallback
 		};
 	}
 

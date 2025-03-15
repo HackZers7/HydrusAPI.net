@@ -101,19 +101,6 @@ public interface IApiConnection
 	/// <param name="uri">URL по которому необходимо произвести запрос.</param>
 	/// <param name="parameters">Параметры которые необходимо добавить в API запрос.</param>
 	/// <param name="body">Объект пописывающий тело запроса, оно будет сериализированно и использовано в теле запроса.</param>
-	/// <param name="progressCallback">Функция обратного вызова для отображения процесса отправки.</param>
-	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <typeparam name="T">Тип данных.</typeparam>
-	/// <returns>Созданные данные.</returns>
-	/// <exception cref="ApiException">Выбрасывается, когда происходит ошибка в API.</exception>
-	Task<T> Post<T>(Uri uri, IDictionary<string, string>? parameters, object? body, IProgress<int>? progressCallback = default, CancellationToken cancel = default);
-
-	/// <summary>
-	///     Создает новые данные в API по-указанному URI.
-	/// </summary>
-	/// <param name="uri">URL по которому необходимо произвести запрос.</param>
-	/// <param name="parameters">Параметры которые необходимо добавить в API запрос.</param>
-	/// <param name="body">Объект пописывающий тело запроса, оно будет сериализированно и использовано в теле запроса.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <typeparam name="T">Тип данных.</typeparam>
 	/// <returns>Статус сообщения.</returns>

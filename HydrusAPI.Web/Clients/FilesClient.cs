@@ -26,13 +26,13 @@ public class FilesClient : ApiClient, IFilesClient
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
-		return ApiConnection.Post<ImportResultResponse>(HydrusUrls.AddFile(), null, request, progressCallback: null, cancel);
+		return ApiConnection.Post<ImportResultResponse>(HydrusUrls.AddFile(), null, request, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<ImportResultResponse> SendFile(Stream file, IProgress<int>? progressCallback = default, CancellationToken cancel = default)
+	public Task<ImportResultResponse> SendFile(Stream file, CancellationToken cancel = default)
 	{
-		return ApiConnection.Post<ImportResultResponse>(HydrusUrls.AddFile(), null, file, progressCallback, cancel);
+		return ApiConnection.Post<ImportResultResponse>(HydrusUrls.AddFile(), null, file, cancel);
 	}
 
 	/// <inheritdoc />
@@ -280,15 +280,15 @@ public class FilesClient : ApiClient, IFilesClient
 	{
 		ThrowHelper.ArgumentNotNull(request);
 
-		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, request, progressCallback: null, cancel);
+		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, request, cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<GeneratedHashesResponse> GenerateHashes(Stream file, IProgress<int>? progressCallback = default, CancellationToken cancel = default)
+	public Task<GeneratedHashesResponse> GenerateHashes(Stream file, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNull(file);
 
-		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, file, progressCallback: progressCallback, cancel);
+		return ApiConnection.Post<GeneratedHashesResponse>(HydrusUrls.GenerateHashes(), null, file, cancel);
 	}
 
 	/// <inheritdoc />
