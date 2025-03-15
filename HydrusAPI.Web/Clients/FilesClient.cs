@@ -1,8 +1,6 @@
 using HydrusAPI.Web.Http;
 using System.Security.Authentication;
 
-// ReSharper disable PossibleMultipleEnumeration
-
 namespace HydrusAPI.Web;
 
 /// <summary>
@@ -332,43 +330,43 @@ public class FilesClient : ApiClient, IFilesClient
 	}
 
 	/// <inheritdoc />
-	public async Task<Stream> GetFile(string hash, bool download = false, CancellationToken cancel = default)
+	public async Task<StreamWithContentType> GetFile(string hash, bool download = false, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
 
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetFile(hash, download), cancel);
 
-		return response.Body!;
+		return new StreamWithContentType(response.Body!, response.Response.ContentType!);
 	}
 
 	/// <inheritdoc />
-	public async Task<Stream> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default)
+	public async Task<StreamWithContentType> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
 
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetFile(fileId, download), cancel);
 
-		return response.Body!;
+		return new StreamWithContentType(response.Body!, response.Response.ContentType!);
 	}
 
 	/// <inheritdoc />
-	public async Task<Stream> GetThumbnail(string hash, CancellationToken cancel = default)
+	public async Task<StreamWithContentType> GetThumbnail(string hash, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
 
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetThumbnail(hash), cancel);
 
-		return response.Body!;
+		return new StreamWithContentType(response.Body!, response.Response.ContentType!);
 	}
 
 	/// <inheritdoc />
-	public async Task<Stream> GetThumbnail(ulong fileId, CancellationToken cancel = default)
+	public async Task<StreamWithContentType> GetThumbnail(ulong fileId, CancellationToken cancel = default)
 	{
 		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
 
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetThumbnail(fileId), cancel);
 
-		return response.Body!;
+		return new StreamWithContentType(response.Body!, response.Response.ContentType!);
 	}
 
 	/// <inheritdoc />

@@ -6,12 +6,16 @@ using System.Linq;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 using System.IO;
+using HydrusAPI.Web.Http;
+using DS.Shared.IO;
 
 namespace HydrusApi.Web.Tests.Clients;
 
 [TestFixture]
 public class FilesClientTest
 {
+	private readonly static string _savePath = "d:\\test.png";
+
 	[TestFixture]
 	public class SendTest
 	{
@@ -51,9 +55,9 @@ public class FilesClientTest
 		{
 			var progress = new Progress<int>(TestContext.WriteLine);
 
-			using (var stream = System.IO.File.OpenRead(IoC.FilePath))
+			using (var stream = new ProgressStream(System.IO.File.OpenRead(IoC.FilePath), progress))
 			{
-				var result = await _client.FilesClient.SendFile(stream, progress);
+				var result = await _client.FilesClient.SendFile(stream);
 
 				Assert.That(result, Is.Not.Null);
 				Assert.That(result.Status, Is.EqualTo(FileStatus.Success).Or.EqualTo(FileStatus.AlreadyExists));
@@ -430,6 +434,30 @@ public class FilesClientTest
 
 			Assert.That(response, Is.Not.Null);
 			Assert.That(response.Hashes.Count, Is.GreaterThan(0));
+		}
+
+		[Test]
+		public async Task GetFile()
+		{
+			using (var response = await _client.FilesClient.GetFile(IoC.FileHash))
+			{
+				using (var writer = File.OpenWrite(_savePath))
+				{
+					await response.CopyToAsync(writer);
+				}
+			}
+		}
+
+		[Test]
+		public async Task GetThumbnail()
+		{
+			using (var response = await _client.FilesClient.GetThumbnail(IoC.FileHash))
+			{
+				using (var writer = File.OpenWrite(_savePath))
+				{
+					await response.CopyToAsync(writer);
+				}
+			}
 		}
 	}
 

@@ -597,7 +597,7 @@ public interface IFilesClient
 	/// <param name="download">Ставит Content-Disposition=attachment. По умолчанию - false.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	Task<Stream> GetFile(string hash, bool download = false, CancellationToken cancel = default);
+	Task<StreamWithContentType> GetFile(string hash, bool download = false, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает файл.
@@ -610,7 +610,7 @@ public interface IFilesClient
 	/// <param name="download">Ставит Content-Disposition=attachment. По умолчанию - false.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	Task<Stream> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default);
+	Task<StreamWithContentType> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает эскиз.
@@ -622,7 +622,7 @@ public interface IFilesClient
 	/// <param name="hash">Хэш (SHA256) файл.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	Task<Stream> GetThumbnail(string hash, CancellationToken cancel = default);
+	Task<StreamWithContentType> GetThumbnail(string hash, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает эскиз.
@@ -634,7 +634,7 @@ public interface IFilesClient
 	/// <param name="fileId">Идентификатор файл.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	Task<Stream> GetThumbnail(ulong fileId, CancellationToken cancel = default);
+	Task<StreamWithContentType> GetThumbnail(ulong fileId, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Рендерит файл.
