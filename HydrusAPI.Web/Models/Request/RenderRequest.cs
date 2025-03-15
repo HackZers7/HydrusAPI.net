@@ -30,12 +30,12 @@ public class RenderRequest : FileRequest
 	public bool Download { get; set; } = false;
 
 	/// <summary>
-	///     Выходной формат изображения. Рекомендуется использовать <see cref="RenderOutputFormat" />
+	///     Выходной формат изображения.
 	/// </summary>
 	/// <remarks>
 	///     По умолчанию - <see cref="RenderOutputFormat.Png" />.
 	/// </remarks>
-	public int RenderFormat { get; set; }
+	public RenderOutputFormat RenderFormat { get; set; } = RenderOutputFormat.Png;
 
 	/// <summary>
 	///     Качество выходного изображения.
@@ -59,7 +59,7 @@ public class RenderRequest : FileRequest
 }
 
 /// <summary>
-///     Выходные форматы рендера.
+///     Выходные форматы визуализации.
 /// </summary>
 public enum RenderOutputFormat
 {

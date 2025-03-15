@@ -396,8 +396,8 @@ public static class HydrusUrls
 			{
 				{ "hash", request.Hash },
 				{ "hashes", request.Hashes },
-				{ "source_hash_type", request.SourceHashType },
-				{ "desired_hash_type", request.DesiredHashType }
+				{ "source_hash_type", request.SourceHashType.ToString().ToLower() },
+				{ "desired_hash_type", request.DesiredHashType.ToString().ToLower() }
 			}
 		);
 	}
@@ -457,7 +457,7 @@ public static class HydrusUrls
 	/// <returns><see cref="Uri" /> эндпоинта получения файла.</returns>
 	public static Uri GetFile(ulong fileId, bool download = false)
 	{
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+		ThrowHelper.ArgumentOutOfRange(fileId, 1UL, ulong.MaxValue);
 
 		return "/get_files/file?"
 			.FormatUri(new Dictionary<string, object?>
@@ -492,7 +492,7 @@ public static class HydrusUrls
 	/// <returns><see cref="Uri" /> эндпоинта получения эскиза.</returns>
 	public static Uri GetThumbnail(ulong fileId)
 	{
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+		ThrowHelper.ArgumentOutOfRange(fileId, 1UL, ulong.MaxValue);
 
 		return "/get_files/thumbnail?"
 			.FormatUri(new Dictionary<string, object?>
@@ -526,7 +526,7 @@ public static class HydrusUrls
 	/// <returns><see cref="Uri" /> эндпоинта получения локального пути к файлу.</returns>
 	public static Uri GetFilePath(ulong fileId)
 	{
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+		ThrowHelper.ArgumentOutOfRange(fileId, 1UL, ulong.MaxValue);
 
 		return "/get_files/file_path?"
 			.FormatUri(new Dictionary<string, object?>
@@ -563,7 +563,7 @@ public static class HydrusUrls
 	/// <returns><see cref="Uri" /> эндпоинта получения локального пути к файлу.</returns>
 	public static Uri GetThumbnailFilePath(ulong fileId, bool includeThumbnailFiletype = false)
 	{
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
+		ThrowHelper.ArgumentOutOfRange(fileId, 1UL, ulong.MaxValue);
 
 		return "/get_files/thumbnail_path?"
 			.FormatUri(new Dictionary<string, object?>
@@ -585,10 +585,10 @@ public static class HydrusUrls
 	}
 
 	/// <summary>
-	///     Возвращает <see cref="Uri" /> запроса рендера файла.
+	///     Возвращает <see cref="Uri" /> запроса визуализации файла.
 	/// </summary>
 	/// <param name="request">Запрос.</param>
-	/// <returns><see cref="Uri" /> эндпоинта рендера файла.</returns>
+	/// <returns><see cref="Uri" /> эндпоинта визуализации файла.</returns>
 	public static Uri Render(RenderRequest request)
 	{
 		ThrowHelper.ArgumentNotNull(request);

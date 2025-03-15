@@ -18,8 +18,8 @@ public class FileHashesRequest
 		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
 
 		Hash = hash;
-		SourceHashType = sourceHashType.ToString().ToLower();
-		DesiredHashType = desiredHashType.ToString().ToLower();
+		SourceHashType = sourceHashType;
+		DesiredHashType = desiredHashType;
 	}
 
 	/// <summary>
@@ -35,8 +35,8 @@ public class FileHashesRequest
 			Hashes = hashes.ToList();
 		}
 
-		SourceHashType = sourceHashType.ToString().ToLower();
-		DesiredHashType = desiredHashType.ToString().ToLower();
+		SourceHashType = sourceHashType;
+		DesiredHashType = desiredHashType;
 	}
 
 	/// <summary>
@@ -50,21 +50,15 @@ public class FileHashesRequest
 	public List<string>? Hashes { get; set; }
 
 	/// <summary>
-	///     Тип отправленного хеша. Для определения тип рекомендуется использовать <see cref="HashAlgorithmType" />, см. пример.
+	///     Тип отправленного хеша.
 	/// </summary>
-	/// <code>
-	/// 	HashAlgorithmType.Sha256.ToString().ToLower();
-	/// </code>
 	/// <remarks>
 	///     По умолчанию - <see cref="HashAlgorithmType.Sha256" />.
 	/// </remarks>
-	public string SourceHashType { get; set; }
+	public HashAlgorithmType SourceHashType { get; set; }
 
 	/// <summary>
-	///     Тип хеша, который необходимо получить. Для определения тип рекомендуется использовать <see cref="HashAlgorithmType" />, см. пример.
+	///     Тип хеша, который необходимо получить.
 	/// </summary>
-	/// <code>
-	/// 	HashAlgorithmType.Sha256.ToString().ToLower();
-	///  </code>
-	public string DesiredHashType { get; set; }
+	public HashAlgorithmType DesiredHashType { get; set; }
 }

@@ -46,8 +46,7 @@ public class SetNotesRequest : FileRequest
 	///     Как разрешать конфликты с существующей заметкой.
 	/// </summary>
 	/// <remarks>
-	/// 	По умолчанию - <see cref="HydrusAPI.Web.ConflictResolutionType.Rename" />
-	/// 	Для более удобной установки значения рекомендуется использовать <see cref="HydrusAPI.Web.ConflictResolutionType" />.
+	/// 	По умолчанию - <see cref="ConflictResolutionType.Rename" />
 	/// </remarks>
-	public int ConflictResolution { get; set; } = (int)ConflictResolutionType.Rename;
+	public ConflictResolutionType ConflictResolution { get; set; } = ConflictResolutionType.Rename;
 }

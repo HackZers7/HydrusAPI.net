@@ -637,57 +637,31 @@ public interface IFilesClient
 	Task<StreamWithContentType> GetThumbnail(ulong fileId, CancellationToken cancel = default);
 
 	/// <summary>
-	///     Рендерит файл.
+	///     Визуализация файла.
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
 	/// <param name="hash">Хэш (SHA256) файл.</param>
-	/// <param name="download">Ставит Content-Disposition=attachment. По умолчанию - false.</param>
-	/// <param name="renderFormat">Выходной формат изображения. По умолчанию - <see cref="RenderOutputFormat.Png" />.</param>
-	/// <param name="renderQuality">Качество выходного изображения. По умолчанию: PNG - 1; JPEG, WEBP - 80.</param>
-	/// <param name="width">Ширина выходного изображения.</param>
-	/// <param name="height">Высота выходного изображения.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	Task<Stream> Render(
-		string hash,
-		bool download = false,
-		RenderOutputFormat renderFormat = RenderOutputFormat.Png,
-		ushort? renderQuality = null,
-		ulong? width = null,
-		ulong? height = null,
-		CancellationToken cancel = default
-	);
+	Task<Stream> Render(string hash, CancellationToken cancel = default);
 
 	/// <summary>
-	///     Рендер файл.
+	///     Визуализация файла.
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
 	///     <see cref="Permissions.SearchFetchFiles" />.
 	/// </remarks>
 	/// <param name="fileId">Идентификатор файл.</param>
-	/// <param name="download">Ставит Content-Disposition=attachment. По умолчанию - false.</param>
-	/// <param name="renderFormat">Выходной формат изображения. По умолчанию - <see cref="RenderOutputFormat.Png" />.</param>
-	/// <param name="renderQuality">Качество выходного изображения. По умолчанию: PNG - 1; JPEG, WEBP - 80.</param>
-	/// <param name="width">Ширина выходного изображения.</param>
-	/// <param name="height">Высота выходного изображения.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает поток с файлом.</returns>
-	Task<Stream> Render(
-		ulong fileId,
-		bool download = false,
-		RenderOutputFormat renderFormat = RenderOutputFormat.Png,
-		ushort? renderQuality = null,
-		ulong? width = null,
-		ulong? height = null,
-		CancellationToken cancel = default
-	);
+	Task<Stream> Render(ulong fileId, CancellationToken cancel = default);
 
 	/// <summary>
-	///     Рендер файл.
+	///     Визуализация файла.
 	/// </summary>
 	/// <remarks>
 	///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):

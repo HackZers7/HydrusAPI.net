@@ -97,4 +97,33 @@ public class MetaClientTest
 
 		Assert.That(data, Is.Not.Null);
 	}
+
+	[Test]
+	public async Task GetFilePath()
+	{
+		var data = await _client.MetaClient.GetFilePath(IoC.FileHash);
+
+		Assert.That(data, Is.Not.Null);
+		Assert.That(data.Filetype, Is.Not.Empty);
+		Assert.That(data.Path, Is.Not.Empty);
+	}
+
+	[Test]
+	public async Task GetThumbnailFilePath()
+	{
+		var data = await _client.MetaClient.GetThumbnailFilePath(IoC.FileHash, true);
+
+		Assert.That(data, Is.Not.Null);
+		Assert.That(data.Filetype, Is.Not.Empty);
+		Assert.That(data.Path, Is.Not.Empty);
+	}
+
+	[Test]
+	public async Task GetLocalFileStorageLocations()
+	{
+		var data = await _client.MetaClient.GetLocalFileStorageLocations();
+
+		Assert.That(data, Is.Not.Null);
+		Assert.That(data.Locations.Count, Is.GreaterThan(0));
+	}
 }

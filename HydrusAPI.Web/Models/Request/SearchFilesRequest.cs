@@ -63,7 +63,7 @@ public class SearchFilesRequest : FileDomainRequest
 	/// <remarks>
 	/// 	По умолчанию - <see cref="SortingType.ImportTime" />.
 	/// </remarks>
-	public int FileSortType { get; set; } = (int)SortingType.ImportTime;
+	public SortingType FileSortType { get; set; } = SortingType.ImportTime;
 
 	/// <summary>
 	///     Необязательно, тип сортировки.

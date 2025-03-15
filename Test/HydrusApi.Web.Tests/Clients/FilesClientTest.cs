@@ -2,11 +2,9 @@ using HydrusAPI.Web;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Security.Authentication;
 using System.Threading.Tasks;
 using System.IO;
-using HydrusAPI.Web.Http;
 using DS.Shared.IO;
 
 namespace HydrusApi.Web.Tests.Clients;
@@ -14,19 +12,14 @@ namespace HydrusApi.Web.Tests.Clients;
 [TestFixture]
 public class FilesClientTest
 {
-	private readonly static string _savePath = "d:\\test.png";
+	private readonly static string _pngSavePath = "d:\\test.png";
+	private readonly static string _jpgSavePath = "d:\\test.jpg";
+
+	private readonly static IHydrusClient _client = IoC.GetHydrusClient();
 
 	[TestFixture]
 	public class SendTest
 	{
-		private readonly IHydrusClient _client;
-
-		// ReSharper disable once ConvertConstructorToMemberInitializers
-		public SendTest()
-		{
-			_client = IoC.GetHydrusClient();
-		}
-
 		[Test]
 		public async Task LocalFile()
 		{
@@ -69,13 +62,6 @@ public class FilesClientTest
 	[TestFixture]
 	public class DeleteTest
 	{
-		private readonly IHydrusClient _client;
-
-		public DeleteTest()
-		{
-			_client = IoC.GetHydrusClient();
-		}
-
 		[Test]
 		public async Task ByHash()
 		{
@@ -128,13 +114,6 @@ public class FilesClientTest
 	[TestFixture]
 	public class RestoreTest
 	{
-		private readonly IHydrusClient _client;
-
-		public RestoreTest()
-		{
-			_client = IoC.GetHydrusClient();
-		}
-
 		[Test]
 		public async Task ByHash()
 		{
@@ -170,12 +149,6 @@ public class FilesClientTest
 	[TestFixture]
 	public class ClearFilesDeletionTest
 	{
-		private readonly IHydrusClient _client;
-
-		public ClearFilesDeletionTest()
-		{
-			_client = IoC.GetHydrusClient();
-		}
 
 		[Test]
 		public async Task ByHash()
@@ -212,13 +185,6 @@ public class FilesClientTest
 	[TestFixture]
 	public class MigrateTest
 	{
-		private readonly IHydrusClient _client;
-
-		public MigrateTest()
-		{
-			_client = IoC.GetHydrusClient();
-		}
-
 		[Test]
 		public async Task ByHash()
 		{
@@ -258,13 +224,6 @@ public class FilesClientTest
 	[TestFixture]
 	public class ArchiveFilesTest
 	{
-		private readonly IHydrusClient _client;
-
-		public ArchiveFilesTest()
-		{
-			_client = IoC.GetHydrusClient();
-		}
-
 		[Test]
 		public async Task ByHash()
 		{
@@ -300,13 +259,6 @@ public class FilesClientTest
 	[TestFixture]
 	public class UnarchiveFilesTest
 	{
-		private readonly IHydrusClient _client;
-
-		public UnarchiveFilesTest()
-		{
-			_client = IoC.GetHydrusClient();
-		}
-
 		[Test]
 		public async Task ByHash()
 		{
@@ -342,14 +294,6 @@ public class FilesClientTest
 	[TestFixture]
 	public class GenerateHashesTest
 	{
-		private readonly IHydrusClient _client;
-
-		// ReSharper disable once ConvertConstructorToMemberInitializers
-		public GenerateHashesTest()
-		{
-			_client = IoC.GetHydrusClient();
-		}
-
 		[Test]
 		public async Task LocalFile()
 		{
@@ -391,14 +335,6 @@ public class FilesClientTest
 	[TestFixture]
 	public class GetFilesTest
 	{
-		private readonly IHydrusClient _client;
-
-		// ReSharper disable once ConvertConstructorToMemberInitializers
-		public GetFilesTest()
-		{
-			_client = IoC.GetHydrusClient();
-		}
-
 		[Test]
 		public async Task SearchFiles()
 		{
@@ -441,7 +377,7 @@ public class FilesClientTest
 		{
 			using (var response = await _client.FilesClient.GetFile(IoC.FileHash))
 			{
-				using (var writer = File.OpenWrite(_savePath))
+				using (var writer = File.OpenWrite(_pngSavePath))
 				{
 					await response.CopyToAsync(writer);
 				}
@@ -453,7 +389,7 @@ public class FilesClientTest
 		{
 			using (var response = await _client.FilesClient.GetThumbnail(IoC.FileHash))
 			{
-				using (var writer = File.OpenWrite(_savePath))
+				using (var writer = File.OpenWrite(_pngSavePath))
 				{
 					await response.CopyToAsync(writer);
 				}
@@ -461,24 +397,36 @@ public class FilesClientTest
 		}
 	}
 
-
 	[TestFixture]
-	public class GetTest
+	public class RenderTest
 	{
-		private readonly IHydrusClient _client;
-
-		// ReSharper disable once ConvertConstructorToMemberInitializers
-		public GetTest()
+		[Test]
+		public async Task PngAsPng()
 		{
-			_client = IoC.GetHydrusClient();
+			using (var response = await _client.FilesClient.Render(IoC.FileHash))
+			{
+				using (var writer = File.OpenWrite(_pngSavePath))
+				{
+					await response.CopyToAsync(writer);
+				}
+			}
 		}
 
 		[Test]
-		public async Task File()
+		public async Task PngAsJpg()
 		{
-			var result = await _client.FilesClient.GetFile(IoC.FileHash);
+			var request = new RenderRequest(IoC.FileHash)
+			{
+				RenderFormat = RenderOutputFormat.Jpeg,
+			};
 
-			Assert.That(result, Is.Not.Null);
+			using (var response = await _client.FilesClient.Render(request))
+			{
+				using (var writer = File.OpenWrite(_jpgSavePath))
+				{
+					await response.CopyToAsync(writer);
+				}
+			}
 		}
 	}
 }

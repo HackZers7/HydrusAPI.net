@@ -84,10 +84,10 @@ The latest supported version of Hydrus API: 78 (607)
 | /get_files/file_metadata                |   ⚠️    |        ❌        |        ❌        |
 | /get_files/file                         |   ✅    |        ❌        |   Not needed    |
 | /get_files/thumbnail                    |   ✅    |        ❌        |   Not needed    |
-| /get_files/file_path                    |   ⚠️    |        ❌        |        ❌        |
-| /get_files/thumbnail_path               |   ⚠️    |        ❌        |        ❌        |
-| /get_files/local_file_storage_locations |   ⚠️    |        ❌        |        ❌        |
-| /get_files/render                       |   ⚠️    |        ❌        |   Not needed    |
+| /get_files/file_path                    |   ✅    |        ❌        |        ❌        |
+| /get_files/thumbnail_path               |   ✅    |        ❌        |        ❌        |
+| /get_files/local_file_storage_locations |   ✅    |        ❌        |        ❌        |
+| /get_files/render                       |   ✅    |        ❌        |   Not needed    |
 
 ### Managing File Relationships
 
@@ -158,7 +158,6 @@ The latest supported version of Hydrus API: 78 (607)
 
 ## Future plans:
 
-- Other API request
 - Requests builder
 - Structured types for response
 

@@ -29,10 +29,10 @@ public class Relationships
 	/// <summary>
 	///     Тип связи.
 	/// </summary>
-	public int Relationship { get; set; }
+	public RelationshipsType Relationship { get; set; }
 
 	/// <summary>
-	///     Следует ли загружать пользовательские параметры слияния дублирующегося содержимого и применять их к файлам вместе со связью. Рекомендуется использовать <see cref="RelationshipsType" />.
+	///     Следует ли загружать пользовательские параметры слияния дублирующегося содержимого и применять их к файлам вместе со связью.
 	/// </summary>
 	/// <remarks>
 	///     По умолчанию - true.

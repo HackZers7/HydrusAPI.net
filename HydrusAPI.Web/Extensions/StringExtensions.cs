@@ -59,7 +59,7 @@ internal static class StringExtensions
 
 		return string.Format("[{0}]", string.Join(',', source.Select(p => p.ToString())));
 	}
-	
+
 	public static string ToStringArray(this IEnumerable<ulong>? source)
 	{
 		if (source == null)
@@ -102,7 +102,9 @@ internal static class StringExtensions
 			string value => value.UriEncode(),
 			bool value => value.ToString().ToLower(),
 			int value => value.ToString(),
+			ushort value => value.ToString(),
 			ulong value => value.ToString(),
+			Enum value => ((int)(object)value).ToString(),
 			IEnumerable<string> value => value.ToStringArray().UriEncode(),
 			IEnumerable<int> value => value.ToStringArray().UriEncode(),
 			IEnumerable<ulong> value => value.ToStringArray().UriEncode(),

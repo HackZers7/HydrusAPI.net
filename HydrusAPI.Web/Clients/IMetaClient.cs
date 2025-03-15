@@ -445,10 +445,7 @@ public interface IMetaClient
 	/// <param name="hash">Хэш (SHA256) файла.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
-	Task<IEnumerable<MetaDataId>> GetId(
-		string hash,
-		CancellationToken cancel = default
-	);
+	Task<IEnumerable<MetaDataId>> GetId(string hash, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает идентификаторы файлов.
@@ -460,10 +457,7 @@ public interface IMetaClient
 	/// <param name="hashes">Хеши (SHA256) файлов.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
-	Task<IEnumerable<MetaDataId>> GetId(
-		IList<string> hashes,
-		CancellationToken cancel = default
-	);
+	Task<IEnumerable<MetaDataId>> GetId(IList<string> hashes, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает хэш (SHA256) файла.
@@ -475,10 +469,7 @@ public interface IMetaClient
 	/// <param name="fileId">Идентификатор файла.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
-	Task<IEnumerable<MetaDataId>> GetHash(
-		ulong fileId,
-		CancellationToken cancel = default
-	);
+	Task<IEnumerable<MetaDataId>> GetHash(ulong fileId, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает хеши (SHA256) файлов.
@@ -490,10 +481,7 @@ public interface IMetaClient
 	/// <param name="fileIds">Идентификаторы файлов.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
-	Task<IEnumerable<MetaDataId>> GetHash(
-		IList<ulong> fileIds,
-		CancellationToken cancel = default
-	);
+	Task<IEnumerable<MetaDataId>> GetHash(IList<ulong> fileIds, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает локальный путь к файлу.
@@ -506,10 +494,7 @@ public interface IMetaClient
 	/// <param name="hash">Хэш (SHA256) файла.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="FilePathResponse" />.</returns>
-	Task<FilePathResponse> GetFilePath(
-		string hash,
-		CancellationToken cancel = default
-	);
+	Task<FilePathResponse> GetFilePath(string hash, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает локальный путь к эскизу.
@@ -522,10 +507,7 @@ public interface IMetaClient
 	/// <param name="fileId">Идентификатор файла.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="FilePathResponse" />.</returns>
-	Task<FilePathResponse> GetFilePath(
-		ulong fileId,
-		CancellationToken cancel = default
-	);
+	Task<FilePathResponse> GetFilePath(ulong fileId, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает локальный путь к эскизу.
@@ -539,11 +521,7 @@ public interface IMetaClient
 	/// <param name="includeThumbnailFiletype">Добавить в ответ тип файла. По умолчанию - false.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="ThumbnailFilePathResponse" />.</returns>
-	Task<ThumbnailFilePathResponse> GetThumbnailFilePath(
-		string hash,
-		bool includeThumbnailFiletype = false,
-		CancellationToken cancel = default
-	);
+	Task<ThumbnailFilePathResponse> GetThumbnailFilePath(string hash, bool includeThumbnailFiletype = false, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает локальный путь к файлу.
@@ -557,11 +535,7 @@ public interface IMetaClient
 	/// <param name="includeThumbnailFiletype">Добавить в ответ тип файла. По умолчанию - false.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает <see cref="ThumbnailFilePathResponse" />.</returns>
-	Task<ThumbnailFilePathResponse> GetThumbnailFilePath(
-		ulong fileId,
-		bool includeThumbnailFiletype = false,
-		CancellationToken cancel = default
-	);
+	Task<ThumbnailFilePathResponse> GetThumbnailFilePath(ulong fileId, bool includeThumbnailFiletype = false, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает локальные хранилища.
@@ -572,8 +546,6 @@ public interface IMetaClient
 	///     <see cref="Permissions.SeeLocalPaths" />.
 	/// </remarks>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает коллекция с хранилищами.</returns>
-	Task<IEnumerable<StorageLocation>> GetLocalFileStorageLocations(
-		CancellationToken cancel = default
-	);
+	/// <returns>Возвращает <see cref="LocalFileStorageLocationsResponse"/>.</returns>
+	Task<LocalFileStorageLocationsResponse> GetLocalFileStorageLocations(CancellationToken cancel = default);
 }

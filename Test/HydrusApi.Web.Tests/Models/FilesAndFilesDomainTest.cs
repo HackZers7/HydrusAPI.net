@@ -24,7 +24,7 @@ public class FilesAndFilesDomainTest
 	public void FilesMultiplySerializationTest()
 	{
 		var files = new FilesRequest("test1");
-		files.FileId = (ulong)500;
+		files.FileId = 500UL;
 
 		var data = Utils.Serialize(files);
 

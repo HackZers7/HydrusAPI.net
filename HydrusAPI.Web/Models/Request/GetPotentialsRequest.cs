@@ -73,10 +73,7 @@ public class GetPotentialsRequest : FilesRequest
 	/// <summary>
 	///     Необязательно, как пары должны соответствовать поиску.
 	/// </summary>
-	/// <remarks>
-	///     По умолчанию - <see cref="PotentialsSearchTypes.OneFileMatchesSearch" />.
-	/// </remarks>
-	public int PotentialsSearchType { get; set; } = (int)PotentialsSearchTypes.OneFileMatchesSearch;
+	public PotentialsSearchTypes PotentialsSearchType { get; set; } = PotentialsSearchTypes.OneFileMatchesSearch;
 
 	/// <summary>
 	///     Необязательно, должны ли быть у пар пиксельные дубликаты.
@@ -84,7 +81,7 @@ public class GetPotentialsRequest : FilesRequest
 	/// <remarks>
 	///     По умолчанию - <see cref="PixelDuplicateTypes.CanBePixelDuplicates" />.
 	/// </remarks>
-	public int PixelDuplicates { get; set; } = (int)PixelDuplicateTypes.CanBePixelDuplicates;
+	public PixelDuplicateTypes PixelDuplicates { get; set; } = PixelDuplicateTypes.CanBePixelDuplicates;
 
 	/// <summary>
 	///     Необязательно, максимальное "расстояние поиска" пар.
@@ -92,7 +89,7 @@ public class GetPotentialsRequest : FilesRequest
 	/// <remarks>
 	///     По умолчанию - 4.
 	/// </remarks>
-	public int MaxHammingDistance { get; set; } = (int)PixelDuplicateTypes.CanBePixelDuplicates;
+	public int MaxHammingDistance { get; set; } = 4;
 }
 
 /// <summary>

@@ -22,7 +22,7 @@ public class FileRequest
 	/// <param name="id">Идентификатор файла.</param>
 	public FileRequest(ulong id)
 	{
-		ThrowHelper.ArgumentOutOfRange(id, (ulong)0, ulong.MaxValue);
+		ThrowHelper.ArgumentOutOfRange(id, 1UL, ulong.MaxValue);
 
 		FileId = id;
 	}

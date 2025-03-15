@@ -28,7 +28,7 @@ public class SetTimeRequest : FilesRequest, IConvert
 	/// <param name="timestampType">Тип времени.</param>
 	public SetTimeRequest(string hash, TimestampTypes timestampType) : base(hash)
 	{
-		TimestampType = (int)timestampType;
+		TimestampType = timestampType;
 	}
 
 	/// <summary>
@@ -38,7 +38,7 @@ public class SetTimeRequest : FilesRequest, IConvert
 	/// <param name="timestampType">Тип времени.</param>
 	public SetTimeRequest(ulong id, TimestampTypes timestampType) : base(id)
 	{
-		TimestampType = (int)timestampType;
+		TimestampType = timestampType;
 	}
 
 	/// <summary>
@@ -48,7 +48,7 @@ public class SetTimeRequest : FilesRequest, IConvert
 	/// <param name="timestampType">Тип времени.</param>
 	public SetTimeRequest(IList<string>? hashes, TimestampTypes timestampType) : base(hashes)
 	{
-		TimestampType = (int)timestampType;
+		TimestampType = timestampType;
 	}
 
 	/// <summary>
@@ -58,7 +58,7 @@ public class SetTimeRequest : FilesRequest, IConvert
 	/// <param name="timestampType">Тип времени.</param>
 	public SetTimeRequest(IList<ulong>? fileIds, TimestampTypes timestampType) : base(fileIds)
 	{
-		TimestampType = (int)timestampType;
+		TimestampType = timestampType;
 	}
 
 	/// <summary>
@@ -80,10 +80,7 @@ public class SetTimeRequest : FilesRequest, IConvert
 	/// <summary>
 	///     Тип времени, который редактируется.
 	/// </summary>
-	/// <remarks>
-	/// 	Для более удобной установки значения рекомендуется использовать <see cref="HydrusAPI.Web.TimestampTypes" />.
-	/// </remarks>
-	public int? TimestampType { get; set; }
+	public TimestampTypes TimestampType { get; set; }
 
 	/// <summary>
 	///     Ключ файлового сервиса.
@@ -146,7 +143,7 @@ public class SetTimeRequest : FilesRequest, IConvert
 			jObject.Add(new JProperty(fileIdsName, FileIds));
 		}
 
-		jObject.Add(new JProperty(timestampTypeName, TimestampType));
+		jObject.Add(new JProperty(timestampTypeName, (int)TimestampType));
 
 		if (Timestamp != null)
 		{

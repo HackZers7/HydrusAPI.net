@@ -24,7 +24,7 @@ public class FilesRequest
 	/// <param name="id">Идентификатор файла.</param>
 	public FilesRequest(ulong id)
 	{
-		ThrowHelper.ArgumentOutOfRange(id, (ulong)0, ulong.MaxValue);
+		ThrowHelper.ArgumentOutOfRange(id, 1UL, ulong.MaxValue);
 
 		FileId = id;
 	}
@@ -96,7 +96,7 @@ public class FilesWithDomainRequest : FileDomainRequest
 	/// <param name="id">Идентификатор файла.</param>
 	public FilesWithDomainRequest(ulong id)
 	{
-		ThrowHelper.ArgumentOutOfRange(id, (ulong)0, ulong.MaxValue);
+		ThrowHelper.ArgumentOutOfRange(id, 1UL, ulong.MaxValue);
 
 		FileId = id;
 	}

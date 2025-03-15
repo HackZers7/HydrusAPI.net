@@ -14,7 +14,7 @@ public class ViewTimeRequest : FilesRequest
 	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
 	public ViewTimeRequest(string hash, CanvasTypes type, double viewTime) : base(hash)
 	{
-		CanvasType = (int)type;
+		CanvasType = type;
 		Viewtime = viewTime;
 	}
 
@@ -26,7 +26,7 @@ public class ViewTimeRequest : FilesRequest
 	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
 	public ViewTimeRequest(ulong id, CanvasTypes type, double viewTime) : base(id)
 	{
-		CanvasType = (int)type;
+		CanvasType = type;
 		Viewtime = viewTime;
 	}
 
@@ -38,7 +38,7 @@ public class ViewTimeRequest : FilesRequest
 	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
 	public ViewTimeRequest(IList<string>? hashes, CanvasTypes type, double viewTime) : base(hashes)
 	{
-		CanvasType = (int)type;
+		CanvasType = type;
 		Viewtime = viewTime;
 	}
 
@@ -50,17 +50,14 @@ public class ViewTimeRequest : FilesRequest
 	/// <param name="viewTime">Как долго пользователь просматривал файл. Unix-формат.</param>
 	public ViewTimeRequest(IList<ulong>? fileIds, CanvasTypes type, double viewTime) : base(fileIds)
 	{
-		CanvasType = (int)type;
+		CanvasType = type;
 		Viewtime = viewTime;
 	}
 
 	/// <summary>
 	///     Тип холста.
-	///     <remarks>
-	///         Для более удобной установки значения рекомендуется использовать <see cref="HydrusAPI.Web.CanvasTypes" />.
-	///     </remarks>
 	/// </summary>
-	public int CanvasType { get; set; }
+	public CanvasTypes CanvasType { get; set; }
 
 	/// <summary>
 	///     Необязательно, время последнего просмотра в секундах.

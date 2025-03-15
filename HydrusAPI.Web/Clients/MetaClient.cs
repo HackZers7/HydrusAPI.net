@@ -384,9 +384,8 @@ public class MetaClient : ApiClient, IMetaClient
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<StorageLocation>> GetLocalFileStorageLocations(CancellationToken cancel = default)
+	public Task<LocalFileStorageLocationsResponse> GetLocalFileStorageLocations(CancellationToken cancel = default)
 	{
-		var response = await ApiConnection.Get<LocalFileStorageLocationsResponse>(HydrusUrls.GetLocalFileStorageLocations(), cancel);
-		return response.Locations;
+		return ApiConnection.Get<LocalFileStorageLocationsResponse>(HydrusUrls.GetLocalFileStorageLocations(), cancel);
 	}
 }

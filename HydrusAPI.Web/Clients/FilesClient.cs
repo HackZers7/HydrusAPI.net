@@ -332,8 +332,6 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public async Task<StreamWithContentType> GetFile(string hash, bool download = false, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
-
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetFile(hash, download), cancel);
 
 		return new StreamWithContentType(response.Body!, response.Response.ContentType!);
@@ -342,8 +340,6 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public async Task<StreamWithContentType> GetFile(ulong fileId, bool download = false, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
-
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetFile(fileId, download), cancel);
 
 		return new StreamWithContentType(response.Body!, response.Response.ContentType!);
@@ -352,8 +348,6 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public async Task<StreamWithContentType> GetThumbnail(string hash, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
-
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetThumbnail(hash), cancel);
 
 		return new StreamWithContentType(response.Body!, response.Response.ContentType!);
@@ -362,57 +356,22 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public async Task<StreamWithContentType> GetThumbnail(ulong fileId, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
-
 		var response = await ApiConnection.GetRawStream(HydrusUrls.GetThumbnail(fileId), cancel);
 
 		return new StreamWithContentType(response.Body!, response.Response.ContentType!);
 	}
 
 	/// <inheritdoc />
-	public Task<Stream> Render(
-		string hash,
-		bool download = false,
-		RenderOutputFormat renderFormat = RenderOutputFormat.Png,
-		ushort? renderQuality = null,
-		ulong? width = null,
-		ulong? height = null,
-		CancellationToken cancel = default
+	public Task<Stream> Render(string hash, CancellationToken cancel = default
 	)
 	{
-		ThrowHelper.ArgumentNotNullOrWhiteSpace(hash);
-
-		return Render(new RenderRequest(hash)
-		{
-			Download = download,
-			RenderFormat = (int)renderFormat,
-			RenderQuality = renderQuality,
-			Width = width,
-			Height = height
-		}, cancel);
+		return Render(new RenderRequest(hash), cancel);
 	}
 
 	/// <inheritdoc />
-	public Task<Stream> Render(
-		ulong fileId,
-		bool download = false,
-		RenderOutputFormat renderFormat = RenderOutputFormat.Png,
-		ushort? renderQuality = null,
-		ulong? width = null,
-		ulong? height = null,
-		CancellationToken cancel = default
-	)
+	public Task<Stream> Render(ulong fileId, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentOutOfRange(fileId, (ulong)1, ulong.MaxValue);
-
-		return Render(new RenderRequest(fileId)
-		{
-			Download = download,
-			RenderFormat = (int)renderFormat,
-			RenderQuality = renderQuality,
-			Width = width,
-			Height = height
-		}, cancel);
+		return Render(new RenderRequest(fileId), cancel);
 	}
 
 	/// <inheritdoc />
