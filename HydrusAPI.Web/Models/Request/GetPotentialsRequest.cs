@@ -4,40 +4,8 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Запрос получения количества оставшихся потенциальных пар дубликатов.
 /// </summary>
-public class GetPotentialsRequest : FilesRequest
+public class GetPotentialsRequest : FileDomainRequest
 {
-	/// <summary>
-	///     Инициализирует новый экземпляр класса.
-	/// </summary>
-	/// <param name="hash">Хеш (SHA256) файла.</param>
-	public GetPotentialsRequest(string hash) : base(hash)
-	{
-	}
-
-	/// <summary>
-	///     Инициализирует новый экземпляр класса.
-	/// </summary>
-	/// <param name="id">Идентификатор файла.</param>
-	public GetPotentialsRequest(ulong id) : base(id)
-	{
-	}
-
-	/// <summary>
-	///     Инициализирует новый экземпляр класса.
-	/// </summary>
-	/// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
-	public GetPotentialsRequest(IList<string>? hashes) : base(hashes)
-	{
-	}
-
-	/// <summary>
-	///     Инициализирует новый экземпляр класса.
-	/// </summary>
-	/// <param name="fileIds">Коллекция идентификаторов файлов.</param>
-	public GetPotentialsRequest(IList<ulong>? fileIds) : base(fileIds)
-	{
-	}
-
 	/// <summary>
 	///     Необязательно, ключ сервисов тегов.
 	/// </summary>

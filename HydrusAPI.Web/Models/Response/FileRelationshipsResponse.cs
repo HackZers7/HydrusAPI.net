@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace HydrusAPI.Web;
 
 /// <summary>
@@ -8,10 +10,7 @@ public class FileRelationshipsResponse : ApiVersionResponse
 	/// <summary>
 	///     Словарь со связями файла, где первый ключ - хэш (SHA256) файл, а второй свойство.
 	/// </summary>
-	/// <remarks>
-	///     API возвращает "числовые" названия некоторый свойств, что трудно прочитать автоматически методами.
-	/// </remarks>
-	public Dictionary<string, Dictionary<string, object>>? FileRelationships { get; set; }
+	public Dictionary<string, FileRelationships> FileRelationships { get; set; } = new();
 }
 
 // TODO: Добавить структурированный тип
@@ -40,4 +39,28 @@ public class FileRelationships
 	///     Лучший существует на сервере.
 	/// </summary>
 	public bool KingIsLocal { get; set; }
+
+	/// <summary>
+	/// 	Потенциальные дубликаты.
+	/// </summary>
+	[JsonProperty("0")]
+	public List<string> PotentialDuplicates { get; set; } = new();
+
+	/// <summary>
+	/// 	Отрицательные срабатывания.
+	/// </summary>
+	[JsonProperty("1")]
+	public List<string> FalsePositives { get; set; } = new();
+
+	/// <summary>
+	/// 	Альтернативы.
+	/// </summary>
+	[JsonProperty("3")]
+	public List<string> Alternates { get; set; } = new();
+
+	/// <summary>
+	/// 	Дубликаты.
+	/// </summary>
+	[JsonProperty("8")]
+	public List<string> Duplicates { get; set; } = new();
 }

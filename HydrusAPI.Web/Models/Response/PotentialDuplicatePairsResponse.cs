@@ -8,5 +8,5 @@ public class PotentialDuplicatePairsResponse : ApiVersionResponse
 	/// <summary>
 	///     Потенциальные пары дубликатов.
 	/// </summary>
-	public List<List<string>>? PotentialDuplicatePairs { get; set; }
+	public List<List<string>> PotentialDuplicatePairs { get; set; } = new List<List<string>>();
 }

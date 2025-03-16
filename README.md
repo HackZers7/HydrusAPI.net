@@ -93,13 +93,13 @@ The latest supported version of Hydrus API: 78 (607)
 
 | URL                                               | Status | Request builder | Structured type |
 | ------------------------------------------------- | :----: | :-------------: | :-------------: |
-| /manage_file_relationships/get_file_relationships |   ⚠️    |        ❌        |        ❌        |
-| /manage_file_relationships/get_potentials_count   |   ⚠️    |        ❌        |        ❌        |
-| /manage_file_relationships/get_potential_pairs    |   ⚠️    |        ❌        |        ❌        |
-| /manage_file_relationships/get_random_potentials  |   ⚠️    |        ❌        |        ❌        |
-| /manage_file_relationships/remove_potentials      |   ⚠️    |        ❌        |   Not needed    |
-| /manage_file_relationships/set_file_relationships |   ⚠️    |        ❌        |   Not needed    |
-| /manage_file_relationships/set_kings              |   ⚠️    |        ❌        |   Not needed    |
+| /manage_file_relationships/get_file_relationships |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/get_potentials_count   |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/get_potential_pairs    |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/get_random_potentials  |   ✅    |        ❌        |        ❌        |
+| /manage_file_relationships/remove_potentials      |   ✅    |        ❌        |   Not needed    |
+| /manage_file_relationships/set_file_relationships |   ✅    |        ❌        |   Not needed    |
+| /manage_file_relationships/set_kings              |   ✅    |        ❌        |   Not needed    |
 
 ### Managing Services
 

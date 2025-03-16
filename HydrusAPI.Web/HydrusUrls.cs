@@ -631,6 +631,17 @@ public static class HydrusUrls
 		);
 	}
 
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения количества оставшихся потенциальных пар дубликатов.
+	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта получения количества оставшихся потенциальных пар дубликатов.</returns>
+	public static Uri GetPotentialsCount()
+	{
+		return "/manage_file_relationships/get_potentials_count"
+			.FormatUri();
+	}
+
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса получения количества оставшихся потенциальных пар дубликатов.
 	/// </summary>
@@ -643,10 +654,10 @@ public static class HydrusUrls
 		return "/manage_file_relationships/get_potentials_count?"
 			.FormatUri(new Dictionary<string, object?>
 			{
-				{ "hash", request.Hash },
-				{ "file_id", request.FileId },
-				{ "hashes", request.Hashes },
-				{ "file_ids", request.FileIds },
+				{ "file_service_key", request.FileServiceKey },
+				{ "file_service_keys", request.FileServiceKeys },
+				{ "deleted_file_service_key", request.DeletedFileServiceKey },
+				{ "deleted_file_service_keys", request.DeletedFileServiceKeys },
 				{ "tag_service_key_1", request.TagServiceKey1 },
 				{ "tags_1", request.Tags1 },
 				{ "tag_service_key_2", request.TagServiceKey2 },
@@ -661,6 +672,16 @@ public static class HydrusUrls
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса получения оставшихся потенциальных пар дубликатов.
 	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта получения оставшихся потенциальных пар дубликатов.</returns>
+	public static Uri GetPotentialsPairs()
+	{
+		return "/manage_file_relationships/get_potential_pairs"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения оставшихся потенциальных пар дубликатов.
+	/// </summary>
 	/// <param name="request">Запрос.</param>
 	/// <returns><see cref="Uri" /> эндпоинта получения оставшихся потенциальных пар дубликатов.</returns>
 	public static Uri GetPotentialsPairs(GetPotentialsPairsRequest request)
@@ -670,10 +691,10 @@ public static class HydrusUrls
 		return "/manage_file_relationships/get_potential_pairs?"
 			.FormatUri(new Dictionary<string, object?>
 			{
-				{ "hash", request.Hash },
-				{ "file_id", request.FileId },
-				{ "hashes", request.Hashes },
-				{ "file_ids", request.FileIds },
+				{ "file_service_key", request.FileServiceKey },
+				{ "file_service_keys", request.FileServiceKeys },
+				{ "deleted_file_service_key", request.DeletedFileServiceKey },
+				{ "deleted_file_service_keys", request.DeletedFileServiceKeys },
 				{ "tag_service_key_1", request.TagServiceKey1 },
 				{ "tags_1", request.Tags1 },
 				{ "tag_service_key_2", request.TagServiceKey2 },
@@ -689,6 +710,16 @@ public static class HydrusUrls
 	/// <summary>
 	///     Возвращает <see cref="Uri" /> запроса получения случайных потенциальных пар дубликатов.
 	/// </summary>
+	/// <returns><see cref="Uri" /> эндпоинта получения случайных потенциальных пар дубликатов.</returns>
+	public static Uri GetRandomPotentials()
+	{
+		return "/manage_file_relationships/get_random_potentials"
+			.FormatUri();
+	}
+
+	/// <summary>
+	///     Возвращает <see cref="Uri" /> запроса получения случайных потенциальных пар дубликатов.
+	/// </summary>
 	/// <param name="request">Запрос.</param>
 	/// <returns><see cref="Uri" /> эндпоинта получения случайных потенциальных пар дубликатов.</returns>
 	public static Uri GetRandomPotentials(GetPotentialsRequest request)
@@ -698,10 +729,10 @@ public static class HydrusUrls
 		return "/manage_file_relationships/get_random_potentials?"
 			.FormatUri(new Dictionary<string, object?>
 			{
-				{ "hash", request.Hash },
-				{ "file_id", request.FileId },
-				{ "hashes", request.Hashes },
-				{ "file_ids", request.FileIds },
+				{ "file_service_key", request.FileServiceKey },
+				{ "file_service_keys", request.FileServiceKeys },
+				{ "deleted_file_service_key", request.DeletedFileServiceKey },
+				{ "deleted_file_service_keys", request.DeletedFileServiceKeys },
 				{ "tag_service_key_1", request.TagServiceKey1 },
 				{ "tags_1", request.Tags1 },
 				{ "tag_service_key_2", request.TagServiceKey2 },

@@ -6,9 +6,20 @@ namespace HydrusAPI.Web;
 public class SetFileRelationshipsRequest
 {
 	/// <summary>
+	/// 	Инициализирует новый экземпляр класса. 
+	/// </summary>
+	/// <param name="relationships">Коллекция связей.</param>
+	public SetFileRelationshipsRequest(IList<Relationships> relationships)
+	{
+		ThrowHelper.ArgumentNotNull(relationships);
+
+		Relationships = relationships;
+	}
+
+	/// <summary>
 	///     Коллекция связей.
 	/// </summary>
-	public List<Relationships>? Relationships { get; set; }
+	public IList<Relationships> Relationships { get; set; }
 }
 
 /// <summary>
@@ -16,6 +27,22 @@ public class SetFileRelationshipsRequest
 /// </summary>
 public class Relationships
 {
+	/// <summary>
+	/// Инициализирует новый экземпляр класса. 
+	/// </summary>
+	/// <param name="hashA">Хэш (SHA256) файла.</param>
+	/// <param name="hashB">Хэш (SHA256) файла.</param>
+	/// <param name="relationships">Тип связи.</param>
+	public Relationships(string hashA, string hashB, RelationshipsType relationships)
+	{
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hashA);
+		ThrowHelper.ArgumentNotNullOrWhiteSpace(hashB);
+
+		HashA = hashA;
+		HashB = hashB;
+		Relationship = relationships;
+	}
+
 	/// <summary>
 	///     Хэш (SHA256) файла.
 	/// </summary>
