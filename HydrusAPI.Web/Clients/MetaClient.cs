@@ -194,7 +194,7 @@ public class MetaClient : ApiClient, IMetaClient
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<MetaData>> GetMetaData(
+	public Task<MetaDataResponse<MetaData>> GetMetaData(
 		string hash,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
@@ -203,7 +203,7 @@ public class MetaClient : ApiClient, IMetaClient
 		CancellationToken cancel = default
 	)
 	{
-		var response = await GetMetaData(new MetaDataRequest(hash)
+		return GetMetaData(new MetaDataRequest(hash)
 		{
 			CreateNewFileIds = createNewFileIds,
 			OnlyReturnIdentifiers = false,
@@ -214,12 +214,10 @@ public class MetaClient : ApiClient, IMetaClient
 			IncludeNotes = includeNotes,
 			IncludeServicesObject = false
 		}, cancel);
-
-		return response.Metadata;
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<MetaData>> GetMetaData(
+	public Task<MetaDataResponse<MetaData>> GetMetaData(
 		IList<string> hashes,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
@@ -228,9 +226,7 @@ public class MetaClient : ApiClient, IMetaClient
 		CancellationToken cancel = default
 	)
 	{
-		ThrowHelper.ArgumentNotNull(hashes);
-
-		var response = await GetMetaData(new MetaDataRequest(hashes)
+		return GetMetaData(new MetaDataRequest(hashes)
 		{
 			CreateNewFileIds = createNewFileIds,
 			OnlyReturnIdentifiers = false,
@@ -241,12 +237,10 @@ public class MetaClient : ApiClient, IMetaClient
 			IncludeNotes = includeNotes,
 			IncludeServicesObject = false
 		}, cancel);
-
-		return response.Metadata;
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<MetaData>> GetMetaData(
+	public Task<MetaDataResponse<MetaData>> GetMetaData(
 		ulong fileId,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
@@ -255,7 +249,7 @@ public class MetaClient : ApiClient, IMetaClient
 		CancellationToken cancel = default
 	)
 	{
-		var response = await GetMetaData(new MetaDataRequest(fileId)
+		return GetMetaData(new MetaDataRequest(fileId)
 		{
 			CreateNewFileIds = createNewFileIds,
 			OnlyReturnIdentifiers = false,
@@ -266,12 +260,10 @@ public class MetaClient : ApiClient, IMetaClient
 			IncludeNotes = includeNotes,
 			IncludeServicesObject = false
 		}, cancel);
-
-		return response.Metadata;
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<MetaData>> GetMetaData(
+	public Task<MetaDataResponse<MetaData>> GetMetaData(
 		IList<ulong> fileIds,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
@@ -280,9 +272,7 @@ public class MetaClient : ApiClient, IMetaClient
 		CancellationToken cancel = default
 	)
 	{
-		ThrowHelper.ArgumentNotNull(fileIds);
-
-		var response = await GetMetaData(new MetaDataRequest(fileIds)
+		return GetMetaData(new MetaDataRequest(fileIds)
 		{
 			CreateNewFileIds = createNewFileIds,
 			OnlyReturnIdentifiers = false,
@@ -293,8 +283,6 @@ public class MetaClient : ApiClient, IMetaClient
 			IncludeNotes = includeNotes,
 			IncludeServicesObject = false
 		}, cancel);
-
-		return response.Metadata;
 	}
 
 	/// <inheritdoc />
@@ -304,59 +292,47 @@ public class MetaClient : ApiClient, IMetaClient
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<MetaDataId>> GetId(string hash, CancellationToken cancel = default)
+	public Task<MetaDataResponse<MetaDataId>> GetId(string hash, CancellationToken cancel = default)
 	{
 		var request = HydrusUrls.GetMetadata(new MetaDataRequest(hash)
 		{
 			OnlyReturnIdentifiers = true,
 			IncludeServicesObject = false
 		});
-		var response = await ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
-
-		return response.Metadata;
+		return ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<MetaDataId>> GetId(IList<string> hashes, CancellationToken cancel = default)
+	public Task<MetaDataResponse<MetaDataId>> GetId(IList<string> hashes, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNull(hashes);
-
 		var request = HydrusUrls.GetMetadata(new MetaDataRequest(hashes)
 		{
 			OnlyReturnIdentifiers = true,
 			IncludeServicesObject = false
 		});
-		var response = await ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
-
-		return response.Metadata;
+		return ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<MetaDataId>> GetHash(ulong fileId, CancellationToken cancel = default)
+	public Task<MetaDataResponse<MetaDataId>> GetHash(ulong fileId, CancellationToken cancel = default)
 	{
 		var request = HydrusUrls.GetMetadata(new MetaDataRequest(fileId)
 		{
 			OnlyReturnIdentifiers = true,
 			IncludeServicesObject = false
 		});
-		var response = await ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
-
-		return response.Metadata;
+		return ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
 	}
 
 	/// <inheritdoc />
-	public async Task<IEnumerable<MetaDataId>> GetHash(IList<ulong> fileIds, CancellationToken cancel = default)
+	public Task<MetaDataResponse<MetaDataId>> GetHash(IList<ulong> fileIds, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNull(fileIds);
-
 		var request = HydrusUrls.GetMetadata(new MetaDataRequest(fileIds)
 		{
 			OnlyReturnIdentifiers = true,
 			IncludeServicesObject = false
 		});
-		var response = await ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
-
-		return response.Metadata;
+		return ApiConnection.Get<MetaDataResponse<MetaDataId>>(request, cancel);
 	}
 
 	/// <inheritdoc />

@@ -108,5 +108,6 @@ public class MetaDataRequest : FilesRequest
 	/// <remarks>
 	///     По умолчанию - true.
 	/// </remarks>
+	[Obsolete("Устарел, скоро будет удален!")]
 	public bool HideServiceKeysTags { get; set; } = true;
 }

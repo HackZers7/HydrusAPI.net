@@ -345,7 +345,7 @@ public interface IMetaClient
 	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию <see cref="MetaData" /> с мета данными.</returns>
-	Task<IEnumerable<MetaData>> GetMetaData(
+	Task<MetaDataResponse<MetaData>> GetMetaData(
 		string hash,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
@@ -368,7 +368,7 @@ public interface IMetaClient
 	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию <see cref="MetaData" /> с мета данными.</returns>
-	Task<IEnumerable<MetaData>> GetMetaData(
+	Task<MetaDataResponse<MetaData>> GetMetaData(
 		IList<string> hashes,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
@@ -391,7 +391,7 @@ public interface IMetaClient
 	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию <see cref="MetaData" /> с мета данными.</returns>
-	Task<IEnumerable<MetaData>> GetMetaData(
+	Task<MetaDataResponse<MetaData>> GetMetaData(
 		ulong fileId,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
@@ -414,7 +414,7 @@ public interface IMetaClient
 	/// <param name="includeNotes">Необязательно, включить в ответ заметки. По умолчанию - false.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию <see cref="MetaData" /> с мета данными.</returns>
-	Task<IEnumerable<MetaData>> GetMetaData(
+	Task<MetaDataResponse<MetaData>> GetMetaData(
 		IList<ulong> fileIds,
 		bool createNewFileIds = false,
 		bool detailedUrlInformation = false,
@@ -432,7 +432,7 @@ public interface IMetaClient
 	/// </remarks>
 	/// <param name="request">Запрос.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="MetaDataResponse" /> с мета данными.</returns>
+	/// <returns>Возвращает <see cref="MetaDataResponse{T}" /> с мета данными.</returns>
 	Task<MetaDataResponse<MetaData>> GetMetaData(MetaDataRequest request, CancellationToken cancel = default);
 
 	/// <summary>
@@ -445,7 +445,7 @@ public interface IMetaClient
 	/// <param name="hash">Хэш (SHA256) файла.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
-	Task<IEnumerable<MetaDataId>> GetId(string hash, CancellationToken cancel = default);
+	Task<MetaDataResponse<MetaDataId>> GetId(string hash, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает идентификаторы файлов.
@@ -457,7 +457,7 @@ public interface IMetaClient
 	/// <param name="hashes">Хеши (SHA256) файлов.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
-	Task<IEnumerable<MetaDataId>> GetId(IList<string> hashes, CancellationToken cancel = default);
+	Task<MetaDataResponse<MetaDataId>> GetId(IList<string> hashes, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает хэш (SHA256) файла.
@@ -469,7 +469,7 @@ public interface IMetaClient
 	/// <param name="fileId">Идентификатор файла.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
-	Task<IEnumerable<MetaDataId>> GetHash(ulong fileId, CancellationToken cancel = default);
+	Task<MetaDataResponse<MetaDataId>> GetHash(ulong fileId, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает хеши (SHA256) файлов.
@@ -481,7 +481,7 @@ public interface IMetaClient
 	/// <param name="fileIds">Идентификаторы файлов.</param>
 	/// <param name="cancel">Токен отмены запроса.</param>
 	/// <returns>Возвращает коллекцию с идентификаторами.</returns>
-	Task<IEnumerable<MetaDataId>> GetHash(IList<ulong> fileIds, CancellationToken cancel = default);
+	Task<MetaDataResponse<MetaDataId>> GetHash(IList<ulong> fileIds, CancellationToken cancel = default);
 
 	/// <summary>
 	///     Запрашивает локальный путь к файлу.

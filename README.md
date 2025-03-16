@@ -81,7 +81,7 @@ The latest supported version of Hydrus API: 78 (607)
 | --------------------------------------- | :----: | :-------------: | :-------------: |
 | /get_files/search_files                 |   ✅    |        ❌        |        ❌        |
 | /get_files/file_hashes                  |   ✅    |        ❌        |        ❌        |
-| /get_files/file_metadata                |   ⚠️    |        ❌        |        ❌        |
+| /get_files/file_metadata                |   ✅    |        ❌        |        ❌        |
 | /get_files/file                         |   ✅    |        ❌        |   Not needed    |
 | /get_files/thumbnail                    |   ✅    |        ❌        |   Not needed    |
 | /get_files/file_path                    |   ✅    |        ❌        |        ❌        |

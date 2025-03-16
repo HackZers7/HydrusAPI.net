@@ -377,8 +377,6 @@ public class FilesClient : ApiClient, IFilesClient
 	/// <inheritdoc />
 	public async Task<Stream> Render(RenderRequest request, CancellationToken cancel = default)
 	{
-		ThrowHelper.ArgumentNotNull(request);
-
 		var response = await ApiConnection.GetRawStream(HydrusUrls.Render(request), cancel);
 
 		return response.Body!;

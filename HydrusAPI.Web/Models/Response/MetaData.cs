@@ -102,7 +102,7 @@ public class MetaData : MetaDataId
 	public bool? IsLocal { get; set; }
 
 	/// <summary>
-	///     В мусорке.
+	///     В мусорки.
 	/// </summary>
 	public bool? IsTrashed { get; set; }
 
@@ -159,7 +159,7 @@ public class MetaData : MetaDataId
 	#region Эскиз
 
 	/// <summary>
-	///     Хэш эскиза в формате base83.
+	///     Хэш эскиза в формате Blurhash.
 	/// </summary>
 	public string? Blurhash { get; set; }
 
@@ -186,8 +186,6 @@ public class MetaData : MetaDataId
 /// </summary>
 public class MetaDataId
 {
-	#region Идентификаторы
-
 	/// <summary>
 	///     Идентификатор файла. Null если опрошенный хэш еще не был объявлен в Hydrus.
 	/// </summary>
@@ -197,8 +195,6 @@ public class MetaDataId
 	///     Хэш (SHA256) файла.
 	/// </summary>
 	public string Hash { get; set; } = default!;
-
-	#endregion
 }
 
 /// <summary>
@@ -249,12 +245,12 @@ public class FileServices
 public class FileViewingStatistic
 {
 	/// <summary>
-	///     Тип вьювера.
+	///     Тип визуализатора.
 	/// </summary>
 	public CanvasTypes CanvasType { get; set; }
 
 	/// <summary>
-	///     Тип вьювера строкой.
+	///     Тип визуализатора строкой.
 	/// </summary>
 	public string CanvasTypePretty { get; set; } = default!;
 
@@ -314,7 +310,7 @@ public abstract class AbstractService
 	/// <summary>
 	///     Название сервиса.
 	/// </summary>
-	public string Name { get; set; }
+	public string Name { get; set; } = default!;
 
 	/// <summary>
 	///     Тип сервиса.
@@ -353,12 +349,12 @@ public class UrlDetailedDefinition : ApiVersionResponse
 	public string? MatchName { get; set; }
 
 	/// <summary>
-	///     Можно спарсить.
+	///     Можно разобрать.
 	/// </summary>
 	public bool CanParse { get; set; }
 
 	/// <summary>
-	///     Причина по которой не возможно спарсить.
+	///     Причина по которой не возможно разобрать.
 	/// </summary>
 	public string? CannotParseReason { get; set; }
 }
