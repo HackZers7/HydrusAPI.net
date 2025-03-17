@@ -6,30 +6,30 @@ namespace HydrusApi.Web.Tests.Models;
 [TestFixture]
 public class FilesAndFilesDomainTest
 {
-	public TestContext TestContext { get; set; } = default!;
+    public TestContext TestContext { get; set; } = default!;
 
-	[Test]
-	public void FilesSerializationTest()
-	{
-		var files = new FilesRequest("test1");
+    [Test]
+    public void FilesSerializationTest()
+    {
+        var files = new FilesRequest("test1");
 
-		var data = Utils.Serialize(files);
+        var data = Utils.Serialize(files);
 
-		TestContext.WriteLine(data);
+        TestContext.WriteLine(data);
 
-		Assert.That(data, Is.Not.Empty);
-	}
+        Assert.That(data, Is.Not.Empty);
+    }
 
-	[Test]
-	public void FilesMultiplySerializationTest()
-	{
-		var files = new FilesRequest("test1");
-		files.FileId = 500UL;
+    [Test]
+    public void FilesMultiplySerializationTest()
+    {
+        var files = new FilesRequest("test1");
+        files.FileId = 500UL;
 
-		var data = Utils.Serialize(files);
+        var data = Utils.Serialize(files);
 
-		TestContext.WriteLine(data);
+        TestContext.WriteLine(data);
 
-		Assert.That(data, Is.Not.Empty);
-	}
+        Assert.That(data, Is.Not.Empty);
+    }
 }

@@ -5,12 +5,12 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class SiblingsAndParentsResponse : ServicesResponse
 {
-	/// <summary>
-	///     Теги.
-	///     <remarks>
-	///         Первый ключ - тег, который был отправлен.
-	///         Второй ключ - код сервиса.
-	///     </remarks>
-	/// </summary>
-	public Dictionary<string, Dictionary<string, Tag>> Tags { get; set; } = new();
+    /// <summary>
+    ///     Теги.
+    ///     <remarks>
+    ///         Первый ключ - тег, который был отправлен.
+    ///         Второй ключ - код сервиса.
+    ///     </remarks>
+    /// </summary>
+    public Dictionary<string, Dictionary<string, Tag>> Tags { get; set; } = new();
 }

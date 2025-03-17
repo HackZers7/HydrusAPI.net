@@ -5,33 +5,33 @@ namespace HydrusAPI.Web;
 /// </summary>
 public enum FileStatus
 {
-	/// <summary>
-	///     Файл находится не в базе данных, но готово к импорту. Очень редкий статус.
-	/// </summary>
-	FileNotExists = 0,
+    /// <summary>
+    ///     Файл находится не в базе данных, но готово к импорту. Очень редкий статус.
+    /// </summary>
+    FileNotExists = 0,
 
-	/// <summary>
-	///     Успешно импортирован.
-	/// </summary>
-	Success = 1,
+    /// <summary>
+    ///     Успешно импортирован.
+    /// </summary>
+    Success = 1,
 
-	/// <summary>
-	///     Уже существует в БД.
-	/// </summary>
-	AlreadyExists = 2,
+    /// <summary>
+    ///     Уже существует в БД.
+    /// </summary>
+    AlreadyExists = 2,
 
-	/// <summary>
-	///     Был ранее удален.
-	/// </summary>
-	PreviouslyDeleted = 3,
+    /// <summary>
+    ///     Был ранее удален.
+    /// </summary>
+    PreviouslyDeleted = 3,
 
-	/// <summary>
-	///     Не ужалось импортировать.
-	/// </summary>
-	Failed = 4,
+    /// <summary>
+    ///     Не ужалось импортировать.
+    /// </summary>
+    Failed = 4,
 
-	/// <summary>
-	///     Вето.
-	/// </summary>
-	Veto = 7
+    /// <summary>
+    ///     Вето.
+    /// </summary>
+    Veto = 7
 }

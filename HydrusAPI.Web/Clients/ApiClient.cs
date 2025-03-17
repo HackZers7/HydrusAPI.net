@@ -7,19 +7,19 @@ namespace HydrusAPI.Web;
 /// </summary>
 public abstract class ApiClient
 {
-	/// <summary>
-	///     Инициализирует новый экземпляр API клиента.
-	/// </summary>
-	/// <param name="apiConnection">Подключение клиента.</param>
-	protected ApiClient(IApiConnection apiConnection)
-	{
-		ThrowHelper.ArgumentNotNull(apiConnection);
+    /// <summary>
+    ///     Инициализирует новый экземпляр API клиента.
+    /// </summary>
+    /// <param name="apiConnection">Подключение клиента.</param>
+    protected ApiClient(IApiConnection apiConnection)
+    {
+        ThrowHelper.ArgumentNotNull(apiConnection);
 
-		ApiConnection = apiConnection;
-	}
+        ApiConnection = apiConnection;
+    }
 
-	/// <summary>
-	///     Возвращает подключение к API.
-	/// </summary>
-	protected IApiConnection ApiConnection { get; private set; }
+    /// <summary>
+    ///     Возвращает подключение к API.
+    /// </summary>
+    protected IApiConnection ApiConnection { get; private set; }
 }

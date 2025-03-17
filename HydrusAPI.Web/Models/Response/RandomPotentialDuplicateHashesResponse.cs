@@ -5,8 +5,8 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class RandomPotentialDuplicateHashesResponse : ApiVersionResponse
 {
-	/// <summary>
-	///     Случайные потенциальные пары дубликатов.
-	/// </summary>
-	public List<string> RandomPotentialDuplicateHashes { get; set; } = new();
+    /// <summary>
+    ///     Случайные потенциальные пары дубликатов.
+    /// </summary>
+    public List<string> RandomPotentialDuplicateHashes { get; set; } = new();
 }

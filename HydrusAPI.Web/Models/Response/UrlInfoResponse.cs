@@ -5,33 +5,33 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class UrlInfoResponse : ApiVersionResponse
 {
-	/// <summary>
-	///     URL для запроса.
-	/// </summary>
-	public Uri RequestUrl { get; set; } = default!;
+    /// <summary>
+    ///     URL для запроса.
+    /// </summary>
+    public Uri RequestUrl { get; set; } = default!;
 
-	/// <summary>
-	///     Норма-лизированная URL.
-	/// </summary>
-	public Uri NormalisedUrl { get; set; } = default!;
+    /// <summary>
+    ///     Норма-лизированная URL.
+    /// </summary>
+    public Uri NormalisedUrl { get; set; } = default!;
 
-	/// <summary>
-	///     Тип URL.
-	/// </summary>
-	public UrlType UrlType { get; set; } = default!;
+    /// <summary>
+    ///     Тип URL.
+    /// </summary>
+    public UrlType UrlType { get; set; } = default!;
 
-	/// <summary>
-	///     Тип URL строкой.
-	/// </summary>
-	public string UrlTypeString { get; set; } = default!;
+    /// <summary>
+    ///     Тип URL строкой.
+    /// </summary>
+    public string UrlTypeString { get; set; } = default!;
 
-	/// <summary>
-	///     Название совпавшего типа.
-	/// </summary>
-	public string? MatchName { get; set; }
+    /// <summary>
+    ///     Название совпавшего типа.
+    /// </summary>
+    public string? MatchName { get; set; }
 
-	/// <summary>
-	///     Можно разобрать.
-	/// </summary>
-	public bool CanParse { get; set; }
+    /// <summary>
+    ///     Можно разобрать.
+    /// </summary>
+    public bool CanParse { get; set; }
 }

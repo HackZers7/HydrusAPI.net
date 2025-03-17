@@ -7,10 +7,10 @@ namespace HydrusAPI.Web.Converters;
 /// </summary>
 public interface IConvert
 {
-	/// <summary>
-	/// 	Преобразует указанный объект в строку JSON.
-	/// </summary>
-	/// <param name="options">Настройки.</param>
-	/// <returns>Преобразованный объект.</returns>
-	string SerializeObject(JsonSerializerOptions options);
+    /// <summary>
+    /// 	Преобразует указанный объект в строку JSON.
+    /// </summary>
+    /// <param name="options">Настройки.</param>
+    /// <returns>Преобразованный объект.</returns>
+    string SerializeObject(JsonSerializerOptions options);
 }

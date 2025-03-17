@@ -5,65 +5,65 @@ namespace HydrusAPI.Web;
 /// </summary>
 public interface IHydrusClient
 {
-	/// <summary>
-	///     Клиент получения токенов аутентификации.
-	/// </summary>
-	IOAuthClient OAuthClient { get; }
+    /// <summary>
+    ///     Клиент получения токенов аутентификации.
+    /// </summary>
+    IOAuthClient OAuthClient { get; }
 
-	/// <summary>
-	///     Клиент для работы с сервисами.
-	/// </summary>
-	IServicesClient ServicesClient { get; }
+    /// <summary>
+    ///     Клиент для работы с сервисами.
+    /// </summary>
+    IServicesClient ServicesClient { get; }
 
-	/// <summary>
-	///     Клиент для работы с файлами.
-	/// </summary>
-	IFilesClient FilesClient { get; }
+    /// <summary>
+    ///     Клиент для работы с файлами.
+    /// </summary>
+    IFilesClient FilesClient { get; }
 
-	/// <summary>
-	///     Клиент для работы с url.
-	/// </summary>
-	IUrlsClient UrlsClient { get; }
+    /// <summary>
+    ///     Клиент для работы с url.
+    /// </summary>
+    IUrlsClient UrlsClient { get; }
 
-	/// <summary>
-	///     Клиент для работы с тегами.
-	/// </summary>
-	ITagsClient TagsClient { get; }
+    /// <summary>
+    ///     Клиент для работы с тегами.
+    /// </summary>
+    ITagsClient TagsClient { get; }
 
-	/// <summary>
-	///     Клиент для редактирования метаданных файла.
-	/// </summary>
-	IMetaClient MetaClient { get; }
+    /// <summary>
+    ///     Клиент для редактирования метаданных файла.
+    /// </summary>
+    IMetaClient MetaClient { get; }
 
-	/// <summary>
-	///     Клиент для работы со связями файлов.
-	/// </summary>
-	IRelationshipsClient RelationshipsClient { get; }
+    /// <summary>
+    ///     Клиент для работы со связями файлов.
+    /// </summary>
+    IRelationshipsClient RelationshipsClient { get; }
 
-	/// <summary>
-	///     Клиент для работы со страницами Hydrus.
-	/// </summary>
-	IPagesClient PagesClient { get; }
+    /// <summary>
+    ///     Клиент для работы со страницами Hydrus.
+    /// </summary>
+    IPagesClient PagesClient { get; }
 
-	/// <summary>
-	///     Клиент для работы со всплывающими окнами Hydrus.
-	/// </summary>
-	IPopupsClient PopupsClient { get; }
+    /// <summary>
+    ///     Клиент для работы со всплывающими окнами Hydrus.
+    /// </summary>
+    IPopupsClient PopupsClient { get; }
 
-	/// <summary>
-	///      Клиент для работы базой данных Hydrus.
-	/// </summary>
-	IManageDataBaseClient ManageDataBaseClient { get; }
+    /// <summary>
+    ///      Клиент для работы базой данных Hydrus.
+    /// </summary>
+    IManageDataBaseClient ManageDataBaseClient { get; }
 
-	/// <summary>
-	///     Клиент для работы с http запросами Hydrus.
-	/// </summary>
-	IHydrusHttpClient HydrusHttpClient { get; }
+    /// <summary>
+    ///     Клиент для работы с http запросами Hydrus.
+    /// </summary>
+    IHydrusHttpClient HydrusHttpClient { get; }
 
-	/// <summary>
-	///     Запрашивает версию Hydrus.
-	/// </summary>
-	/// <param name="cancel">Токен отмены запроса.</param>
-	/// <returns>Возвращает <see cref="ApiVersionResponse" /> с информацией о версии Hydrus.</returns>
-	Task<ApiVersionResponse> GetApiVersion(CancellationToken cancel = default);
+    /// <summary>
+    ///     Запрашивает версию Hydrus.
+    /// </summary>
+    /// <param name="cancel">Токен отмены запроса.</param>
+    /// <returns>Возвращает <see cref="ApiVersionResponse" /> с информацией о версии Hydrus.</returns>
+    Task<ApiVersionResponse> GetApiVersion(CancellationToken cancel = default);
 }

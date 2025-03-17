@@ -5,13 +5,13 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class FoundTag
 {
-	/// <summary>
-	///     Найденный тег.
-	/// </summary>
-	public string Value { get; set; } = default!;
+    /// <summary>
+    ///     Найденный тег.
+    /// </summary>
+    public string Value { get; set; } = default!;
 
-	/// <summary>
-	///     Количество использований.
-	/// </summary>
-	public int Count { get; set; } = 0;
+    /// <summary>
+    ///     Количество использований.
+    /// </summary>
+    public int Count { get; set; } = 0;
 }

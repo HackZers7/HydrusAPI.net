@@ -5,18 +5,18 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class HeadersResponse : ApiVersionResponse
 {
-	public NetworkContext NetworkContext { get; set; }
+    public NetworkContext NetworkContext { get; set; }
 
-	/// <summary>
-	///     Словарь с заголовками.
-	/// </summary>
-	public Dictionary<string, Header>? Headers { get; set; }
+    /// <summary>
+    ///     Словарь с заголовками.
+    /// </summary>
+    public Dictionary<string, Header>? Headers { get; set; }
 }
 
 public class NetworkContext
 {
-	public int Type { get; set; }
-	public string Data { get; set; }
+    public int Type { get; set; }
+    public string Data { get; set; }
 }
 
 /// <summary>
@@ -24,10 +24,10 @@ public class NetworkContext
 /// </summary>
 public class Header
 {
-	/// <summary>
-	///     Значение.
-	/// </summary>
-	public string? Value { get; set; }
-	public string? Approved { get; set; }
-	public string? Reason { get; set; }
+    /// <summary>
+    ///     Значение.
+    /// </summary>
+    public string? Value { get; set; }
+    public string? Approved { get; set; }
+    public string? Reason { get; set; }
 }

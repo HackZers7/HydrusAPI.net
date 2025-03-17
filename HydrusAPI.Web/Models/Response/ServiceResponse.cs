@@ -5,8 +5,8 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class ServiceResponse : ApiVersionResponse
 {
-	/// <summary>
-	///     Сервис.
-	/// </summary>
-	public Service Service { get; set; } = new();
+    /// <summary>
+    ///     Сервис.
+    /// </summary>
+    public Service Service { get; set; } = new();
 }

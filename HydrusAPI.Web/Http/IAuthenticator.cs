@@ -5,10 +5,10 @@ namespace HydrusAPI.Web.Http;
 /// </summary>
 public interface IAuthenticator
 {
-	/// <summary>
-	///     Применяет аутентификацию к запросу.
-	/// </summary>
-	/// <param name="request">Запрос.</param>
-	/// <param name="apiConnection">Подключение.</param>
-	Task Apply(IRequest request, IApiConnection apiConnection);
+    /// <summary>
+    ///     Применяет аутентификацию к запросу.
+    /// </summary>
+    /// <param name="request">Запрос.</param>
+    /// <param name="apiConnection">Подключение.</param>
+    Task Apply(IRequest request, IApiConnection apiConnection);
 }

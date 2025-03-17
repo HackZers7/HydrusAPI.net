@@ -7,165 +7,165 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class HydrusClientConfig
 {
-	/// <summary>
-	///     Конструктор по умолчанию.
-	/// </summary>
-	/// <param name="baseAddress">Базовый адрес подключения.</param>
-	/// <param name="authenticator">Аутентификатор.</param>
-	/// <param name="serializer">Сериализатор.</param>
-	/// <param name="httpClient">Http клиент.</param>
-	/// <param name="apiConnection">Подключение.</param>
-	public HydrusClientConfig(
-		Uri baseAddress,
-		IAuthenticator? authenticator,
-		IJsonSerializer serializer,
-		IHttpClient httpClient,
-		IApiConnection? apiConnection
-	)
-	{
-		BaseAddress = baseAddress;
-		Authenticator = authenticator;
-		Serializer = serializer;
-		HttpClient = httpClient;
-		ApiConnection = apiConnection;
-	}
+    /// <summary>
+    ///     Конструктор по умолчанию.
+    /// </summary>
+    /// <param name="baseAddress">Базовый адрес подключения.</param>
+    /// <param name="authenticator">Аутентификатор.</param>
+    /// <param name="serializer">Сериализатор.</param>
+    /// <param name="httpClient">Http клиент.</param>
+    /// <param name="apiConnection">Подключение.</param>
+    public HydrusClientConfig(
+        Uri baseAddress,
+        IAuthenticator? authenticator,
+        IJsonSerializer serializer,
+        IHttpClient httpClient,
+        IApiConnection? apiConnection
+    )
+    {
+        BaseAddress = baseAddress;
+        Authenticator = authenticator;
+        Serializer = serializer;
+        HttpClient = httpClient;
+        ApiConnection = apiConnection;
+    }
 
-	/// <summary>
-	///     Возвращает адрес клиента Hydrus.
-	/// </summary>
-	public Uri BaseAddress { get; }
+    /// <summary>
+    ///     Возвращает адрес клиента Hydrus.
+    /// </summary>
+    public Uri BaseAddress { get; }
 
-	/// <summary>
-	///     Возвращает аутентификатор.
-	/// </summary>
-	public IAuthenticator? Authenticator { get; private set; }
+    /// <summary>
+    ///     Возвращает аутентификатор.
+    /// </summary>
+    public IAuthenticator? Authenticator { get; private set; }
 
-	/// <summary>
-	///     Возвращает сериализатор.
-	/// </summary>
-	public IJsonSerializer Serializer { get; private set; }
+    /// <summary>
+    ///     Возвращает сериализатор.
+    /// </summary>
+    public IJsonSerializer Serializer { get; private set; }
 
-	/// <summary>
-	///     Возвращает http клиент.
-	/// </summary>
-	public IHttpClient HttpClient { get; private set; }
+    /// <summary>
+    ///     Возвращает http клиент.
+    /// </summary>
+    public IHttpClient HttpClient { get; private set; }
 
-	/// <summary>
-	///     Возвращает подключение.
-	/// </summary>
-	public IApiConnection? ApiConnection { get; private set; }
+    /// <summary>
+    ///     Возвращает подключение.
+    /// </summary>
+    public IApiConnection? ApiConnection { get; private set; }
 
-	/// <summary>
-	///     Устанавливает новый токен для авторизации.
-	/// </summary>
-	/// <param name="accessToken">Ключ доступа.</param>
-	/// <returns>Экземпляр настроек.</returns>
-	public HydrusClientConfig WithToken(string accessToken)
-	{
-		ThrowHelper.ArgumentNotNull(accessToken);
+    /// <summary>
+    ///     Устанавливает новый токен для авторизации.
+    /// </summary>
+    /// <param name="accessToken">Ключ доступа.</param>
+    /// <returns>Экземпляр настроек.</returns>
+    public HydrusClientConfig WithToken(string accessToken)
+    {
+        ThrowHelper.ArgumentNotNull(accessToken);
 
-		return WithAuthenticator(
-			new HydrusTokenAuthenticator(accessToken)
-		);
-	}
+        return WithAuthenticator(
+            new HydrusTokenAuthenticator(accessToken)
+        );
+    }
 
-	/// <summary>
-	///     Устанавливает новый аутентификатор.
-	/// </summary>
-	/// <param name="authenticator">Новый экземпляр аутентификатор.</param>
-	/// <returns>Экземпляр настроек.</returns>
-	public HydrusClientConfig WithAuthenticator(IAuthenticator authenticator)
-	{
-		ThrowHelper.ArgumentNotNull(authenticator);
+    /// <summary>
+    ///     Устанавливает новый аутентификатор.
+    /// </summary>
+    /// <param name="authenticator">Новый экземпляр аутентификатор.</param>
+    /// <returns>Экземпляр настроек.</returns>
+    public HydrusClientConfig WithAuthenticator(IAuthenticator authenticator)
+    {
+        ThrowHelper.ArgumentNotNull(authenticator);
 
-		Authenticator = authenticator;
+        Authenticator = authenticator;
 
-		return this;
-	}
+        return this;
+    }
 
-	/// <summary>
-	///     Устанавливает новый http клиент.
-	/// </summary>
-	/// <param name="httpClient">Новый экземпляр http клиента.</param>
-	/// <returns>Экземпляр настроек.</returns>
-	public HydrusClientConfig WithHttpClient(IHttpClient httpClient)
-	{
-		ThrowHelper.ArgumentNotNull(httpClient);
+    /// <summary>
+    ///     Устанавливает новый http клиент.
+    /// </summary>
+    /// <param name="httpClient">Новый экземпляр http клиента.</param>
+    /// <returns>Экземпляр настроек.</returns>
+    public HydrusClientConfig WithHttpClient(IHttpClient httpClient)
+    {
+        ThrowHelper.ArgumentNotNull(httpClient);
 
-		HttpClient = httpClient;
+        HttpClient = httpClient;
 
-		return this;
-	}
+        return this;
+    }
 
-	/// <summary>
-	///     Устанавливает новый сериализатор.
-	/// </summary>
-	/// <param name="jsonSerializer">Новый экземпляр сериализатора.</param>
-	/// <returns>Экземпляр настроек.</returns>
-	public HydrusClientConfig WithJsonSerializer(IJsonSerializer jsonSerializer)
-	{
-		ThrowHelper.ArgumentNotNull(jsonSerializer);
+    /// <summary>
+    ///     Устанавливает новый сериализатор.
+    /// </summary>
+    /// <param name="jsonSerializer">Новый экземпляр сериализатора.</param>
+    /// <returns>Экземпляр настроек.</returns>
+    public HydrusClientConfig WithJsonSerializer(IJsonSerializer jsonSerializer)
+    {
+        ThrowHelper.ArgumentNotNull(jsonSerializer);
 
-		Serializer = jsonSerializer;
+        Serializer = jsonSerializer;
 
-		return this;
-	}
+        return this;
+    }
 
-	/// <summary>
-	///     Устанавливает новое подключение.
-	/// </summary>
-	/// <param name="apiConnector">Новый экземпляр подключения.</param>
-	/// <returns>Экземпляр настроек.</returns>
-	public HydrusClientConfig WithConnection(IApiConnection apiConnector)
-	{
-		ThrowHelper.ArgumentNotNull(apiConnector, nameof(apiConnector));
+    /// <summary>
+    ///     Устанавливает новое подключение.
+    /// </summary>
+    /// <param name="apiConnector">Новый экземпляр подключения.</param>
+    /// <returns>Экземпляр настроек.</returns>
+    public HydrusClientConfig WithConnection(IApiConnection apiConnector)
+    {
+        ThrowHelper.ArgumentNotNull(apiConnector, nameof(apiConnector));
 
-		ApiConnection = apiConnector;
+        ApiConnection = apiConnector;
 
-		return this;
-	}
+        return this;
+    }
 
-	/// <summary>
-	///     Создает новый экземпляр настроек по умолчанию.
-	/// </summary>
-	/// <param name="baseAddress">Адрес клиента Hydrus.</param>
-	/// <param name="accessToken">Ключ доступа.</param>
-	/// <returns>Настройки по умолчанию.</returns>
-	public static HydrusClientConfig CreateDefault(Uri baseAddress, string accessToken)
-	{
-		return CreateDefault(baseAddress)
-			.WithToken(accessToken);
-	}
+    /// <summary>
+    ///     Создает новый экземпляр настроек по умолчанию.
+    /// </summary>
+    /// <param name="baseAddress">Адрес клиента Hydrus.</param>
+    /// <param name="accessToken">Ключ доступа.</param>
+    /// <returns>Настройки по умолчанию.</returns>
+    public static HydrusClientConfig CreateDefault(Uri baseAddress, string accessToken)
+    {
+        return CreateDefault(baseAddress)
+            .WithToken(accessToken);
+    }
 
-	/// <summary>
-	///     Создает новый экземпляр настроек по умолчанию.
-	/// </summary>
-	/// <param name="baseAddress">Адрес клиента Hydrus.</param>
-	/// <returns>Настройки по умолчанию.</returns>
-	public static HydrusClientConfig CreateDefault(Uri baseAddress)
-	{
-		ThrowHelper.ArgumentNotNull(baseAddress);
+    /// <summary>
+    ///     Создает новый экземпляр настроек по умолчанию.
+    /// </summary>
+    /// <param name="baseAddress">Адрес клиента Hydrus.</param>
+    /// <returns>Настройки по умолчанию.</returns>
+    public static HydrusClientConfig CreateDefault(Uri baseAddress)
+    {
+        ThrowHelper.ArgumentNotNull(baseAddress);
 
-		return new HydrusClientConfig(
-			baseAddress,
-			null,
-			new NewtonsoftJsonSerializer(),
-			new NetHttpClient(),
-			null
-		);
-	}
+        return new HydrusClientConfig(
+            baseAddress,
+            null,
+            new NewtonsoftJsonSerializer(),
+            new NetHttpClient(),
+            null
+        );
+    }
 
-	/// <summary>
-	///     Собирает подключение по текущим настройкам.
-	/// </summary>
-	/// <returns>Новый экземпляр подключения.</returns>
-	public IApiConnection Build()
-	{
-		return ApiConnection ?? new ApiConnection(
-			BaseAddress,
-			Serializer,
-			HttpClient,
-			Authenticator
-		);
-	}
+    /// <summary>
+    ///     Собирает подключение по текущим настройкам.
+    /// </summary>
+    /// <returns>Новый экземпляр подключения.</returns>
+    public IApiConnection Build()
+    {
+        return ApiConnection ?? new ApiConnection(
+            BaseAddress,
+            Serializer,
+            HttpClient,
+            Authenticator
+        );
+    }
 }

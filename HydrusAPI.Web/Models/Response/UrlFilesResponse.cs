@@ -5,13 +5,13 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class UrlFilesResponse : ApiVersionResponse
 {
-	/// <summary>
-	///     Норма-лизированная URL.
-	/// </summary>
-	public Uri NormalisedUrl { get; set; } = default!;
+    /// <summary>
+    ///     Норма-лизированная URL.
+    /// </summary>
+    public Uri NormalisedUrl { get; set; } = default!;
 
-	/// <summary>
-	///     Статус привязанных файлов.
-	/// </summary>
-	public List<FileInfo> UrlFileStatuses { get; set; } = new();
+    /// <summary>
+    ///     Статус привязанных файлов.
+    /// </summary>
+    public List<FileInfo> UrlFileStatuses { get; set; } = new();
 }

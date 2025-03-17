@@ -5,57 +5,57 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class RenderRequest : FileRequest
 {
-	/// <summary>
-	///     Инициализирует новый экземпляр класса.
-	/// </summary>
-	/// <param name="hash">Хеш (SHA256) файла.</param>
-	public RenderRequest(string hash) : base(hash)
-	{
-	}
+    /// <summary>
+    ///     Инициализирует новый экземпляр класса.
+    /// </summary>
+    /// <param name="hash">Хеш (SHA256) файла.</param>
+    public RenderRequest(string hash) : base(hash)
+    {
+    }
 
-	/// <summary>
-	///     Инициализирует новый экземпляр класса.
-	/// </summary>
-	/// <param name="id">Идентификатор файла.</param>
-	public RenderRequest(ulong id) : base(id)
-	{
-	}
+    /// <summary>
+    ///     Инициализирует новый экземпляр класса.
+    /// </summary>
+    /// <param name="id">Идентификатор файла.</param>
+    public RenderRequest(ulong id) : base(id)
+    {
+    }
 
-	/// <summary>
-	///     Ставит Content-Disposition=attachment.
-	/// </summary>
-	/// <remarks>
-	///     По умолчанию - false.
-	/// </remarks>
-	public bool Download { get; set; } = false;
+    /// <summary>
+    ///     Ставит Content-Disposition=attachment.
+    /// </summary>
+    /// <remarks>
+    ///     По умолчанию - false.
+    /// </remarks>
+    public bool Download { get; set; } = false;
 
-	/// <summary>
-	///     Выходной формат изображения.
-	/// </summary>
-	/// <remarks>
-	///     По умолчанию - <see cref="RenderOutputFormat.Png" />.
-	/// </remarks>
-	public RenderOutputFormat RenderFormat { get; set; } = RenderOutputFormat.Png;
+    /// <summary>
+    ///     Выходной формат изображения.
+    /// </summary>
+    /// <remarks>
+    ///     По умолчанию - <see cref="RenderOutputFormat.Png" />.
+    /// </remarks>
+    public RenderOutputFormat RenderFormat { get; set; } = RenderOutputFormat.Png;
 
-	/// <summary>
-	///     Качество выходного изображения.
-	/// </summary>
-	/// <remarks>
-	///     По умолчанию:
-	///     PNG - 1;
-	///     JPEG, WEBP - 80.
-	/// </remarks>
-	public ushort? RenderQuality { get; set; }
+    /// <summary>
+    ///     Качество выходного изображения.
+    /// </summary>
+    /// <remarks>
+    ///     По умолчанию:
+    ///     PNG - 1;
+    ///     JPEG, WEBP - 80.
+    /// </remarks>
+    public ushort? RenderQuality { get; set; }
 
-	/// <summary>
-	///     Ширина выходного изображения.
-	/// </summary>
-	public ulong? Width { get; set; }
+    /// <summary>
+    ///     Ширина выходного изображения.
+    /// </summary>
+    public ulong? Width { get; set; }
 
-	/// <summary>
-	///     Высота выходного изображения.
-	/// </summary>
-	public ulong? Height { get; set; }
+    /// <summary>
+    ///     Высота выходного изображения.
+    /// </summary>
+    public ulong? Height { get; set; }
 }
 
 /// <summary>
@@ -63,28 +63,28 @@ public class RenderRequest : FileRequest
 /// </summary>
 public enum RenderOutputFormat
 {
-	/// <summary>
-	///     JPEG
-	/// </summary>
-	Jpeg = 1,
+    /// <summary>
+    ///     JPEG
+    /// </summary>
+    Jpeg = 1,
 
-	/// <summary>
-	///     PNG
-	/// </summary>
-	Png = 2,
+    /// <summary>
+    ///     PNG
+    /// </summary>
+    Png = 2,
 
-	/// <summary>
-	///     APNG
-	/// </summary>
-	Apng = 23,
+    /// <summary>
+    ///     APNG
+    /// </summary>
+    Apng = 23,
 
-	/// <summary>
-	///     WEBP
-	/// </summary>
-	WebP = 33,
+    /// <summary>
+    ///     WEBP
+    /// </summary>
+    WebP = 33,
 
-	/// <summary>
-	///     Animated WEBP
-	/// </summary>
-	AWebP = 83
+    /// <summary>
+    ///     Animated WEBP
+    /// </summary>
+    AWebP = 83
 }

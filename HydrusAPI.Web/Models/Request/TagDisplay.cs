@@ -5,13 +5,13 @@ namespace HydrusAPI.Web;
 /// </summary>
 public enum TagDisplay
 {
-	/// <summary>
-	///     Обрабатывать в состоянии как теги отображаются пользователю.
-	/// </summary>
-	Display = 1,
+    /// <summary>
+    ///     Обрабатывать в состоянии как теги отображаются пользователю.
+    /// </summary>
+    Display = 1,
 
-	/// <summary>
-	///     Обрабатывать в состоянии как теги хранятся.
-	/// </summary>
-	Storage = 2
+    /// <summary>
+    ///     Обрабатывать в состоянии как теги хранятся.
+    /// </summary>
+    Storage = 2
 }

@@ -5,8 +5,8 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class TagsSearchResponse : ApiVersionResponse
 {
-	/// <summary>
-	///     Теги.
-	/// </summary>
-	public List<FoundTag> Tags { get; set; } = new();
+    /// <summary>
+    ///     Теги.
+    /// </summary>
+    public List<FoundTag> Tags { get; set; } = new();
 }

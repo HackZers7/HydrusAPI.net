@@ -5,17 +5,17 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class PageKeyRequest
 {
-	/// <summary>
-	///     Инициализирует новый экземпляр класса.
-	/// </summary>
-	/// <param name="pageKey">Уникальный ключ страницы.</param>
-	public PageKeyRequest(string pageKey)
-	{
-		PageKey = pageKey;
-	}
+    /// <summary>
+    ///     Инициализирует новый экземпляр класса.
+    /// </summary>
+    /// <param name="pageKey">Уникальный ключ страницы.</param>
+    public PageKeyRequest(string pageKey)
+    {
+        PageKey = pageKey;
+    }
 
-	/// <summary>
-	///     Уникальный ключ страницы.
-	/// </summary>
-	public string PageKey { get; }
+    /// <summary>
+    ///     Уникальный ключ страницы.
+    /// </summary>
+    public string PageKey { get; }
 }

@@ -11,70 +11,70 @@ namespace HydrusApi.Web.Tests.Models;
 [TestFixture]
 public class FormatUriTest
 {
-	[Test]
-	public void FormatUri()
-	{
-		var data = HydrusUrls.SearchFiles(new SearchFilesRequest(new List<object>
-			{
-				"test",
-				"test2",
-				new List<string>
-				{
-					"test4",
-					"test5"
-				}
-			})
-		);
+    [Test]
+    public void FormatUri()
+    {
+        var data = HydrusUrls.SearchFiles(new SearchFilesRequest(new List<object>
+            {
+                "test",
+                "test2",
+                new List<string>
+                {
+                    "test4",
+                    "test5"
+                }
+            })
+        );
 
-		TestContext.WriteLine(data);
+        TestContext.WriteLine(data);
 
-		Assert.That(data, Is.Not.Null);
-	}
+        Assert.That(data, Is.Not.Null);
+    }
 
-	[Test]
-	public void ToParameter()
-	{
-		var data = ToParameter(new List<object>
-		{
-			"test",
-			"test2",
-			new List<string>
-			{
-				"test4",
-				"test5"
-			}
-		});
+    [Test]
+    public void ToParameter()
+    {
+        var data = ToParameter(new List<object>
+        {
+            "test",
+            "test2",
+            new List<string>
+            {
+                "test4",
+                "test5"
+            }
+        });
 
-		TestContext.WriteLine(data);
+        TestContext.WriteLine(data);
 
-		Assert.That(data, Is.Not.Null);
-	}
+        Assert.That(data, Is.Not.Null);
+    }
 
-	public static string ToParameter(object? source)
-	{
-		if (source == null)
-		{
-			return string.Empty;
-		}
+    public static string ToParameter(object? source)
+    {
+        if (source == null)
+        {
+            return string.Empty;
+        }
 
-		return source switch
-		{
-			string value => value,
-			bool value => value.ToString().ToLower(),
-			int value => value.ToString(),
-			IEnumerable<string> value => ToStringArray(value),
-			IEnumerable<object> value => ToStringArray(value.Select(ToParameter)),
-			_ => throw new NotSupportedException()
-		};
-	}
+        return source switch
+        {
+            string value => value,
+            bool value => value.ToString().ToLower(),
+            int value => value.ToString(),
+            IEnumerable<string> value => ToStringArray(value),
+            IEnumerable<object> value => ToStringArray(value.Select(ToParameter)),
+            _ => throw new NotSupportedException()
+        };
+    }
 
-	public static string ToStringArray(IEnumerable<string>? source)
-	{
-		if (source == null)
-		{
-			return "[]";
-		}
+    public static string ToStringArray(IEnumerable<string>? source)
+    {
+        if (source == null)
+        {
+            return "[]";
+        }
 
-		return string.Format("[{0}]", string.Join(',', source.Select(p => p.Trim() is { } trimString && trimString.StartsWith('[') && trimString.EndsWith(']') ? trimString : $"\"{p}\"")));
-	}
+        return string.Format("[{0}]", string.Join(',', source.Select(p => p.Trim() is { } trimString && trimString.StartsWith('[') && trimString.EndsWith(']') ? trimString : $"\"{p}\"")));
+    }
 }

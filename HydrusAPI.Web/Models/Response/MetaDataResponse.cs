@@ -5,8 +5,8 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class MetaDataResponse<T> : ServicesResponse where T : class
 {
-	/// <summary>
-	///     Коллекция метаданных.
-	/// </summary>
-	public List<T> Metadata { get; set; } = default!;
+    /// <summary>
+    ///     Коллекция метаданных.
+    /// </summary>
+    public List<T> Metadata { get; set; } = default!;
 }

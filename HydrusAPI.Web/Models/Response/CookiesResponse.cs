@@ -1,12 +1,12 @@
 namespace HydrusAPI.Web;
 
 /// <summary>
-/// Ответ с куки Hydrus.
+///     Ответ с куки Hydrus.
 /// </summary>
 public class CookiesResponse : ApiVersionResponse
 {
-	/// <summary>
-	/// Коллекция куки в формате [название, значение, домен, путь, истекает].
-	/// </summary>
-	public List<List<object?>> Cookies { get; set; } = default!;
+    /// <summary>
+    ///     Коллекция куки в формате [название, значение, домен, путь, истекает].
+    /// </summary>
+    public List<List<object?>> Cookies { get; set; } = default!;
 }

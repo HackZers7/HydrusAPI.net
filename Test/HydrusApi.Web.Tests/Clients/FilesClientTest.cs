@@ -12,421 +12,421 @@ namespace HydrusApi.Web.Tests.Clients;
 [TestFixture]
 public class FilesClientTest
 {
-	private readonly static string _pngSavePath = "d:\\test.png";
-	private readonly static string _jpgSavePath = "d:\\test.jpg";
-
-	private readonly static IHydrusClient _client = IoC.GetHydrusClient();
-
-	[TestFixture]
-	public class SendTest
-	{
-		[Test]
-		public async Task LocalFile()
-		{
-			var result = await _client.FilesClient.SendFile(IoC.FilePath);
-
-			Assert.That(result, Is.Not.Null);
-			Assert.That(result.Status, Is.EqualTo(FileStatus.Success).Or.EqualTo(FileStatus.AlreadyExists));
-			Assert.That(result.Hash, Is.Not.Empty);
-		}
-
-		[Test]
-		public async Task File()
-		{
-			using (var stream = System.IO.File.OpenRead(IoC.FilePath2))
-			{
-				var result = await _client.FilesClient.SendFile(stream);
-
-				Assert.That(result, Is.Not.Null);
-				Assert.That(result.Status, Is.EqualTo(FileStatus.Success).Or.EqualTo(FileStatus.AlreadyExists));
-				Assert.That(result.Hash, Is.Not.Empty);
-			}
-		}
-
-		[Test]
-		public async Task FileWithProgress()
-		{
-			var progress = new Progress<int>(TestContext.WriteLine);
-
-			using (var stream = new ProgressStream(System.IO.File.OpenRead(IoC.FilePath), progress))
-			{
-				var result = await _client.FilesClient.SendFile(stream);
-
-				Assert.That(result, Is.Not.Null);
-				Assert.That(result.Status, Is.EqualTo(FileStatus.Success).Or.EqualTo(FileStatus.AlreadyExists));
-				Assert.That(result.Hash, Is.Not.Empty);
-			}
-		}
-	}
-
-	[TestFixture]
-	public class DeleteTest
-	{
-		[Test]
-		public async Task ByHash()
-		{
-			await _client.FilesClient.DeleteFiles(IoC.FileHash);
-		}
-
-		[Test]
-		public async Task ById()
-		{
-			await _client.FilesClient.DeleteFiles(IoC.FileId);
-		}
-
-		[Test]
-		public async Task MultiplyFiles()
-		{
-			var deleteFiles = new DeleteFilesRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 });
-
-			await _client.FilesClient.DeleteFiles(deleteFiles);
-		}
-
-		[Test]
-		public async Task MultiplyFilesWithHashAndId()
-		{
-			var deleteFiles = new DeleteFilesRequest(new List<ulong> { IoC.FileId })
-			{
-				Hashes = new List<string> { IoC.FileHash2 }
-			};
-
-			await _client.FilesClient.DeleteFiles(deleteFiles);
-		}
-
-		[Test]
-		public async Task MultiplyWithHashAndId()
-		{
-			var deleteFiles = new DeleteFilesRequest(IoC.FileId)
-			{
-				Hash = IoC.FileHash2
-			};
-
-			await _client.FilesClient.DeleteFiles(deleteFiles);
-		}
-
-		[Test]
-		public async Task WithReasons()
-		{
-			await _client.FilesClient.DeleteFiles(IoC.FileHash, "testReason");
-		}
-	}
-
-	[TestFixture]
-	public class RestoreTest
-	{
-		[Test]
-		public async Task ByHash()
-		{
-			await _client.FilesClient.RestoreFiles(IoC.FileHash);
-		}
-
-		[Test]
-		public async Task ById()
-		{
-			await _client.FilesClient.RestoreFiles(IoC.FileId);
-		}
-
-		[Test]
-		public async Task MultiplyFiles()
-		{
-			var request = new FilesWithDomainRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 });
-
-			await _client.FilesClient.RestoreFiles(request);
-		}
-
-		[Test]
-		public async Task MultiplyFilesWithHashAndId()
-		{
-			var request = new FilesWithDomainRequest(new List<ulong> { IoC.FileId })
-			{
-				Hashes = new List<string>() { IoC.FileHash2 }
-			};
-
-			await _client.FilesClient.RestoreFiles(request);
-		}
-	}
-
-	[TestFixture]
-	public class ClearFilesDeletionTest
-	{
-
-		[Test]
-		public async Task ByHash()
-		{
-			await _client.FilesClient.ClearFilesDeletion(IoC.FileHash);
-		}
-
-		[Test]
-		public async Task ById()
-		{
-			await _client.FilesClient.ClearFilesDeletion(IoC.FileId);
-		}
-
-		[Test]
-		public async Task MultiplyFiles()
-		{
-			var request = new FilesRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 });
-
-			await _client.FilesClient.ClearFilesDeletion(request);
-		}
-
-		[Test]
-		public async Task MultiplyFilesWithHashAndId()
-		{
-			var request = new FilesRequest(new List<ulong> { IoC.FileId })
-			{
-				Hashes = new List<string>() { IoC.FileHash2 }
-			};
-
-			await _client.FilesClient.ClearFilesDeletion(request);
-		}
-	}
-
-	[TestFixture]
-	public class MigrateTest
-	{
-		[Test]
-		public async Task ByHash()
-		{
-			await _client.FilesClient.MigrateFiles(IoC.TestFileDomain, IoC.FileHash);
-		}
-
-		[Test]
-		public async Task ById()
-		{
-			await _client.FilesClient.MigrateFiles(IoC.TestFileDomain, IoC.FileId);
-		}
-
-		[Test]
-		public async Task MultiplyFiles()
-		{
-			var request = new FilesWithDomainRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 })
-			{
-				FileServiceKey = IoC.TestFileDomain
-			};
-
-			await _client.FilesClient.MigrateFiles(request);
-		}
-
-		[Test]
-		public async Task MultiplyFilesWithHashAndId()
-		{
-			var request = new FilesWithDomainRequest(new List<ulong> { IoC.FileId })
-			{
-				Hashes = new List<string>() { IoC.FileHash2 },
-				FileServiceKey = IoC.TestFileDomain
-			};
-
-			await _client.FilesClient.MigrateFiles(request);
-		}
-	}
-
-	[TestFixture]
-	public class ArchiveFilesTest
-	{
-		[Test]
-		public async Task ByHash()
-		{
-			await _client.FilesClient.ArchiveFiles(IoC.FileHash);
-		}
-
-		[Test]
-		public async Task ById()
-		{
-			await _client.FilesClient.ArchiveFiles(IoC.FileId);
-		}
-
-		[Test]
-		public async Task MultiplyFiles()
-		{
-			var request = new FilesRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 });
-
-			await _client.FilesClient.ArchiveFiles(request);
-		}
-
-		[Test]
-		public async Task MultiplyFilesWithHashAndId()
-		{
-			var request = new FilesRequest(new List<ulong> { IoC.FileId })
-			{
-				Hashes = new List<string>() { IoC.FileHash2 }
-			};
-
-			await _client.FilesClient.ArchiveFiles(request);
-		}
-	}
-
-	[TestFixture]
-	public class UnarchiveFilesTest
-	{
-		[Test]
-		public async Task ByHash()
-		{
-			await _client.FilesClient.UnarchiveFiles(IoC.FileHash);
-		}
-
-		[Test]
-		public async Task ById()
-		{
-			await _client.FilesClient.UnarchiveFiles(IoC.FileId);
-		}
-
-		[Test]
-		public async Task MultiplyFiles()
-		{
-			var request = new FilesRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 });
-
-			await _client.FilesClient.UnarchiveFiles(request);
-		}
-
-		[Test]
-		public async Task MultiplyFilesWithHashAndId()
-		{
-			var request = new FilesRequest(new List<ulong> { IoC.FileId })
-			{
-				Hashes = new List<string>() { IoC.FileHash2 }
-			};
-
-			await _client.FilesClient.UnarchiveFiles(request);
-		}
-	}
-
-	[TestFixture]
-	public class GenerateHashesTest
-	{
-		[Test]
-		public async Task LocalFile()
-		{
-			var result = await _client.FilesClient.GenerateHashes(IoC.FilePath);
-
-			Assert.That(result, Is.Not.Null);
-			Assert.That(result.PerceptualHashes, Is.Not.Null);
-			Assert.That(result.PixelHash, Is.Not.Null);
-			Assert.That(result.Hash, Is.Not.Empty);
-		}
-
-		[Test]
-		public async Task File()
-		{
-			using (var stream = System.IO.File.OpenRead(IoC.FilePath))
-			{
-				var result = await _client.FilesClient.GenerateHashes(stream);
-
-				Assert.That(result, Is.Not.Null);
-				Assert.That(result.PerceptualHashes, Is.Not.Null);
-				Assert.That(result.PixelHash, Is.Not.Null);
-				Assert.That(result.Hash, Is.Not.Empty);
-			}
-		}
-
-		[Test]
-		public async Task NotExistFile()
-		{
-			using (var stream = System.IO.File.OpenRead(IoC.FilePath3))
-			{
-				var result = await _client.FilesClient.GenerateHashes(stream);
-
-				Assert.That(result, Is.Not.Null);
-				Assert.That(result.Hash, Is.Not.Empty);
-			}
-		}
-	}
-
-	[TestFixture]
-	public class GetFilesTest
-	{
-		[Test]
-		public async Task SearchFiles()
-		{
-			var response = await _client.FilesClient.SearchFiles(new List<string>
-			{
-				"tag1"
-			});
-
-			Assert.That(response, Is.Not.Null);
-			Assert.That(response.Hashes, Is.Not.Null);
-			Assert.That(response.Hashes!.Count, Is.GreaterThan(0));
-			Assert.That(response.FileIds, Is.Not.Null);
-			Assert.That(response.FileIds!.Count, Is.GreaterThan(0));
-		}
-
-		[Test]
-		public async Task OneFileHash()
-		{
-			var response = await _client.FilesClient.GetFileHashes(IoC.FileHash, HashAlgorithmType.Md5);
-
-			Assert.That(response, Is.Not.Null);
-			Assert.That(response.Hashes.Count, Is.GreaterThan(0));
-		}
-
-		[Test]
-		public async Task MultiplyFileHash()
-		{
-			var response = await _client.FilesClient.GetFileHashes(new List<string>()
-			{
-				IoC.FileHash,
-				IoC.FileHash2
-			}, HashAlgorithmType.Md5);
-
-			Assert.That(response, Is.Not.Null);
-			Assert.That(response.Hashes.Count, Is.GreaterThan(0));
-		}
-
-		[Test]
-		public async Task GetFile()
-		{
-			using (var response = await _client.FilesClient.GetFile(IoC.FileHash))
-			{
-				using (var writer = File.OpenWrite(_pngSavePath))
-				{
-					await response.CopyToAsync(writer);
-				}
-			}
-		}
-
-		[Test]
-		public async Task GetThumbnail()
-		{
-			using (var response = await _client.FilesClient.GetThumbnail(IoC.FileHash))
-			{
-				using (var writer = File.OpenWrite(_pngSavePath))
-				{
-					await response.CopyToAsync(writer);
-				}
-			}
-		}
-	}
-
-	[TestFixture]
-	public class RenderTest
-	{
-		[Test]
-		public async Task PngAsPng()
-		{
-			using (var response = await _client.FilesClient.Render(IoC.FileHash))
-			{
-				using (var writer = File.OpenWrite(_pngSavePath))
-				{
-					await response.CopyToAsync(writer);
-				}
-			}
-		}
-
-		[Test]
-		public async Task PngAsJpg()
-		{
-			var request = new RenderRequest(IoC.FileHash)
-			{
-				RenderFormat = RenderOutputFormat.Jpeg,
-			};
-
-			using (var response = await _client.FilesClient.Render(request))
-			{
-				using (var writer = File.OpenWrite(_jpgSavePath))
-				{
-					await response.CopyToAsync(writer);
-				}
-			}
-		}
-	}
+    private readonly static string _pngSavePath = "d:\\test.png";
+    private readonly static string _jpgSavePath = "d:\\test.jpg";
+
+    private readonly static IHydrusClient _client = IoC.GetHydrusClient();
+
+    [TestFixture]
+    public class SendTest
+    {
+        [Test]
+        public async Task LocalFile()
+        {
+            var result = await _client.FilesClient.SendFile(IoC.FilePath);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Status, Is.EqualTo(FileStatus.Success).Or.EqualTo(FileStatus.AlreadyExists));
+            Assert.That(result.Hash, Is.Not.Empty);
+        }
+
+        [Test]
+        public async Task File()
+        {
+            using (var stream = System.IO.File.OpenRead(IoC.FilePath2))
+            {
+                var result = await _client.FilesClient.SendFile(stream);
+
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Status, Is.EqualTo(FileStatus.Success).Or.EqualTo(FileStatus.AlreadyExists));
+                Assert.That(result.Hash, Is.Not.Empty);
+            }
+        }
+
+        [Test]
+        public async Task FileWithProgress()
+        {
+            var progress = new Progress<int>(TestContext.WriteLine);
+
+            using (var stream = new ProgressStream(System.IO.File.OpenRead(IoC.FilePath), progress))
+            {
+                var result = await _client.FilesClient.SendFile(stream);
+
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Status, Is.EqualTo(FileStatus.Success).Or.EqualTo(FileStatus.AlreadyExists));
+                Assert.That(result.Hash, Is.Not.Empty);
+            }
+        }
+    }
+
+    [TestFixture]
+    public class DeleteTest
+    {
+        [Test]
+        public async Task ByHash()
+        {
+            await _client.FilesClient.DeleteFiles(IoC.FileHash);
+        }
+
+        [Test]
+        public async Task ById()
+        {
+            await _client.FilesClient.DeleteFiles(IoC.FileId);
+        }
+
+        [Test]
+        public async Task MultiplyFiles()
+        {
+            var deleteFiles = new DeleteFilesRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 });
+
+            await _client.FilesClient.DeleteFiles(deleteFiles);
+        }
+
+        [Test]
+        public async Task MultiplyFilesWithHashAndId()
+        {
+            var deleteFiles = new DeleteFilesRequest(new List<ulong> { IoC.FileId })
+            {
+                Hashes = new List<string> { IoC.FileHash2 }
+            };
+
+            await _client.FilesClient.DeleteFiles(deleteFiles);
+        }
+
+        [Test]
+        public async Task MultiplyWithHashAndId()
+        {
+            var deleteFiles = new DeleteFilesRequest(IoC.FileId)
+            {
+                Hash = IoC.FileHash2
+            };
+
+            await _client.FilesClient.DeleteFiles(deleteFiles);
+        }
+
+        [Test]
+        public async Task WithReasons()
+        {
+            await _client.FilesClient.DeleteFiles(IoC.FileHash, "testReason");
+        }
+    }
+
+    [TestFixture]
+    public class RestoreTest
+    {
+        [Test]
+        public async Task ByHash()
+        {
+            await _client.FilesClient.RestoreFiles(IoC.FileHash);
+        }
+
+        [Test]
+        public async Task ById()
+        {
+            await _client.FilesClient.RestoreFiles(IoC.FileId);
+        }
+
+        [Test]
+        public async Task MultiplyFiles()
+        {
+            var request = new FilesWithDomainRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 });
+
+            await _client.FilesClient.RestoreFiles(request);
+        }
+
+        [Test]
+        public async Task MultiplyFilesWithHashAndId()
+        {
+            var request = new FilesWithDomainRequest(new List<ulong> { IoC.FileId })
+            {
+                Hashes = new List<string>() { IoC.FileHash2 }
+            };
+
+            await _client.FilesClient.RestoreFiles(request);
+        }
+    }
+
+    [TestFixture]
+    public class ClearFilesDeletionTest
+    {
+
+        [Test]
+        public async Task ByHash()
+        {
+            await _client.FilesClient.ClearFilesDeletion(IoC.FileHash);
+        }
+
+        [Test]
+        public async Task ById()
+        {
+            await _client.FilesClient.ClearFilesDeletion(IoC.FileId);
+        }
+
+        [Test]
+        public async Task MultiplyFiles()
+        {
+            var request = new FilesRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 });
+
+            await _client.FilesClient.ClearFilesDeletion(request);
+        }
+
+        [Test]
+        public async Task MultiplyFilesWithHashAndId()
+        {
+            var request = new FilesRequest(new List<ulong> { IoC.FileId })
+            {
+                Hashes = new List<string>() { IoC.FileHash2 }
+            };
+
+            await _client.FilesClient.ClearFilesDeletion(request);
+        }
+    }
+
+    [TestFixture]
+    public class MigrateTest
+    {
+        [Test]
+        public async Task ByHash()
+        {
+            await _client.FilesClient.MigrateFiles(IoC.TestFileDomain, IoC.FileHash);
+        }
+
+        [Test]
+        public async Task ById()
+        {
+            await _client.FilesClient.MigrateFiles(IoC.TestFileDomain, IoC.FileId);
+        }
+
+        [Test]
+        public async Task MultiplyFiles()
+        {
+            var request = new FilesWithDomainRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 })
+            {
+                FileServiceKey = IoC.TestFileDomain
+            };
+
+            await _client.FilesClient.MigrateFiles(request);
+        }
+
+        [Test]
+        public async Task MultiplyFilesWithHashAndId()
+        {
+            var request = new FilesWithDomainRequest(new List<ulong> { IoC.FileId })
+            {
+                Hashes = new List<string>() { IoC.FileHash2 },
+                FileServiceKey = IoC.TestFileDomain
+            };
+
+            await _client.FilesClient.MigrateFiles(request);
+        }
+    }
+
+    [TestFixture]
+    public class ArchiveFilesTest
+    {
+        [Test]
+        public async Task ByHash()
+        {
+            await _client.FilesClient.ArchiveFiles(IoC.FileHash);
+        }
+
+        [Test]
+        public async Task ById()
+        {
+            await _client.FilesClient.ArchiveFiles(IoC.FileId);
+        }
+
+        [Test]
+        public async Task MultiplyFiles()
+        {
+            var request = new FilesRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 });
+
+            await _client.FilesClient.ArchiveFiles(request);
+        }
+
+        [Test]
+        public async Task MultiplyFilesWithHashAndId()
+        {
+            var request = new FilesRequest(new List<ulong> { IoC.FileId })
+            {
+                Hashes = new List<string>() { IoC.FileHash2 }
+            };
+
+            await _client.FilesClient.ArchiveFiles(request);
+        }
+    }
+
+    [TestFixture]
+    public class UnarchiveFilesTest
+    {
+        [Test]
+        public async Task ByHash()
+        {
+            await _client.FilesClient.UnarchiveFiles(IoC.FileHash);
+        }
+
+        [Test]
+        public async Task ById()
+        {
+            await _client.FilesClient.UnarchiveFiles(IoC.FileId);
+        }
+
+        [Test]
+        public async Task MultiplyFiles()
+        {
+            var request = new FilesRequest(new List<string>() { IoC.FileHash, IoC.FileHash2 });
+
+            await _client.FilesClient.UnarchiveFiles(request);
+        }
+
+        [Test]
+        public async Task MultiplyFilesWithHashAndId()
+        {
+            var request = new FilesRequest(new List<ulong> { IoC.FileId })
+            {
+                Hashes = new List<string>() { IoC.FileHash2 }
+            };
+
+            await _client.FilesClient.UnarchiveFiles(request);
+        }
+    }
+
+    [TestFixture]
+    public class GenerateHashesTest
+    {
+        [Test]
+        public async Task LocalFile()
+        {
+            var result = await _client.FilesClient.GenerateHashes(IoC.FilePath);
+
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.PerceptualHashes, Is.Not.Null);
+            Assert.That(result.PixelHash, Is.Not.Null);
+            Assert.That(result.Hash, Is.Not.Empty);
+        }
+
+        [Test]
+        public async Task File()
+        {
+            using (var stream = System.IO.File.OpenRead(IoC.FilePath))
+            {
+                var result = await _client.FilesClient.GenerateHashes(stream);
+
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.PerceptualHashes, Is.Not.Null);
+                Assert.That(result.PixelHash, Is.Not.Null);
+                Assert.That(result.Hash, Is.Not.Empty);
+            }
+        }
+
+        [Test]
+        public async Task NotExistFile()
+        {
+            using (var stream = System.IO.File.OpenRead(IoC.FilePath3))
+            {
+                var result = await _client.FilesClient.GenerateHashes(stream);
+
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Hash, Is.Not.Empty);
+            }
+        }
+    }
+
+    [TestFixture]
+    public class GetFilesTest
+    {
+        [Test]
+        public async Task SearchFiles()
+        {
+            var response = await _client.FilesClient.SearchFiles(new List<string>
+            {
+                "tag1"
+            });
+
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.Hashes, Is.Not.Null);
+            Assert.That(response.Hashes!.Count, Is.GreaterThan(0));
+            Assert.That(response.FileIds, Is.Not.Null);
+            Assert.That(response.FileIds!.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public async Task OneFileHash()
+        {
+            var response = await _client.FilesClient.GetFileHashes(IoC.FileHash, HashAlgorithmType.Md5);
+
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.Hashes.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public async Task MultiplyFileHash()
+        {
+            var response = await _client.FilesClient.GetFileHashes(new List<string>()
+            {
+                IoC.FileHash,
+                IoC.FileHash2
+            }, HashAlgorithmType.Md5);
+
+            Assert.That(response, Is.Not.Null);
+            Assert.That(response.Hashes.Count, Is.GreaterThan(0));
+        }
+
+        [Test]
+        public async Task GetFile()
+        {
+            using (var response = await _client.FilesClient.GetFile(IoC.FileHash))
+            {
+                using (var writer = File.OpenWrite(_pngSavePath))
+                {
+                    await response.CopyToAsync(writer);
+                }
+            }
+        }
+
+        [Test]
+        public async Task GetThumbnail()
+        {
+            using (var response = await _client.FilesClient.GetThumbnail(IoC.FileHash))
+            {
+                using (var writer = File.OpenWrite(_pngSavePath))
+                {
+                    await response.CopyToAsync(writer);
+                }
+            }
+        }
+    }
+
+    [TestFixture]
+    public class RenderTest
+    {
+        [Test]
+        public async Task PngAsPng()
+        {
+            using (var response = await _client.FilesClient.Render(IoC.FileHash))
+            {
+                using (var writer = File.OpenWrite(_pngSavePath))
+                {
+                    await response.CopyToAsync(writer);
+                }
+            }
+        }
+
+        [Test]
+        public async Task PngAsJpg()
+        {
+            var request = new RenderRequest(IoC.FileHash)
+            {
+                RenderFormat = RenderOutputFormat.Jpeg,
+            };
+
+            using (var response = await _client.FilesClient.Render(request))
+            {
+                using (var writer = File.OpenWrite(_jpgSavePath))
+                {
+                    await response.CopyToAsync(writer);
+                }
+            }
+        }
+    }
 }

@@ -5,8 +5,8 @@ namespace HydrusAPI.Web;
 /// </summary>
 public class ServicesResponse : ApiVersionResponse
 {
-	/// <summary>
-	///     Объект со всеми доступными сервисами. Где ключ - идентификатор сервиса.
-	/// </summary>
-	public Dictionary<string, Service> Services { get; set; } = new();
+    /// <summary>
+    ///     Объект со всеми доступными сервисами. Где ключ - идентификатор сервиса.
+    /// </summary>
+    public Dictionary<string, Service> Services { get; set; } = new();
 }
