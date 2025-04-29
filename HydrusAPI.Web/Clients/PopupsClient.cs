@@ -13,72 +13,58 @@ public class PopupsClient : ApiClient, IPopupsClient
     }
 
     /// <inheritdoc />
-    public async Task<IEnumerable<JobStatus>> GetPopups(bool onlyInView = false, CancellationToken cancel = default)
+    public Task<JobStatusesResponse> GetPopups(bool onlyInView = false, CancellationToken cancel = default)
     {
-        var response = await ApiConnection.Get<JobStatusResponse>(HydrusUrls.GetPopups(onlyInView), cancel);
-
-        return response.JobStatuses!;
+        return ApiConnection.Get<JobStatusesResponse>(HydrusUrls.GetPopups(onlyInView), cancel);
     }
 
     /// <inheritdoc />
-    public Task<JobStatus> AddPopup(JobStatus request, CancellationToken cancel = default)
+    public Task<JobStatusResponse> AddPopup(JobStatus request, CancellationToken cancel = default)
     {
-        return ApiConnection.Post<JobStatus>(HydrusUrls.AddPopup(), null, request, cancel);
+        return ApiConnection.Post<JobStatusResponse>(HydrusUrls.AddPopup(), null, request, cancel);
     }
 
     /// <inheritdoc />
-    public async Task<bool> CallUserCallable(string jobStatusKey, CancellationToken cancel = default)
+    public Task CallUserCallable(string jobStatusKey, CancellationToken cancel = default)
     {
-        ThrowHelper.ArgumentNotNullOrWhiteSpace(jobStatusKey);
-
-        var response = await ApiConnection.Post(HydrusUrls.CallUserCallable(), null, new JobStatusKeyRequest(jobStatusKey), cancel);
-
-        return response.IsSuccessStatusCode();
+        return ApiConnection.Post(HydrusUrls.CallUserCallable(), null, new JobStatusKeyRequest(jobStatusKey), cancel);
     }
 
     /// <inheritdoc />
-    public async Task<bool> CancelPopup(string jobStatusKey, CancellationToken cancel = default)
+    public Task CancelPopup(string jobStatusKey, CancellationToken cancel = default)
     {
-        ThrowHelper.ArgumentNotNullOrWhiteSpace(jobStatusKey);
-
-        var response = await ApiConnection.Post(HydrusUrls.CancelPopup(), null, new JobStatusKeyRequest(jobStatusKey), cancel);
-
-        return response.IsSuccessStatusCode();
+        return ApiConnection.Post(HydrusUrls.CancelPopup(), null, new JobStatusKeyRequest(jobStatusKey), cancel);
     }
 
     /// <inheritdoc />
-    public async Task<bool> DismissPopup(string jobStatusKey, CancellationToken cancel = default)
+    public Task DismissPopup(string jobStatusKey, CancellationToken cancel = default)
     {
-        ThrowHelper.ArgumentNotNullOrWhiteSpace(jobStatusKey);
-
-        var response = await ApiConnection.Post(HydrusUrls.DismissPopup(), null, new JobStatusKeyRequest(jobStatusKey), cancel);
-
-        return response.IsSuccessStatusCode();
+        return ApiConnection.Post(HydrusUrls.DismissPopup(), null, new JobStatusKeyRequest(jobStatusKey), cancel);
     }
 
     /// <inheritdoc />
-    public async Task<bool> FinishPopup(string jobStatusKey, CancellationToken cancel = default)
+    public Task TaskFinishPopup(string jobStatusKey, CancellationToken cancel = default)
     {
-        ThrowHelper.ArgumentNotNullOrWhiteSpace(jobStatusKey);
-
-        var response = await ApiConnection.Post(HydrusUrls.FinishPopup(), null, new JobStatusKeyRequest(jobStatusKey), cancel);
-
-        return response.IsSuccessStatusCode();
+        return ApiConnection.Post(HydrusUrls.FinishPopup(), null, new JobStatusKeyRequest(jobStatusKey), cancel);
     }
 
     /// <inheritdoc />
-    public async Task<bool> FinishAndDismissPopup(string jobStatusKey, ulong? seconds = null, CancellationToken cancel = default)
+    public Task FinishAndDismissPopup(string jobStatusKey, ulong? seconds = null, CancellationToken cancel = default)
     {
-        ThrowHelper.ArgumentNotNullOrWhiteSpace(jobStatusKey);
+        return ApiConnection.Post(HydrusUrls.FinishAndDismissPopup(), null, new JobStatusKeyRequest(jobStatusKey, seconds), cancel);
+    }
 
-        var response = await ApiConnection.Post(HydrusUrls.FinishAndDismissPopup(), null, new JobStatusKeyRequest(jobStatusKey, seconds), cancel);
-
-        return response.IsSuccessStatusCode();
+    /// <inheritdoc/>
+    public Task FinishPopup(string jobStatusKey, CancellationToken cancel = default)
+    {
+        return ApiConnection.Post(HydrusUrls.FinishPopup(), null, new JobStatusKeyRequest(jobStatusKey), cancel);
     }
 
     /// <inheritdoc />
-    public Task<JobStatus> UpdatePopup(JobStatus request, CancellationToken cancel = default)
+    public Task<JobStatusResponse> UpdatePopup(UpdatePopupRequest request, CancellationToken cancel = default)
     {
-        return ApiConnection.Post<JobStatus>(HydrusUrls.UpdatePopup(), null, request, cancel);
+        ThrowHelper.ArgumentNotNull(request);
+
+        return ApiConnection.Post<JobStatusResponse>(HydrusUrls.UpdatePopup(), null, request, cancel);
     }
 }

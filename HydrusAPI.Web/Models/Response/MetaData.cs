@@ -30,7 +30,7 @@ public class MetaData : MetaDataId
     /// </summary>
     public string? FiletypeHuman { get; set; }
 
-    // TODO: Найти все типы файлов и сделать перечисление.
+    // [TODO]: Найти все типы файлов и сделать перечисление.
     /// <summary>
     ///     Тип файла перечислением.
     /// </summary>

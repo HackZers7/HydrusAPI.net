@@ -62,7 +62,7 @@ public class Page
     /// <summary>
     ///     Дочерние страницы.
     /// </summary>
-    public List<Page>? Pages { get; set; }
+    public Page[] Pages { get; set; } = Array.Empty<Page>();
 
     public Management? Management { get; set; }
 }
@@ -145,7 +145,7 @@ public enum PageTypes
     PageOfPages = 10
 }
 
-// TODO: Проверить Management на содержание других наблюдателей
+// [TODO]: Проверить Management на содержание других наблюдателей
 
 public class Media
 {

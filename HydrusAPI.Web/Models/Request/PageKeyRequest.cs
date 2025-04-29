@@ -11,6 +11,8 @@ public class PageKeyRequest
     /// <param name="pageKey">Уникальный ключ страницы.</param>
     public PageKeyRequest(string pageKey)
     {
+        ThrowHelper.ArgumentNotNullOrWhiteSpace(pageKey);
+
         PageKey = pageKey;
     }
 

@@ -14,8 +14,8 @@ public interface IHydrusHttpClient
     /// </remarks>
     /// <param name="domain">Домен сайта.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Коллекция с куки.</returns>
-    Task<List<List<object?>>> GetCookies(string domain, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="CookiesResponse"/>, которая содержит все куки.</returns>
+    Task<CookiesResponse> GetCookies(string domain, CancellationToken cancel = default);
 
     /// <summary>
     ///     Устанавливает куки.
@@ -26,11 +26,11 @@ public interface IHydrusHttpClient
     /// </remarks>
     /// <param name="request">Запрос.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> SetCookies(SetCookiesRequest request, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task SetCookies(SetCookiesRequest request, CancellationToken cancel = default);
 
     /// <summary>
-    ///     Получает глобальные заголовки. 
+    ///     Получает глобальные заголовки.
     /// </summary>
     /// <remarks>
     ///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
@@ -41,7 +41,7 @@ public interface IHydrusHttpClient
     Task<HeadersResponse> GetHeaders(CancellationToken cancel = default);
 
     /// <summary>
-    ///     Получает заголовки для домена. 
+    ///     Получает заголовки для домена.
     /// </summary>
     /// <remarks>
     ///     Требуется аутентификация. Для отправки требуется область видимости (разрешение):
@@ -61,6 +61,6 @@ public interface IHydrusHttpClient
     /// </remarks>
     /// <param name="request">Запрос.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> SetHeaders(SetHeadersRequest request, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task SetHeaders(SetHeadersRequest request, CancellationToken cancel = default);
 }

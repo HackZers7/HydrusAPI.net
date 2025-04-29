@@ -13,18 +13,17 @@ public class HydrusHttpClient : ApiClient, IHydrusHttpClient
     }
 
     /// <inheritdoc/>
-    public async Task<List<List<object?>>> GetCookies(string domain, CancellationToken cancel = default)
+    public Task<CookiesResponse> GetCookies(string domain, CancellationToken cancel = default)
     {
-        var response = await ApiConnection.Get<CookiesResponse>(HydrusUrls.GetCookies(domain), cancel);
-
-        return response.Cookies;
+        return ApiConnection.Get<CookiesResponse>(HydrusUrls.GetCookies(domain), cancel);
     }
 
     /// <inheritdoc/>
-    public async Task<bool> SetCookies(SetCookiesRequest request, CancellationToken cancel = default)
+    public Task SetCookies(SetCookiesRequest request, CancellationToken cancel = default)
     {
-        var response = await ApiConnection.Post(HydrusUrls.SetCookies(), null, request, cancel);
-        return response.IsSuccessStatusCode();
+        ThrowHelper.ArgumentNotNull(request);
+
+        return ApiConnection.Post(HydrusUrls.SetCookies(), null, request, cancel);
     }
 
     /// <inheritdoc/>
@@ -40,9 +39,10 @@ public class HydrusHttpClient : ApiClient, IHydrusHttpClient
     }
 
     /// <inheritdoc/>
-    public async Task<bool> SetHeaders(SetHeadersRequest request, CancellationToken cancel = default)
+    public Task SetHeaders(SetHeadersRequest request, CancellationToken cancel = default)
     {
-        var response = await ApiConnection.Post(HydrusUrls.SetHeaders(), null, request, cancel);
-        return response.IsSuccessStatusCode();
+        ThrowHelper.ArgumentNotNull(request);
+
+        return ApiConnection.Post(HydrusUrls.SetHeaders(), null, request, cancel);
     }
 }

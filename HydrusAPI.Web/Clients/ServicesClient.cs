@@ -41,22 +41,18 @@ public class ServicesClient : ApiClient, IServicesClient
     }
 
     /// <inheritdoc />
-    public async Task<bool> CommitPending(string serviceKey, CancellationToken cancel = default)
+    public async Task CommitPending(string serviceKey, CancellationToken cancel = default)
     {
         ThrowHelper.ArgumentNotNullOrWhiteSpace(serviceKey);
 
-        var response = await ApiConnection.Post(HydrusUrls.CommitPending(), null, new ServiceKeyRequest(serviceKey), cancel);
-
-        return response.IsSuccessStatusCode();
+        await ApiConnection.Post(HydrusUrls.CommitPending(), null, new ServiceKeyRequest(serviceKey), cancel);
     }
 
     /// <inheritdoc />
-    public async Task<bool> ForgetPending(string serviceKey, CancellationToken cancel = default)
+    public async Task ForgetPending(string serviceKey, CancellationToken cancel = default)
     {
         ThrowHelper.ArgumentNotNullOrWhiteSpace(serviceKey);
 
-        var response = await ApiConnection.Post(HydrusUrls.ForgetPending(), null, new ServiceKeyRequest(serviceKey), cancel);
-
-        return response.IsSuccessStatusCode();
+        await ApiConnection.Post(HydrusUrls.ForgetPending(), null, new ServiceKeyRequest(serviceKey), cancel);
     }
 }

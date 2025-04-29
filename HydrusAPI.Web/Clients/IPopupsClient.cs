@@ -14,8 +14,8 @@ public interface IPopupsClient
     /// </remarks>
     /// <param name="onlyInView">Только те окна, которые сейчас отображаются в клиенте. По умолчанию - false.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает перечисление с текущими задачами.</returns>
-    Task<IEnumerable<JobStatus>> GetPopups(bool onlyInView = false, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="JobStatusesResponse"/> с текущими задачами.</returns>
+    Task<JobStatusesResponse> GetPopups(bool onlyInView = false, CancellationToken cancel = default);
 
     /// <summary>
     ///     Добавляет новое всплывающее окно.
@@ -27,7 +27,7 @@ public interface IPopupsClient
     /// <param name="request">Запрос.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
     /// <returns>Возвращает созданную задачу.</returns>
-    Task<JobStatus> AddPopup(JobStatus request, CancellationToken cancel = default);
+    Task<JobStatusResponse> AddPopup(JobStatus request, CancellationToken cancel = default);
 
     /// <summary>
     ///     Вызывает пользовательскую функцию.
@@ -38,8 +38,8 @@ public interface IPopupsClient
     /// </remarks>
     /// <param name="jobStatusKey">Уникальный идентификатор задачи.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> CallUserCallable(string jobStatusKey, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task CallUserCallable(string jobStatusKey, CancellationToken cancel = default);
 
     /// <summary>
     ///     Пытается отменить отображение всплывающего окна.
@@ -50,8 +50,8 @@ public interface IPopupsClient
     /// </remarks>
     /// <param name="jobStatusKey">Уникальный идентификатор задачи.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> CancelPopup(string jobStatusKey, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task CancelPopup(string jobStatusKey, CancellationToken cancel = default);
 
     /// <summary>
     ///     Пытается закрыть всплывающее окно.
@@ -62,8 +62,8 @@ public interface IPopupsClient
     /// </remarks>
     /// <param name="jobStatusKey">Уникальный идентификатор задачи.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> DismissPopup(string jobStatusKey, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task DismissPopup(string jobStatusKey, CancellationToken cancel = default);
 
     /// <summary>
     ///     Пытается завершить всплывающее окно.
@@ -74,8 +74,8 @@ public interface IPopupsClient
     /// </remarks>
     /// <param name="jobStatusKey">Уникальный идентификатор задачи.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> FinishPopup(string jobStatusKey, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task FinishPopup(string jobStatusKey, CancellationToken cancel = default);
 
     /// <summary>
     ///     Пытается завершить и закрыть всплывающее окно.
@@ -87,8 +87,8 @@ public interface IPopupsClient
     /// <param name="jobStatusKey">Уникальный идентификатор задачи.</param>
     /// <param name="seconds">Необязательно, количество секунд, которое ожидается перед закрытием всплывающего окна.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> FinishAndDismissPopup(string jobStatusKey, ulong? seconds = null, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task FinishAndDismissPopup(string jobStatusKey, ulong? seconds = null, CancellationToken cancel = default);
 
     /// <summary>
     ///     Обновляет всплывающее окно.
@@ -100,5 +100,5 @@ public interface IPopupsClient
     /// <param name="request">Запрос.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
     /// <returns>Возвращает обновленную задачу.</returns>
-    Task<JobStatus> UpdatePopup(JobStatus request, CancellationToken cancel = default);
+    Task<JobStatusResponse> UpdatePopup(UpdatePopupRequest request, CancellationToken cancel = default);
 }

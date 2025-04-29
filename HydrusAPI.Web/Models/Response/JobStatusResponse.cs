@@ -3,12 +3,23 @@ namespace HydrusAPI.Web;
 /// <summary>
 ///     Ответ с текущими статусами задач.
 /// </summary>
-public class JobStatusResponse : ApiVersionResponse
+public class JobStatusesResponse : ApiVersionResponse
 {
     /// <summary>
     ///     Текущие статусы задач.
     /// </summary>
-    public List<JobStatus>? JobStatuses { get; set; }
+    public JobStatus[] JobStatuses { get; set; } = Array.Empty<JobStatus>();
+}
+
+/// <summary>
+///     Ответ с текущими статусом задачи.
+/// </summary>
+public class JobStatusResponse : ApiVersionResponse
+{
+    /// <summary>
+    ///     Статус задач.
+    /// </summary>
+    public JobStatus JobStatus { get; set; } = default!;
 }
 
 /// <summary>
@@ -34,12 +45,12 @@ public class JobStatus
     /// <summary>
     ///     Тело задачи.
     /// </summary>
-    public string? StatusText1 { get; set; }
+    public string? StatusText_1 { get; set; }
 
     /// <summary>
     ///     Тело задачи.
     /// </summary>
-    public string? StatusText2 { get; set; }
+    public string? StatusText_2 { get; set; }
 
     /// <summary>
     ///     Есть ошибки.
@@ -82,7 +93,7 @@ public class JobStatus
     public bool IsWorking { get; set; }
 
     /// <summary>
-    ///     Статус работы задачи. Собирается из <see cref="StatusTitle" />, <see cref="StatusText1" />, <see cref="StatusText2" /> и <see cref="Traceback" />.
+    ///     Статус работы задачи. Собирается из <see cref="StatusTitle" />, <see cref="StatusText_1" />, <see cref="StatusText_2" /> и <see cref="Traceback" />.
     /// </summary>
     public string? NiceString { get; set; }
 
@@ -95,13 +106,13 @@ public class JobStatus
     ///     Коллекция с числами, представляющая индикатор выполнения.
     ///     Первое число - текущее, второе максимальное. Минимальное всегда 0.
     /// </summary>
-    public List<ushort>? PopupGauge1 { get; set; }
+    public List<ushort>? PopupGauge_1 { get; set; }
 
     /// <summary>
     ///     Коллекция с числами, представляющая индикатор выполнения.
     ///     Первое число - текущее, второе максимальное. Минимальное всегда 0.
     /// </summary>
-    public List<ushort>? PopupGauge2 { get; set; }
+    public List<ushort>? PopupGauge_2 { get; set; }
 
     /// <summary>
     ///     Произвольный объект.
@@ -122,6 +133,11 @@ public class JobStatus
     ///     Текущая сетевая задача.
     /// </summary>
     public NetworkJob? NetworkJob { get; set; }
+
+    /// <summary>
+    ///     Лейбл для приложенный файлов.
+    /// </summary>
+    public string? FilesLabel { get; set; }
 }
 
 /// <summary>
@@ -132,7 +148,7 @@ public class Files
     /// <summary>
     ///     Коллекция хешей (SHA256).
     /// </summary>
-    public List<string>? Hashes { get; set; }
+    public string[] Hashes { get; set; } = Array.Empty<string>();
 
     /// <summary>
     ///     Отображаемый лейбл.

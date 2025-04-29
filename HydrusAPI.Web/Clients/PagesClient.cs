@@ -27,66 +27,56 @@ public class PagesClient : ApiClient, IPagesClient
     }
 
     /// <inheritdoc />
-    public Task<bool> AddFilesOnPage(string pageKey, string hash, CancellationToken cancel = default)
+    public Task AddFilesOnPage(string pageKey, string hash, CancellationToken cancel = default)
     {
         return AddFilesOnPage(new AddFilesOnPageRequest(pageKey, hash), cancel);
     }
 
     /// <inheritdoc />
-    public Task<bool> AddFilesOnPage(string pageKey, params string[] hashes)
+    public Task AddFilesOnPage(string pageKey, IList<string> hashes)
     {
         return AddFilesOnPage(new AddFilesOnPageRequest(pageKey, hashes));
     }
 
     /// <inheritdoc />
-    public Task<bool> AddFilesOnPage(string pageKey, ulong fileId, CancellationToken cancel = default)
+    public Task AddFilesOnPage(string pageKey, ulong fileId, CancellationToken cancel = default)
     {
         return AddFilesOnPage(new AddFilesOnPageRequest(pageKey, fileId), cancel);
     }
 
     /// <inheritdoc />
-    public Task<bool> AddFilesOnPage(string pageKey, params ulong[] ids)
+    public Task AddFilesOnPage(string pageKey, IList<ulong> ids)
     {
         return AddFilesOnPage(new AddFilesOnPageRequest(pageKey, ids));
     }
 
     /// <inheritdoc />
-    public async Task<bool> AddFilesOnPage(AddFilesOnPageRequest request, CancellationToken cancel = default)
+    public Task AddFilesOnPage(AddFilesOnPageRequest request, CancellationToken cancel = default)
     {
         ThrowHelper.ArgumentNotNull(request);
 
-        var response = await ApiConnection.Post(HydrusUrls.AddFilesOnPage(), null, request, cancel);
-
-        return response.IsSuccessStatusCode();
+        return ApiConnection.Post(HydrusUrls.AddFilesOnPage(), null, request, cancel);
     }
 
     /// <inheritdoc />
-    public async Task<bool> FocusPage(string pageKey, CancellationToken cancel = default)
+    public Task FocusPage(string pageKey, CancellationToken cancel = default)
     {
-        ThrowHelper.ArgumentNotNullOrWhiteSpace(pageKey);
-
-        var response = await ApiConnection.Post(
-            HydrusUrls.AddFilesOnPage(),
+        return ApiConnection.Post(
+            HydrusUrls.FocusPage(),
             null,
             new PageKeyRequest(pageKey),
             cancel
         );
-
-        return response.IsSuccessStatusCode();
     }
 
     /// <inheritdoc />
-    public async Task<bool> RefreshPage(string pageKey, CancellationToken cancel = default)
+    public Task RefreshPage(string pageKey, CancellationToken cancel = default)
     {
-        ThrowHelper.ArgumentNotNullOrWhiteSpace(pageKey);
-
-        var response = await ApiConnection.Post(
-            HydrusUrls.AddFilesOnPage(),
+        return ApiConnection.Post(
+            HydrusUrls.RefreshPage(),
             null,
             new PageKeyRequest(pageKey),
             cancel
         );
-
-        return response.IsSuccessStatusCode();
     }
 }

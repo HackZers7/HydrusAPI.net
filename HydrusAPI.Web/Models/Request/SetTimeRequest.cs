@@ -155,9 +155,7 @@ public class SetTimeRequest : FilesRequest, IConvert
         }
         else
         {
-#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-            jObject.Add(new JProperty(timestampName, null));
-#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+            jObject.Add(new JProperty(timestampName));
         }
 
         if (!string.IsNullOrWhiteSpace(FileServiceKey))

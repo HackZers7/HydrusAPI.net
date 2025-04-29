@@ -39,8 +39,8 @@ public interface IPagesClient
     /// <param name="pageKey">Уникальный ключ страницы.</param>
     /// <param name="hash">Хэш (SHA256) файл.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> AddFilesOnPage(string pageKey, string hash, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task AddFilesOnPage(string pageKey, string hash, CancellationToken cancel = default);
 
     /// <summary>
     ///     Добавляет файлы на страницу.
@@ -50,9 +50,9 @@ public interface IPagesClient
     ///     <see cref="Permissions.ManagePages" />.
     /// </remarks>
     /// <param name="pageKey">Уникальный ключ страницы.</param>
-    /// <param name="hashes">Хеши (SHA256) файлов.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> AddFilesOnPage(string pageKey, params string[] hashes);
+    /// <param name="hashes">Коллекция хешей (SHA256) файлов.</param>
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task AddFilesOnPage(string pageKey, IList<string> hashes);
 
     /// <summary>
     ///     Добавляет файлы на страницу.
@@ -64,8 +64,8 @@ public interface IPagesClient
     /// <param name="pageKey">Уникальный ключ страницы.</param>
     /// <param name="fileId">Идентификатор файл.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> AddFilesOnPage(string pageKey, ulong fileId, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task AddFilesOnPage(string pageKey, ulong fileId, CancellationToken cancel = default);
 
     /// <summary>
     ///     Добавляет файлы на страницу.
@@ -75,9 +75,9 @@ public interface IPagesClient
     ///     <see cref="Permissions.ManagePages" />.
     /// </remarks>
     /// <param name="pageKey">Уникальный ключ страницы.</param>
-    /// <param name="ids">Идентификаторы файлов.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> AddFilesOnPage(string pageKey, params ulong[] ids);
+    /// <param name="ids">Коллекция идентификаторов файлов.</param>
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task AddFilesOnPage(string pageKey, IList<ulong> ids);
 
     /// <summary>
     ///     Добавляет файлы на страницу.
@@ -88,8 +88,8 @@ public interface IPagesClient
     /// </remarks>
     /// <param name="request">Запрос.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> AddFilesOnPage(AddFilesOnPageRequest request, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task AddFilesOnPage(AddFilesOnPageRequest request, CancellationToken cancel = default);
 
     /// <summary>
     ///     Фокусирует страницу в клиенте Hydrus.
@@ -100,8 +100,8 @@ public interface IPagesClient
     /// </remarks>
     /// <param name="pageKey">Уникальный ключ страницы.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> FocusPage(string pageKey, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task FocusPage(string pageKey, CancellationToken cancel = default);
 
     /// <summary>
     ///     Обновляет страницу в клиенте Hydrus.
@@ -112,6 +112,6 @@ public interface IPagesClient
     /// </remarks>
     /// <param name="pageKey">Уникальный ключ страницы.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> RefreshPage(string pageKey, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task RefreshPage(string pageKey, CancellationToken cancel = default);
 }

@@ -28,7 +28,7 @@ public class Service
     /// </summary>
     public string TypePretty { get; set; } = default!;
 
-    // TODO: переделать на перечисление.
+    // [TODO]: переделать на перечисление.
     /// <summary>
     ///     Форма звезды оценочного сервиса (только для рейтинговых сервисов).
     /// </summary>

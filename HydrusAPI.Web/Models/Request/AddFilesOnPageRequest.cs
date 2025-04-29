@@ -57,5 +57,5 @@ public class AddFilesOnPageRequest : FilesRequest
     /// <summary>
     ///     Уникальный ключ страницы.
     /// </summary>
-    public string PageKey { get; set; } = default!;
+    public string PageKey { get; set; }
 }

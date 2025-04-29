@@ -824,6 +824,8 @@ public static class HydrusUrls
     /// <returns><see cref="Uri" /> эндпоинта получения информации об странице.</returns>
     public static Uri GetPage(string pageKey, bool simple = true)
     {
+        ThrowHelper.ArgumentNotNullOrWhiteSpace(pageKey);
+
         return "/manage_pages/get_page_info?"
             .FormatUri(new Dictionary<string, object?>
             {
@@ -870,7 +872,7 @@ public static class HydrusUrls
     /// <returns><see cref="Uri" /> эндпоинта получения всплывающих окон.</returns>
     public static Uri GetPopups(bool onlyInView = false)
     {
-        return "/manage_popups/get_popups"
+        return "/manage_popups/get_popups?"
             .FormatUri(new Dictionary<string, object?>
             {
                 { "only_in_view", onlyInView }
@@ -1020,6 +1022,8 @@ public static class HydrusUrls
     /// <returns><see cref="Uri" /> эндпоинта получения куки.</returns>
     public static Uri GetCookies(string domain)
     {
+        ThrowHelper.ArgumentNotNullOrWhiteSpace(domain);
+
         return "/manage_cookies/get_cookies?"
             .FormatUri(new Dictionary<string, object?>
             {

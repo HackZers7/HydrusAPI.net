@@ -47,4 +47,27 @@ public class ServicesClientTest
         Assert.That(services, Is.Not.Null);
         Assert.That(services.Services, Has.Count.GreaterThan(0));
     }
+
+    [Test]
+    public async Task GetPendingCounts()
+    {
+        var services = await _client.ServicesClient.GetPendingCounts();
+
+        Assert.That(services, Is.Not.Null);
+        Assert.That(services.PendingCounts, Has.Count.GreaterThan(0));
+    }
+
+    [Test]
+    public async Task CommitPending()
+    {
+        var key = "6c6f63616c2074616773";
+        await _client.ServicesClient.CommitPending(key);
+    }
+
+    [Test]
+    public async Task ForgetPending()
+    {
+        var key = "6c6f63616c2074616773";
+        await _client.ServicesClient.ForgetPending(key);
+    }
 }

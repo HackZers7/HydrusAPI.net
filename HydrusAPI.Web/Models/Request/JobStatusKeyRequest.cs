@@ -12,6 +12,8 @@ public class JobStatusKeyRequest
     /// <param name="seconds">Необязательно, количество секунд, которое ожидается перед закрытием всплывающего окна.</param>
     public JobStatusKeyRequest(string jobStatusKey, ulong? seconds = null)
     {
+        ThrowHelper.ArgumentNotNullOrWhiteSpace(jobStatusKey);
+
         JobStatusKey = jobStatusKey;
         Seconds = seconds;
     }

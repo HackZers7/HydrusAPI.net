@@ -69,8 +69,8 @@ public interface IServicesClient
     /// </remarks>
     /// <param name="serviceKey">Ключ сервиса.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> CommitPending(string serviceKey, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task CommitPending(string serviceKey, CancellationToken cancel = default);
 
     /// <summary>
     ///     Отменяет загрузку ожидающего сервиса.
@@ -81,6 +81,6 @@ public interface IServicesClient
     /// </remarks>
     /// <param name="serviceKey">Ключ сервиса.</param>
     /// <param name="cancel">Токен отмены запроса.</param>
-    /// <returns>Возвращает метку был ли успешно отправлен запрос.</returns>
-    Task<bool> ForgetPending(string serviceKey, CancellationToken cancel = default);
+    /// <returns>Возвращает <see cref="Task"/>.</returns>
+    Task ForgetPending(string serviceKey, CancellationToken cancel = default);
 }

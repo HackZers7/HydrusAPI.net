@@ -105,46 +105,46 @@ The latest supported version of Hydrus API: 78 (607)
 
 | URL                                 | Status | Request builder | Structured type |
 | ----------------------------------- | :----: | :-------------: | :-------------: |
-| /manage_services/get_pending_counts |   ⚠️    |        ❌        |        ❌        |
-| /manage_services/commit_pending     |   ⚠️    |        ❌        |   Not needed    |
-| /manage_services/forget_pending     |   ⚠️    |        ❌        |   Not needed    |
+| /manage_services/get_pending_counts |   ✅    |        ❌        |        ❌        |
+| /manage_services/commit_pending     |   ✅    |        ❌        |   Not needed    |
+| /manage_services/forget_pending     |   ✅    |        ❌        |   Not needed    |
 
 ### Managing Cookies
 
 | URL                         | Status | Request builder | Structured type |
 | --------------------------- | :----: | :-------------: | :-------------: |
-| /manage_cookies/get_cookies |   ⚠️    |        ❌        |        ❌        |
-| /manage_cookies/set_cookies |   ⚠️    |        ❌        |   Not needed    |
+| /manage_cookies/get_cookies |   ✅    |        ❌        |        ❌        |
+| /manage_cookies/set_cookies |   ✅    |        ❌        |   Not needed    |
 
 ### Managing HTTP Headers
 
 | URL                         | Status | Request builder | Structured type |
 | --------------------------- | :----: | :-------------: | :-------------: |
-| /manage_headers/get_headers |   ⚠️    |        ❌        |        ❌        |
-| /manage_headers/set_headers |   ⚠️    |        ❌        |        ❌        |
+| /manage_headers/get_headers |   ✅    |        ❌        |        ❌        |
+| /manage_headers/set_headers |   ✅    |        ❌        |        ❌        |
 
 ### Managing Pages
 
 | URL                         | Status | Request builder | Structured type |
 | --------------------------- | :----: | :-------------: | :-------------: |
-| /manage_pages/get_pages     |   ⚠️    |        ❌        |        ❌        |
-| /manage_pages/get_page_info |   ⚠️    |        ❌        |        ❌        |
-| /manage_pages/add_files     |   ⚠️    |        ❌        |   Not needed    |
-| /manage_pages/focus_page    |   ⚠️    |        ❌        |   Not needed    |
-| /manage_pages/refresh_page  |   ⚠️    |        ❌        |   Not needed    |
+| /manage_pages/get_pages     |   ✅    |        ❌        |        ❌        |
+| /manage_pages/get_page_info |   ✅    |        ❌        |        ❌        |
+| /manage_pages/add_files     |   ✅    |        ❌        |   Not needed    |
+| /manage_pages/focus_page    |   ✅    |        ❌        |   Not needed    |
+| /manage_pages/refresh_page  |   ✅    |        ❌        |   Not needed    |
 
 ### Managing Popups
 
 | URL                                     | Status | Request builder | Structured type |
 | --------------------------------------- | :----: | :-------------: | :-------------: |
-| /manage_popups/get_popups               |   ⚠️    |        ❌        |        ❌        |
-| /manage_popups/add_popup                |   ⚠️    |        ❌        |        ❌        |
-| /manage_popups/call_user_callable       |   ⚠️    |        ❌        |   Not needed    |
-| /manage_popups/cancel_popup             |   ⚠️    |        ❌        |   Not needed    |
-| /manage_popups/dismiss_popup            |   ⚠️    |        ❌        |   Not needed    |
-| /manage_popups/finish_popup             |   ⚠️    |        ❌        |   Not needed    |
-| /manage_popups/finish_and_dismiss_popup |   ⚠️    |        ❌        |   Not needed    |
-| /manage_popups/update_popup             |   ⚠️    |        ❌        |        ❌        |
+| /manage_popups/get_popups               |   ✅    |        ❌        |        ❌        |
+| /manage_popups/add_popup                |   ✅    |        ❌        |        ❌        |
+| /manage_popups/call_user_callable       |   ✅    |        ❌        |   Not needed    |
+| /manage_popups/cancel_popup             |   ✅    |        ❌        |   Not needed    |
+| /manage_popups/dismiss_popup            |   ✅    |        ❌        |   Not needed    |
+| /manage_popups/finish_popup             |   ✅    |        ❌        |   Not needed    |
+| /manage_popups/finish_and_dismiss_popup |   ✅    |        ❌        |   Not needed    |
+| /manage_popups/update_popup             |   ✅    |        ❌        |        ❌        |
 
 ### Managing the Database
 
