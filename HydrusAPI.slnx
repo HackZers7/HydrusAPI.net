@@ -1,0 +1,8 @@
+<Solution>
+    <Project Path="HydrusAPI.Web/HydrusAPI.Web.csproj" />
+    <Project Path="Test/HydrusApi.Web.Tests.csproj" />
+    <Folder Name="DS.Shared">
+        <Project Path="../DS.Shared/DS.Shared/DS.Shared.csproj" />
+        <Project Path="../DS.Shared/Tests/DS.Shared.Tests/DS.Shared.Tests.csproj" />
+    </Folder>
+</Solution>
